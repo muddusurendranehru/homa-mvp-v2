@@ -255,6 +255,65 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* METABOLIC CHECK BALLOON CTA */}
+      <section style={{ position: "relative", background: "#0a0a0a", overflow: "hidden", minHeight: "520px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {/* Doctor image — tall, fills left side on mobile */}
+        <img
+          src="/images/gokhomayt2vert.jpg"
+          alt="Sugar Normal? Check HOMA-IR"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
+            opacity: 0.45,
+          }}
+        />
+        {/* Dark overlay */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)" }} />
+        {/* Balloon button — centered on top of image */}
+        <div style={{ position: "relative", zIndex: 10, textAlign: "center", padding: "48px 20px" }}>
+          <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "32px", fontWeight: 600 }}>
+            Sugar Normal? Your HOMA-IR May Say Otherwise
+          </p>
+          <Link
+            href="/tools"
+            style={{
+              display: "inline-flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "240px",
+              height: "240px",
+              borderRadius: "50%",
+              background: "radial-gradient(circle at 35% 35%, #b91c1c, #7f1d1d)",
+              boxShadow: "0 0 0 14px rgba(185,28,28,0.2), 0 0 0 28px rgba(185,28,28,0.08), 0 20px 60px rgba(185,28,28,0.5)",
+              textDecoration: "none",
+              color: "#fff",
+              animation: "pulse-red 2s ease-in-out infinite",
+              cursor: "pointer",
+            }}
+          >
+            <span style={{ fontSize: "40px", marginBottom: "8px" }}>⚠️</span>
+            <span style={{ fontSize: "16px", fontWeight: 900, letterSpacing: "0.04em", lineHeight: 1.25, textAlign: "center", padding: "0 20px" }}>
+              CHECK FREE<br />METABOLIC<br />CALCULATORS
+            </span>
+            <span style={{ fontSize: "12px", marginTop: "10px", color: "rgba(255,255,255,0.7)", fontWeight: 600 }}>👆 Tap Here — It&apos;s Free</span>
+          </Link>
+          <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "11px", marginTop: "28px" }}>
+            HOMA-IR · TyG Index · WHR · WHtR · BMI — All Free
+          </p>
+        </div>
+        <style>{`
+          @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 0 14px rgba(185,28,28,0.2), 0 0 0 28px rgba(185,28,28,0.08), 0 20px 60px rgba(185,28,28,0.5); }
+            50% { box-shadow: 0 0 0 24px rgba(185,28,28,0.25), 0 0 0 48px rgba(185,28,28,0.12), 0 20px 90px rgba(185,28,28,0.7); }
+          }
+        `}</style>
+      </section>
+
       {/* PATIENT STORIES */}
       <section style={{ padding: "72px 6%", background: "#f8f7f3" }}>
         <div
