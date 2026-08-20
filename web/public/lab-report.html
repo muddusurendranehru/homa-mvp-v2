@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMA Healthcare – Before & After Report Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0d7a6e;
+    --teal-light: #13a896;
+    --teal-bg: #e8f7f5;
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --blue: #3b82f6;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-400: #9ca3af;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+    --white: #ffffff;
+    --shadow: 0 4px 24px rgba(13,122,110,0.10);
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0faf9;
+    color: var(--gray-800);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0d7a6e 0%, #13a896 60%, #1bbfaa 100%);
+    color: white;
+    padding: 28px 40px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 4px 20px rgba(13,122,110,0.25);
+  }
+  .logo-circle {
+    width: 54px; height: 54px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    border: 2px solid rgba(255,255,255,0.35);
+    flex-shrink: 0;
+  }
+  .header-text h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.55rem;
+    letter-spacing: -0.3px;
+  }
+  .header-text p {
+    font-size: 0.82rem;
+    opacity: 0.82;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .container { max-width: 980px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; gap: 6px;
+    background: white;
+    border-radius: var(--radius);
+    padding: 6px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    border: 1px solid var(--gray-200);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 11px 10px;
+    border: none; background: transparent;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--gray-600);
+    transition: all 0.22s;
+  }
+  .tab-btn.active {
+    background: var(--teal);
+    color: white;
+    box-shadow: 0 2px 10px rgba(13,122,110,0.25);
+  }
+  .tab-btn:not(.active):hover { background: var(--teal-bg); color: var(--teal); }
+
+  /* ── CARD ── */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .card-header {
+    background: var(--teal-bg);
+    padding: 14px 22px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid #c5e8e4;
+  }
+  .card-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--teal);
+  }
+  .card-body { padding: 22px; }
+
+  /* ── PATIENT INFO ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  @media(max-width:640px){ .info-grid { grid-template-columns: 1fr 1fr; } }
+  .field label {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 5px;
+  }
+  .field input, .field select {
+    width: 100%;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--gray-800);
+    outline: none;
+    transition: border-color 0.18s;
+    background: #fafafa;
+  }
+  .field input:focus, .field select:focus {
+    border-color: var(--teal);
+    background: white;
+  }
+
+  /* ── LAB ENTRY TABLE ── */
+  .lab-section-title {
+    font-family: 'DM Serif Display', serif;
+    color: var(--teal);
+    font-size: 1rem;
+    margin: 20px 0 10px;
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--teal-bg);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .lab-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .lab-grid-header {
+    display: contents;
+  }
+  .lab-grid-header div {
+    background: var(--teal);
+    color: white;
+    padding: 9px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .lab-row {
+    display: contents;
+  }
+  .lab-row div {
+    padding: 7px 10px;
+    border-top: 1px solid var(--gray-100);
+    display: flex; align-items: center;
+    font-size: 0.86rem;
+  }
+  .lab-row:nth-child(even) div { background: #fafafa; }
+  .lab-row div.param-name { font-weight: 500; color: var(--gray-800); }
+  .lab-row div.param-unit { font-size: 0.74rem; color: var(--gray-400); }
+  .lab-row div input {
+    width: 100%;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 0.88rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.15s;
+    background: white;
+  }
+  .lab-row div input:focus { border-color: var(--teal); }
+
+  /* ── BUTTONS ── */
+  .btn-generate {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 16px rgba(13,122,110,0.3);
+    transition: all 0.2s;
+    margin-top: 12px;
+  }
+  .btn-generate:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(13,122,110,0.35); }
+
+  .btn-row { display: flex; gap: 10px; margin-top: 12px; }
+  .btn-secondary {
+    flex: 1;
+    padding: 11px;
+    background: white;
+    color: var(--teal);
+    border: 2px solid var(--teal);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-secondary:hover { background: var(--teal-bg); }
+
+  /* ── REPORT TAB ── */
+  #tab-report { display: none; }
+
+  /* REPORT HEADER */
+  .report-header {
+    background: linear-gradient(135deg, #0d7a6e, #13a896);
+    color: white;
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 26px 28px 20px;
+    margin-bottom: 0;
+  }
+  .report-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+  .report-meta {
+    display: flex; gap: 28px; flex-wrap: wrap;
+    font-size: 0.83rem;
+    opacity: 0.88;
+    margin-top: 12px;
+  }
+  .report-meta span { display: flex; align-items: center; gap: 5px; }
+
+  /* SCORE CARD */
+  .score-banner {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    padding: 18px 28px;
+    display: flex; gap: 18px; flex-wrap: wrap;
+    align-items: center;
+  }
+  .score-pill {
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .score-pill.improved { background: #dcfce7; color: #15803d; }
+  .score-pill.same { background: #fef9c3; color: #a16207; }
+  .score-pill.worse { background: #fee2e2; color: #dc2626; }
+  .score-label { font-size: 0.78rem; color: var(--gray-400); margin-left: auto; font-style: italic; }
+
+  /* COMPARISON TABLE */
+  .report-section {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    overflow-x: auto;
+  }
+  .report-section:last-of-type { border-radius: 0 0 var(--radius) var(--radius); border-bottom: 1px solid var(--gray-200); }
+  
+  .section-label {
+    padding: 12px 18px 8px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--teal);
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--teal-bg);
+    background: var(--teal-bg);
+  }
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .report-table thead th {
+    background: var(--gray-800);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .report-table tbody tr td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: middle;
+  }
+  .report-table tbody tr:last-child td { border-bottom: none; }
+  .report-table tbody tr:hover td { background: #f9fffe; }
+
+  .param-cell { font-weight: 500; }
+  .unit-small { font-size: 0.74rem; color: var(--gray-400); display: block; }
+
+  .val-before { color: var(--gray-600); }
+  .val-after { font-weight: 600; color: var(--gray-800); }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge.improved { background: #dcfce7; color: #15803d; }
+  .badge.worse    { background: #fee2e2; color: #dc2626; }
+  .badge.same     { background: #fef9c3; color: #a16207; }
+  .badge.calc     { background: #ede9fe; color: #6d28d9; }
+
+  .interp { font-size: 0.8rem; color: var(--gray-600); }
+  .interp.good { color: #15803d; }
+  .interp.bad  { color: #dc2626; }
+  .interp.warn { color: #a16207; }
+
+  .homa-highlight td { background: #f0fdf4 !important; }
+
+  /* FOOTER */
+  .report-footer {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 18px 28px;
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    flex-wrap: wrap;
+  }
+  .footer-brand { font-weight: 600; color: var(--teal); font-size: 0.82rem; }
+
+  /* ── TESTIMONIALS ── */
+  .testi-section {
+    margin-top: 32px;
+    padding-top: 8px;
+  }
+  .testi-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    color: var(--teal);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .testi-sub {
+    text-align: center;
+    font-size: 0.83rem;
+    color: var(--gray-400);
+    margin-bottom: 22px;
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media(max-width:680px){ .testi-grid { grid-template-columns: 1fr; } }
+  .testi-card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    padding: 20px 18px 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: transform 0.18s;
+  }
+  .testi-card:hover { transform: translateY(-3px); }
+  .testi-quote-mark {
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--teal-bg);
+    font-family: 'DM Serif Display', serif;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+  }
+  .testi-text {
+    font-size: 0.87rem;
+    color: var(--gray-600);
+    line-height: 1.65;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .testi-outcome {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--teal-bg);
+    color: var(--teal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .testi-author {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid var(--gray-100);
+    padding-top: 12px;
+  }
+  .testi-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 600; font-size: 0.85rem; color: var(--gray-800); }
+  .testi-detail { font-size: 0.74rem; color: var(--gray-400); margin-top: 1px; }
+  .testi-stars { color: #f59e0b; font-size: 0.82rem; margin-top: 2px; }
+  .testi-add-card {
+    background: var(--teal-bg);
+    border: 2px dashed var(--teal-light);
+    border-radius: var(--radius);
+    padding: 28px 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .testi-add-card:hover { background: #d0f0ec; }
+  .testi-add-card span { font-size: 2rem; }
+  .testi-add-card p { font-size: 0.84rem; color: var(--teal); font-weight: 600; text-align: center; }
+
+  /* PRINT */
+  @media print {
+    body { background: white; }
+    .tabs, .btn-row, #tab-entry { display: none !important; }
+    #tab-report { display: block !important; }
+    .container { padding: 0; max-width: 100%; }
+    .report-section { page-break-inside: avoid; }
+  }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* STEP HINT */
+  .hint {
+    background: var(--teal-bg);
+    border-left: 4px solid var(--teal);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.83rem;
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+  .hint strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-circle">🏥</div>
+  <div class="header-text">
+    <h1>HOMA Healthcare Center</h1>
+    <p>Before & After Lab Report Comparison · Dr. Muddu Surendra Nehru</p>
+  </div>
+  <div class="header-badge">MVP Tool</div>
+</div>
+
+<div class="container">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('entry')">📝 Enter Lab Values</button>
+    <button class="tab-btn" onclick="switchTab('report')" id="report-tab-btn">📊 View Comparison Report</button>
+  </div>
+
+  <!-- ══════════════════ TAB: ENTRY ══════════════════ -->
+  <div id="tab-entry">
+
+    <div class="hint">
+      <strong>How to use:</strong> Enter patient's lab values from TWO different reports — one before HOMA treatment, one after. Then click <em>Generate Report</em> to see the full comparison.
+    </div>
+
+    <!-- Patient Info -->
+    <div class="card">
+      <div class="card-header">
+        <span>👤</span>
+        <h2>Patient Information</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-grid">
+          <div class="field">
+            <label>Patient Name</label>
+            <input type="text" id="pt-name" placeholder="e.g. Ravi Kumar">
+          </div>
+          <div class="field">
+            <label>Age / Gender</label>
+            <input type="text" id="pt-age" placeholder="e.g. 48 yrs / Male">
+          </div>
+          <div class="field">
+            <label>Patient ID / Mobile</label>
+            <input type="text" id="pt-id" placeholder="e.g. HC-1042">
+          </div>
+          <div class="field">
+            <label>Report 1 Date (Before)</label>
+            <input type="date" id="date-before">
+          </div>
+          <div class="field">
+            <label>Report 2 Date (After)</label>
+            <input type="date" id="date-after">
+          </div>
+          <div class="field">
+            <label>HOMA Product Used</label>
+            <input type="text" id="homa-product" placeholder="e.g. HOMA-IR Protocol">
+          </div>
+          <div class="field">
+            <label>Doctor / Reviewed By</label>
+            <input type="text" id="doctor" value="Dr. Muddu Surendra Nehru">
+          </div>
+          <div class="field">
+            <label>Duration of Treatment</label>
+            <input type="text" id="duration" placeholder="e.g. 8 weeks">
+          </div>
+          <div class="field">
+            <label>Clinical Notes</label>
+            <input type="text" id="notes" placeholder="e.g. On HOMA Diet + supplements">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lab Values Entry -->
+    <div class="card">
+      <div class="card-header">
+        <span>🩸</span>
+        <h2>Lab Values — Enter Before & After</h2>
+      </div>
+      <div class="card-body">
+
+        <!-- SECTION 1: Glucose / Diabetes -->
+        <div class="lab-section-title">🩸 Glucose & Diabetes Markers</div>
+        <div class="lab-grid">
+          <div class="lab-grid-header">
+            <div>Parameter</div>
+            <div>Normal Range</div>
+            <div>Before Value</div>
+            <div>After Value</div>
+          </div>
+          <!-- rows -->
+          <div class="lab-row" data-key="fasting-glucose" data-name="Fasting Glucose" data-unit="mg/dL" data-dir="low" data-normal="70–99">
+            <div class="param-name">Fasting Glucose <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">70–99</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="hba1c" data-name="HbA1c (%)" data-unit="%" data-dir="low" data-normal="<5.7%">
+            <div class="param-name">HbA1c <span class="param-unit">%</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;5.7%</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="avg-glucose" data-name="Avg. Glucose (eAG)" data-unit="mg/dL" data-dir="low" data-normal="<140">
+            <div class="param-name">Avg. Glucose (eAG) <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;140</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="fasting-insulin" data-name="Fasting Insulin" data-unit="µIU/mL" data-dir="low" data-normal="2–25">
+            <div class="param-name">Fasting Insulin <span class="param-unit">µIU/mL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">2–25</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="c-peptide" data-name="C-Peptide" data-unit="ng/mL" data-dir="low" data-normal="0.8–3.1">
+            <div class="param-name">C-Peptide <span class="param-unit">ng/mL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">0.8–3.1</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="pp-glucose" data-name="Post-Prandial Glucose" data-unit="mg/dL" data-dir="low" data-normal="<140">
+            <div class="param-name">Post-Prandial Glucose <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;140</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Cholesterol -->
+        <div class="lab-section-title">❤️ Cholesterol / Lipid Profile</div>
+        <div class="lab-grid">
+          <div class="lab-grid-header">
+            <div>Parameter</div>
+            <div>Normal Range</div>
+            <div>Before Value</div>
+            <div>After Value</div>
+          </div>
+          <div class="lab-row" data-key="total-chol" data-name="Total Cholesterol" data-unit="mg/dL" data-dir="low" data-normal="<200">
+            <div class="param-name">Total Cholesterol <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;200</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="ldl" data-name="LDL (Bad Cholesterol)" data-unit="mg/dL" data-dir="low" data-normal="<100">
+            <div class="param-name">LDL — Bad Cholesterol <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;100</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="hdl" data-name="HDL (Good Cholesterol)" data-unit="mg/dL" data-dir="high" data-normal=">60">
+            <div class="param-name">HDL — Good Cholesterol <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&gt;60</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="tg" data-name="Triglycerides" data-unit="mg/dL" data-dir="low" data-normal="<150">
+            <div class="param-name">Triglycerides <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;150</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="vldl" data-name="VLDL" data-unit="mg/dL" data-dir="low" data-normal="<30">
+            <div class="param-name">VLDL <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;30</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Liver -->
+        <div class="lab-section-title">🫀 Liver Function Tests</div>
+        <div class="lab-grid">
+          <div class="lab-grid-header">
+            <div>Parameter</div>
+            <div>Normal Range</div>
+            <div>Before Value</div>
+            <div>After Value</div>
+          </div>
+          <div class="lab-row" data-key="alt" data-name="ALT (SGPT)" data-unit="U/L" data-dir="low" data-normal="7–56">
+            <div class="param-name">ALT / SGPT <span class="param-unit">U/L</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">7–56</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="ast" data-name="AST (SGOT)" data-unit="U/L" data-dir="low" data-normal="10–40">
+            <div class="param-name">AST / SGOT <span class="param-unit">U/L</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">10–40</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="ggt" data-name="GGT" data-unit="U/L" data-dir="low" data-normal="9–48">
+            <div class="param-name">GGT <span class="param-unit">U/L</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">9–48</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="bilirubin" data-name="Bilirubin Total" data-unit="mg/dL" data-dir="low" data-normal="0.1–1.2">
+            <div class="param-name">Bilirubin — Total <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">0.1–1.2</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="albumin" data-name="Albumin" data-unit="g/dL" data-dir="high" data-normal="3.5–5.0">
+            <div class="param-name">Albumin <span class="param-unit">g/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">3.5–5.0</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="total-protein" data-name="Total Protein" data-unit="g/dL" data-dir="high" data-normal="6.0–8.3">
+            <div class="param-name">Total Protein <span class="param-unit">g/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">6.0–8.3</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Kidney -->
+        <div class="lab-section-title">🫘 Kidney Function</div>
+        <div class="lab-grid">
+          <div class="lab-grid-header">
+            <div>Parameter</div>
+            <div>Normal Range</div>
+            <div>Before Value</div>
+            <div>After Value</div>
+          </div>
+          <div class="lab-row" data-key="creatinine" data-name="Creatinine" data-unit="mg/dL" data-dir="low" data-normal="0.7–1.3">
+            <div class="param-name">Creatinine <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">0.7–1.3</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="urea" data-name="Blood Urea" data-unit="mg/dL" data-dir="low" data-normal="15–40">
+            <div class="param-name">Blood Urea <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">15–40</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="uric-acid" data-name="Uric Acid" data-unit="mg/dL" data-dir="low" data-normal="3.5–7.2">
+            <div class="param-name">Uric Acid <span class="param-unit">mg/dL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">3.5–7.2</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Body Metrics -->
+        <div class="lab-section-title">⚖️ Body Metrics & BP</div>
+        <div class="lab-grid">
+          <div class="lab-grid-header">
+            <div>Parameter</div>
+            <div>Normal Range</div>
+            <div>Before Value</div>
+            <div>After Value</div>
+          </div>
+          <div class="lab-row" data-key="weight" data-name="Weight" data-unit="kg" data-dir="low" data-normal="BMI 18–25">
+            <div class="param-name">Weight <span class="param-unit">kg</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">BMI 18–25</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="bmi" data-name="BMI" data-unit="kg/m²" data-dir="low" data-normal="18.5–24.9">
+            <div class="param-name">BMI <span class="param-unit">kg/m²</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">18.5–24.9</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="waist" data-name="Waist Circumference" data-unit="cm" data-dir="low" data-normal="M<90 F<80">
+            <div class="param-name">Waist Circumference <span class="param-unit">cm</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">M&lt;90, F&lt;80</div>
+            <div><input type="number" step="0.5" placeholder="—"></div>
+            <div><input type="number" step="0.5" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="sbp" data-name="Systolic BP" data-unit="mmHg" data-dir="low" data-normal="<130">
+            <div class="param-name">Systolic BP <span class="param-unit">mmHg</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;130</div>
+            <div><input type="number" step="1" placeholder="—"></div>
+            <div><input type="number" step="1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="dbp" data-name="Diastolic BP" data-unit="mmHg" data-dir="low" data-normal="<80">
+            <div class="param-name">Diastolic BP <span class="param-unit">mmHg</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;80</div>
+            <div><input type="number" step="1" placeholder="—"></div>
+            <div><input type="number" step="1" placeholder="—"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 6: Thyroid & Others -->
+        <div class="lab-section-title">🦋 Thyroid & Other Markers</div>
+        <div class="lab-grid">
+          <div class="lab-grid-header">
+            <div>Parameter</div>
+            <div>Normal Range</div>
+            <div>Before Value</div>
+            <div>After Value</div>
+          </div>
+          <div class="lab-row" data-key="tsh" data-name="TSH" data-unit="µIU/mL" data-dir="low" data-normal="0.5–4.5">
+            <div class="param-name">TSH <span class="param-unit">µIU/mL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">0.5–4.5</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="vitamin-d" data-name="Vitamin D3" data-unit="ng/mL" data-dir="high" data-normal="30–100">
+            <div class="param-name">Vitamin D3 <span class="param-unit">ng/mL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">30–100</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="vitamin-b12" data-name="Vitamin B12" data-unit="pg/mL" data-dir="high" data-normal="200–900">
+            <div class="param-name">Vitamin B12 <span class="param-unit">pg/mL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">200–900</div>
+            <div><input type="number" step="1" placeholder="—"></div>
+            <div><input type="number" step="1" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="crp" data-name="hsCRP" data-unit="mg/L" data-dir="low" data-normal="<1.0">
+            <div class="param-name">hsCRP (Inflammation) <span class="param-unit">mg/L</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">&lt;1.0</div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+            <div><input type="number" step="0.01" placeholder="—"></div>
+          </div>
+          <div class="lab-row" data-key="ferritin" data-name="Ferritin" data-unit="ng/mL" data-dir="high" data-normal="12–300">
+            <div class="param-name">Ferritin <span class="param-unit">ng/mL</span></div>
+            <div style="font-size:0.78rem;color:#9ca3af;">12–300</div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+            <div><input type="number" step="0.1" placeholder="—"></div>
+          </div>
+        </div>
+
+        <button class="btn-generate" onclick="generateReport()">
+          🔬 Generate HOMA Comparison Report
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <!-- ══ END TAB ENTRY ══ -->
+
+  <!-- ══════════════════ TAB: REPORT ══════════════════ -->
+  <div id="tab-report">
+
+    <!-- Report Header -->
+    <div class="report-header" id="rpt-header">
+      <div class="report-title">📊 Before & After Lab Report</div>
+      <div style="font-size:0.85rem;opacity:0.85;" id="rpt-subtitle">HOMA Healthcare Center · Dr. Muddu Surendra Nehru</div>
+      <div class="report-meta" id="rpt-meta"></div>
+    </div>
+
+    <!-- Score Banner -->
+    <div class="score-banner" id="rpt-score"></div>
+
+    <!-- Tables will be injected here -->
+    <div id="rpt-tables"></div>
+
+    <!-- HOMA Calculated Indices -->
+    <div id="rpt-homa-section"></div>
+
+    <!-- Footer -->
+    <div class="report-footer">
+      <div>
+        <div class="footer-brand">🏥 HOMA Healthcare Center · Gachibowli, Hyderabad</div>
+        <div style="margin-top:3px;">This report is for clinical use only. Generated using HOMA MVP Platform.</div>
+      </div>
+      <div id="rpt-generated-date" style="text-align:right;"></div>
+    </div>
+
+    <div class="btn-row" style="margin-top:16px;">
+      <button class="btn-secondary" onclick="switchTab('entry')">← Edit Values</button>
+      <button class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
+      <button class="btn-secondary" onclick="copyText()">📋 Copy Summary</button>
+    </div>
+
+    <!-- ── TESTIMONIALS ── -->
+    <div class="testi-section">
+      <div class="testi-heading">⭐ What Our Patients Say</div>
+      <div class="testi-sub">Real results from real patients at HOMA Healthcare Center, Gachibowli</div>
+      <div class="testi-grid" id="testi-grid">
+
+        <!-- Card 1 -->
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-text">I lost 18 kg in just 3 months! I never believed it was possible without surgery. Dr. Muddu's HOMA protocol changed my life completely. My diabetes tablets are also reduced now.</div>
+          <span class="testi-outcome">⚖️ Lost 18 kg · HbA1c 9.2 → 6.4%</span>
+          <div class="testi-author">
+            <div class="testi-avatar">SR</div>
+            <div>
+              <div class="testi-name">Suresh R., 52 yrs</div>
+              <div class="testi-detail">Type 2 Diabetes · Hyderabad</div>
+              <div class="testi-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-text">The team is always available — even on WhatsApp at night if we have doubts. Dr. Muddu personally follows up every week. I have never seen such dedication from any doctor before.</div>
+          <span class="testi-outcome">✅ Excellent follow-up & availability</span>
+          <div class="testi-author">
+            <div class="testi-avatar">PL</div>
+            <div>
+              <div class="testi-name">Priya L., 44 yrs</div>
+              <div class="testi-detail">Thyroid + Obesity · Secunderabad</div>
+              <div class="testi-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-text">My cholesterol was 280 and triglycerides were 320. After 2 months on HOMA protocol, cholesterol is 190 and triglycerides are 148. No side effects — completely safe. Super doctor!</div>
+          <span class="testi-outcome">❤️ Cholesterol 280→190 · TG 320→148</span>
+          <div class="testi-author">
+            <div class="testi-avatar">VK</div>
+            <div>
+              <div class="testi-name">Venkat K., 58 yrs</div>
+              <div class="testi-detail">Dyslipidemia · Gachibowli</div>
+              <div class="testi-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-text">All my queries are answered immediately. The team explains everything in Telugu which I understand very well. The HOMA diet plan is practical and easy to follow in daily Indian cooking.</div>
+          <span class="testi-outcome">🗣️ Answers all queries · Telugu support</span>
+          <div class="testi-author">
+            <div class="testi-avatar">LN</div>
+            <div>
+              <div class="testi-name">Lakshmi N., 61 yrs</div>
+              <div class="testi-detail">Metabolic Syndrome · Warangal</div>
+              <div class="testi-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-text">I was skeptical at first but Dr. Muddu showed me my own lab reports with HOMA-IR and TyG numbers. Seeing my own data improving every month gave me so much confidence to continue. Excellent scientific approach!</div>
+          <span class="testi-outcome">🔬 HOMA-IR 6.8 → 1.9 in 10 weeks</span>
+          <div class="testi-author">
+            <div class="testi-avatar">RM</div>
+            <div>
+              <div class="testi-name">Ravi M., 47 yrs</div>
+              <div class="testi-detail">Insulin Resistance · Miyapur</div>
+              <div class="testi-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add new card -->
+        <div class="testi-add-card" onclick="openAddTestimonial()">
+          <span>➕</span>
+          <p>Add a Patient Testimonial<br><span style="font-weight:400;font-size:0.78rem;color:#4b5563;">Click to add your patient's success story</span></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Add Testimonial Modal -->
+    <div id="testi-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;">
+      <div style="background:white;border-radius:16px;padding:28px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.25);">
+        <h3 style="font-family:'DM Serif Display',serif;color:#0d7a6e;margin-bottom:18px;">✍️ Add Patient Testimonial</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <input id="t-name" type="text" placeholder="Patient Name & Age (e.g. Ramesh K., 52 yrs)" style="padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;">
+          <input id="t-detail" type="text" placeholder="Condition · City (e.g. Diabetes · Hyderabad)" style="padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;">
+          <input id="t-outcome" type="text" placeholder="Key Result (e.g. Lost 12 kg · HbA1c improved)" style="padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;">
+          <textarea id="t-text" placeholder="Patient's testimonial quote..." rows="4" style="padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;resize:vertical;"></textarea>
+          <div style="display:flex;gap:10px;margin-top:4px;">
+            <button onclick="saveTestimonial()" style="flex:1;padding:11px;background:linear-gradient(135deg,#0d7a6e,#13a896);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;">✅ Save Testimonial</button>
+            <button onclick="closeModal()" style="padding:11px 18px;background:white;color:#4b5563;border:1.5px solid #e5e7eb;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;cursor:pointer;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ══ END TAB REPORT ══ -->
+
+</div><!-- container -->
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(tab) {
+  document.getElementById('tab-entry').style.display  = tab === 'entry'  ? 'block' : 'none';
+  document.getElementById('tab-report').style.display = tab === 'report' ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (tab==='entry'&&i===0)||(tab==='report'&&i===1)));
+}
+
+// ── INTERPRET DIRECTION ──
+function getStatus(before, after, dir) {
+  if (before === '' || after === '') return 'na';
+  const b = parseFloat(before), a = parseFloat(after);
+  if (isNaN(b) || isNaN(a)) return 'na';
+  const delta = ((a - b) / b) * 100;
+  if (Math.abs(delta) < 1.5) return 'same';
+  if (dir === 'low') return a < b ? 'improved' : 'worse';
+  return a > b ? 'improved' : 'worse';
+}
+
+function getIcon(status) {
+  return { improved: '⬇️', worse: '⬆️', same: '➡️', na: '—' }[status] || '—';
+}
+
+function getInterp(key, before, after) {
+  const b = parseFloat(before), a = parseFloat(after);
+  if (isNaN(b) || isNaN(a)) return { text: '—', cls: '' };
+
+  const map = {
+    'fasting-glucose': () => a <= 99 ? {text:'Now in normal range ✅', cls:'good'} : a<=125 ? {text:'Still pre-diabetic range',cls:'warn'} : {text:'Still elevated — review',cls:'bad'},
+    'hba1c':           () => a < 5.7 ? {text:'Normal — excellent!',cls:'good'} : a<6.5 ? {text:'Better control (still slightly high)',cls:'warn'} : {text:'Still diabetic range',cls:'bad'},
+    'ldl':             () => a < 100 ? {text:'Big improvement ✅',cls:'good'} : a<130 ? {text:'Near target',cls:'warn'} : {text:'Still elevated',cls:'bad'},
+    'hdl':             () => a > 60 ? {text:'Good HDL level',cls:'good'} : a>=40 ? {text:'Minor improvement',cls:'warn'} : {text:'Still low — risk',cls:'bad'},
+    'tg':              () => a < 150 ? {text:'Now normal range',cls:'good'} : a<200 ? {text:'Getting better',cls:'warn'} : {text:'Still high ⚠️',cls:'bad'},
+    'total-chol':      () => a < 200 ? {text:'Now near normal ✅',cls:'good'} : a<240 ? {text:'Borderline high',cls:'warn'} : {text:'Still high',cls:'bad'},
+    'alt':             () => a <= 56 ? {text:'Liver normalised ✅',cls:'good'} : {text:'Liver stress — monitor',cls:'bad'},
+    'ast':             () => a <= 40 ? {text:'Within range',cls:'good'} : {text:'Slightly elevated',cls:'warn'},
+    'ggt':             () => a <= 48 ? {text:'Big recovery 👍',cls:'good'} : {text:'Still elevated',cls:'warn'},
+    'bmi':             () => a < 25 ? {text:'Normal BMI ✅',cls:'good'} : a<30 ? {text:'Overweight — improving',cls:'warn'} : {text:'Obese range',cls:'bad'},
+    'sbp':             () => a < 120 ? {text:'Optimal BP ✅',cls:'good'} : a<130 ? {text:'Normal BP',cls:'warn'} : {text:'Still elevated',cls:'bad'},
+    'vitamin-d':       () => a >= 30 ? {text:'Sufficient D3 ✅',cls:'good'} : {text:'Still insufficient',cls:'warn'},
+    'crp':             () => a < 1 ? {text:'Low inflammation ✅',cls:'good'} : {text:'Still elevated',cls:'warn'},
+  };
+  return (map[key] || (() => ({text: a < b ? 'Improved' : a > b ? 'Monitor closely' : 'Stable', cls: a<b?'good':a>b?'bad':''})))();
+}
+
+// ── GENERATE REPORT ──
+function generateReport() {
+  const name    = document.getElementById('pt-name').value || 'Anonymous Patient';
+  const age     = document.getElementById('pt-age').value;
+  const ptid    = document.getElementById('pt-id').value;
+  const before  = document.getElementById('date-before').value;
+  const after   = document.getElementById('date-after').value;
+  const product = document.getElementById('homa-product').value || 'HOMA Protocol';
+  const doctor  = document.getElementById('doctor').value;
+  const dur     = document.getElementById('duration').value;
+  const notes   = document.getElementById('notes').value;
+
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+
+  // Meta
+  document.getElementById('rpt-meta').innerHTML = `
+    <span>👤 ${name} ${age?'· '+age:''} ${ptid?'· ID: '+ptid:''}</span>
+    <span>📅 Before: ${fmtDate(before)}</span>
+    <span>📅 After: ${fmtDate(after)}</span>
+    ${dur?`<span>⏱️ Duration: ${dur}</span>`:''}
+    ${product?`<span>💊 ${product}</span>`:''}
+    ${doctor?`<span>👨‍⚕️ ${doctor}</span>`:''}
+  `;
+
+  // Collect rows
+  const rows = document.querySelectorAll('.lab-row');
+  const sections = {
+    '🩸 Glucose & Diabetes': [],
+    '❤️ Cholesterol / Lipid Profile': [],
+    '🫀 Liver Function': [],
+    '🫘 Kidney Function': [],
+    '⚖️ Body Metrics & BP': [],
+    '🦋 Thyroid & Other': []
+  };
+  const sectionMap = {
+    'fasting-glucose':'🩸 Glucose & Diabetes','hba1c':'🩸 Glucose & Diabetes','avg-glucose':'🩸 Glucose & Diabetes',
+    'fasting-insulin':'🩸 Glucose & Diabetes','c-peptide':'🩸 Glucose & Diabetes','pp-glucose':'🩸 Glucose & Diabetes',
+    'total-chol':'❤️ Cholesterol / Lipid Profile','ldl':'❤️ Cholesterol / Lipid Profile',
+    'hdl':'❤️ Cholesterol / Lipid Profile','tg':'❤️ Cholesterol / Lipid Profile','vldl':'❤️ Cholesterol / Lipid Profile',
+    'alt':'🫀 Liver Function','ast':'🫀 Liver Function','ggt':'🫀 Liver Function',
+    'bilirubin':'🫀 Liver Function','albumin':'🫀 Liver Function','total-protein':'🫀 Liver Function',
+    'creatinine':'🫘 Kidney Function','urea':'🫘 Kidney Function','uric-acid':'🫘 Kidney Function',
+    'weight':'⚖️ Body Metrics & BP','bmi':'⚖️ Body Metrics & BP','waist':'⚖️ Body Metrics & BP',
+    'sbp':'⚖️ Body Metrics & BP','dbp':'⚖️ Body Metrics & BP',
+    'tsh':'🦋 Thyroid & Other','vitamin-d':'🦋 Thyroid & Other','vitamin-b12':'🦋 Thyroid & Other',
+    'crp':'🦋 Thyroid & Other','ferritin':'🦋 Thyroid & Other'
+  };
+
+  let totalImproved = 0, totalWorse = 0, totalSame = 0;
+  const allData = [];
+
+  rows.forEach(row => {
+    const key    = row.dataset.key;
+    const name_  = row.dataset.name;
+    const unit   = row.dataset.unit;
+    const dir    = row.dataset.dir;
+    const normal = row.dataset.normal;
+    const inputs = row.querySelectorAll('input');
+    const bv     = inputs[0].value.trim();
+    const av     = inputs[1].value.trim();
+    if (!bv && !av) return;
+
+    const status = getStatus(bv, av, dir);
+    const interp = getInterp(key, bv, av);
+
+    if (status === 'improved') totalImproved++;
+    else if (status === 'worse') totalWorse++;
+    else if (status === 'same') totalSame++;
+
+    const sec = sectionMap[key] || '🦋 Thyroid & Other';
+    sections[sec].push({ key, name: name_, unit, bv, av, status, interp, normal, dir });
+    allData.push({ name: name_, bv, av, status });
+  });
+
+  // Score banner
+  document.getElementById('rpt-score').innerHTML = `
+    <div class="score-pill improved">✅ ${totalImproved} Improved</div>
+    <div class="score-pill same">➡️ ${totalSame} Stable</div>
+    <div class="score-pill worse">⚠️ ${totalWorse} Needs Attention</div>
+    ${notes ? `<div style="font-size:0.8rem;color:#6b7280;margin-left:8px;font-style:italic;">📝 ${notes}</div>` : ''}
+    <div class="score-label">Total parameters tracked: ${totalImproved+totalSame+totalWorse}</div>
+  `;
+
+  // Tables
+  let tablesHtml = '';
+  for (const [section, data] of Object.entries(sections)) {
+    if (!data.length) continue;
+    tablesHtml += `
+      <div class="report-section">
+        <div class="section-label">${section}</div>
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th style="width:24%">Parameter</th>
+              <th style="width:12%">Normal</th>
+              <th style="width:14%">Before</th>
+              <th style="width:14%">After</th>
+              <th style="width:14%">Change</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.map(r => {
+              const pct = (r.bv && r.av) ? Math.abs(((parseFloat(r.av)-parseFloat(r.bv))/parseFloat(r.bv)*100)).toFixed(1)+'%' : '';
+              return `
+              <tr class="${r.key==='alt'&&r.status==='worse'?'homa-highlight':''}">
+                <td class="param-cell">${r.name} <span class="unit-small">${r.unit}</span></td>
+                <td style="font-size:0.78rem;color:#9ca3af;">${r.normal}</td>
+                <td class="val-before">${r.bv||'—'}</td>
+                <td class="val-after">${r.av||'—'}</td>
+                <td>
+                  <span class="badge ${r.status}">
+                    ${getIcon(r.status)} ${r.status==='na'?'—':r.status.charAt(0).toUpperCase()+r.status.slice(1)}
+                    ${pct&&r.status!=='same'?'<br><small style="font-weight:400;opacity:0.7">'+pct+'</small>':''}
+                  </span>
+                </td>
+                <td class="interp ${r.interp.cls}">${r.interp.text}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  }
+
+  // HOMA-IR & TyG auto-calculate
+  const fgb = parseFloat(document.querySelector('[data-key="fasting-glucose"] input').value);
+  const fib = parseFloat(document.querySelector('[data-key="fasting-insulin"] input').value);
+  const tgb = parseFloat(document.querySelector('[data-key="tg"] input').value);
+  const fga = parseFloat(document.querySelector('[data-key="fasting-glucose"] input:last-child').value) ||
+              parseFloat(document.querySelectorAll('[data-key="fasting-glucose"] input')[1].value);
+  const fia = parseFloat(document.querySelectorAll('[data-key="fasting-insulin"] input')[1].value);
+  const tga = parseFloat(document.querySelectorAll('[data-key="tg"] input')[1].value);
+
+  let homaSection = '';
+  const canHOMA = !isNaN(fgb)&&!isNaN(fib)&&!isNaN(fga)&&!isNaN(fia);
+  const canTyG  = !isNaN(fgb)&&!isNaN(tgb)&&!isNaN(fga)&&!isNaN(tga);
+
+  if (canHOMA || canTyG) {
+    const homab = canHOMA ? (fgb*fib/405).toFixed(2) : '—';
+    const homaa = canHOMA ? (fga*fia/405).toFixed(2) : '—';
+    const tygb  = canTyG  ? (Math.log(fgb * tgb / 2)).toFixed(3) : '—';
+    const tyga  = canTyG  ? (Math.log(fga * tga / 2)).toFixed(3) : '—';
+
+    const homaStatus = canHOMA ? getStatus(homab, homaa, 'low') : 'na';
+    const tygStatus  = canTyG  ? getStatus(tygh = parseFloat(tygb), tyga2 = parseFloat(tyga), 'low') : 'na';
+
+    homaSection = `
+      <div class="report-section">
+        <div class="section-label">🧮 HOMA Calculated Indices (Auto)</div>
+        <table class="report-table">
+          <thead>
+            <tr><th>Index</th><th>Normal</th><th>Before</th><th>After</th><th>Change</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f0fdf4;">
+              <td class="param-cell">HOMA-IR <span class="unit-small">Insulin Resistance</span></td>
+              <td style="font-size:0.78rem;color:#9ca3af;">&lt;2.0</td>
+              <td class="val-before">${homab}</td>
+              <td class="val-after">${homaa}</td>
+              <td><span class="badge ${homaStatus}">${getIcon(homaStatus)} ${homaStatus}</span></td>
+              <td class="interp ${parseFloat(homaa)<2?'good':homaStatus==='improved'?'warn':'bad'}">
+                ${canHOMA?(parseFloat(homaa)<2?'Excellent! Normal insulin sensitivity ✅':homaStatus==='improved'?'Good progress! ↓'+((parseFloat(homab)-parseFloat(homaa)).toFixed(2))+' drop — continue to reach <2.0':parseFloat(homaa)<3?'Borderline resistance — needs attention':'High resistance — urgent lifestyle intervention'):'—'}
+              </td>
+            </tr>
+            <tr style="background:#f0fdf4;">
+              <td class="param-cell">TyG Index <span class="unit-small">Triglyceride-Glucose</span></td>
+              <td style="font-size:0.78rem;color:#9ca3af;">&lt;8.5</td>
+              <td class="val-before">${tygb}</td>
+              <td class="val-after">${tyga}</td>
+              <td><span class="badge ${tygStatus}">${getIcon(tygStatus)} ${tygStatus}</span></td>
+              <td class="interp ${parseFloat(tyga)<8.5?'good':tygStatus==='improved'?'warn':'bad'}">
+                ${canTyG?(
+                  parseFloat(tyga)<8.5
+                    ? 'Low cardiovascular risk ✅ Target achieved!'
+                    : tygStatus==='improved'
+                      ? `Good progress! ↓${(parseFloat(tygb)-parseFloat(tyga)).toFixed(3)} reduction — continue treatment to reach &lt;8.5`
+                      : tygStatus==='same'
+                        ? 'Stable — needs further reduction below 8.5'
+                        : 'Worsened — review diet & triglycerides urgently'
+                ):'—'}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>`;
+  }
+
+  document.getElementById('rpt-tables').innerHTML = tablesHtml;
+  document.getElementById('rpt-homa-section').innerHTML = homaSection;
+  document.getElementById('rpt-generated-date').innerHTML =
+    `Generated: ${new Date().toLocaleString('en-IN')}<br>mvp.homahealthcarecenter.in`;
+
+  switchTab('report');
+}
+
+// ── TESTIMONIALS ──
+function openAddTestimonial() {
+  document.getElementById('testi-modal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('testi-modal').style.display = 'none';
+}
+function saveTestimonial() {
+  const name    = document.getElementById('t-name').value.trim();
+  const detail  = document.getElementById('t-detail').value.trim();
+  const outcome = document.getElementById('t-outcome').value.trim();
+  const text    = document.getElementById('t-text').value.trim();
+  if (!name || !text) { alert('Please enter at least a name and testimonial text.'); return; }
+
+  const initials = name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const card = document.createElement('div');
+  card.className = 'testi-card';
+  card.innerHTML = `
+    <div class="testi-quote-mark">"</div>
+    <div class="testi-text">${text}</div>
+    ${outcome?`<span class="testi-outcome">✅ ${outcome}</span>`:''}
+    <div class="testi-author">
+      <div class="testi-avatar">${initials}</div>
+      <div>
+        <div class="testi-name">${name}</div>
+        <div class="testi-detail">${detail}</div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>`;
+
+  const grid = document.getElementById('testi-grid');
+  const addBtn = grid.lastElementChild;
+  grid.insertBefore(card, addBtn);
+  ['t-name','t-detail','t-outcome','t-text'].forEach(id => document.getElementById(id).value='');
+  closeModal();
+}
+
+function copyText() {
+  const rows = document.querySelectorAll('.lab-row');
+  let txt = `HOMA Healthcare Center — Lab Report Summary\n\n`;
+  txt += `Patient: ${document.getElementById('pt-name').value || '—'}\n\n`;
+  rows.forEach(r => {
+    const ins = r.querySelectorAll('input');
+    if (ins[0].value || ins[1].value)
+      txt += `${r.dataset.name}: Before ${ins[0].value||'—'} → After ${ins[1].value||'—'}\n`;
+  });
+  navigator.clipboard.writeText(txt).then(() => alert('✅ Summary copied to clipboard!'));
+}
+</script>
+</body>
+</html>

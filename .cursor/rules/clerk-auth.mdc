@@ -1,0 +1,13 @@
+---
+description: Clerk auth, middleware public routes, /auth page embedding
+globs: web/middleware.ts,web/app/layout.tsx,web/app/auth/**/*.tsx,web/lib/auth-context.tsx
+alwaysApply: false
+---
+
+# Clerk authentication (HOMA web)
+
+- **Provider:** Single `ClerkProvider` in `web/app/layout.tsx` — wrap **inside** `<body>`, not around `<html>`. Keep one provider only.
+- **Env (local + Render):** `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, and URL vars: `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth`, `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth`, `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard`, `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard`. **Never mix** `pk_live` with `sk_test` (or `pk_test` with `sk_live`) — both keys must be from the same Clerk instance or Clerk returns failed loads / 404-style API errors.
+- **Middleware:** Public routes must include `/auth(.*)`, `/blog(.*)`, `/admin/blog(.*)`, and early-return `/api/admin/blog` so Clerk does not block anonymous access where intended.
+- **`/auth` embedding:** On a flat `app/auth/page.tsx`, use `<SignIn routing="hash" />` / `<SignUp routing="hash" />` (not `routing="path"` without `app/auth/[[...rest]]/page.tsx`). Path routing needs a catch-all segment for Clerk’s multi-step URLs.
+- **Do not** duplicate Clerk config across layouts; **do not** change blog or DB code when fixing auth unless the task explicitly requires it.

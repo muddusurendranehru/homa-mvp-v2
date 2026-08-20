@@ -1,0 +1,54 @@
+﻿
+> homa-clinic-frontend@1.0.0 build
+> next build
+
+  Γû▓ Next.js 14.2.0
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/26) ...
+   Generating static pages (6/26) 
+   Generating static pages (12/26) 
+   Generating static pages (19/26) 
+ Γ£ô Generating static pages (26/26)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                       Size     First Load JS
+Γöî Γùï /                                             16.9 kB         114 kB
+Γö£ Γùï /_not-found                                   871 B          87.8 kB
+Γö£ Γùï /admin/gallery                                3 kB             95 kB
+Γö£ ╞Æ /api/create-checkout-session                  0 B                0 B
+Γö£ ╞Æ /api/gallery                                  0 B                0 B
+Γö£ ╞Æ /api/gallery/[id]                             0 B                0 B
+Γö£ ╞Æ /api/gallery/[id]/set-cover                   0 B                0 B
+Γö£ ╞Æ /api/gallery/reorder                          0 B                0 B
+Γö£ Γùï /assessment                                   3.16 kB         118 kB
+Γö£ Γùï /auth                                         2.58 kB         118 kB
+Γö£ Γùï /blog                                         3.34 kB        97.1 kB
+Γö£ Γùï /blog/can-prediabetes-be-reversed-in-90-days  1.47 kB        95.2 kB
+Γö£ Γùï /blog/insulin-resistance-kidney-link          1.48 kB         100 kB
+Γö£ Γùï /dashboard                                    4.11 kB         122 kB
+Γö£ Γùï /diet                                         8.37 kB         102 kB
+Γö£ Γùï /disclaimer                                   6.22 kB        93.2 kB
+Γö£ Γùï /enroll                                       3.31 kB          97 kB
+Γö£ Γùï /gallery                                      4.66 kB        96.7 kB
+Γö£ Γùï /nutri-bot                                    4.52 kB         120 kB
+Γö£ Γùï /onboarding-emails                            2.56 kB        89.5 kB
+Γö£ Γùï /pricing                                      3.4 kB         97.1 kB
+Γö£ Γùï /remission-program                            4.97 kB         120 kB
+Γö£ Γùï /sitemap.xml                                  0 B                0 B
+Γö£ Γùï /testimonials                                 3.66 kB        97.4 kB
+Γö£ Γùï /upgrade                                      3.46 kB        97.2 kB
+Γöö Γùï /zoom                                         173 B          93.9 kB
++ First Load JS shared by all                     86.9 kB
+  Γö£ chunks/23-db0652fa52efb010.js                 31.3 kB
+  Γö£ chunks/fd9d1056-06513e4cd597418e.js           53.6 kB
+  Γöö other shared chunks (total)                   1.95 kB
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+

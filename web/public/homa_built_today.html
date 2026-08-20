@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>HOMA — Built today</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+    :root { --navy: #0a1628; --gold: #d4a843; }
+    .heading-font { font-family: 'Playfair Display', serif; }
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0a1628] text-white min-h-screen">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <p class="text-[#d4a843] text-sm tracking-widest uppercase mb-2">HOMA Healthcare Center · internal log</p>
+    <h1 class="heading-font text-3xl md:text-4xl font-bold text-white mb-2">Built today</h1>
+    <p class="text-white/60 text-sm mb-10" id="date-line">Update the date below when you edit this file.</p>
+
+    <div class="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 mb-8">
+      <h2 class="text-lg font-semibold text-[#d4a843] mb-4">Session notes (edit freely)</h2>
+      <ul class="list-disc list-inside space-y-2 text-white/90 text-sm leading-relaxed">
+        <li>Cursor rules: <code class="text-emerald-300">.cursor/rules/cursor-master-instruction-workflow.mdc</code> — master-instruction workflow.</li>
+        <li>Cursor rules: <code class="text-emerald-300">.cursor/rules/homa-mvp-project.mdc</code> — full HOMA golden rules (sync to your clone if missing).</li>
+        <li>Index doc: <code class="text-emerald-300">CURSOR-PROJECT-RULES.md</code> — points to <code class="text-emerald-300">.mdc</code> files; does not replace them.</li>
+        <li>This page: <code class="text-emerald-300">/homa_built_today.html</code> — optional daily changelog.</li>
+      </ul>
+    </div>
+
+    <p class="text-white/50 text-sm mb-6">
+      This file is static HTML in <code class="text-white/70">web/public/</code>. It is not linked from the main nav unless you add a link. Safe to delete if you do not need it.
+    </p>
+
+    <a href="/" class="inline-flex items-center gap-2 text-[#d4a843] hover:text-amber-300 text-sm font-medium transition-colors">
+      ← Back to HOMA MVP home
+    </a>
+  </div>
+  <script>
+    (function () {
+      var el = document.getElementById('date-line');
+      if (el) {
+        el.textContent = 'Last template update: ' + new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) + ' (browser date)';
+      }
+    })();
+  </script>
+</body>
+</html>

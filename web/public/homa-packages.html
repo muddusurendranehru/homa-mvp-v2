@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>HOMA — Packages (static preview)</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: linear-gradient(to bottom, #0f172a, #134e4a, #022c22); min-height: 100vh; color: #ecfdf5; }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 2.5rem 1rem 3rem; }
+    .note { font-size: 12px; color: rgba(153, 246, 228, 0.55); margin-bottom: 1.25rem; }
+    .note a { color: #5eead4; }
+    .head { text-align: center; margin-bottom: 2.5rem; }
+    .head .k { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #5eead4; }
+    .head h1 { margin: 0.5rem 0 0; font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 800; color: #fff; }
+    .head p { margin: 0.75rem auto 0; max-width: 42rem; font-size: 1rem; line-height: 1.5; color: rgba(204, 251, 241, 0.9); }
+    .grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    .card {
+      display: flex; flex-direction: column; border-radius: 1rem; border: 1px solid rgba(45, 212, 191, 0.35);
+      background: linear-gradient(to bottom right, rgba(19, 78, 74, 0.65), rgba(6, 78, 59, 0.85));
+      padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+    }
+    .card .n { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #2dd4bf; margin-bottom: 0.5rem; }
+    .card h2 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .card .blurb { margin-top: 0.5rem; font-size: 0.875rem; color: rgba(204, 251, 241, 0.9); line-height: 1.5; }
+    .card ul { margin: 1rem 0 0; padding: 0; list-style: none; flex: 1; }
+    .card li { display: flex; gap: 0.5rem; font-size: 0.875rem; color: rgba(236, 253, 245, 0.95); margin-bottom: 0.5rem; }
+    .card li span:first-child { color: #2dd4bf; flex-shrink: 0; }
+    .wa {
+      margin-top: 1.5rem; display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: 0.5rem;
+      border-radius: 0.75rem; background: #25D366; color: #fff; font-weight: 700; padding: 0.875rem 1rem; text-decoration: none;
+    }
+    .wa:hover { background: #20bd5a; }
+    .foot { margin-top: 2.5rem; text-align: center; font-size: 11px; color: rgba(153, 246, 228, 0.65); }
+    .foot a { color: #a7f3d0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="note">Standalone preview — same ideas as <a href="/packages">/packages</a> in the app. <a href="/">← HOMA home</a></p>
+
+    <header class="head">
+      <p class="k">HOMA Clinic</p>
+      <h1>Packages</h1>
+      <p>Choose a lane. Enroll on WhatsApp — we&apos;ll confirm eligibility, timing, and inclusions for Hyderabad / Gachibowli.</p>
+    </header>
+
+    <div class="grid" id="grid"></div>
+
+    <p class="foot">Final pricing and inclusions are confirmed after clinical assessment. Call <a href="tel:+919963721999">09963721999</a>.</p>
+  </div>
+
+  <script>
+    (function () {
+      var WA = 'https://wa.me/919963721999';
+      var packages = [
+        { name: 'Free Risk Check', blurb: 'Online calculators and quick orientation — no payment, no signup.', bullets: ['HOMA-IR / TyG style tools', 'Understand your risk band', 'WhatsApp for next step'], enrollText: 'I want the Free Risk Check' },
+        { name: 'Basic HOMA Test — home visit', blurb: 'Fasting insulin–guided interpretation with home blood draw coordination in Hyderabad.', bullets: ['Scheduling support', 'Metabolic context — not just a single number', 'Doctor-aligned follow-up'], enrollText: 'I want the Basic HOMA Home Visit' },
+        { name: '30-Day Program', blurb: 'Structured start for insulin resistance, weight, and sugar trends with close monitoring.', bullets: ['Nutrition + lifestyle framework', 'Metrics check-ins', 'Coach-style accountability'], enrollText: 'I want the 30-Day Program' },
+        { name: '90-Day Reversal Program', blurb: 'Our flagship metabolic remission track — evidence-based protocols with high remission focus.', bullets: ['HOMA-guided progression', 'Personalized plan', 'Priority support'], enrollText: 'I want the 90-Day Reversal Program' },
+        { name: 'Premium Door-to-Door Care', blurb: 'Concierge-style monitoring for busy families — assessments and follow-ups at your doorstep where available.', bullets: ['Priority scheduling', 'Home visits as applicable', 'Dedicated coordination'], enrollText: 'I want Premium Door-to-Door Care' }
+      ];
+      var grid = document.getElementById('grid');
+      packages.forEach(function (pkg, i) {
+        var href = WA + '?text=' + encodeURIComponent('Hi Dr. Nehru — ' + pkg.enrollText + '. Please share details and next steps.');
+        var li = pkg.bullets.map(function (b) { return '<li><span>✓</span><span>' + b.replace(/</g, '&lt;') + '</span></li>'; }).join('');
+        grid.innerHTML += '<article class="card">' +
+          '<div class="n">Package ' + (i + 1) + '</div>' +
+          '<h2>' + pkg.name.replace(/</g, '&lt;') + '</h2>' +
+          '<p class="blurb">' + pkg.blurb.replace(/</g, '&lt;') + '</p>' +
+          '<ul>' + li + '</ul>' +
+          '<a class="wa" href="' + href + '" target="_blank" rel="noopener noreferrer"><span>💬</span> Enroll on WhatsApp</a>' +
+          '</article>';
+      });
+    })();
+  </script>
+</body>
+</html>

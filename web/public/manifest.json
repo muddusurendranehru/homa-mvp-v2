@@ -1,0 +1,31 @@
+{
+  "name": "HOMA Clinic - Dr. Muddu Nehru MD",
+  "short_name": "HOMA Clinic",
+  "description": "Free HOMA-IR, TyG & WHtR calculators. Diabetes reversal Gachibowli",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e40af",
+  "theme_color": "#1e40af",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait-primary",
+  "id": "com.homaclinic.app",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.homaclinic.app",
+      "id": "com.homaclinic.app"
+    }
+  ],
+  "prefer_related_applications": false
+}

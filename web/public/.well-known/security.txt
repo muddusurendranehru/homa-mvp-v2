@@ -1,0 +1,9 @@
+Contact: mailto:security@homahealthcarecenter.in
+Contact: https://homahealthcarecenter.in/contact
+Encryption: https://homahealthcarecenter.in/pgp-key.txt
+Acknowledgments: https://homahealthcarecenter.in/security-thanks
+Preferred-Languages: en, te
+Canonical: https://homahealthcarecenter.in/.well-known/security.txt
+Policy: https://homahealthcarecenter.in/security-policy
+Hiring: https://homahealthcarecenter.in/careers/security
+Expires: 2027-02-07T00:00:00.000Z

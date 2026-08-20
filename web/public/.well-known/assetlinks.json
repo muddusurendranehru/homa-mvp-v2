@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.homahealthcarecenter.app",
+    "sha256_cert_fingerprints": [
+      "9A:14:13:34:EE:E1:99:F0:CC:08:BF:FC:5D:AB:76:5C:69:AA:04:7F:66:EA:B0:91:25:0B:0D:E5:47:E7:27:0B"
+    ]
+  }
+}]

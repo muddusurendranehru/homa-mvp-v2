@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professor of Medicine with 32+ years experience, author of 4 books & 300+ articles. Founder of HOMA Health Clinics, Hyderabad.">
+    <title>About Dr. Muddu Surendra Nehru, MD – HOMA Health Clinics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.95;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .content {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        section:last-child {
+            margin-bottom: 0;
+        }
+        
+        h2 {
+            color: #1e40af;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #2563eb;
+        }
+        
+        h3 {
+            color: #2563eb;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.8;
+        }
+        
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        
+        .cta-whatsapp {
+            background: #25d366;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .cta-whatsapp a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .cta-whatsapp a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .program-steps {
+            list-style: none;
+            padding-left: 0;
+            counter-reset: step-counter;
+        }
+        
+        .program-steps li {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2563eb;
+            border-radius: 5px;
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .program-steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 1rem;
+            background: #2563eb;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-whatsapp a {
+                font-size: 1.1rem;
+                padding: 0.6rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>About Dr. Muddu Surendra Nehru, MD</h1>
+            <p>Professor of Medicine | Founder of HOMA Health Clinics</p>
+            <a href="/" class="nav-link">← Back to Homepage</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <section id="professional-bio">
+                <h2>Professional Biography</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">32+</div>
+                        <div class="stat-label">Years of Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Research Articles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Published Books</div>
+                    </div>
+                </div>
+                
+                <p>Dr. Muddu Surendra Nehru, MD, is a distinguished Professor of Medicine with over three decades of clinical excellence and research leadership. His pioneering work in metabolic health and early disease detection has established him as a trusted authority in preventive medicine.</p>
+                
+                <div class="highlight-box">
+                    <h3>Experience & Expertise</h3>
+                    <p>With 32+ years of dedicated service in medicine, Dr. Nehru brings unparalleled clinical expertise to HOMA Health Clinics. His extensive research background, evidenced by 300+ peer-reviewed articles, demonstrates his commitment to advancing medical knowledge and improving patient outcomes.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Authoritativeness</h3>
+                    <p>As the author of 4 authoritative books on metabolic health and preventive medicine, Dr. Nehru has established himself as a leading voice in the medical community. His publications serve as essential references for healthcare professionals and patients alike.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Trustworthiness</h3>
+                    <p>Dr. Nehru's evidence-based approach, combined with decades of successful patient care, has earned the trust of thousands of patients. His commitment to transparency, ethical practice, and patient-centered care defines the foundation of HOMA Health Clinics.</p>
+                </div>
+            </section>
+
+            <section id="mission">
+                <h2>Our Mission: Early Detection & Metabolic Remission</h2>
+                
+                <p>At HOMA Health Clinics, we believe that early detection is the cornerstone of effective metabolic disease management. Our mission is to identify metabolic imbalances before they progress to chronic conditions, enabling true remission rather than mere symptom management.</p>
+                
+                <h3>Early Detection Approach</h3>
+                <p>Through advanced diagnostic tools and comprehensive assessments, we identify metabolic markers that conventional medicine often overlooks. By catching issues early, we can intervene with targeted interventions that prevent disease progression.</p>
+                
+                <h3>Metabolic Remission Goals</h3>
+                <p>Our goal is not just to manage symptoms but to achieve true metabolic remission. This means restoring normal metabolic function, reducing or eliminating medication dependency, and helping patients regain optimal health through evidence-based, personalized treatment protocols.</p>
+            </section>
+
+            <section id="90-day-program">
+                <h2>The 90-Day Metabolic Remission Program</h2>
+                
+                <p>Our comprehensive 90-day program is designed to systematically address metabolic imbalances and guide patients toward sustainable remission. Each phase builds upon the previous one, creating a structured path to optimal health.</p>
+                
+                <ol class="program-steps">
+                    <li>
+                        <strong>Initial Assessment (Days 1-7)</strong><br>
+                        Comprehensive metabolic panel, personalized health analysis, and baseline establishment. We identify all metabolic markers requiring attention.
+                    </li>
+                    <li>
+                        <strong>Intervention Phase (Days 8-60)</strong><br>
+                        Targeted interventions based on your unique metabolic profile. This includes personalized nutrition plans, lifestyle modifications, and precision monitoring.
+                    </li>
+                    <li>
+                        <strong>Optimization Phase (Days 61-90)</strong><br>
+                        Fine-tuning interventions based on progress data. We adjust protocols to ensure optimal outcomes and establish long-term maintenance strategies.
+                    </li>
+                </ol>
+                
+                <div class="highlight-box">
+                    <p><strong>Program Outcomes:</strong> Our 90-day program has demonstrated remarkable success rates in achieving metabolic remission, with patients reporting significant improvements in energy levels, metabolic markers, and overall quality of life.</p>
+                </div>
+            </section>
+
+            <section id="contact-cta">
+                <div class="cta-whatsapp">
+                    <h3 style="color: white; margin-bottom: 1rem;">Start Your Journey to Metabolic Health</h3>
+                    <p style="color: white; margin-bottom: 1.5rem;">Connect with us on WhatsApp for a free consultation</p>
+                    <a href="https://wa.me/919963721999?text=Hi%2C%20I%27d%20like%20to%20learn%20more%20about%20the%2090-day%20Metabolic%20Remission%20Program" target="_blank" rel="noopener noreferrer">
+                        📱 WhatsApp: 09963721999
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HOMA Health Clinics, Hyderabad. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Founded by Dr. Muddu Surendra Nehru, MD | Professor of Medicine</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dr. Muddu Surendra Nehru, MD",
+      "url": "https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com/about",
+      "image": "https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com/profile.jpg",
+      "jobTitle": "Professor of Medicine",
+      "affiliation": "HOMA Health Clinics",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Gachibowli",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500032",
+        "addressCountry": "IN"
+      },
+      "description": "With 32+ years of clinical experience, Dr. Muddu pioneered the HOMA-IR based metabolic remission approach. Author of 4 books and 300+ articles on diabetes reversal and obesity management."
+    }
+    </script>
+</body>
+</html>

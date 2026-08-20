@@ -1,0 +1,12 @@
+{
+  "name": "dr-muddus-mvp-miracle-value-proposition",
+  "private": true,
+  "description": "HOMA Clinic — run Next.js from web/, Express from server/",
+  "scripts": {
+    "dev": "npm run dev --prefix web",
+    "dev:web": "npm run dev --prefix web",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix web",
+    "lint": "npm run lint --prefix web"
+  }
+}

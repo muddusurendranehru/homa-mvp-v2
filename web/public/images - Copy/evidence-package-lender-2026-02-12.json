@@ -1,0 +1,583 @@
+{
+  "exportedAt": "2026-02-12T08:51:54.924Z",
+  "lenderName": "",
+  "accountNumber": "",
+  "previousPracticeNote": "I previously managed a fully functional, registered hospital/clinic, which was closed in order to invest in and establish my current clinic. That investment has not produced the expected income, and the clinic has faced sustained operating losses, leading to serious cash-flow constraints. I have used the proceeds from closing the earlier hospital and subsequent income to service my debts to the maximum extent possible. I now seek a fair settlement or restructuring so that these loans can be closed in an orderly and transparent manner.",
+  "hardshipNoPensionNote": "Earlier in my career I served in government and teaching posts as a doctor, but I am no longer in government service and do not receive any government salary or pension. My income in recent years depended entirely on my private hospital and clinic practice, which has had to close, causing a severe and continuing reduction in my earnings. Despite selling assets and cutting personal expenses to repay as much as possible, I am currently unable to maintain the original instalment schedule on these loans. I am therefore requesting a reasonable one-time settlement or restructured arrangement so that I can close these obligations in a fair and sustainable manner.",
+  "investment": {
+    "registration": 125000,
+    "rent": 500000,
+    "signage": 1700000,
+    "software": 1002000,
+    "medicine": 225000,
+    "equipment": {
+      "medical": 325000,
+      "furniture": 324000,
+      "electrical": 127000,
+      "computers": 107000
+    },
+    "total": 4435000,
+    "interiorNote": "",
+    "clinicPhotosNote": "",
+    "govtFeesTotal": 100000,
+    "runningExpenses": {
+      "electricity": 12000,
+      "advances": 200000,
+      "equipment": 123000
+    },
+    "expensesNote": ""
+  },
+  "grandTotalLosses": {
+    "setup": 4435000,
+    "running": 335000,
+    "bankInterest": 217500,
+    "total": 4987500
+  },
+  "monthlyData": [
+    {
+      "month": "july 2024",
+      "revenue": 0,
+      "expenses": 226000,
+      "netProfitLoss": -226000
+    }
+  ],
+  "monthlyLosses": [
+    {
+      "month": "Feb24",
+      "totalExpense": 26700,
+      "totalIncome": 0,
+      "netLoss": 26700,
+      "notes": ""
+    }
+  ],
+  "cumulativeLoss": 26700,
+  "loanHistory": {
+    "lenderName": "",
+    "accountNumber": "",
+    "loanAmountOriginal": 0,
+    "processingFeesPaid": 0,
+    "firstEmiDate": "",
+    "emiAmount": 0,
+    "monthsPaid": 0,
+    "totalAmountPaid": 0,
+    "outstandingBalance": 0,
+    "proposedOtsPct": 70,
+    "otsAmount": 0,
+    "savings": 0
+  },
+  "emiTrackerData": [
+    {
+      "month": "july24",
+      "principal": 500,
+      "interest": 64500,
+      "totalEmi": 65000,
+      "status": ""
+    },
+    {
+      "month": "july24",
+      "principal": 1000,
+      "interest": 34000,
+      "totalEmi": 35000,
+      "status": ""
+    },
+    {
+      "month": "july24",
+      "principal": 1000,
+      "interest": 21000,
+      "totalEmi": 22000,
+      "status": ""
+    },
+    {
+      "month": "july24",
+      "principal": 1000,
+      "interest": 98000,
+      "totalEmi": 99000,
+      "status": ""
+    }
+  ],
+  "emiTrackerTotals": {
+    "totalPrincipal": 3500,
+    "totalInterest": 217500,
+    "postClosureInterest": 0
+  },
+  "taxCompliance": {
+    "itReturnsFiled": {
+      "fy22": true,
+      "fy23": true,
+      "fy24": true
+    },
+    "itReturnsFiles": [
+      "SURENDRA NEHRU MUDDU-2022-23.pdf",
+      "SURENDRA NEHRU MUDDU- 2023-24.pdf",
+      "SURENDRA NEHRU MUDDU-2024-25 (1).pdf"
+    ],
+    "gstPaid": 34500,
+    "professionalTax": 12000,
+    "otherGovtFees": 87000
+  },
+  "legalCosts": {
+    "courtNoticeFees": 325000,
+    "lawyerFees": 0,
+    "courtFiles": ""
+  },
+  "healthExpenses": {
+    "borrowerMedical": 98769,
+    "spouseMedical": 96784,
+    "healthFiles": "continretalbill1.pdf"
+  },
+  "majorAssetSale": {
+    "propertyDescription": "house number bahar B/8 sahara estate",
+    "propertyAddress": "mansoorabad hyderabad",
+    "registrationDetails": "",
+    "saleValue": 3800000,
+    "saleDate": "2024-07-30",
+    "netAmountReceived": 3800000,
+    "reasonForSale": "To honour my obligations in good faith, I have already sold a major personal/family asset and applied the sale proceeds towards repayment of multiple loans, as reflected in the enclosed sale deed and bank statements. After this one-time sacrifice, I no longer have comparable assets available to liquidate. Even after applying the entire sale consideration, a residual balance remains which I am presently unable to clear under the original terms. I therefore request that the remaining dues be considered for a reasonable one-time settlement or restructured plan aligned with my present repayment capacity.",
+    "usageNote": "I previously managed a fully functional, registered hospital/clinic, which was closed in order to invest in and establish my current clinic. That investment has not produced the expected income, and the clinic has faced sustained operating losses, leading to serious cash-flow constraints. I have used the proceeds from closing the earlier hospital and subsequent income to service my debts to the maximum extent possible. I now seek a fair settlement or restructuring so that these loans can be closed in an orderly and transparent manner.",
+    "debtsRepaid": [
+      {
+        "lender": "bajaj finance",
+        "loanAccount": "flexi",
+        "amountFromSale": 14235000,
+        "closureStatus": "PART-PAID"
+      }
+    ],
+    "totalAppliedToDebt": 14235000,
+    "remarks": "To honour my obligations in good faith, I have already sold a major personal/family asset and applied the sale proceeds towards repayment of multiple loans, as reflected in the enclosed sale deed and bank statements. After this one-time sacrifice, I no longer have comparable assets available to liquidate. Even after applying the entire sale consideration, a residual balance remains which I am presently unable to clear under the original terms. I therefore request that the remaining dues be considered for a reasonable one-time settlement or restructured plan aligned with my present repayment capacity."
+  },
+  "evidenceChecklist": {
+    "clinic_reg": {
+      "checked": true,
+      "fileName": "homaregdcert1 (1).jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "pharmacy_lic": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "shop_lic": {
+      "checked": true,
+      "fileName": "Emailing Print _ Udyam Registration Certificate (1).pdf",
+      "description": "",
+      "fileList": []
+    },
+    "pan": {
+      "checked": true,
+      "fileName": "homafirmpancardimp2.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "gst_reg": {
+      "checked": true,
+      "fileName": "GSTREGISTRATIONIMPORTANT1.pdf",
+      "description": "",
+      "fileList": []
+    },
+    "rent_lease": {
+      "checked": true,
+      "fileName": "rentalmainpage.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "equipment": {
+      "checked": true,
+      "fileName": "equipbipap1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "medicalEquip": {
+      "checked": true,
+      "fileName": "equipdismantle3.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "furniture": {
+      "checked": true,
+      "fileName": "equipdismant;le1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "electrical": {
+      "checked": true,
+      "fileName": "acdiasmantle1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "computers": {
+      "checked": true,
+      "fileName": "billpaidevidence3.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "signage": {
+      "checked": true,
+      "fileName": "billpaidboards1.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "software": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "interior": {
+      "checked": true,
+      "fileName": "Homa Budget File (3) (1).docx",
+      "description": "",
+      "fileList": []
+    },
+    "interior_quote": {
+      "checked": true,
+      "fileName": "billpaidevidence3.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "clinicPhotos": {
+      "checked": true,
+      "fileName": "clinicnightboard1 (1).jpeg",
+      "description": "",
+      "fileList": [
+        "clinicnightboard1 (1).jpeg"
+      ]
+    },
+    "ac_units": {
+      "checked": true,
+      "fileName": "acbill5.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "pollution": {
+      "checked": false,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "it_returns": {
+      "checked": false,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "gst_receipts": {
+      "checked": true,
+      "fileName": "GSTREGISTRATIONIMPORTANT1.pdf",
+      "description": "",
+      "fileList": []
+    },
+    "prof_tax": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "govtFeesReceipts": {
+      "checked": true,
+      "fileName": "homagovt2.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "utilityBills": {
+      "checked": true,
+      "fileName": "dec23homaelecbillpaid1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "equipmentAdvances": {
+      "checked": true,
+      "fileName": "acbill5.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "pharmaMarketingReceipts": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "cashOnlineReceipts": {
+      "checked": true,
+      "fileName": "billpaid2.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "emiBankStatements": {
+      "checked": true,
+      "fileName": "july24.xlsx",
+      "description": "",
+      "fileList": [
+        "july24.xlsx"
+      ]
+    },
+    "digital_mkt": {
+      "checked": true,
+      "fileName": "billpaidboards1.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "print_ads": {
+      "checked": true,
+      "fileName": "billpaidevidence3.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    "website": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "awareness_meetings": {
+      "checked": true,
+      "fileName": "meeting11.jpg",
+      "description": "",
+      "fileList": [
+        "meeting11.jpg"
+      ]
+    },
+    "dmho_closure": {
+      "checked": true,
+      "fileName": "DMHOGDKNOTICE1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "drug_cancel": {
+      "checked": true,
+      "fileName": "medical shop.pdf",
+      "description": "",
+      "fileList": []
+    },
+    "landlord_noc": {
+      "checked": false,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "premises_handover": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "sale_deed": {
+      "checked": true,
+      "fileName": "saharasale1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "bank_statement_proofs": {
+      "checked": true,
+      "fileName": "june2025.xls",
+      "description": "",
+      "fileList": []
+    },
+    "staff_salary": {
+      "checked": true,
+      "fileName": "staffpaid4.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "pharma_bills": {
+      "checked": true,
+      "fileName": "pharmacybill4.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "lab_vendor": {
+      "checked": true,
+      "fileName": "aq5.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "borrower_health": {
+      "checked": true,
+      "fileName": "cert2.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "spouse_health": {
+      "checked": true,
+      "fileName": "continretalbill1.pdf",
+      "description": "",
+      "fileList": []
+    },
+    "medical_bills": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "court_summons": {
+      "checked": true,
+      "fileName": "COURTNOTICE1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "prev_hospital_reg": {
+      "checked": true,
+      "fileName": "Copy of gdk21regd1.pdf",
+      "description": "",
+      "fileList": []
+    },
+    "govt_service_order": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    "teaching_hospital_cert": {
+      "checked": true,
+      "fileName": "osmanicert1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    "other_govt_service_proof": {
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    }
+  },
+  "infrastructure": [
+    {
+      "id": "rent_lease",
+      "label": "Rent/lease agreement",
+      "checked": true,
+      "fileName": "rentalmainpage.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "equipment",
+      "label": "Equipment purchase bills (furniture, medical devices)",
+      "checked": true,
+      "fileName": "equipbipap1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "medicalEquip",
+      "label": "Medical equipment receipts (beds, fridges, devices)",
+      "checked": true,
+      "fileName": "equipdismantle3.jpg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "furniture",
+      "label": "Furniture receipts (chairs, stools, tables)",
+      "checked": true,
+      "fileName": "equipdismant;le1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "electrical",
+      "label": "Electrical equipment (fans, AC units)",
+      "checked": true,
+      "fileName": "acdiasmantle1.jpg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "computers",
+      "label": "Computers/printers receipts",
+      "checked": true,
+      "fileName": "billpaidevidence3.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "signage",
+      "label": "Signage/boards/LED installation bills",
+      "checked": true,
+      "fileName": "billpaidboards1.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "software",
+      "label": "Hospital software licence/invoice",
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "interior",
+      "label": "Interior/renovation bills",
+      "checked": true,
+      "fileName": "Homa Budget File (3) (1).docx",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "interior_quote",
+      "label": "Interior quotation / bill (HOMA Clinic)",
+      "checked": true,
+      "fileName": "billpaidevidence3.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "clinicPhotos",
+      "label": "Real clinic photos (exterior/interior, before closure)",
+      "checked": true,
+      "fileName": "clinicnightboard1 (1).jpeg",
+      "description": "",
+      "fileList": [
+        "clinicnightboard1 (1).jpeg"
+      ]
+    },
+    {
+      "id": "ac_units",
+      "label": "AC Units Installation",
+      "checked": true,
+      "fileName": "acbill5.jpeg",
+      "description": "",
+      "fileList": []
+    }
+  ],
+  "marketing": [
+    {
+      "id": "digital_mkt",
+      "label": "Digital marketing bills (Google Ads, social media)",
+      "checked": true,
+      "fileName": "billpaidboards1.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "print_ads",
+      "label": "Print ads / pamphlets",
+      "checked": true,
+      "fileName": "billpaidevidence3.jpeg",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "website",
+      "label": "Website development invoice",
+      "checked": true,
+      "fileName": "",
+      "description": "",
+      "fileList": []
+    },
+    {
+      "id": "awareness_meetings",
+      "label": "Awareness Meetings & Flyers",
+      "checked": true,
+      "fileName": "meeting11.jpg",
+      "description": "",
+      "fileList": [
+        "meeting11.jpg"
+      ]
+    }
+  ],
+  "certificates": [],
+  "hardshipFromStep4": null,
+  "emailTemplate": ""
+}

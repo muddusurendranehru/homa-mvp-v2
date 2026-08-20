@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>HOMA — Photo hero (static preview)</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: #0a1824; }
+    .note { max-width: 960px; margin: 0 auto; padding: 12px 6% 0; font-size: 12px; color: rgba(255,255,255,0.45); }
+    .note a { color: #5ed3c8; }
+  </style>
+</head>
+<body>
+  <p class="note">Standalone preview of the full-photo hero — does not change the Next.js app. <a href="/">← HOMA home</a></p>
+
+  <!-- Mirrors web/components/LandingPageHero.tsx -->
+  <section style="position:relative;width:100%;min-height:520px;max-height:880px;height:calc(100vh - 48px);overflow:hidden;background:#0a1824;">
+    <img
+      src="/images/dr-muddu-chiranjeevi.jpg"
+      alt="Dr. Muddu Surendra Nehru with Megastar Chiranjeevi – HOMA Clinic Gachibowli Hyderabad"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0.82;"
+    />
+    <div style="position:absolute;inset:0;background:linear-gradient(165deg,rgba(13,43,78,0.12) 0%,rgba(13,43,78,0.02) 28%,rgba(13,43,78,0.55) 58%,rgba(13,43,78,0.96) 100%);"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:48px 6% 44px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div style="flex:1 1 300px;max-width:640px;min-width:0;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5ed3c8;display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="width:22px;height:1px;background:#00A896;display:inline-block;"></span>
+          Metabolic Medicine · Gachibowli · 32 Years · First in India
+        </div>
+        <p style="font-size:clamp(15px,2.1vw,18px);font-weight:600;line-height:1.4;color:rgba(255,255,255,0.92);margin-bottom:10px;max-width:520px;">
+          Struggling with belly fat or fatigue? Use our metabolic calculators — <span style="color:#F5A623;">first in India, free online</span> — before you commit to anything else.
+        </p>
+        <div style="display:inline-block;background:rgba(245,166,35,0.18);border:1px solid rgba(245,166,35,0.45);border-radius:100px;padding:6px 14px;margin-bottom:16px;font-size:12px;font-weight:600;color:#ffe6b8;letter-spacing:0.02em;">
+          Free metabolic risk check · No cost · No signup
+        </div>
+        <h1 style="font-family:Georgia,serif;font-size:clamp(36px,5.2vw,72px);font-weight:500;line-height:1.06;color:#fff;letter-spacing:-0.01em;margin:0 0 14px;">
+          Diabetes &amp;<br/>Obesity<br/>Reversed.
+        </h1>
+        <p style="font-size:16px;font-weight:300;line-height:1.65;color:rgba(255,255,255,0.65);max-width:480px;margin-bottom:28px;">
+          Dr. Muddu Surendra Nehru MD · Professor of Medicine · 32 years · Appreciated by Megastar Chiranjeevi. D·D·D Door to Door Diabetes Delivery.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="/assessment" style="background:#F5A623;color:#1a1a1a;font-size:15px;font-weight:700;padding:14px 30px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;">
+            📋 Book An Appointment
+          </a>
+          <a href="https://wa.me/919963721999" style="background:#25D366;color:#fff;font-size:15px;font-weight:600;padding:14px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;">
+            💬 WhatsApp Us
+          </a>
+          <a href="/tools" style="background:rgba(255,255,255,0.12);color:#fff;font-size:14px;font-weight:500;padding:14px 22px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.25);">
+            🔬 Free Metabolic Check
+          </a>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;flex:0 1 auto;align-self:flex-end;">
+        <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(18px);border-radius:10px;padding:13px 20px;min-width:164px;text-align:right;">
+          <div style="font-size:26px;font-weight:600;color:#fff;line-height:1;">5,000+</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;letter-spacing:0.04em;">Patients Treated</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(18px);border-radius:10px;padding:13px 20px;min-width:164px;text-align:right;">
+          <div style="font-size:26px;font-weight:600;color:#fff;line-height:1;">90 Days</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;letter-spacing:0.04em;">Reversal Program</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(18px);border-radius:10px;padding:13px 20px;min-width:164px;text-align:right;">
+          <div style="font-size:26px;font-weight:600;color:#fff;line-height:1;">32+ Yrs</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;letter-spacing:0.04em;">Clinical Experience</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(18px);border-radius:10px;padding:13px 20px;min-width:164px;text-align:right;">
+          <div style="font-size:26px;font-weight:600;color:#fff;line-height:1;">4 Books</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;letter-spacing:0.04em;">Published Author</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

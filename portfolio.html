@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Muddu Surendra Nehru M.D. | Professor & Healthcare AI Pioneer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+        :root { --navy: #0a1628; --gold: #d4a843; }
+        .heading-font { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { background: linear-gradient(135deg, #0a1628 0%, #11223d 100%); }
+        .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(16px); border: 1px solid rgba(212,168,67,0.15); }
+        .nav-link { position: relative; transition: all 0.3s; }
+        .nav-link:after { content:''; position:absolute; width:0; height:2px; bottom:-2px; left:0; background:#d4a843; transition:width 0.3s; }
+        .nav-link:hover:after { width:100%; }
+        .app-card { transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+        .app-card:hover { transform: scale(1.04) translateY(-8px); box-shadow: 0 25px 50px -12px rgba(212,168,67,0.25); }
+        .section-line:after { content:''; display:block; width:64px; height:3px; background:linear-gradient(to right,#d4a843,transparent); margin-top:8px; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .live-blink { animation: blink 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+        .bounce { animation: bounce 2s infinite; }
+    </style>
+</head>
+<body class="bg-[#0a1628] text-white overflow-x-hidden">
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a1628]/80 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <div class="flex items-center gap-x-3">
+            <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#d4a843] to-amber-400 flex items-center justify-center text-[#0a1628] font-bold text-2xl">H</div>
+            <div>
+                <span class="heading-font text-2xl tracking-tighter font-semibold">HOMA</span>
+                <span class="text-xs tracking-[2px] text-[#d4a843] block -mt-1">HEALTHCARE</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-x-10 text-sm font-medium">
+            <a href="#research" class="nav-link">RESEARCH</a>
+            <a href="#apps" class="nav-link">APPS</a>
+            <a href="#speaking" class="nav-link">SPEAKING</a>
+            <a href="#ddd" class="nav-link">D·D·D</a>
+            <a href="#skills" class="nav-link">EXPERTISE</a>
+        </div>
+        <div class="flex items-center gap-x-4">
+            <button onclick="showContactModal()" class="px-6 py-3 text-sm font-semibold rounded-3xl border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] transition-all">
+                GET IN TOUCH
+            </button>
+            <button onclick="toggleMobileMenu()" class="md:hidden w-11 h-11 flex items-center justify-center text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#0a1628] border-t border-white/10 py-6 px-6">
+        <div class="flex flex-col gap-y-6 text-lg">
+            <a href="#research" onclick="toggleMobileMenu()" class="nav-link">RESEARCH</a>
+            <a href="#apps" onclick="toggleMobileMenu()" class="nav-link">LIVE APPS</a>
+            <a href="#speaking" onclick="toggleMobileMenu()" class="nav-link">SPEAKING</a>
+            <a href="#ddd" onclick="toggleMobileMenu()" class="nav-link">D·D·D</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="nav-link">SKILLS</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<header class="hero-bg min-h-screen pt-20 flex items-center relative">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+        <div class="pt-12 md:pt-0">
+            <div class="inline-flex items-center gap-x-2 bg-white/10 text-xs tracking-widest px-5 py-2 rounded-3xl mb-6">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full live-blink"></div>
+                GACHIBOWLI, HYDERABAD, INDIA
+            </div>
+            <h1 class="heading-font text-5xl md:text-6xl leading-none font-bold tracking-tighter mb-4">
+                DR. MUDDU<br>SURENDRA<br>NEHRU M.D.
+            </h1>
+            <p class="text-xl text-[#d4a843] font-light mb-2">Professor of Medicine • 32 Years</p>
+            <p class="text-xl text-white/80 mb-6">Founder & CEO, HOMA Healthcare Center</p>
+            <div class="max-w-md text-base text-white/60 mb-8 leading-relaxed">
+                Healthcare AI Pioneer • Published Researcher • 2 Indexed Papers 2026 • 
+                Creator of India's first Door to Door Diabetes Delivery system.
+            </div>
+            <div class="flex flex-wrap gap-4">
+                <a href="https://mvp.homahealthcarecenter.in" target="_blank"
+                   class="group px-8 py-4 bg-[#d4a843] text-[#0a1628] font-semibold rounded-3xl flex items-center gap-x-3 hover:scale-105 transition-all">
+                    CHECK YOUR RISK FREE
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#research" class="px-8 py-4 border-2 border-white/40 hover:border-[#d4a843] rounded-3xl font-medium transition-all">
+                    VIEW RESEARCH
+                </a>
+            </div>
+            <div class="flex items-center gap-x-6 mt-10 text-sm">
+                <a href="https://youtube.com/@homahealthcarecenter" target="_blank"
+                   class="flex items-center gap-x-2 hover:text-[#d4a843] transition">
+                    <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                </a>
+                <a href="https://facebook.com/homahealthcarecenter" target="_blank"
+                   class="flex items-center gap-x-2 hover:text-[#d4a843] transition">
+                    <i class="fa-brands fa-facebook text-xl"></i> Facebook
+                </a>
+                <a href="https://instagram.com/homahealthcarecenter" target="_blank"
+                   class="flex items-center gap-x-2 hover:text-[#d4a843] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i> Instagram
+                </a>
+            </div>
+        </div>
+        <div class="relative flex justify-center">
+            <div class="relative w-full max-w-md">
+                <div class="absolute -inset-6 bg-gradient-to-br from-[#d4a843]/20 to-transparent rounded-[4rem] rotate-6"></div>
+                <div class="glass rounded-3xl p-3 shadow-2xl">
+                    <!-- ✏️ EDIT: Replace src with your actual photo URL -->
+                    <img src="/images/dr-muddu.jpg"
+                         onerror="this.src='https://ui-avatars.com/api/?name=Dr+Muddu&size=800&background=0a1628&color=d4a843&bold=true'"
+                         alt="Dr. Muddu Surendra Nehru M.D."
+                         class="w-full aspect-square object-cover rounded-3xl">
+                </div>
+                <div class="absolute -bottom-6 -right-6 glass px-6 py-3 rounded-3xl shadow-xl flex items-center gap-x-3">
+                    <div class="text-3xl">🧬</div>
+                    <div>
+                        <div class="text-xs tracking-widest text-[#d4a843]">AI PIONEER</div>
+                        <div class="font-semibold text-base leading-none">Healthcare Visionary</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-12 left-1/2 flex flex-col items-center gap-y-2 text-xs tracking-widest opacity-60">
+        <div>SCROLL TO EXPLORE</div>
+        <i class="fa-solid fa-chevron-down bounce"></i>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4a843]/40 to-transparent"></div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     STATS BAR
+═══════════════════════════════════════════════ -->
+<div class="max-w-7xl mx-auto px-6 -mt-12 relative z-20">
+    <div class="glass rounded-3xl py-8 px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div onclick="animateStat(this)" class="group cursor-pointer">
+            <div id="years-count" class="text-5xl font-semibold text-[#d4a843]">32</div>
+            <div class="text-xs tracking-widest text-white/60 group-hover:text-white transition mt-1">YEARS EXPERIENCE</div>
+        </div>
+        <div onclick="animateStat(this)" class="group cursor-pointer">
+            <div id="apps-count" class="text-5xl font-semibold text-[#d4a843]">6</div>
+            <div class="text-xs tracking-widest text-white/60 group-hover:text-white transition mt-1">LIVE AI APPS</div>
+        </div>
+        <div onclick="animateStat(this)" class="group cursor-pointer">
+            <div id="papers-count" class="text-5xl font-semibold text-[#d4a843]">2</div>
+            <div class="text-xs tracking-widest text-white/60 group-hover:text-white transition mt-1">INDEXED PAPERS 2026</div>
+        </div>
+        <div onclick="animateStat(this)" class="group cursor-pointer">
+            <div id="subs-count" class="text-5xl font-semibold text-[#d4a843]">1327</div>
+            <div class="text-xs tracking-widest text-white/60 group-hover:text-white transition mt-1">YT SUBSCRIBERS</div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     RESEARCH PAPERS
+═══════════════════════════════════════════════ -->
+<section id="research" class="max-w-7xl mx-auto px-6 py-28">
+    <div class="mb-12">
+        <div class="uppercase text-xs tracking-[3px] text-[#d4a843] mb-2">2026 INDEXED RESEARCH</div>
+        <h2 class="heading-font text-5xl font-bold tracking-tighter section-line">Published Breakthroughs</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- ✏️ PAPER 1 — Edit title, journal, DOI, date -->
+        <div class="glass rounded-3xl p-8 hover:border-[#d4a843]/50 group transition">
+            <div class="flex justify-between items-start mb-6">
+                <div class="text-xs uppercase bg-white/10 px-4 py-2 rounded-2xl">International Journal of Medicine</div>
+                <div class="text-[#d4a843] text-xs">MAR 2026</div>
+            </div>
+            <h3 class="text-xl font-semibold leading-tight mb-4 group-hover:text-[#d4a843] transition">
+                TyG Index and HbA1c Correlation in Metabolic Disease
+            </h3>
+            <p class="text-white/60 text-sm mb-6 leading-relaxed">
+                Peer-reviewed study on TyG Index as an early predictor of insulin resistance and type 2 diabetes in Indian population cohorts.
+            </p>
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-white/40">DOI: 10.61336/im/26-3-10</span>
+                <span class="text-[#d4a843] bg-[#d4a843]/10 px-3 py-1 rounded-full">● INDEXED</span>
+            </div>
+        </div>
+
+        <!-- ✏️ PAPER 2 — Edit title, journal, volume, date -->
+        <div class="glass rounded-3xl p-8 hover:border-[#d4a843]/50 group transition">
+            <div class="flex justify-between items-start mb-6">
+                <div class="text-xs uppercase bg-white/10 px-4 py-2 rounded-2xl">IJCPR 2026</div>
+                <div class="text-[#d4a843] text-xs">2026</div>
+            </div>
+            <h3 class="text-xl font-semibold leading-tight mb-4 group-hover:text-[#d4a843] transition">
+                TyG-WC Index as a Predictor of Insulin Resistance
+            </h3>
+            <p class="text-white/60 text-sm mb-6 leading-relaxed">
+                Novel assessment of TyG-Waist Circumference Index for metabolic syndrome identification and insulin resistance stratification.
+            </p>
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-white/40">IJCPR 2026; 18(2): 826–833</span>
+                <span class="text-[#d4a843] bg-[#d4a843]/10 px-3 py-1 rounded-full">● INDEXED</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     LIVE APPS
+═══════════════════════════════════════════════ -->
+<section id="apps" class="bg-[#11223d] py-28">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-x-2 px-6 py-2 bg-white/5 rounded-3xl text-xs tracking-widest mb-4">
+                <i class="fa-solid fa-mobile-screen-button"></i> POWERED BY HOMA AI
+            </div>
+            <h2 class="heading-font text-5xl font-bold tracking-tighter mb-3">Live Healthcare Applications</h2>
+            <p class="max-w-md mx-auto text-white/60">Six production-ready AI platforms — all built from zero coding experience.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- ✏️ APP CARDS — Edit name, desc, url, color for each app -->
+
+            <div class="app-card glass rounded-3xl overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-[#d4a843] to-amber-300"></div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">🏥</div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase tracking-widest bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full live-blink"></span> LIVE
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">HOMA MVP</h4>
+                    <p class="text-white/60 text-sm mb-6">Patient portal with Google auth, HOMA-IR & TyG calculators, blog, assessments, dashboard.</p>
+                    <a href="https://mvp.homahealthcarecenter.in" target="_blank"
+                       class="block text-center text-xs font-semibold py-3 border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] rounded-2xl transition">
+                        LAUNCH APP →
+                    </a>
+                </div>
+            </div>
+
+            <div class="app-card glass rounded-3xl overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-red-600 to-rose-400"></div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase tracking-widest bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full live-blink"></span> LIVE
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">AI OCR Dashboard</h4>
+                    <p class="text-white/60 text-sm mb-6">Lab report AI processing with speedometer-type HOMA-IR, TyG, BMI risk visualization.</p>
+                    <a href="https://ai-image-ocr-1.onrender.com" target="_blank"
+                       class="block text-center text-xs font-semibold py-3 border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] rounded-2xl transition">
+                        LAUNCH APP →
+                    </a>
+                </div>
+            </div>
+
+            <div class="app-card glass rounded-3xl overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-blue-600 to-sky-400"></div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">📊</div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase tracking-widest bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full live-blink"></span> LIVE
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">HealthMetrics</h4>
+                    <p class="text-white/60 text-sm mb-6">30-day C.O.D. remission diet tracker with CKD meal plans and WhatsApp reminders.</p>
+                    <a href="https://healthmetrics-render1.onrender.com" target="_blank"
+                       class="block text-center text-xs font-semibold py-3 border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] rounded-2xl transition">
+                        LAUNCH APP →
+                    </a>
+                </div>
+            </div>
+
+            <div class="app-card glass rounded-3xl overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-green-600 to-emerald-400"></div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">🌿</div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase tracking-widest bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full live-blink"></span> LIVE
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">NutriBot</h4>
+                    <p class="text-white/60 text-sm mb-6">600+ Indian foods database with Telugu/regional names, full nutrition lookup.</p>
+                    <a href="https://homa-foods-nutrition.onrender.com" target="_blank"
+                       class="block text-center text-xs font-semibold py-3 border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] rounded-2xl transition">
+                        LAUNCH APP →
+                    </a>
+                </div>
+            </div>
+
+            <div class="app-card glass rounded-3xl overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-purple-600 to-violet-400"></div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">🔬</div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase tracking-widest bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full live-blink"></span> LIVE
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">PCOS HOMA-IQ</h4>
+                    <p class="text-white/60 text-sm mb-6">AI-powered PCOS metabolic scoring and risk stratification platform.</p>
+                    <a href="https://pcos-homaig-score-frontend.onrender.com" target="_blank"
+                       class="block text-center text-xs font-semibold py-3 border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] rounded-2xl transition">
+                        LAUNCH APP →
+                    </a>
+                </div>
+            </div>
+
+            <div class="app-card glass rounded-3xl overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-teal-600 to-cyan-400"></div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">🏢</div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase tracking-widest bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full live-blink"></span> LIVE
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Franchise Nexus</h4>
+                    <p class="text-white/60 text-sm mb-6">Multi-clinic franchise management and onboarding platform for HOMA expansion.</p>
+                    <a href="https://clinics.homahealthcarecenter.in" target="_blank"
+                       class="block text-center text-xs font-semibold py-3 border border-[#d4a843] hover:bg-[#d4a843] hover:text-[#0a1628] rounded-2xl transition">
+                        LAUNCH APP →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SPEAKING & EVENTS  ← ✏️ MOST EDITABLE SECTION
+     Add/remove events by copying one <div class="glass..."> block
+═══════════════════════════════════════════════ -->
+<section id="speaking" class="max-w-7xl mx-auto px-6 py-28">
+    <div class="mb-12">
+        <div class="uppercase text-xs tracking-[3px] text-[#d4a843] mb-2">SPEAKING & EVENTS</div>
+        <h2 class="heading-font text-5xl font-bold tracking-tighter section-line">Talks & Engagements</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- ✏️ TO ADD NEW EVENT: Copy one block below and edit the text -->
+
+        <div class="glass rounded-2xl p-6 hover:border-[#d4a843]/50 transition">
+            <div class="text-[#d4a843] text-xs tracking-widest mb-3">2026 • HYDERABAD</div>
+            <div class="text-2xl mb-3">🦁</div>
+            <h4 class="font-semibold text-lg mb-2">Lions Club International</h4>
+            <p class="text-white/60 text-sm leading-relaxed">
+                Speaker on Diabetes Prevention and Metabolic Health Awareness. Demonstrated AI-powered HOMA-IR risk calculator to members.
+            </p>
+            <div class="mt-4 text-xs text-[#d4a843]">Community Health Talk</div>
+        </div>
+
+        <div class="glass rounded-2xl p-6 hover:border-[#d4a843]/50 transition">
+            <div class="text-[#d4a843] text-xs tracking-widest mb-3">2026 • HYDERABAD</div>
+            <div class="text-2xl mb-3">🏦</div>
+            <h4 class="font-semibold text-lg mb-2">HSBC Corporate Health</h4>
+            <p class="text-white/60 text-sm leading-relaxed">
+                Invited speaker on metabolic syndrome screening for corporate employees. Presented D·D·D home testing concept.
+            </p>
+            <div class="mt-4 text-xs text-[#d4a843]">Corporate Wellness Session</div>
+        </div>
+
+        <div class="glass rounded-2xl p-6 hover:border-[#d4a843]/50 transition">
+            <div class="text-[#d4a843] text-xs tracking-widest mb-3">2026 • INDIA</div>
+            <div class="text-2xl mb-3">🎓</div>
+            <h4 class="font-semibold text-lg mb-2">RSSDI Grant Application</h4>
+            <p class="text-white/60 text-sm leading-relaxed">
+                Research grant submitted to Research Society for Study of Diabetes in India for metabolic biomarker studies.
+            </p>
+            <div class="mt-4 text-xs text-[#d4a843]">Research Funding</div>
+        </div>
+
+        <div class="glass rounded-2xl p-6 hover:border-[#d4a843]/50 transition">
+            <div class="text-[#d4a843] text-xs tracking-widest mb-3">2026 • YOUTUBE</div>
+            <div class="text-2xl mb-3">📺</div>
+            <h4 class="font-semibold text-lg mb-2">Medical Education Channel</h4>
+            <p class="text-white/60 text-sm leading-relaxed">
+                1,327 subscribers. Regular videos on diabetes, metabolic health, HOMA-IR, TyG Index in Telugu and English.
+            </p>
+            <div class="mt-4 text-xs text-[#d4a843]">Digital Education</div>
+        </div>
+
+        <div class="glass rounded-2xl p-6 hover:border-[#d4a843]/50 transition">
+            <div class="text-[#d4a843] text-xs tracking-widest mb-3">2026 • HYDERABAD</div>
+            <div class="text-2xl mb-3">🏥</div>
+            <h4 class="font-semibold text-lg mb-2">HOMA Healthcare CME</h4>
+            <p class="text-white/60 text-sm leading-relaxed">
+                Continuing Medical Education sessions for doctors on insulin resistance assessment using HOMA-IR and TyG Index.
+            </p>
+            <div class="mt-4 text-xs text-[#d4a843]">Medical Education</div>
+        </div>
+
+        <!-- ✏️ ADD YOUR NEXT EVENT HERE — copy this block -->
+        <div class="glass rounded-2xl p-6 border border-dashed border-[#d4a843]/30 flex flex-col items-center justify-center text-center min-h-[200px]">
+            <div class="text-3xl mb-3">➕</div>
+            <div class="text-white/40 text-sm">Your next speaking engagement</div>
+            <div class="text-xs text-white/30 mt-2">Edit portfolio.html to add</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     D·D·D INNOVATION
+═══════════════════════════════════════════════ -->
+<section id="ddd" class="bg-[#11223d] py-28">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-16 items-start">
+            <div class="md:col-span-5">
+                <div class="sticky top-28">
+                    <div class="text-[#d4a843] text-sm tracking-[4px] font-medium mb-3">INDIA'S FIRST</div>
+                    <h2 class="heading-font text-6xl leading-none font-bold tracking-tighter mb-6">D·D·D</h2>
+                    <p class="text-xl text-white/80 mb-4">Door to Door Diabetes Delivery</p>
+                    <p class="text-white/60 leading-relaxed mb-6">
+                        AI-powered home diabetes care — from online risk check to medicine delivery. 
+                        World's first 365° integrated home healthcare system.
+                    </p>
+                    <div class="glass rounded-2xl p-4 mb-6">
+                        <div class="text-[#d4a843] font-semibold italic text-lg">
+                            "HbA1c is History. HOMA is Mastery."
+                        </div>
+                    </div>
+                    <div class="text-xs text-white/40 border-t border-white/10 pt-4">
+                        Trademark Filed • Class 44 • Healthcare Services
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-7">
+                <div class="space-y-3">
+                    <!-- ✏️ DDD STEPS — Edit text as needed -->
+                    {[
+                        ["1", "Check Risk FREE Online", "mvp.homahealthcarecenter.in — 2 minutes, no blood test"],
+                        ["2", "We Call You", "Our team calls within 24 hours — warm welcome"],
+                        ["3", "Fast Overnight", "8 hours water only — preparation guidance given"],
+                        ["4", "Technician Home Visit", "Blood sample collected at your doorstep"],
+                        ["5", "AI Speedometer Report", "HOMA-IR, TyG Index, BMI — color-coded risk display"],
+                        ["6", "Doctor Consultation", "Dr. Muddu reviews all reports — zoom or in-person"],
+                        ["7", "Nutrition + Exercise Plan", "Medical Nutrition Therapy prescribed"],
+                        ["8", "30-Day App + NutriBot", "Digital tools activated — track daily progress"],
+                        ["9", "Medicine Home Delivery", "Prescription medicines to your door*"],
+                        ["10", "365° Follow-Up", "Weekly Zoom + YouTube + Blogs — ongoing care"]
+                    ].map ? "" : ""}
+                </div>
+                <div id="ddd-steps" class="space-y-3"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     EXPERTISE / SKILLS
+═══════════════════════════════════════════════ -->
+<section id="skills" class="max-w-7xl mx-auto px-6 py-28">
+    <div class="mb-12">
+        <div class="uppercase text-xs tracking-[3px] text-[#d4a843] mb-2">EXPERTISE</div>
+        <h2 class="heading-font text-5xl font-bold tracking-tighter section-line">Medical & Technology</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-16">
+        <div>
+            <div class="flex items-center gap-x-4 mb-8">
+                <div class="text-4xl">🩺</div>
+                <div>
+                    <div class="uppercase text-xs text-emerald-400 tracking-widest">32 YEARS</div>
+                    <h3 class="text-3xl font-semibold">Medical Expertise</h3>
+                </div>
+            </div>
+            <!-- ✏️ MEDICAL SKILLS — Edit as needed -->
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="w-2 bg-emerald-400 rounded flex-shrink-0"></div>
+                    <div>
+                        <div class="font-medium">Internal Medicine & Metabolic Disease</div>
+                        <div class="text-xs text-white/50 mt-1">Professor of Medicine — 32+ years clinical practice</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-2 bg-emerald-400 rounded flex-shrink-0"></div>
+                    <div>
+                        <div class="font-medium">Diabetes Remission & Cardio-Obesity</div>
+                        <div class="text-xs text-white/50 mt-1">Founder, HOMA Healthcare Center, Gachibowli</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-2 bg-emerald-400 rounded flex-shrink-0"></div>
+                    <div>
+                        <div class="font-medium">HOMA-IR, TyG & Metabolic Biomarkers</div>
+                        <div class="text-xs text-white/50 mt-1">2 indexed research papers published 2026</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-2 bg-emerald-400 rounded flex-shrink-0"></div>
+                    <div>
+                        <div class="font-medium">Medical Education & UG/PG Training</div>
+                        <div class="text-xs text-white/50 mt-1">Examiner & Guide — multiple medical colleges</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="flex items-center gap-x-4 mb-8">
+                <div class="text-4xl">💻</div>
+                <div>
+                    <div class="uppercase text-xs text-[#d4a843] tracking-widest">SELF-TAUGHT</div>
+                    <h3 class="text-3xl font-semibold">Technology Stack</h3>
+                </div>
+            </div>
+            <!-- ✏️ TECH SKILLS — Edit as needed -->
+            <div class="grid grid-cols-2 gap-3 text-sm">
+                <div class="glass px-4 py-3 rounded-2xl">Next.js 15 + TypeScript</div>
+                <div class="glass px-4 py-3 rounded-2xl">Clerk Auth + Google OAuth</div>
+                <div class="glass px-4 py-3 rounded-2xl">Neon PostgreSQL</div>
+                <div class="glass px-4 py-3 rounded-2xl">Render + Cloudflare</div>
+                <div class="glass px-4 py-3 rounded-2xl">Claude AI + Grok</div>
+                <div class="glass px-4 py-3 rounded-2xl">HeyGen + Hypernatural</div>
+                <div class="glass px-4 py-3 rounded-2xl">Express.js REST API</div>
+                <div class="glass px-4 py-3 rounded-2xl">Tailwind CSS + GitHub</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER CTA
+═══════════════════════════════════════════════ -->
+<footer class="bg-black py-24 relative">
+    <div class="max-w-4xl mx-auto text-center px-6">
+        <div class="text-xs tracking-[3px] text-[#d4a843] mb-4">CHECK YOUR METABOLIC RISK — FREE</div>
+        <a href="https://mvp.homahealthcarecenter.in" target="_blank"
+           class="block group mb-8">
+            <div class="inline-flex items-center gap-x-4 bg-white text-[#0a1628] rounded-3xl px-10 py-6 text-2xl font-semibold transition-all hover:scale-105">
+                mvp.homahealthcarecenter.in
+                <span class="text-3xl transition-transform group-hover:rotate-45">→</span>
+            </div>
+        </a>
+        <div class="text-white/40 text-sm">
+            📞 09963721999 • surendra.muddu@gmail.com<br>
+            HOMA Healthcare Center • Gachibowli, Hyderabad, Telangana<br><br>
+            © 2026 Dr. Muddu Surendra Nehru M.D. • All rights reserved
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-[#d4a843]/30 to-transparent"></div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     CONTACT MODAL
+═══════════════════════════════════════════════ -->
+<div id="contact-modal" onclick="if(event.target.id==='contact-modal') hideContactModal()"
+     class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999] flex items-center justify-center">
+    <div onclick="event.stopPropagation()" class="glass max-w-md w-full mx-4 rounded-3xl p-10">
+        <div class="flex justify-between items-center mb-8">
+            <div class="text-2xl font-semibold">Reach Dr. Nehru</div>
+            <button onclick="hideContactModal()" class="text-3xl leading-none hover:text-[#d4a843]">×</button>
+        </div>
+        <div class="space-y-4">
+            <!-- ✏️ CONTACT LINKS — Edit phone/email/whatsapp -->
+            <a href="tel:09963721999"
+               class="flex items-center gap-x-5 p-4 rounded-2xl hover:bg-white/10 transition">
+                <i class="fa-solid fa-phone text-xl w-6 text-[#d4a843]"></i>
+                <div>
+                    <div class="font-medium">Call Direct</div>
+                    <div class="text-sm text-white/60">09963721999</div>
+                </div>
+            </a>
+            <a href="https://wa.me/919963721999" target="_blank"
+               class="flex items-center gap-x-5 p-4 rounded-2xl hover:bg-white/10 transition">
+                <i class="fa-brands fa-whatsapp text-xl w-6 text-[#d4a843]"></i>
+                <div>
+                    <div class="font-medium">WhatsApp</div>
+                    <div class="text-sm text-white/60">+91 99637 21999</div>
+                </div>
+            </a>
+            <a href="mailto:surendra.muddu@gmail.com"
+               class="flex items-center gap-x-5 p-4 rounded-2xl hover:bg-white/10 transition">
+                <i class="fa-solid fa-envelope text-xl w-6 text-[#d4a843]"></i>
+                <div>
+                    <div class="font-medium">Email</div>
+                    <div class="text-sm text-white/60">surendra.muddu@gmail.com</div>
+                </div>
+            </a>
+            <a href="https://mvp.homahealthcarecenter.in" target="_blank"
+               class="flex items-center gap-x-5 p-4 rounded-2xl bg-[#d4a843]/10 border border-[#d4a843]/30 hover:bg-[#d4a843]/20 transition">
+                <i class="fa-solid fa-globe text-xl w-6 text-[#d4a843]"></i>
+                <div>
+                    <div class="font-medium text-[#d4a843]">Check Your Risk FREE</div>
+                    <div class="text-sm text-white/60">mvp.homahealthcarecenter.in</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// ─── D·D·D Steps (edit here) ──────────────────────
+const dddSteps = [
+    ["1", "Check Risk FREE Online", "mvp.homahealthcarecenter.in — 2 minutes, no blood test needed"],
+    ["2", "We Call You", "Our team calls within 24 hours — warm welcome and guidance"],
+    ["3", "Fast Overnight", "8 hours water only — we guide you through preparation"],
+    ["4", "Technician Home Visit", "Blood sample collected at your doorstep — professional, safe"],
+    ["5", "AI Speedometer Report", "HOMA-IR, TyG, BMI — color-coded risk display generated"],
+    ["6", "Doctor Consultation", "Dr. Muddu reviews all reports — zoom or in-person visit"],
+    ["7", "Nutrition + Exercise Plan", "Medical Nutrition Therapy + personalized exercise plan"],
+    ["8", "30-Day App + NutriBot", "HealthMetrics + NutriBot activated — daily tracking begins"],
+    ["9", "Medicine Home Delivery", "Prescription medicines delivered to your door *conditions apply"],
+    ["10", "365° Follow-Up", "Weekly Zoom + YouTube channel + Blog access — forever"],
+];
+
+const stepsContainer = document.getElementById('ddd-steps');
+dddSteps.forEach(([num, title, desc]) => {
+    stepsContainer.innerHTML += `
+    <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition">
+        <div class="text-[#d4a843] font-bold text-sm min-w-[28px] pt-0.5">${num}.</div>
+        <div>
+            <div class="font-medium text-sm">${title}</div>
+            <div class="text-white/50 text-xs mt-1 leading-relaxed">${desc}</div>
+        </div>
+    </div>`;
+});
+
+// ─── Mobile menu ──────────────────────────────────
+function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+// ─── Contact modal ────────────────────────────────
+function showContactModal() {
+    const m = document.getElementById('contact-modal');
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+}
+function hideContactModal() {
+    const m = document.getElementById('contact-modal');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hideContactModal();
+});
+
+// ─── Animated counters ────────────────────────────
+function animateValue(id, start, end, duration) {
+    let t0 = null;
+    const el = document.getElementById(id);
+    const step = ts => {
+        if (!t0) t0 = ts;
+        const p = Math.min((ts - t0) / duration, 1);
+        el.textContent = Math.floor(p * (end - start) + start);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = end;
+    };
+    requestAnimationFrame(step);
+}
+function animateStat(el) {
+    const id = el.querySelector('[id$="-count"]').id;
+    const map = {
+        'years-count': [0, 32, 1400],
+        'apps-count': [0, 6, 1100],
+        'papers-count': [0, 2, 900],
+        'subs-count': [1200, 1327, 1600]
+    };
+    if (map[id]) animateValue(id, ...map[id]);
+}
+
+// Auto-animate counters on scroll
+const statsEl = document.querySelector('.glass.rounded-3xl');
+if (statsEl) {
+    new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            animateValue('years-count', 0, 32, 1400);
+            animateValue('apps-count', 0, 6, 1100);
+            animateValue('papers-count', 0, 2, 900);
+            animateValue('subs-count', 1200, 1327, 1600);
+        }
+    }, { threshold: 0.5 }).observe(statsEl);
+}
+</script>
+</body>
+</html>
