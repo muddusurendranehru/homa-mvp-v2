@@ -43,7 +43,10 @@ export default function SeminarPage() {
           <p className="text-lg mb-1">
             Booking ID: <span className="font-semibold">{bookingId}</span>
           </p>
-          <p className="text-slate-600">See you at 7 PM.</p>
+          <p className="text-slate-600 mb-4">See you at 7 PM.</p>
+          <a href="https://meet.google.com/epb-fcdg-qqw" target="_blank" rel="noopener noreferrer" className="inline-block w-full py-2.5 rounded-lg font-semibold text-white transition" style={{ backgroundColor: "#1e40af" }}>
+            Join Seminar on Google Meet
+          </a>
         </div>
       </div>
     );
@@ -55,46 +58,23 @@ export default function SeminarPage() {
         HOMA Metabolic Health Seminar
       </h1>
       <p className="text-center mb-8" style={{ color: "#d4af37" }}>
-        Every Evening, 7:00 PM — 20 Minutes
+        Every Evening, 7:00 PM - 20 Minutes
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-2xl shadow-md p-6 space-y-4 border"
-        style={{ borderColor: "#d4af37" }}
-      >
+      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white rounded-2xl shadow-md p-6 space-y-4 border" style={{ borderColor: "#d4af37" }}>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-          <input
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2"
-            placeholder="Your full name"
-          />
+          <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2" placeholder="Your full name" />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
-          <input
-            type="tel"
-            required
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2"
-            placeholder="10-digit mobile number"
-          />
+          <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2" placeholder="10-digit mobile number" />
         </div>
 
         {error && <p className="text-red-600 text-sm">{error}</p>}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-2.5 rounded-lg font-semibold text-white transition disabled:opacity-60"
-          style={{ backgroundColor: "#1e40af" }}
-        >
+        <button type="submit" disabled={loading} className="w-full py-2.5 rounded-lg font-semibold text-white transition disabled:opacity-60" style={{ backgroundColor: "#1e40af" }}>
           {loading ? "Booking..." : "Join Seminar"}
         </button>
       </form>
