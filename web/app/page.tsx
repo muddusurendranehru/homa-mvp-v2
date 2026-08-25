@@ -1,10 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Countdown to tonight 7:00 PM
+  const [countdown, setCountdown] = useState({ hrs: "00", mins: "00", secs: "00", started: false });
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const target = new Date();
+      target.setHours(19, 0, 0, 0);
+      if (now >= target) {
+        setCountdown({ hrs: "00", mins: "00", secs: "00", started: true });
+        return;
+      }
+      const diff = target.getTime() - now.getTime();
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      setCountdown({
+        hrs: String(h).padStart(2, "0"),
+        mins: String(m).padStart(2, "0"),
+        secs: String(s).padStart(2, "0"),
+        started: false,
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const faqs = [
     {
@@ -39,6 +66,115 @@ export default function HomePage() {
 
   return (
     <>
+      {/* SEMINAR BANNER — sugar.fit style, full bold section */}
+      <div style={{
+        width: "100%",
+        background: "linear-gradient(135deg, #07153a 0%, #0f2557 40%, #1a3a8f 70%, #07153a 100%)",
+        padding: "36px 20px 32px",
+        textAlign: "center",
+        borderBottom: "3px solid #d4af37",
+      }}>
+        {/* LIVE badge */}
+        <div style={{ marginBottom: "10px" }}>
+          <span style={{
+            background: "#d4af37",
+            color: "#07153a",
+            fontSize: "12px",
+            fontWeight: 900,
+            letterSpacing: "0.12em",
+            padding: "4px 16px",
+            borderRadius: "20px",
+            textTransform: "uppercase",
+          }}>🔴 FREE · TONIGHT ONLY</span>
+        </div>
+
+        {/* Main heading */}
+        <h2 style={{
+          color: "#d4af37",
+          fontSize: "clamp(22px, 4vw, 40px)",
+          fontWeight: 900,
+          letterSpacing: "0.04em",
+          textTransform: "uppercase",
+          margin: "0 0 4px",
+          lineHeight: 1.15,
+        }}>
+          HOMA Metabolic Health Seminar
+        </h2>
+        <p style={{ color: "#ffffff", fontSize: "clamp(14px, 2vw, 18px)", fontWeight: 400, margin: "0 0 20px", opacity: 0.85 }}>
+          Dr. Muddu Surendra Nehru MD · 20 Minutes · No Sign-up Required
+        </p>
+
+        {/* Countdown */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "clamp(12px, 3vw, 36px)", marginBottom: "16px" }}>
+          {[
+            { val: countdown.hrs, label: "Hrs" },
+            { val: countdown.mins, label: "Mins" },
+            { val: countdown.secs, label: "Secs" },
+          ].map(({ val, label }) => (
+            <div key={label} style={{ textAlign: "center" }}>
+              <div style={{
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(212,175,55,0.4)",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                minWidth: "72px",
+              }}>
+                <span style={{ color: "#ffffff", fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 700, lineHeight: 1 }}>
+                  {val}
+                </span>
+              </div>
+              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "12px", margin: "4px 0 0", letterSpacing: "0.06em" }}>{label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Seats left */}
+        <p style={{
+          display: "inline-block",
+          background: "rgba(212,175,55,0.15)",
+          border: "1px solid rgba(212,175,55,0.5)",
+          color: "#d4af37",
+          fontSize: "14px",
+          fontWeight: 600,
+          padding: "6px 20px",
+          borderRadius: "20px",
+          marginBottom: "24px",
+        }}>
+          {countdown.started ? "🟢 Seminar is LIVE now!" : "⚡ Limited seats — Register free"}
+        </p>
+
+        {/* Buttons */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "14px", flexWrap: "wrap" }}>
+          <a href="/seminar" style={{
+            backgroundColor: "#d4af37",
+            color: "#07153a",
+            padding: "14px 36px",
+            borderRadius: "10px",
+            fontWeight: 800,
+            fontSize: "clamp(14px, 2vw, 17px)",
+            textDecoration: "none",
+            display: "inline-block",
+            boxShadow: "0 4px 20px rgba(212,175,55,0.45)",
+            letterSpacing: "0.02em",
+          }}>
+            👉 Join Seminar Free
+          </a>
+          <a href="/tools" style={{
+            backgroundColor: "transparent",
+            color: "#ffffff",
+            padding: "14px 36px",
+            borderRadius: "10px",
+            fontWeight: 600,
+            fontSize: "clamp(14px, 2vw, 17px)",
+            textDecoration: "none",
+            display: "inline-block",
+            border: "2px solid rgba(255,255,255,0.55)",
+          }}>
+            Check Your Risk Free →
+          </a>
+        </div>
+      </div>
+
       {/* HERO — starts immediately, layout.tsx header sits above */}
       <section
         style={{
