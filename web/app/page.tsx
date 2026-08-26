@@ -444,7 +444,7 @@ export default function HomePage() {
             { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801926/pt23_osuhcg.jpg", role: "✅ Obesity Reversed · Telangana" },
           ].map((p) => (
             <div
-              key={p.name}
+              key={p.role}
               onClick={() => window.open("/testimonials", "_blank")}
               style={{
                 position: "relative",
