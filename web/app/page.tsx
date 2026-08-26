@@ -175,6 +175,80 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* 3 HOOK LINES — English · Hindi · Telugu */}
+      <div style={{
+        background: "#07153a",
+        borderBottom: "1px solid rgba(212,175,55,0.2)",
+        padding: "0",
+      }}>
+        {[
+          {
+            emoji: "🇬🇧",
+            text: "Reverse Type 2 Diabetes in 90 Days — Science-Based, No Gimmicks",
+            href: "/assessment",
+            lang: "EN",
+          },
+          {
+            emoji: "🇮🇳",
+            text: "शुगर को जड़ से खत्म करें — 90 दिनों में, बिना दवाई के",
+            href: "/seminar",
+            lang: "HI",
+          },
+          {
+            emoji: "🌿",
+            text: "మధుమేహాన్ని 90 రోజుల్లో తగ్గించుకోండి — డా. ముద్దు తో",
+            href: "/tools",
+            lang: "TE",
+          },
+        ].map(({ emoji, text, href, lang }) => (
+          <a
+            key={lang}
+            href={href}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "13px 24px",
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              textDecoration: "none",
+              background: "transparent",
+              transition: "background 0.2s",
+              gap: "12px",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(212,175,55,0.08)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+          >
+            <span style={{ fontSize: "16px", flexShrink: 0 }}>{emoji}</span>
+            <span style={{
+              color: "#ffffff",
+              fontSize: "clamp(13px, 1.8vw, 15px)",
+              fontWeight: 500,
+              flex: 1,
+              lineHeight: 1.4,
+            }}>{text}</span>
+            <span style={{
+              color: "#d4af37",
+              fontSize: "12px",
+              fontWeight: 700,
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+            }}>
+              <span style={{
+                background: "rgba(212,175,55,0.15)",
+                border: "1px solid rgba(212,175,55,0.4)",
+                borderRadius: "4px",
+                padding: "2px 6px",
+                fontSize: "10px",
+                letterSpacing: "0.05em",
+              }}>{lang}</span>
+              →
+            </span>
+          </a>
+        ))}
+      </div>
+
       {/* HERO — starts immediately, layout.tsx header sits above */}
       <section
         style={{
