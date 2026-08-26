@@ -429,43 +429,23 @@ export default function HomePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
             gap: "16px",
           }}
         >
           {[
-            {
-              img: "/images/before-after-south-indian-9-month.jpg",
-              name: "Sneha, 29",
-              role: "PCOS Reversed · Telangana",
-            },
-            {
-              img: "/images/obesity-reversal-hyderabad-jpg.jpg",
-              name: "Ramesh, 58",
-              role: "Diabetes Reversed · Hyderabad",
-            },
-            {
-              img: "/images/pcos-reversal-anita-hyderabad-jpg.jpg",
-              name: "Anita, 34",
-              role: "−18 kg · No Medication · Gachibowli",
-            },
-            {
-              img: "/images/before-after-south-indian-after-blue-best-1.jpg",
-              name: "Suresh, 52",
-              role: "Pre-Diabetes Reversed · Ameerpet",
-            },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786782867/pt3_xjwa8v.jpg", role: "✅ Diabetes Reversed · Hyderabad" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786783593/wc3_kwewhe.jpg", role: "✅ Central Obesity Reversed · Gachibowli" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786782867/pt2_xtvbhg.jpg", role: "✅ −12 kg · No Medication · Ameerpet" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801928/pt28_tlwch0.jpg", role: "✅ Pre-Diabetes Reversed · Bachupally" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801928/pt26_qjkp9x.jpg", role: "✅ Diabetes Reversed · Kondapur" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801929/pt29_lga0ax.jpg", role: "✅ −18 kg · Off Insulin · Madhapur" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801927/pt25_mrynmj.jpg", role: "✅ HbA1c Normal · No Surgery · Patancheru" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801926/pt23_osuhcg.jpg", role: "✅ Obesity Reversed · Telangana" },
           ].map((p) => (
             <div
               key={p.name}
-              role="button"
-              tabIndex={0}
               onClick={() => window.open("/testimonials", "_blank")}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  window.open("/testimonials", "_blank");
-                }
-              }}
               style={{
                 position: "relative",
                 borderRadius: "16px",
@@ -480,39 +460,9 @@ export default function HomePage() {
                 alt={p.name}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%,-50%)",
-                  width: "52px",
-                  height: "52px",
-                  background: "rgba(255,255,255,0.15)",
-                  border: "2px solid rgba(255,255,255,0.5)",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)" }} />
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px" }}>
-                <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", marginBottom: "4px" }}>
-                  The HOMA experience
-                </div>
-                <div style={{ fontSize: "16px", fontWeight: 600, color: "#fff" }}>{p.name}</div>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.6)", marginTop: "2px" }}>{p.role}</div>
+                <div style={{ fontSize: "13px", fontWeight: 600, color: "#fff" }}>{p.role}</div>
               </div>
             </div>
           ))}
