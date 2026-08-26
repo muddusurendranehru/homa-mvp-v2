@@ -887,6 +887,38 @@ export default function RootLayout({
 
           {/* Welcome Bot */}
           <WelcomeBot />
+
+          {/* Floating Metabolic Check Button — appears on ALL pages */}
+          <a
+            href="/tools"
+            style={{
+              position: "fixed",
+              bottom: "24px",
+              right: "24px",
+              zIndex: 9999,
+              width: "68px",
+              height: "68px",
+              borderRadius: "50%",
+              background: "radial-gradient(circle at 35% 35%, #dc2626, #7f1d1d)",
+              boxShadow: "0 0 0 6px rgba(220,38,38,0.2), 0 4px 24px rgba(220,38,38,0.5)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none",
+              animation: "float-pulse 2.5s ease-in-out infinite",
+            }}
+            title="Free Metabolic Check"
+          >
+            <span style={{ fontSize: "22px", lineHeight: 1 }}>⚠️</span>
+            <span style={{ fontSize: "8px", color: "#fff", fontWeight: 700, marginTop: "2px", textAlign: "center", lineHeight: 1.2, letterSpacing: "0.02em" }}>CHECK<br/>FREE</span>
+          </a>
+          <style>{`
+            @keyframes float-pulse {
+              0%, 100% { box-shadow: 0 0 0 6px rgba(220,38,38,0.2), 0 4px 24px rgba(220,38,38,0.5); transform: translateY(0); }
+              50% { box-shadow: 0 0 0 12px rgba(220,38,38,0.25), 0 8px 40px rgba(220,38,38,0.7); transform: translateY(-4px); }
+            }
+          `}</style>
         </AuthProvider>
         </ClerkProvider>
       </body>

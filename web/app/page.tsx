@@ -249,29 +249,22 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* HERO — starts immediately, layout.tsx header sits above */}
+      {/* HERO — full photo, no crop */}
       <section
         style={{
           position: "relative",
           width: "100%",
-          height: "calc(100vh - 94px)",
-          minHeight: "500px",
-          maxHeight: "860px",
-          overflow: "hidden",
           background: "#0a1824",
         }}
       >
         <img
-          src="/images/dr-muddu-chiranjeevi.jpg"
+          src="/images/dr-muddu-chiranjeevi-new.jpg"
           alt="Dr. Muddu Surendra Nehru – HOMA Clinic Gachibowli Hyderabad"
           style={{
-            position: "absolute",
-            inset: 0,
+            display: "block",
             width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center 20%",
-            opacity: 0.72,
+            height: "auto",
+            opacity: 0.85,
           }}
         />
         <div
@@ -279,145 +272,64 @@ export default function HomePage() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(160deg, rgba(13,43,78,0.1) 0%, rgba(13,43,78,0.0) 35%, rgba(13,43,78,0.55) 65%, rgba(13,43,78,0.93) 100%)",
+              "linear-gradient(160deg, rgba(13,43,78,0.0) 0%, rgba(13,43,78,0.0) 50%, rgba(13,43,78,0.7) 85%, rgba(13,43,78,0.95) 100%)",
           }}
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: "52px 6% 48px",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div style={{ maxWidth: "580px" }}>
-            <div
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#5ed3c8",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                marginBottom: "14px",
-              }}
-            >
-              <span
-                style={{
-                  width: "22px",
-                  height: "1px",
-                  background: "#00A896",
-                  display: "inline-block",
-                }}
-              />
-              Metabolic Medicine · Gachibowli · Hyderabad
-            </div>
-            <h1
-              style={{
-                fontFamily: "'EB Garamond', serif",
-                fontSize: "clamp(40px, 5.5vw, 76px)",
-                fontWeight: 500,
-                lineHeight: 1.05,
-                color: "#fff",
-                marginBottom: "16px",
-              }}
-            >
-              Diabetes &amp;
-              <br />
-              Obesity
-              <br />
-              Reversed.
-            </h1>
-            <p
-              style={{
-                fontSize: "16px",
-                fontWeight: 300,
-                lineHeight: 1.65,
-                color: "rgba(255,255,255,0.6)",
-                maxWidth: "460px",
-                marginBottom: "30px",
-              }}
-            >
-              Dr. Muddu Surendra Nehru MD — Professor of Medicine. Science-based metabolic reversal in 90 days. No
-              gimmicks. Real results.
-            </p>
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              <Link
-                href="/assessment"
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  padding: "14px 30px",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  background: "#F5A623",
-                  color: "#1a1a1a",
-                }}
-              >
-                📋 Book An Appointment
-              </Link>
-              <a
-                href="https://wa.me/919963721999"
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  padding: "14px 30px",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  background: "#25D366",
-                  color: "#fff",
-                }}
-              >
-                💬 WhatsApp Us
-              </a>
-              <Link
-                href="/tools"
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  padding: "14px 30px",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  background: "rgba(255,255,255,0.12)",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                }}
-              >
-                🔬 Free Metabolic Check
-              </Link>
-            </div>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {[
-              ["5,000+", "Patients Treated"],
-              ["90 Days", "Reversal Program"],
-              ["32+ Yrs", "Clinical Experience"],
-              ["4 Books", "Published Author"],
-            ].map(([num, lbl]) => (
-              <div
-                key={lbl}
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.16)",
-                  backdropFilter: "blur(18px)",
-                  borderRadius: "10px",
-                  padding: "13px 20px",
-                  minWidth: "164px",
-                  textAlign: "right",
-                }}
-              >
-                <div style={{ fontSize: "26px", fontWeight: 600, color: "#fff", lineHeight: 1 }}>{num}</div>
-                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)", marginTop: "3px" }}>{lbl}</div>
-              </div>
-            ))}
-          </div>
+        {/* 3 buttons — sit at bottom of photo */}
+        <div style={{
+          position: "absolute",
+          bottom: "32px",
+          left: 0,
+          right: 0,
+          display: "flex",
+          justifyContent: "center",
+          gap: "12px",
+          flexWrap: "wrap",
+          padding: "0 20px",
+        }}>
+          <Link
+            href="/assessment"
+            style={{
+              fontSize: "15px",
+              fontWeight: 600,
+              padding: "14px 30px",
+              borderRadius: "6px",
+              textDecoration: "none",
+              background: "#F5A623",
+              color: "#1a1a1a",
+            }}
+          >
+            📋 Book An Appointment
+          </Link>
+          <a
+            href="https://wa.me/919963721999"
+            style={{
+              fontSize: "15px",
+              fontWeight: 600,
+              padding: "14px 30px",
+              borderRadius: "6px",
+              textDecoration: "none",
+              background: "#25D366",
+              color: "#fff",
+            }}
+          >
+            💬 WhatsApp Us
+          </a>
+          <Link
+            href="/tools"
+            style={{
+              fontSize: "15px",
+              fontWeight: 600,
+              padding: "14px 30px",
+              borderRadius: "6px",
+              textDecoration: "none",
+              background: "rgba(255,255,255,0.12)",
+              color: "#fff",
+              border: "1px solid rgba(255,255,255,0.3)",
+            }}
+          >
+            🔬 Free Metabolic Check
+          </Link>
         </div>
       </section>
 
@@ -464,65 +376,6 @@ export default function HomePage() {
           ⭐ Appreciated by Megastar Chiranjeevi &nbsp;·&nbsp; Trusted at ISB · IIIT · IKEA Gachibowli
         </div>
       </div>
-
-      {/* METABOLIC CHECK BALLOON CTA */}
-      <section style={{ position: "relative", background: "#0a0a0a", overflow: "hidden", minHeight: "520px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        {/* Doctor image — tall, fills left side on mobile */}
-        <img
-          src="/images/gokhomayt2vert.jpg"
-          alt="Sugar Normal? Check HOMA-IR"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center top",
-            opacity: 0.45,
-          }}
-        />
-        {/* Dark overlay */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)" }} />
-        {/* Balloon button — centered on top of image */}
-        <div style={{ position: "relative", zIndex: 10, textAlign: "center", padding: "48px 20px" }}>
-          <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "32px", fontWeight: 600 }}>
-            Sugar Normal? Your HOMA-IR May Say Otherwise
-          </p>
-          <Link
-            href="/tools"
-            style={{
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "240px",
-              height: "240px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle at 35% 35%, #b91c1c, #7f1d1d)",
-              boxShadow: "0 0 0 14px rgba(185,28,28,0.2), 0 0 0 28px rgba(185,28,28,0.08), 0 20px 60px rgba(185,28,28,0.5)",
-              textDecoration: "none",
-              color: "#fff",
-              animation: "pulse-red 2s ease-in-out infinite",
-              cursor: "pointer",
-            }}
-          >
-            <span style={{ fontSize: "40px", marginBottom: "8px" }}>⚠️</span>
-            <span style={{ fontSize: "16px", fontWeight: 900, letterSpacing: "0.04em", lineHeight: 1.25, textAlign: "center", padding: "0 20px" }}>
-              CHECK FREE<br />METABOLIC<br />CALCULATORS
-            </span>
-            <span style={{ fontSize: "12px", marginTop: "10px", color: "rgba(255,255,255,0.7)", fontWeight: 600 }}>👆 Tap Here — It&apos;s Free</span>
-          </Link>
-          <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "11px", marginTop: "28px" }}>
-            HOMA-IR · TyG Index · WHR · WHtR · BMI — All Free
-          </p>
-        </div>
-        <style>{`
-          @keyframes pulse-red {
-            0%, 100% { box-shadow: 0 0 0 14px rgba(185,28,28,0.2), 0 0 0 28px rgba(185,28,28,0.08), 0 20px 60px rgba(185,28,28,0.5); }
-            50% { box-shadow: 0 0 0 24px rgba(185,28,28,0.25), 0 0 0 48px rgba(185,28,28,0.12), 0 20px 90px rgba(185,28,28,0.7); }
-          }
-        `}</style>
-      </section>
 
       {/* PATIENT STORIES */}
       <section style={{ padding: "72px 6%", background: "#f8f7f3" }}>
