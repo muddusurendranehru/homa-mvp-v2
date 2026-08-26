@@ -457,7 +457,7 @@ export default function HomePage() {
             >
               <img
                 src={p.img}
-                alt={p.name}
+                alt={p.role}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)" }} />
