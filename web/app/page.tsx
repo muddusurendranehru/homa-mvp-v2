@@ -469,6 +469,196 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* CELEBRITY & VIP RECOGNITION */}
+      <section style={{ background: "#07153a", padding: "72px 6%" }}>
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>
+            Trusted at the Highest Level
+          </div>
+          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, color: "#fff", marginBottom: "12px", lineHeight: 1.2 }}>
+            Celebrities. Ministers. Medical Colleagues.<br />
+            <em style={{ color: "#d4af37", fontStyle: "italic" }}>All Chose HOMA.</em>
+          </h2>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", fontWeight: 300, maxWidth: "500px", margin: "0 auto" }}>
+            When Tollywood&apos;s biggest star and Telangana&apos;s IT Minister trust the same doctor — that&apos;s not marketing. That&apos;s proof.
+          </p>
+        </div>
+
+        {/* Celebrities — Chiranjeevi anchor + blood bank side by side */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", maxWidth: "1000px", margin: "0 auto 24px" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700/v1786781678/CHIRU1_1_uyuz78.jpg", name: "Megastar Chiranjeevi", sub: "Actor · Philanthropist · Padma Vibhushan · 150M fans" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700,h_500,c_fill,g_face/v1786844071/IMG20241027085019_mh5w0m.jpg", name: "Chiranjeevi Blood Bank", sub: "Dr. Muddu invited to Chiranjeevi Blood Bank initiative — recognition of trust and shared service mission" },
+          ].map((v) => (
+            <div key={v.name} style={{ borderRadius: "20px", overflow: "hidden", position: "relative" }}>
+              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "340px", objectFit: "cover", objectPosition: "top" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%)", padding: "28px 24px 20px" }}>
+                <div style={{ fontSize: "18px", fontWeight: 800, color: "#d4af37" }}>{v.name}</div>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", marginTop: "4px" }}>{v.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Celebrities — Rajendra Prasad + V6 Ravi */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto 48px" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1773572168/snhc9z3jadq0ex3empoq.jpg", name: "Rajendra Prasad", sub: "National Award Winning Telugu Actor · Padma Shri" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1786811555/IMG20250620132710_nuprlk.jpg", name: "V6 Ravi Sir", sub: "Senior Media Celebrity · V6 News Channel" },
+          ].map((v) => (
+            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
+              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "380px", objectFit: "cover", objectPosition: "top" }} />
+              <div style={{ padding: "14px 16px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+                <div style={{ fontSize: "14px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* VIP Politicians — separate label */}
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "rgba(212,175,55,0.6)", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+            Political & Government Recognition
+          </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786783988/minsridharsirbook4_y4zoov.jpg", name: "Hon. Minister Sridhar Babu", sub: "IT, Electronics & Commerce — Govt. of Telangana" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810654/IMG20250315083245_np6k3n.jpg", name: "Appreciation Ceremony", sub: "Recognition by Telangana IT Ministry" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810449/IMG20250313090259_01_jpiynp.jpg", name: "Sri Gandhi MLA", sub: "Sherlingampally — Appreciation for Community Service" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810865/IMG20240712181743_kyfph4.jpg", name: "State Leadership Meeting", sub: "With MLA Sri Raj Thakur Makkan Singh & IT Minister" },
+          ].map((v) => (
+            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
+              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "200px", objectFit: "cover", objectPosition: "top" }} />
+              <div style={{ padding: "12px 14px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+                <div style={{ fontSize: "13px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
+                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* AWARDS SECTION */}
+      <section style={{ background: "#f8f5ee", padding: "72px 6%" }}>
+        <div style={{ textAlign: "center", marginBottom: "44px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#c0392b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Honours &amp; Awards</div>
+          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 500, color: "#0D2B4E", lineHeight: 1.2 }}>
+            Recognised. Awarded.<br /><em style={{ color: "#c0392b", fontStyle: "italic" }}>By Those Who Know Best.</em>
+          </h2>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px", maxWidth: "1060px", margin: "0 auto" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786811121/IMG20250615191438_tzoubz.jpg", badge: "🏆 Award" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786811118/IMG20250615190734_qxnrs1.jpg", badge: "🏆 Award" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786811239/IMG20250611113136_fpr7cd.jpg", badge: "🤝 Peer Recognition" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786811232/IMG20250611110911_hhhhvh.jpg", badge: "🎤 Lecture" },
+          ].map((item, i) => (
+            <div key={i} style={{ borderRadius: "14px", overflow: "hidden", background: "#fff", boxShadow: "0 4px 20px rgba(0,0,0,0.08)", border: "1px solid #ece9e1" }}>
+              <div style={{ position: "relative" }}>
+                <img src={item.img} alt={item.badge} style={{ width: "100%", height: "260px", objectFit: "cover", display: "block" }} />
+                <div style={{ position: "absolute", top: "10px", left: "10px", background: "rgba(192,57,43,0.88)", borderRadius: "20px", padding: "4px 12px", fontSize: "11px", fontWeight: 700, color: "#fff" }}>
+                  {item.badge}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* MEDICAL COLLEAGUES */}
+      <section style={{ background: "#07153a", padding: "72px 6%" }}>
+        <div style={{ textAlign: "center", marginBottom: "44px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#00A896", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Medical Community</div>
+          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 500, color: "#fff", lineHeight: 1.2 }}>
+            Respected by Doctors<br /><em style={{ color: "#d4af37", fontStyle: "italic" }}>Across India &amp; Abroad.</em>
+          </h2>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px", maxWidth: "1060px", margin: "0 auto" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810254/IMG20250319132952_zvvpfg.jpg", badge: "🏥 Medical College" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810309/IMG20250328192515_okaory.jpg", badge: "🌍 International" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810647/IMG20250222194655_msfeeh.jpg", badge: "🤝 Medical Peers" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786809817/tsapicon1_y7f5fw.jpg", badge: "📖 Book Inauguration" },
+          ].map((item, i) => (
+            <div key={i} style={{ borderRadius: "14px", overflow: "hidden", background: "#0f1f3d", border: "1px solid rgba(212,175,55,0.12)" }}>
+              <div style={{ position: "relative" }}>
+                <img src={item.img} alt={item.badge} style={{ width: "100%", height: "260px", objectFit: "cover", display: "block" }} />
+                <div style={{ position: "absolute", top: "10px", left: "10px", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", borderRadius: "20px", padding: "4px 12px", fontSize: "11px", fontWeight: 600, color: "#d4af37" }}>
+                  {item.badge}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5 Ps — WHY HOMA IS DIFFERENT */}
+      <section style={{ background: "#f8f7f3", padding: "72px 6%" }}>
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#00A896", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>
+            The HOMA Difference
+          </div>
+          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, color: "#0D2B4E", lineHeight: 1.2 }}>
+            The 5 Ps — What No One Else Offers
+          </h2>
+          <p style={{ fontSize: "15px", color: "#888", fontWeight: 300, maxWidth: "520px", margin: "12px auto 0" }}>
+            Sugar.fit has an app. Clinics have pills. HOMA has a 32-year protocol that treats the root cause — not the number on your meter.
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px", maxWidth: "1100px", margin: "0 auto" }}>
+          {[
+            { emoji: "🎯", p: "Precision", line1: "HOMA-IR + TyG Index", line2: "We measure insulin resistance directly. Not just sugar. Not just HbA1c. The root cause, measured precisely.", color: "#0D2B4E" },
+            { emoji: "🔬", p: "Penetrative", line1: "6 Metabolic Pathways", line2: "We go 6 levels deep — ENaC, RAAS, leptin, glycocalyx, visceral fat, beta cell reserve. Tablets touch only the surface.", color: "#1a5276" },
+            { emoji: "🛡️", p: "Preventive", line1: "Stop It Before It Starts", line2: "Pre-diabetes reversed before it becomes diabetes. Heart risk identified before it becomes an event. Prevention is our first move.", color: "#1B6B45" },
+            { emoji: "👤", p: "Personalized", line1: "Your Food. Your Body. Your Plan.", line2: "Indian meal plans built for Telugu, Hindi, and regional diets. No foreign keto. No generic advice. Your culture, your reversal.", color: "#7d3c98" },
+            { emoji: "✅", p: "Proven", line1: "32 Years · 5,000+ Patients", line2: "9 published books. Peer-reviewed protocols. Taught at ISB, IIIT, IKEA. Results that repeat — not testimonials from one lucky patient.", color: "#c0392b" },
+          ].map((item) => (
+            <div key={item.p} style={{ background: "#fff", borderRadius: "16px", padding: "28px 22px", border: "1px solid #ece9e1", borderTop: `4px solid ${item.color}` }}>
+              <div style={{ fontSize: "32px", marginBottom: "12px" }}>{item.emoji}</div>
+              <div style={{ fontSize: "10px", fontWeight: 700, color: item.color, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "6px" }}>{item.p}</div>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: "#0D2B4E", marginBottom: "10px", lineHeight: 1.3 }}>{item.line1}</div>
+              <div style={{ fontSize: "13px", color: "#666", lineHeight: 1.6 }}>{item.line2}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 9 BOOKS — Authority Section */}
+      <section style={{ background: "#0D2B4E", padding: "72px 6%" }}>
+        <div style={{ display: "flex", gap: "48px", alignItems: "center", flexWrap: "wrap", maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ flex: "1 1 380px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+              Published Authority
+            </div>
+            <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 500, color: "#fff", lineHeight: 1.2, marginBottom: "20px" }}>
+              9 Books.<br />32 Years.<br /><em style={{ color: "#d4af37" }}>One Mission.</em>
+            </h2>
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, marginBottom: "28px" }}>
+              Dr. Muddu has written the science most doctors never learned in college — BP, PCOS, diabetes, kidneys, GLP-1, spices, insulin. Each book is peer-reviewed clinical knowledge made readable for patients.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+              {["BP: The Untold Truth", "The Telma Trap", "Rice Belly Insulin Axis", "PCOS: The Metabolism Angle", "Your Kidneys Are Not Silent Anymore", "+ 4 more published titles"].map((b) => (
+                <div key={b} style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", display: "flex", gap: "8px", alignItems: "flex-start" }}>
+                  <span style={{ color: "#d4af37", flexShrink: 0 }}>📖</span> {b}
+                </div>
+              ))}
+            </div>
+            <a href="https://wa.me/919963721999" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "13px 28px", borderRadius: "8px", textDecoration: "none" }}>
+              💬 Ask Dr. Muddu Directly
+            </a>
+          </div>
+          <div style={{ flex: "1 1 340px" }}>
+            <img
+              src="https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_800/v1786809072/bboksslide1_gkdzpb.jpg"
+              alt="All 9 books published by Dr. Muddu Surendra Nehru MD"
+              style={{ width: "100%", borderRadius: "16px", display: "block", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* CONDITIONS */}
       <section style={{ padding: "72px 6%", background: "#fff", textAlign: "center" }}>
         <p
