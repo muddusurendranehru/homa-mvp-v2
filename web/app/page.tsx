@@ -64,6 +64,55 @@ export default function HomePage() {
     },
   ];
 
+  const scienceSlides = [
+    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848746/gllucodeberg1_wlwkq0.jpg", title: "Glucose is just the tip of the iceberg", sub: "The real danger is hidden — insulin resistance, organ fat, metabolic dysfunction" },
+    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848745/Malabsorption_complete2_u03x0a.jpg", title: "The HOMA Journey to Reversal", sub: "Step-by-step metabolic recovery — from diagnosis to remission" },
+    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787849215/pancreas_and_dm1_9_egt9qi.jpg", title: "Early vs Late Biomarkers", sub: "Catch diabetes risk years before fasting glucose turns abnormal" },
+    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787849213/pancreas_and_dm1_6_tvlmce.jpg", title: "Right Way vs Wrong Way", sub: "Why treating sugar alone fails — the metabolic approach that actually works" },
+  ];
+  const [slideIdx, setSlideIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setSlideIdx(i => (i + 1) % 4), 4000);
+    return () => clearInterval(t);
+  }, []);
+  const ScienceSlides = () => (
+    <section style={{ background: "#07153a", padding: "60px 6%", textAlign: "center" }}>
+      <div style={{ fontSize: "13px", color: "#d4af37", fontWeight: 700, letterSpacing: "2px", marginBottom: "8px" }}>THE SCIENCE</div>
+      <h2 style={{ fontSize: "clamp(22px,3.5vw,36px)", fontWeight: 800, color: "#fff", marginBottom: "32px" }}>
+        Why Sugar Alone Is Not the Problem
+      </h2>
+      <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}>
+        <img
+          src={scienceSlides[slideIdx].img}
+          alt={scienceSlides[slideIdx].title}
+          style={{ width: "100%", borderRadius: "16px", border: "2px solid rgba(212,175,55,0.4)", display: "block" }}
+        />
+        <div style={{ background: "rgba(6,21,43,0.85)", borderRadius: "0 0 16px 16px", padding: "20px 24px", textAlign: "left" }}>
+          <div style={{ fontWeight: 800, fontSize: "18px", color: "#d4af37", marginBottom: "4px" }}>{scienceSlides[slideIdx].title}</div>
+          <div style={{ fontSize: "14px", color: "rgba(255,255,255,0.65)" }}>{scienceSlides[slideIdx].sub}</div>
+        </div>
+        {/* Dots */}
+        <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "16px" }}>
+          {scienceSlides.map((_, i) => (
+            <button key={i} onClick={() => setSlideIdx(i)} style={{ width: "10px", height: "10px", borderRadius: "50%", border: "none", cursor: "pointer", background: i === slideIdx ? "#d4af37" : "rgba(255,255,255,0.25)" }} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const [quizAge, setQuizAge] = useState("");
+  const [quizWaist, setQuizWaist] = useState("");
+  const [quizResult, setQuizResult] = useState<string | null>(null);
+  const checkOrganAge = () => {
+    const a = parseInt(quizAge), w = parseInt(quizWaist);
+    if (!a || !w) return;
+    const risk = w > (a < 40 ? 85 : 90) ? "high" : w > 80 ? "moderate" : "low";
+    if (risk === "high") setQuizResult(`⚠️ Your organs may be ${Math.round(a * 0.25 + 10)}+ years older. Book a free assessment now.`);
+    else if (risk === "moderate") setQuizResult(`🔶 Moderate risk detected. A HOMA-IR test is recommended.`);
+    else setQuizResult(`✅ Low risk. Keep monitoring with our free HOMA-IR tool.`);
+  };
+
   return (
     <>
       {/* SEMINAR BANNER — sugar.fit style, full bold section */}
@@ -98,10 +147,10 @@ export default function HomePage() {
           margin: "0 0 4px",
           lineHeight: 1.15,
         }}>
-          HOMA Metabolic Health Seminar
+          Free Webinar Tonight — 6 to 7 PM
         </h2>
         <p style={{ color: "#ffffff", fontSize: "clamp(14px, 2vw, 18px)", fontWeight: 400, margin: "0 0 20px", opacity: 0.85 }}>
-          Dr. Muddu Surendra Nehru MD · 20 Minutes · No Sign-up Required
+          Dr. Muddu Surendra Nehru MD · Today 6–7 PM · Join for just 20 Minutes · Free · No Sign-up
         </p>
 
         {/* Countdown */}
@@ -377,6 +426,140 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* CELEBRITY & VIP RECOGNITION */}
+      <section style={{ background: "#07153a", padding: "72px 6%" }}>
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>
+            Trusted at the Highest Level
+          </div>
+          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, color: "#fff", marginBottom: "12px", lineHeight: 1.2 }}>
+            Celebrities. Ministers. Medical Colleagues.<br />
+            <em style={{ color: "#d4af37", fontStyle: "italic" }}>All Chose HOMA.</em>
+          </h2>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", fontWeight: 300, maxWidth: "500px", margin: "0 auto" }}>
+            When Tollywood&apos;s biggest star and Telangana&apos;s IT Minister trust the same doctor — that&apos;s not marketing. That&apos;s proof.
+          </p>
+        </div>
+
+        {/* Celebrities — Chiranjeevi anchor + blood bank side by side */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", maxWidth: "1000px", margin: "0 auto 24px" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700/v1786781678/CHIRU1_1_uyuz78.jpg", name: "Megastar Chiranjeevi", sub: "Actor · Philanthropist · Padma Vibhushan · 150M fans" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700,h_500,c_fill,g_face/v1786844071/IMG20241027085019_mh5w0m.jpg", name: "Chiranjeevi Blood Bank", sub: "Dr. Muddu invited to Chiranjeevi Blood Bank initiative — recognition of trust and shared service mission" },
+          ].map((v) => (
+            <div key={v.name} style={{ borderRadius: "20px", overflow: "hidden", position: "relative" }}>
+              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "340px", objectFit: "cover", objectPosition: "top" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%)", padding: "28px 24px 20px" }}>
+                <div style={{ fontSize: "18px", fontWeight: 800, color: "#d4af37" }}>{v.name}</div>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", marginTop: "4px" }}>{v.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Celebrities — Rajendra Prasad + V6 Ravi */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto 48px" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1773572168/snhc9z3jadq0ex3empoq.jpg", name: "Rajendra Prasad", sub: "National Award Winning Telugu Actor · Padma Shri" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1786811555/IMG20250620132710_nuprlk.jpg", name: "V6 Ravi Sir", sub: "Senior Media Celebrity · V6 News Channel" },
+          ].map((v) => (
+            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
+              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "380px", objectFit: "cover", objectPosition: "top" }} />
+              <div style={{ padding: "14px 16px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+                <div style={{ fontSize: "14px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* VIP Politicians — separate label */}
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "rgba(212,175,55,0.6)", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+            Political & Government Recognition
+          </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto" }}>
+          {[
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786783988/minsridharsirbook4_y4zoov.jpg", name: "Hon. Minister Sridhar Babu", sub: "IT, Electronics & Commerce — Govt. of Telangana" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810654/IMG20250315083245_np6k3n.jpg", name: "Appreciation Ceremony", sub: "Recognition by Telangana IT Ministry" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810449/IMG20250313090259_01_jpiynp.jpg", name: "Sri Gandhi MLA", sub: "Sherlingampally — Appreciation for Community Service" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810865/IMG20240712181743_kyfph4.jpg", name: "State Leadership Meeting", sub: "With MLA Sri Raj Thakur Makkan Singh & IT Minister" },
+          ].map((v) => (
+            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
+              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "200px", objectFit: "cover", objectPosition: "top" }} />
+              <div style={{ padding: "12px 14px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+                <div style={{ fontSize: "13px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
+                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FREE TOOLS STRIP */}
+      <section style={{ background: "#d4af37", padding: "20px 6%", textAlign: "center" }}>
+        <div style={{ fontSize: "14px", fontWeight: 800, color: "#06152b", marginBottom: "14px", letterSpacing: "1px" }}>
+          🔬 FREE METABOLIC TOOLS — No Signup Required
+        </div>
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+          {[
+            { label: "HOMA-IR Calculator", icon: "🧪", href: "/tools" },
+            { label: "Waist Risk Check", icon: "📏", href: "/tools" },
+            { label: "TyG Index", icon: "📊", href: "/tools" },
+            { label: "Organ Age Quiz", icon: "❤️", href: "#organ-age" },
+          ].map((t) => (
+            <a key={t.label} href={t.href} style={{
+              background: "#06152b", color: "#d4af37", fontWeight: 700, fontSize: "14px",
+              padding: "10px 20px", borderRadius: "30px", textDecoration: "none",
+              border: "2px solid #06152b", whiteSpace: "nowrap",
+            }}>
+              {t.icon} {t.label}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ORGAN AGE SECTION */}
+      <section id="organ-age" style={{ background: "#06152b", padding: "60px 6%", textAlign: "center" }}>
+        <div style={{ fontSize: "13px", color: "#d4af37", fontWeight: 700, letterSpacing: "2px", marginBottom: "8px" }}>THE SILENT TRUTH</div>
+        <h2 style={{ fontSize: "clamp(26px,4vw,42px)", fontWeight: 900, color: "#fff", marginBottom: "12px", lineHeight: 1.2 }}>
+          You Look 30.<br />
+          <span style={{ color: "#d4af37" }}>Your Organs May Be 55.</span>
+        </h2>
+        <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "16px", marginBottom: "40px", maxWidth: "560px", margin: "0 auto 40px" }}>
+          Normal weight. Normal sugar. Normal BP. Yet your heart, liver and kidneys are aging faster than you think. This is called Normal Weight Obesity — and most doctors miss it.
+        </p>
+        <div style={{ display: "flex", gap: "40px", alignItems: "center", justifyContent: "center", flexWrap: "wrap", maxWidth: "1000px", margin: "0 auto" }}>
+          <img src="https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600/v1787847084/gokinsifde1_epuelu.jpg" alt="Biological Age 30 Organ Age 55" style={{ width: "100%", maxWidth: "340px", borderRadius: "20px", border: "2px solid #d4af37" }} />
+          <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(212,175,55,0.3)", borderRadius: "20px", padding: "32px", maxWidth: "380px", width: "100%", textAlign: "left" }}>
+            <div style={{ fontSize: "18px", fontWeight: 800, color: "#fff", marginBottom: "6px" }}>🔬 Check Your Organ Age</div>
+            <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "24px" }}>Takes 30 seconds. Free. No signup.</div>
+            {quizResult ? (
+              <div>
+                <div style={{ background: "rgba(212,175,55,0.15)", border: "1px solid #d4af37", borderRadius: "12px", padding: "16px", color: "#fff", fontSize: "15px", fontWeight: 600, marginBottom: "16px" }}>{quizResult}</div>
+                <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" style={{ display: "block", background: "#25D366", color: "#fff", fontWeight: 700, fontSize: "15px", padding: "14px", borderRadius: "10px", textDecoration: "none", textAlign: "center" }}>💬 WhatsApp Dr. Muddu — Free</a>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div>
+                  <label style={{ color: "rgba(255,255,255,0.6)", fontSize: "13px", display: "block", marginBottom: "6px" }}>Your Age</label>
+                  <input type="number" placeholder="e.g. 35" value={quizAge} onChange={e => setQuizAge(e.target.value)} style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.08)", color: "#fff", fontSize: "16px", boxSizing: "border-box" }} />
+                </div>
+                <div>
+                  <label style={{ color: "rgba(255,255,255,0.6)", fontSize: "13px", display: "block", marginBottom: "6px" }}>Waist Size (cm)</label>
+                  <input type="number" placeholder="e.g. 88" value={quizWaist} onChange={e => setQuizWaist(e.target.value)} style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.08)", color: "#fff", fontSize: "16px", boxSizing: "border-box" }} />
+                </div>
+                <button onClick={checkOrganAge} style={{ background: "linear-gradient(135deg, #d4af37, #b8941f)", color: "#06152b", fontWeight: 800, fontSize: "16px", padding: "14px", borderRadius: "10px", border: "none", cursor: "pointer" }}>
+                  Check My Organ Age →
+                </button>
+                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", textAlign: "center" }}>Indian waist cutoffs: Women &lt;85cm · Men &lt;96cm</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* PATIENT STORIES */}
       <section style={{ padding: "72px 6%", background: "#f8f7f3" }}>
         <div
@@ -469,76 +652,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CELEBRITY & VIP RECOGNITION */}
-      <section style={{ background: "#07153a", padding: "72px 6%" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>
-            Trusted at the Highest Level
-          </div>
-          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, color: "#fff", marginBottom: "12px", lineHeight: 1.2 }}>
-            Celebrities. Ministers. Medical Colleagues.<br />
-            <em style={{ color: "#d4af37", fontStyle: "italic" }}>All Chose HOMA.</em>
-          </h2>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", fontWeight: 300, maxWidth: "500px", margin: "0 auto" }}>
-            When Tollywood&apos;s biggest star and Telangana&apos;s IT Minister trust the same doctor — that&apos;s not marketing. That&apos;s proof.
-          </p>
-        </div>
-
-        {/* Celebrities — Chiranjeevi anchor + blood bank side by side */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", maxWidth: "1000px", margin: "0 auto 24px" }}>
-          {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700/v1786781678/CHIRU1_1_uyuz78.jpg", name: "Megastar Chiranjeevi", sub: "Actor · Philanthropist · Padma Vibhushan · 150M fans" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700,h_500,c_fill,g_face/v1786844071/IMG20241027085019_mh5w0m.jpg", name: "Chiranjeevi Blood Bank", sub: "Dr. Muddu invited to Chiranjeevi Blood Bank initiative — recognition of trust and shared service mission" },
-          ].map((v) => (
-            <div key={v.name} style={{ borderRadius: "20px", overflow: "hidden", position: "relative" }}>
-              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "340px", objectFit: "cover", objectPosition: "top" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%)", padding: "28px 24px 20px" }}>
-                <div style={{ fontSize: "18px", fontWeight: 800, color: "#d4af37" }}>{v.name}</div>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", marginTop: "4px" }}>{v.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Celebrities — Rajendra Prasad + V6 Ravi */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto 48px" }}>
-          {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1773572168/snhc9z3jadq0ex3empoq.jpg", name: "Rajendra Prasad", sub: "National Award Winning Telugu Actor · Padma Shri" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1786811555/IMG20250620132710_nuprlk.jpg", name: "V6 Ravi Sir", sub: "Senior Media Celebrity · V6 News Channel" },
-          ].map((v) => (
-            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
-              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "380px", objectFit: "cover", objectPosition: "top" }} />
-              <div style={{ padding: "14px 16px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
-                <div style={{ fontSize: "14px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* VIP Politicians — separate label */}
-        <div style={{ textAlign: "center", marginBottom: "20px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "rgba(212,175,55,0.6)", textTransform: "uppercase", letterSpacing: "0.12em" }}>
-            Political & Government Recognition
-          </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto" }}>
-          {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786783988/minsridharsirbook4_y4zoov.jpg", name: "Hon. Minister Sridhar Babu", sub: "IT, Electronics & Commerce — Govt. of Telangana" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810654/IMG20250315083245_np6k3n.jpg", name: "Appreciation Ceremony", sub: "Recognition by Telangana IT Ministry" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810449/IMG20250313090259_01_jpiynp.jpg", name: "Sri Gandhi MLA", sub: "Sherlingampally — Appreciation for Community Service" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810865/IMG20240712181743_kyfph4.jpg", name: "State Leadership Meeting", sub: "With MLA Sri Raj Thakur Makkan Singh & IT Minister" },
-          ].map((v) => (
-            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
-              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "200px", objectFit: "cover", objectPosition: "top" }} />
-              <div style={{ padding: "12px 14px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
-                <div style={{ fontSize: "13px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
-                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* SCIENCE SLIDES CAROUSEL */}
+      <ScienceSlides />
 
       {/* AWARDS SECTION */}
       <section style={{ background: "#f8f5ee", padding: "72px 6%" }}>
@@ -581,6 +696,7 @@ export default function HomePage() {
             { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810309/IMG20250328192515_okaory.jpg", badge: "🌍 International" },
             { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810647/IMG20250222194655_msfeeh.jpg", badge: "🤝 Medical Peers" },
             { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786809817/tsapicon1_y7f5fw.jpg", badge: "📖 Book Inauguration" },
+            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786844904/IMG_20230612_132006_t6s4sm.jpg", badge: "👩‍⚕️ Lady Doctors" },
           ].map((item, i) => (
             <div key={i} style={{ borderRadius: "14px", overflow: "hidden", background: "#0f1f3d", border: "1px solid rgba(212,175,55,0.12)" }}>
               <div style={{ position: "relative" }}>
@@ -656,6 +772,27 @@ export default function HomePage() {
               style={{ width: "100%", borderRadius: "16px", display: "block", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
             />
           </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA — Start Your Reversal */}
+      <section style={{ background: "#0D2B4E", padding: "72px 6%", textAlign: "center" }}>
+        <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 500, color: "#fff", marginBottom: "16px" }}>
+          Start Your Reversal Today
+        </h2>
+        <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.55)", fontWeight: 300, maxWidth: "480px", margin: "0 auto 36px" }}>
+          Free 15-minute metabolic assessment. No cost, no signup. Serving Gachibowli, Ameerpet, Bachupally &amp; Patancheru.
+        </p>
+        <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/assessment" style={{ background: "#F5A623", color: "#1a1a1a", fontWeight: 700, fontSize: "16px", padding: "16px 36px", borderRadius: "8px", textDecoration: "none" }}>
+            Book An Appointment →
+          </Link>
+          <a href="https://wa.me/919963721999" style={{ background: "#25D366", color: "#fff", fontWeight: 700, fontSize: "16px", padding: "16px 36px", borderRadius: "8px", textDecoration: "none" }}>
+            💬 WhatsApp Dr. Muddu
+          </a>
+          <Link href="/tools" style={{ background: "rgba(255,255,255,0.1)", color: "#fff", fontWeight: 600, fontSize: "16px", padding: "16px 36px", borderRadius: "8px", textDecoration: "none", border: "1px solid rgba(255,255,255,0.25)" }}>
+            🔬 Free HOMA-IR Check
+          </Link>
         </div>
       </section>
 
@@ -914,75 +1051,71 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section style={{ background: "#0D2B4E", padding: "72px 6%", textAlign: "center" }}>
-        <h2
-          style={{
-            fontFamily: "'EB Garamond', serif",
-            fontSize: "clamp(32px, 4vw, 56px)",
-            fontWeight: 500,
-            color: "#fff",
-            marginBottom: "16px",
-          }}
-        >
-          Start Your Reversal Today
+      {/* FLOATING BALLOONS */}
+      {/* Left — Check Your Health */}
+      <a
+        href="/tools"
+        style={{
+          position: "fixed", left: "0", top: "50%", transform: "translateY(-50%)",
+          background: "linear-gradient(135deg, #1a3a8f, #0f2557)",
+          color: "#fff", fontWeight: 700, fontSize: "13px",
+          padding: "14px 10px", borderRadius: "0 12px 12px 0",
+          textDecoration: "none", zIndex: 9999, writingMode: "vertical-rl",
+          textOrientation: "mixed", letterSpacing: "1px",
+          boxShadow: "2px 2px 12px rgba(0,0,0,0.3)",
+          border: "2px solid #d4af37", borderLeft: "none",
+        }}
+      >
+        🔬 Check Your Health
+      </a>
+      {/* Right — WhatsApp */}
+      <a
+        href="https://wa.me/919963721999"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: "fixed", right: "0", top: "50%", transform: "translateY(-50%)",
+          background: "#25D366",
+          color: "#fff", fontWeight: 700, fontSize: "13px",
+          padding: "14px 10px", borderRadius: "12px 0 0 12px",
+          textDecoration: "none", zIndex: 9999, writingMode: "vertical-rl",
+          textOrientation: "mixed", letterSpacing: "1px",
+          boxShadow: "-2px 2px 12px rgba(0,0,0,0.3)",
+        }}
+      >
+        💬 WhatsApp Us
+      </a>
+
+      {/* OUR APPROACH SECTION */}
+      <section style={{ background: "#f8faff", padding: "60px 6%", textAlign: "center" }}>
+        <div style={{ fontSize: "13px", color: "#1a3a8f", fontWeight: 700, letterSpacing: "2px", marginBottom: "8px" }}>HOW IT WORKS</div>
+        <h2 style={{ fontSize: "clamp(24px,4vw,36px)", fontWeight: 800, color: "#06152b", marginBottom: "8px" }}>
+          The HOMA Approach to <span style={{ color: "#1a3a8f" }}>Diabetes Reversal</span>
         </h2>
-        <p
-          style={{
-            fontSize: "16px",
-            color: "rgba(255,255,255,0.55)",
-            fontWeight: 300,
-            maxWidth: "480px",
-            margin: "0 auto 36px",
-          }}
-        >
-          Free 15-minute metabolic assessment. No cost, no signup. Serving Gachibowli, Ameerpet, Bachupally &amp;
-          Patancheru.
-        </p>
-        <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link
-            href="/assessment"
-            style={{
-              background: "#F5A623",
-              color: "#1a1a1a",
-              fontWeight: 700,
-              fontSize: "16px",
-              padding: "16px 36px",
-              borderRadius: "8px",
-              textDecoration: "none",
-            }}
-          >
-            Book An Appointment →
-          </Link>
-          <a
-            href="https://wa.me/919963721999"
-            style={{
-              background: "#25D366",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "16px",
-              padding: "16px 36px",
-              borderRadius: "8px",
-              textDecoration: "none",
-            }}
-          >
-            💬 WhatsApp Dr. Muddu
-          </a>
-          <Link
-            href="/tools"
-            style={{
-              background: "rgba(255,255,255,0.1)",
-              color: "#fff",
-              fontWeight: 600,
-              fontSize: "16px",
-              padding: "16px 36px",
-              borderRadius: "8px",
-              textDecoration: "none",
-              border: "1px solid rgba(255,255,255,0.25)",
-            }}
-          >
-            🔬 Free HOMA-IR Check
-          </Link>
+        <p style={{ color: "#555", fontSize: "16px", marginBottom: "48px" }}>Doctor-led. Science-backed. No app required.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "24px", maxWidth: "1000px", margin: "0 auto" }}>
+          {[
+            { num: "1", title: "Understand Your Body", desc: "HOMA-IR test + organ age assessment — detect risk years before symptoms" },
+            { num: "2", title: "Find the Root Cause", desc: "Not just sugar — full metabolic diagnosis by a real MD doctor" },
+            { num: "3", title: "Doctor-Designed Plan", desc: "Personally by Dr. Muddu — not an algorithm, not a chatbot" },
+            { num: "4", title: "Regular Follow-up", desc: "Weekly check-ins with the doctor himself — phone, clinic, or home visit" },
+            { num: "5", title: "Long-Term Remission", desc: "Goal: off medicines, not just managed. Hundreds of patients have done it" },
+          ].map((step) => (
+            <div key={step.num} style={{
+              background: "#fff", borderRadius: "16px", padding: "28px 20px",
+              boxShadow: "0 2px 16px rgba(0,0,0,0.07)", textAlign: "left",
+            }}>
+              <div style={{
+                width: "40px", height: "40px", borderRadius: "50%",
+                background: "linear-gradient(135deg, #1a3a8f, #0f2557)",
+                color: "#fff", fontWeight: 800, fontSize: "18px",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: "14px",
+              }}>{step.num}</div>
+              <div style={{ fontWeight: 700, fontSize: "16px", color: "#06152b", marginBottom: "8px" }}>{step.title}</div>
+              <div style={{ fontSize: "14px", color: "#666", lineHeight: "1.5" }}>{step.desc}</div>
+            </div>
+          ))}
         </div>
       </section>
 
