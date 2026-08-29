@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com';
+  const baseUrl = 'https://mvp.homahealthcarecenter.in';
   const now = new Date();
-  
+
   return [
     // Core pages
     { url: `${baseUrl}/`, lastModified: now, priority: 1.0 },
@@ -23,19 +23,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/disclaimer`, lastModified: now, priority: 0.5 },
     { url: `${baseUrl}/upgrade`, lastModified: now, priority: 0.6 },
     { url: `${baseUrl}/onboarding-emails`, lastModified: now, priority: 0.5 },
-    
+
     // Location pages
     { url: `${baseUrl}/hyderabad/hyderabad`, lastModified: now, priority: 0.9 },
     { url: `${baseUrl}/hyderabad/gachibowli`, lastModified: now, priority: 0.9 },
     { url: `${baseUrl}/hyderabad/ameerpet`, lastModified: now, priority: 0.8 },
     { url: `${baseUrl}/hyderabad/patancheru`, lastModified: now, priority: 0.8 },
     { url: `${baseUrl}/hyderabad/bachupally`, lastModified: now, priority: 0.8 },
-    
+
     // Blog posts
     { url: `${baseUrl}/blog/can-prediabetes-be-reversed-in-90-days`, lastModified: now, priority: 0.8 },
     { url: `${baseUrl}/blog/insulin-resistance-kidney-link`, lastModified: now, priority: 0.7 },
     // Add future blogs here
-    
+
     // Condition pages
     { url: `${baseUrl}/conditions/diabetes`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${baseUrl}/conditions/hypertension`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
@@ -44,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/conditions/obesity`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${baseUrl}/conditions/prediabetes`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${baseUrl}/conditions/metabolic-syndrome`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
-    
+
     // New condition pages - Patient-focused questions
     { url: `${baseUrl}/conditions/pcos-unexplained-weight-gain`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${baseUrl}/conditions/tired-at-60-not-just-aging`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
