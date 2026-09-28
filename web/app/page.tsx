@@ -115,6 +115,91 @@ export default function HomePage() {
 
   return (
     <>
+      {/* GOV LEADERS START */}
+      <section style={{ background: "#07153a", padding: "44px 5% 40px", borderTop: "4px solid #d4af37", borderBottom: "4px solid #d4af37", textAlign: "center" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontSize: "12px", fontWeight: 700, letterSpacing: "0.08em", padding: "6px 14px", borderRadius: "20px", marginBottom: "16px" }}>
+            GOVERNMENT OF TELANGANA &middot; PROOF OF CONCEPT
+          </div>
+          <h1 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 700, lineHeight: 1.25, margin: "0 auto 28px", color: "#ffffff", maxWidth: "860px" }}>
+            Minister directs HOMA&apos;s 50-Patient Diabetes Remission Pilot
+          </h1>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "24px", justifyContent: "center", alignItems: "flex-start", marginBottom: "28px" }}>
+            {[
+              { src: "/images/cm-revanth-reddy-book-homa.jpg", alt: "Hon'ble Chief Minister Sri A. Revanth Reddy receiving Dr. Muddu's book BP: The Untold Truth", caption: "Hon\u2019ble Chief Minister Sri A. Revanth Reddy receiving Dr. Muddu\u2019s book \u2018BP: The Untold Truth\u2019" },
+              { src: "/images/minister-sridhar-babu-homa.jpg", alt: "Hon'ble Minister Sri Duddilla Sridhar Babu with Dr. Muddu Surendra Nehru", caption: "Hon\u2019ble Minister Sri Duddilla Sridhar Babu, IT & Industries, Govt of Telangana" },
+            ].map((p) => (
+              <figure key={p.src} style={{ flex: "1 1 300px", maxWidth: "460px", margin: 0 }}>
+                <img
+                  src={p.src}
+                  alt={p.alt}
+                  style={{ display: "block", width: "100%", aspectRatio: "3 / 4", objectFit: "cover", objectPosition: "center", borderRadius: "12px", border: "3px solid #d4af37" }}
+                />
+                <figcaption style={{ color: "#cfd8e3", fontSize: "14px", lineHeight: 1.5, marginTop: "10px" }}>
+                  {p.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p style={{ fontSize: "17px", lineHeight: 1.6, color: "#cfd8e3", margin: "0 auto 22px", maxWidth: "760px" }}>
+            Hon&apos;ble Minister for IT, Industries &amp; Commerce, Sri Duddilla Sridhar Babu, has directed the District Collector, Peddapalli, to take up Dr. Muddu&apos;s 50-patient diabetes remission pilot in Manthani.
+          </p>
+          <a
+            href="/poc.html"
+            style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "16px", padding: "14px 28px", borderRadius: "8px", textDecoration: "none", marginBottom: "24px" }}
+          >
+            See the Government Pilot &rarr;
+          </a>
+          {/* Hero buttons (moved from old Chiranjeevi hero) */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+            <Link
+              href="/assessment"
+              style={{
+                fontSize: "15px",
+                fontWeight: 600,
+                padding: "14px 30px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                background: "#F5A623",
+                color: "#1a1a1a",
+              }}
+            >
+              📋 Book An Appointment
+            </Link>
+            <a
+              href="https://wa.me/919963721999"
+              style={{
+                fontSize: "15px",
+                fontWeight: 600,
+                padding: "14px 30px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                background: "#25D366",
+                color: "#fff",
+              }}
+            >
+              💬 WhatsApp Us
+            </a>
+            <Link
+              href="/tools"
+              style={{
+                fontSize: "15px",
+                fontWeight: 600,
+                padding: "14px 30px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                background: "rgba(255,255,255,0.12)",
+                color: "#fff",
+                border: "1px solid rgba(255,255,255,0.3)",
+              }}
+            >
+              🔬 Free Metabolic Check
+            </Link>
+          </div>
+        </div>
+      </section>
+      {/* GOV LEADERS END */}
+
       {/* SEMINAR BANNER — sugar.fit style, full bold section */}
       <div style={{
         width: "100%",
@@ -298,90 +383,6 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* HERO — full photo, no crop */}
-      <section
-        style={{
-          position: "relative",
-          width: "100%",
-          background: "#0a1824",
-        }}
-      >
-        <img
-          src="/images/dr-muddu-chiranjeevi-new.jpg"
-          alt="Dr. Muddu Surendra Nehru – HOMA Clinic Gachibowli Hyderabad"
-          style={{
-            display: "block",
-            width: "100%",
-            height: "auto",
-            opacity: 0.85,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(160deg, rgba(13,43,78,0.0) 0%, rgba(13,43,78,0.0) 50%, rgba(13,43,78,0.7) 85%, rgba(13,43,78,0.95) 100%)",
-          }}
-        />
-        {/* 3 buttons — sit at bottom of photo */}
-        <div style={{
-          position: "absolute",
-          bottom: "32px",
-          left: 0,
-          right: 0,
-          display: "flex",
-          justifyContent: "center",
-          gap: "12px",
-          flexWrap: "wrap",
-          padding: "0 20px",
-        }}>
-          <Link
-            href="/assessment"
-            style={{
-              fontSize: "15px",
-              fontWeight: 600,
-              padding: "14px 30px",
-              borderRadius: "6px",
-              textDecoration: "none",
-              background: "#F5A623",
-              color: "#1a1a1a",
-            }}
-          >
-            📋 Book An Appointment
-          </Link>
-          <a
-            href="https://wa.me/919963721999"
-            style={{
-              fontSize: "15px",
-              fontWeight: 600,
-              padding: "14px 30px",
-              borderRadius: "6px",
-              textDecoration: "none",
-              background: "#25D366",
-              color: "#fff",
-            }}
-          >
-            💬 WhatsApp Us
-          </a>
-          <Link
-            href="/tools"
-            style={{
-              fontSize: "15px",
-              fontWeight: 600,
-              padding: "14px 30px",
-              borderRadius: "6px",
-              textDecoration: "none",
-              background: "rgba(255,255,255,0.12)",
-              color: "#fff",
-              border: "1px solid rgba(255,255,255,0.3)",
-            }}
-          >
-            🔬 Free Metabolic Check
-          </Link>
-        </div>
-      </section>
-
       {/* TRUST STRIP */}
       <div
         style={{
@@ -444,7 +445,7 @@ export default function HomePage() {
         {/* Celebrities — Chiranjeevi anchor + blood bank side by side */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", maxWidth: "1000px", margin: "0 auto 24px" }}>
           {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700/v1786781678/CHIRU1_1_uyuz78.jpg", name: "Megastar Chiranjeevi", sub: "Actor · Philanthropist · Padma Vibhushan · 150M fans" },
+            { img: "/images/dr-muddu-chiranjeevi-new.jpg", name: "Megastar Chiranjeevi", sub: "Actor · Philanthropist · Padma Vibhushan · 150M fans" },
             { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700,h_500,c_fill,g_face/v1786844071/IMG20241027085019_mh5w0m.jpg", name: "Chiranjeevi Blood Bank", sub: "Dr. Muddu invited to Chiranjeevi Blood Bank initiative — recognition of trust and shared service mission" },
           ].map((v) => (
             <div key={v.name} style={{ borderRadius: "20px", overflow: "hidden", position: "relative" }}>
