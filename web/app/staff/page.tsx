@@ -42,10 +42,18 @@ export default function StaffPage() {
   const [tab, setTab]               = useState<'feed' | 'patients'>('feed')
   const [loading, setLoading]       = useState(true)
   const [lastRefresh, setLastRefresh] = useState(new Date())
+  const [denied, setDenied]         = useState(false)
 
   async function load() {
     try {
       const res  = await fetch('/api/staff')
+      if (res.status === 401 || res.status === 403) {
+        setDenied(true)
+        setActivities([])
+        setPatients([])
+        setLoading(false)
+        return
+      }
       const data = await res.json()
       setActivities(data.activities || [])
       setPatients(data.patients || [])
@@ -91,6 +99,20 @@ export default function StaffPage() {
     borderRadius: '12px',
     padding: '14px 16px',
     marginBottom: '10px',
+  }
+
+  if (denied) {
+    return (
+      <main style={base}>
+        <div style={{ textAlign: 'center', paddingTop: '80px', color: 'rgba(255,255,255,0.7)' }}>
+          <h1 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '8px' }}>Staff only</h1>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '14px' }}>
+            This account is not on the HOMA staff list. Please sign in with a clinic staff email.
+          </p>
+          <a href="/auth" style={{ color: '#25D366', fontSize: '14px' }}>Go to sign in</a>
+        </div>
+      </main>
+    )
   }
 
   if (loading) {

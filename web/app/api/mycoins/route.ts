@@ -8,11 +8,12 @@ export async function GET(req: NextRequest) {
 
     if (!phone) return NextResponse.json({ error: 'Phone required' }, { status: 400 })
 
+    // Only non-sensitive columns: no phone, no free-text descriptions.
     const coins = await sql`
-      SELECT * FROM patient_coins WHERE phone = ${phone}
+      SELECT patient_name, tribe, total_coins FROM patient_coins WHERE phone = ${phone}
     `
     const activities = await sql`
-      SELECT * FROM patient_activities WHERE phone = ${phone}
+      SELECT id, activity_type, coins_earned, created_at FROM patient_activities WHERE phone = ${phone}
       ORDER BY created_at DESC LIMIT 20
     `
 
@@ -21,7 +22,8 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json({
-      patient_name: coins[0].patient_name,
+      // First name only, so typing someone else's number doesn't reveal their full name.
+      patient_name: String(coins[0].patient_name || '').trim().split(/\s+/)[0],
       tribe: coins[0].tribe,
       total_coins: coins[0].total_coins,
       activities,

@@ -21,6 +21,7 @@ function hostnameLooksLikeRender(req: NextRequest): boolean {
 const isProtectedRoute = createRouteMatcher([
   '/dashboard(.*)',
   '/profile(.*)',
+  '/staff(.*)', // staff dashboard: must be signed in (allowlist checked in /api/staff)
 ]);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {

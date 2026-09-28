@@ -1,7 +1,14 @@
 import { neon } from '@neondatabase/serverless'
 import { NextResponse } from 'next/server'
+import { requireStaff } from '@/lib/staff-auth'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
+  // Patient names/phones: only signed-in clinic staff may see this.
+  const denied = await requireStaff()
+  if (denied) return denied
+
   try {
     const sql = neon(process.env.DATABASE_URL!)
 
@@ -42,6 +49,6 @@ export async function GET() {
     })
   } catch (err: any) {
     console.error('Staff API error:', err)
-    return NextResponse.json({ error: err.message }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to load staff data' }, { status: 500 })
   }
 }
