@@ -746,6 +746,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* POC LINK START */}
+      <section style={{ background: "#07153a", padding: "40px 6%", textAlign: "center" }}>
+        <a
+          href="/poc.html"
+          style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "18px", padding: "16px 32px", borderRadius: "8px", textDecoration: "none" }}
+        >
+          &#127963;&#65039; Government Proof of Concept: 50-Patient Pilot &rarr;
+        </a>
+      </section>
+      {/* POC LINK END */}
+
       {/* 5 Ps — WHY HOMA IS DIFFERENT */}
       <section style={{ background: "#f8f7f3", padding: "72px 6%" }}>
         <div style={{ textAlign: "center", marginBottom: "48px" }}>
