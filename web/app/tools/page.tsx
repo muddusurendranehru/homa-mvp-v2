@@ -58,6 +58,20 @@ export default function ToolsPage() {
             </Link>
           </section>
 
+          {/* BMI */}
+          <section className="mb-12 p-6 border rounded-lg bg-gray-50">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">BMI Calculator</h2>
+            <p className="text-gray-700 mb-4">
+              Enter your height and weight to calculate your Body Mass Index (BMI) and weight category.
+            </p>
+            <Link 
+              href="/tools/bmi-calculator"
+              className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Calculate BMI
+            </Link>
+          </section>
+
           {/* Waist Circumference */}
           <section className="mb-12 p-6 border rounded-lg bg-gray-50">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Waist Circumference Assessment</h2>

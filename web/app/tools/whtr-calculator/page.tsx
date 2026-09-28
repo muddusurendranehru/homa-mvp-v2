@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import ResultActions from '@/components/ResultActions';
 
 export default function WHTRCalculator() {
   const toolName = "Waist-to-Height Ratio (WHtR)";
@@ -91,19 +92,12 @@ export default function WHTRCalculator() {
                     <strong>Next step:</strong> Get a <span className="text-green-600 font-medium">free 15-minute consultation</span>  
                     with <strong>Dr. Muddu Surendra Nehru, MD</strong> (32+ years) to understand your personalized remission plan.
                   </p>
-                  <a 
-                    href="https://wa.me/919963721999?text=Assessment"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mt-4 bg-green-600 hover:bg-green-700 text-white font-medium px-5 py-2.5 rounded-lg transition"
-                  >
-                    WhatsApp 'Assessment' Now
-                  </a>
                   <p className="mt-3 text-xs text-gray-500">
                     No cost. No obligation. Available in English & Telugu.
                   </p>
                 </div>
               )}
+              <ResultActions testName={toolName} score={result.value} category={result.stage} />
             </div>
           )}
         </div>
