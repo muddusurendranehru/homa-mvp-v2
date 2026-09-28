@@ -241,7 +241,7 @@ export default function RootLayout({
                   "@type": "SoftwareApplication",
                   "name": "Nutrition Bot",
                   "description": "AI nutrition guidance powered by HOMA Foods - Get personalized nutrition recommendations",
-                  "url": "https://nutrition-bot-frontend.onrender.com",
+                  "url": "https://healthmetrics30daymeals.onrender.com",
                   "applicationCategory": "HealthApplication",
                   "operatingSystem": "Web",
                   "offers": {
@@ -513,7 +513,7 @@ export default function RootLayout({
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                   {/* Nutrition Bot - Highlighted */}
                   <a
-                    href="https://nutrition-bot-frontend.onrender.com"
+                    href="https://healthmetrics30daymeals.onrender.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gradient-to-br from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 rounded-xl p-4 text-white transition-all transform hover:scale-105 shadow-lg border-2 border-green-400"

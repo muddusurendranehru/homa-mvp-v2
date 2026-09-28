@@ -37,7 +37,7 @@ const apps: App[] = [
   {
     name: 'Nutrition Bot',
     description: 'AI nutrition guidance powered by HOMA Foods',
-    url: 'https://homa-foods-nutrition.onrender.com',
+    url: 'https://healthmetrics30daymeals.onrender.com',
     icon: '🍎',
   },
 ];

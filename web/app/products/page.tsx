@@ -11,7 +11,7 @@ const products = [
     name: 'Nutrition Bot',
     description: 'AI-assisted meal and nutrition guidance aligned with metabolic goals and HOMA thinking.',
     audience: 'Anyone improving diet for weight, sugar, or insulin resistance.',
-    href: 'https://homa-foods-nutrition.onrender.com',
+    href: 'https://healthmetrics30daymeals.onrender.com',
     icon: '🍎',
   },
   {
