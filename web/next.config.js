@@ -11,6 +11,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Service worker must never be cached, so installed app users get updates quickly
+        source: '/sw.js',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' }
+        ]
+      },
+      {
         source: '/.well-known/assetlinks.json',
         headers: [
           { key: 'Content-Type', value: 'application/json' }
