@@ -153,7 +153,9 @@ export default function HomePage() {
           {/* Hero buttons (moved from old Chiranjeevi hero) */}
           <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
             <Link
-              href="/assessment"
+              href="https://wa.me/919963721999?text=I%20want%20to%20book%20an%20appointment%20at%20HOMA%20Clinic"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 fontSize: "15px",
                 fontWeight: 600,
@@ -832,7 +834,7 @@ export default function HomePage() {
           Free 15-minute metabolic assessment. No cost, no signup. Serving Gachibowli, Ameerpet, Bachupally &amp; Patancheru.
         </p>
         <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/assessment" style={{ background: "#F5A623", color: "#1a1a1a", fontWeight: 700, fontSize: "16px", padding: "16px 36px", borderRadius: "8px", textDecoration: "none" }}>
+          <Link href="https://wa.me/919963721999?text=I%20want%20to%20book%20an%20appointment%20at%20HOMA%20Clinic" target="_blank" rel="noopener noreferrer" style={{ background: "#F5A623", color: "#1a1a1a", fontWeight: 700, fontSize: "16px", padding: "16px 36px", borderRadius: "8px", textDecoration: "none" }}>
             Book An Appointment →
           </Link>
           <a href="https://wa.me/919963721999" style={{ background: "#25D366", color: "#fff", fontWeight: 700, fontSize: "16px", padding: "16px 36px", borderRadius: "8px", textDecoration: "none" }}>
