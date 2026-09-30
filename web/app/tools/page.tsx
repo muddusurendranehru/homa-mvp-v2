@@ -9,6 +9,20 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   return (
     <div className="min-h-screen bg-white font-sans">
+      {/* Poster hero image */}
+      <section className="w-full bg-[#07153a]">
+        <div className="max-w-4xl mx-auto px-0 sm:px-4">
+          <img
+            src="/images/tools-hero-central-belly.jpg"
+            alt="The villain for India is your central belly and your ego — HOMA Clinic free health calculators"
+            width={1008}
+            height={1792}
+            loading="eager"
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
+      </section>
+
       {/* Hero */}
       <header className="bg-gradient-to-r from-purple-50 to-blue-50 py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
