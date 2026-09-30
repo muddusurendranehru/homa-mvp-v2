@@ -31,6 +31,11 @@
   .btn { display: inline-block; margin: 8px; padding: 12px 22px; border-radius: 6px; font-weight: bold; text-decoration: none; }
   .btn-green { background: #25d366; color: #fff; }
   .btn-gold { background: #d4af37; color: #07153a; }
+    .press-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .press-item { margin: 0; background: #f8f5ee; border: 1px solid #e8e0d0; border-radius: 8px; overflow: hidden; }
+  .press-item img { width: 100%; height: auto; display: block; object-fit: contain; background: #fff; max-height: 420px; }
+  .press-item figcaption { padding: 10px 12px; font-size: 13px; color: #07153a; text-align: center; border-top: 1px solid #e8e0d0; }
+  .press-letter img { max-height: 520px; }
   footer { text-align: center; font-size: 13px; color: #6b7280; padding: 24px 6%; }
   footer a { color: #07153a; }
 </style>
@@ -67,6 +72,34 @@
   <div class="card doc">
     <h2>Approval Letter</h2>
     <img src="/images/poc-approval-letter.jpg" alt="Government proof-of-concept approval letter" onerror="this.parentNode.style.display='none'">
+  </div>
+
+  
+  <div class="card">
+    <h2>Press &amp; Photos</h2>
+    <p style="margin-bottom:16px;color:#4b5563;">Telugu press coverage of HOMA CME 2026 at T-Hub — Minister Sridhar Babu, book launch, Metric Explorer, and the 50-patient POC.</p>
+    <div class="press-grid">
+      <figure class="press-item">
+        <img src="/images/poc-press-1.jpg" alt="Telugu newspaper clipping: Minister Sridhar Babu at HOMA CME 2026 inauguration" loading="lazy" width="649" height="1324">
+        <figcaption>Telugu press coverage — HOMA CME 2026</figcaption>
+      </figure>
+      <figure class="press-item">
+        <img src="/images/poc-press-2.jpg" alt="Telugu newspaper photo: Metric Explorer app launch at HOMA CME 2026" loading="lazy" width="642" height="1599">
+        <figcaption>Metric Explorer launch — HOMA CME 2026</figcaption>
+      </figure>
+      <figure class="press-item">
+        <img src="/images/poc-press-3.jpg" alt="Telugu newspaper clipping: Minister Sridhar Babu inaugurates HOMA CME 2026" loading="lazy" width="1188" height="1541">
+        <figcaption>Minister Sridhar Babu inaugurates HOMA CME</figcaption>
+      </figure>
+      <figure class="press-item">
+        <img src="/images/poc-press-4.jpg" alt="Telugu newspaper clipping: Minister Sridhar Babu speaking at HOMA CME 2026" loading="lazy" width="1600" height="506">
+        <figcaption>Telugu press — Minister at HOMA CME podium</figcaption>
+      </figure>
+      <figure class="press-item press-letter">
+        <img src="/images/poc-press-letter.jpg" alt="HOMA proposal letter with Minister green-ink note directing Peddapalli Collector for Manthani pilot" loading="lazy" width="725" height="1600">
+        <figcaption>Approval letter — Minister's green-ink note (Manthani pilot)</figcaption>
+      </figure>
+    </div>
   </div>
 
   <div class="card">
