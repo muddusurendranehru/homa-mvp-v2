@@ -144,12 +144,20 @@ export default function HomePage() {
           <p style={{ fontSize: "17px", lineHeight: 1.6, color: "#cfd8e3", margin: "0 auto 22px", maxWidth: "760px" }}>
             Hon&apos;ble Minister for IT, Industries &amp; Commerce, Sri Duddilla Sridhar Babu, has directed the District Collector, Peddapalli, to take up Dr. Muddu&apos;s 50-patient diabetes remission pilot in Manthani.
           </p>
-          <a
-            href="/poc.html"
-            style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "16px", padding: "14px 28px", borderRadius: "8px", textDecoration: "none", marginBottom: "24px" }}
-          >
-            See the Government Pilot &rarr;
-          </a>
+          <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", marginBottom: "24px" }}>
+            <a
+              href="/poc.html"
+              style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "16px", padding: "14px 28px", borderRadius: "8px", textDecoration: "none" }}
+            >
+              See the Government Pilot &rarr;
+            </a>
+            <a
+              href="/cme-2026.html"
+              style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "16px", padding: "14px 28px", borderRadius: "8px", textDecoration: "none" }}
+            >
+              CME 2026 Conference Photos &rarr;
+            </a>
+          </div>
           {/* Hero buttons (moved from old Chiranjeevi hero) */}
           <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
             <Link
@@ -751,12 +759,20 @@ export default function HomePage() {
 
       {/* POC LINK START */}
       <section style={{ background: "#07153a", padding: "40px 6%", textAlign: "center" }}>
-        <a
-          href="/poc.html"
-          style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "18px", padding: "16px 32px", borderRadius: "8px", textDecoration: "none" }}
-        >
-          &#127963;&#65039; Government Proof of Concept: 50-Patient Pilot &rarr;
-        </a>
+        <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+          <a
+            href="/poc.html"
+            style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "18px", padding: "16px 32px", borderRadius: "8px", textDecoration: "none" }}
+          >
+            &#127963;&#65039; Government Proof of Concept: 50-Patient Pilot &rarr;
+          </a>
+          <a
+            href="/cme-2026.html"
+            style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "18px", padding: "16px 32px", borderRadius: "8px", textDecoration: "none" }}
+          >
+            CME 2026 Conference Photos &rarr;
+          </a>
+        </div>
       </section>
       {/* POC LINK END */}
 
