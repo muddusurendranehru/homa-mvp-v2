@@ -714,6 +714,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FREE SUGAR CAMP */}
+      <section style={{ background: "#ffffff", padding: "28px 6%", textAlign: "center" }}>
+        <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 500, color: "#0D2B4E", margin: "0 0 14px" }}>
+          Free sugar camp
+        </h2>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "12px", maxWidth: "640px", margin: "0 auto" }}>
+          <img
+            src="https://res.cloudinary.com/drhsco04l/image/upload/w_400,c_fill,f_auto,q_auto/v1791036659/WhatsApp_Image_2026-10-03_at_19.36.32_1_ewjv3z.jpg"
+            alt="Free sugar camp waist check"
+            style={{ width: "180px", maxWidth: "100%", height: "auto", borderRadius: "8px", display: "block" }}
+          />
+          <img
+            src="https://res.cloudinary.com/drhsco04l/image/upload/w_400,c_fill,f_auto,q_auto/v1791036659/WhatsApp_Image_2026-10-03_at_19.36.32_lz1wj8.jpg"
+            alt="Free sugar camp waist check"
+            style={{ width: "180px", maxWidth: "100%", height: "auto", borderRadius: "8px", display: "block" }}
+          />
+          <img
+            src="https://res.cloudinary.com/drhsco04l/image/upload/w_400,c_fill,f_auto,q_auto/v1791036659/WhatsApp_Image_2026-10-03_at_19.36.31_3_hq1u1h.jpg"
+            alt="Free sugar camp waist check"
+            style={{ width: "180px", maxWidth: "100%", height: "auto", borderRadius: "8px", display: "block" }}
+          />
+        </div>
+        <p style={{ margin: "12px 0 0", fontSize: "14px", color: "#333" }}>Waist check.</p>
+      </section>
+
  {/* AWARDS SECTION */}
       <section style={{ background: "#f8f5ee", padding: "72px 6%" }}>
         <div style={{ textAlign: "center", marginBottom: "44px" }}>
