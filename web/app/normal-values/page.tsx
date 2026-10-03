@@ -31,6 +31,8 @@ const publicSlides = [
   ["/images/cutoffs/cut-first.jpg", "Cut this first", "Sugar in tea, then the rice, then dinner after 8 pm."],
   ["/images/cutoffs/five-stands.jpg", "Five stands", "Arms crossed. Time all five. Stop if the knees hurt."],
   ["/images/cutoffs/walk-corridor.jpg", "Walk the corridor", "On 4 metres, slower than 5 seconds is the weak side."],
+  ["/images/cutoffs/daily-movement.jpg", "Daily movement", "150 minutes of walking a week. Muscle work 2 days. Yoga does not replace the walk."],
+  ["/images/cutoffs/five-kinds.jpg", "Five kinds", "Walk or run stays under 220 minus age. Gym weights are the same job as resistance."],
 ];
 
 const labSlides = [
