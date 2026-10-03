@@ -210,6 +210,18 @@ export default function HomePage() {
       </section>
       {/* GOV LEADERS END */}
 
+      {/* DPIIT CERTIFICATE */}
+      <section style={{ background: "#ffffff", padding: "28px 6%", textAlign: "center" }}>
+        <img
+          src="/images/dpiit-certificate.jpg"
+          alt="DPIIT certificate of recognition for HOMA Clinics Private Limited, DIPP275722"
+          style={{ display: "block", maxWidth: "280px", width: "100%", height: "auto", margin: "0 auto" }}
+        />
+        <p style={{ margin: "10px 0 0", fontSize: "14px", color: "#333" }}>
+          DPIIT recognised. Certificate DIPP275722.
+        </p>
+      </section>
+
       {/* SEMINAR BANNER — sugar.fit style, full bold section */}
       <div style={{
         width: "100%",
