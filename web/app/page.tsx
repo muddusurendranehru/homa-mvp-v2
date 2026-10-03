@@ -737,6 +737,9 @@ export default function HomePage() {
           />
         </div>
         <p style={{ margin: "12px 0 0", fontSize: "14px", color: "#333" }}>Waist check.</p>
+        <p style={{ margin: "14px 0 0" }}>
+          <a href="/normal-values" style={{ color: "#0D2B4E", fontWeight: 700, fontSize: "15px", textDecoration: "underline" }}>Cutoff values: BMI, waist, and daily needs</a>
+        </p>
       </section>
 
  {/* AWARDS SECTION */}

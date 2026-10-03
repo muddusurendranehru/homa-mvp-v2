@@ -1,0 +1,109 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cutoff values | HOMA Clinic",
+  description: "Indian BMI, height and weight, waist, and HOMA clinic cutoff slides.",
+};
+
+const rows = [
+  ["Under 18.5", "Underweight"],
+  ["18.5 to 22.9", "Normal for Indian adults"],
+  ["23.0 to 24.9", "Overweight"],
+  ["25 and above", "Obese"],
+];
+
+const weights = [
+  ["150 cm", "41.6 to 51.5 kg"],
+  ["155 cm", "44.4 to 55.0 kg"],
+  ["160 cm", "47.4 to 58.6 kg"],
+  ["165 cm", "50.4 to 62.3 kg"],
+  ["170 cm", "53.5 to 66.2 kg"],
+  ["175 cm", "56.7 to 70.1 kg"],
+  ["180 cm", "59.9 to 74.2 kg"],
+];
+
+const slides = [
+  ["/images/cutoffs/measurements1.jpg", "Which test", "Tape, BIA, DEXA, or CT. Start with the tape."],
+  ["/images/cutoffs/measurements2.jpg", "Tape still wins", "Scanners are costly. A tape is still the clinic standard."],
+  ["/images/cutoffs/measurements5.jpg", "Hidden fat", "Neck, waist, and waist-to-height. BMI can look normal."],
+  ["/images/cutoffs/measurements4.jpg", "The cutoff card", "HOMA-IR, TyG, sugar, lipids, vitamins, and muscle."],
+  ["/images/cutoffs/measurements11.jpg", "Muscle and grip", "DEXA for diagnosis. BIA to follow up. Do not mix the women's numbers."],
+  ["/images/cutoffs/measurements12.jpg", "Walk, grip, chair", "The three tests to do with the body scan."],
+  ["/images/cutoffs/measurements8.jpg", "Thin outside, weak inside", "High fat, low muscle, HOMA-IR above 2.3."],
+  ["/images/cutoffs/measurements10.jpg", "Use with care", "Practice guides. Not every number is an Indian consensus cut."],
+  ["/images/cutoffs/measurements7.jpg", "Protein at each meal", "Spread protein across the day. Not one large meal."],
+  ["/images/cutoffs/daily-requirements.jpg", "A day's food", "Carbs, protein, fat, fibre, and water."],
+];
+
+const card = { background: "#07153a", border: "1px solid rgba(212,175,55,0.35)", borderRadius: "16px", padding: "18px 16px", marginBottom: "22px" };
+
+export default function NormalValuesPage() {
+  return (
+    <main style={{ background: "#f4f7fb", color: "#1a1a1a" }}>
+      <header style={{ background: "linear-gradient(160deg, #07153a 0%, #0D2B4E 70%)", color: "#fff", padding: "48px 6% 36px", textAlign: "center" }}>
+        <p style={{ margin: "0 0 8px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#d4af37", fontSize: "12px", fontWeight: 700 }}>HOMA Clinic</p>
+        <h1 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 500, margin: "0 0 10px" }}>Cutoff values</h1>
+        <p style={{ margin: "0 auto", maxWidth: "520px", fontSize: "16px", lineHeight: 1.5, color: "rgba(255,255,255,0.82)" }}>
+          Indian BMI, waist, and the clinic cutoff slides. Tap any slide to open it large.
+        </p>
+      </header>
+
+      <img src="/images/franchise-banner.jpg" alt="HOMA Clinics, India's first diabetes reversal franchise" style={{ display: "block", width: "100%", maxWidth: "760px", height: "auto", margin: "0 auto" }} />
+
+      <div style={{ maxWidth: "760px", margin: "0 auto", padding: "28px 6% 72px" }}>
+        <section style={card}>
+          <h2 style={{ color: "#d4af37", fontSize: "18px", margin: "0 0 10px" }}>Indian BMI</h2>
+          <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "15px", lineHeight: 1.5, margin: "0 0 12px" }}>
+            Overweight starts at 23, not 25. Obesity starts at 25. Asia-Pacific cut, used by ICMR-INDIAB.
+          </p>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "15px", color: "#fff" }}>
+            <tbody>
+              {rows.map(([value, label]) => (
+                <tr key={value}>
+                  <td style={{ borderBottom: "1px solid rgba(255,255,255,0.12)", padding: "8px 0", fontWeight: 700, color: "#d4af37" }}>{value}</td>
+                  <td style={{ borderBottom: "1px solid rgba(255,255,255,0.12)", padding: "8px 0" }}>{label}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        <section style={{ ...card, background: "#fff" }}>
+          <h2 style={{ color: "#0D2B4E", fontSize: "18px", margin: "0 0 8px" }}>Height and weight</h2>
+          <p style={{ fontSize: "15px", lineHeight: 1.5, margin: "0 0 12px", color: "#333" }}>
+            Weight that keeps BMI between 18.5 and 22.9. Worked out from those two limits.
+          </p>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "15px" }}>
+            <tbody>
+              {weights.map(([height, weight]) => (
+                <tr key={height}>
+                  <td style={{ borderBottom: "1px solid #ece9e1", padding: "8px 0", fontWeight: 700, color: "#0D2B4E" }}>{height}</td>
+                  <td style={{ borderBottom: "1px solid #ece9e1", padding: "8px 0" }}>{weight}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        <section style={card}>
+          <h2 style={{ color: "#d4af37", fontSize: "18px", margin: "0 0 8px" }}>Waist line</h2>
+          <p style={{ color: "#fff", fontSize: "16px", lineHeight: 1.5, margin: 0 }}>
+            90 cm or more in men. 80 cm or more in women.
+          </p>
+        </section>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "14px" }}>
+          {slides.map(([src, title, note]) => (
+            <a key={src} href={src} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", background: "#fff", borderRadius: "12px", overflow: "hidden", border: "1px solid #e6eaf0" }}>
+              <img src={src} alt={title} style={{ width: "100%", height: "110px", objectFit: "cover", display: "block" }} />
+              <div style={{ padding: "8px 10px 10px" }}>
+                <div style={{ fontSize: "14px", fontWeight: 700, color: "#0D2B4E" }}>{title}</div>
+                <div style={{ fontSize: "12px", color: "#555", marginTop: "2px" }}>{note}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
