@@ -22,7 +22,18 @@ const weights = [
   ["180 cm", "59.9 to 74.2 kg"],
 ];
 
-const slides = [
+const publicSlides = [
+  ["/images/cutoffs/height-weight.jpg", "Weight for your height", "Same band for men and women. BMI 18.5 to 22.9."],
+  ["/images/cutoffs/height-inches.jpg", "Height in inches", "Centimetres and feet, side by side."],
+  ["/images/cutoffs/thali.jpg", "One Indian thali", "Half the plate is vegetable and dal, not a heap of rice."],
+  ["/images/cutoffs/food-shares.jpg", "A day's food", "Carbs about half the plate. Protein a palm. Fat a teaspoon."],
+  ["/images/cutoffs/water.jpg", "Water, in glasses", "Sip through the day. More if you sweat."],
+  ["/images/cutoffs/cut-first.jpg", "Cut this first", "Sugar in tea, then the rice, then dinner after 8 pm."],
+  ["/images/cutoffs/five-stands.jpg", "Five stands", "Arms crossed. Time all five. Stop if the knees hurt."],
+  ["/images/cutoffs/walk-corridor.jpg", "Walk the corridor", "On 4 metres, slower than 5 seconds is the weak side."],
+];
+
+const labSlides = [
   ["/images/cutoffs/measurements1.jpg", "Which test", "Tape, BIA, DEXA, or CT. Start with the tape."],
   ["/images/cutoffs/measurements2.jpg", "Tape still wins", "Scanners are costly. A tape is still the clinic standard."],
   ["/images/cutoffs/measurements5.jpg", "Hidden fat", "Neck, waist, and waist-to-height. BMI can look normal."],
@@ -49,6 +60,8 @@ export default function NormalValuesPage() {
       </header>
 
       <img src="/images/franchise-banner.jpg" alt="HOMA Clinics, India's first diabetes reversal franchise" style={{ display: "block", width: "100%", maxWidth: "760px", height: "auto", margin: "0 auto" }} />
+
+      <img src="/images/cutoffs/metabolic-transformation.jpg" alt="90-day metabolic transformation is the goal" style={{ display: "block", width: "100%", maxWidth: "760px", height: "auto", margin: "0 auto" }} />
 
       <div style={{ maxWidth: "760px", margin: "0 auto", padding: "28px 6% 72px" }}>
         <section style={card}>
@@ -92,8 +105,21 @@ export default function NormalValuesPage() {
           </p>
         </section>
 
+        <h2 style={{ color: "#0D2B4E", fontSize: "20px", margin: "8px 0 12px" }}>For the public</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "14px", marginBottom: "28px" }}>
+          {publicSlides.map(([src, title, note]) => (
+            <a key={src} href={src} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", background: "#fff", borderRadius: "12px", overflow: "hidden", border: "1px solid #e6eaf0" }}>
+              <img src={src} alt={title} style={{ width: "100%", height: "110px", objectFit: "cover", display: "block" }} />
+              <div style={{ padding: "8px 10px 10px" }}>
+                <div style={{ fontSize: "14px", fontWeight: 700, color: "#0D2B4E" }}>{title}</div>
+                <div style={{ fontSize: "12px", color: "#555", marginTop: "2px" }}>{note}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+        <h2 style={{ color: "#0D2B4E", fontSize: "20px", margin: "8px 0 12px" }}>Lab cutoffs</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "14px" }}>
-          {slides.map(([src, title, note]) => (
+          {labSlides.map(([src, title, note]) => (
             <a key={src} href={src} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", background: "#fff", borderRadius: "12px", overflow: "hidden", border: "1px solid #e6eaf0" }}>
               <img src={src} alt={title} style={{ width: "100%", height: "110px", objectFit: "cover", display: "block" }} />
               <div style={{ padding: "8px 10px 10px" }}>
