@@ -14,13 +14,16 @@ export default function ToolsPage() {
         <div className="max-w-4xl mx-auto px-0 sm:px-4">
           <img
             src="/images/tools-hero-central-belly.jpg"
-            alt="The villain for India is your central belly and your ego — HOMA Clinic free health calculators"
+            alt="You look fine. Your waist may not be."
             width={1008}
             height={1792}
             loading="eager"
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
         </div>
+        <p className="text-center text-white text-base sm:text-lg font-medium px-4 py-4">
+          You look fine. Your waist may not be.
+        </p>
       </section>
 
       {/* Hero */}
