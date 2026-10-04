@@ -25,9 +25,9 @@ const navLinks = [
 
 const appLinks = [
   { name: 'Drug Trials Tracker', url: 'https://drug-trials-frontend.onrender.com', icon: '💊' },
-  { name: 'OCR Report Analyzer', url: 'https://ai-image-ocr-1.onrender.com', icon: '📄' },
+  { name: 'OCR Report Analyzer', url: 'https://ai-ocr-lab-reports.onrender.com', icon: '📄' },
   { name: 'PCOS HOMA Score', url: 'https://pcos-homaiq-score-frontend.onrender.com', icon: '🎯' },
-  { name: '90-Day Metrics', url: 'https://healthmetrics-render1.onrender.com', icon: '📊' },
+  { name: '90-Day Metrics', url: 'https://healthmetrics30daymeals.onrender.com', icon: '📊' },
   { name: 'Nutrition Bot', url: 'https://healthmetrics30daymeals.onrender.com', icon: '🍎' },
 ];
 

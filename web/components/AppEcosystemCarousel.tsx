@@ -19,7 +19,7 @@ const apps: App[] = [
   {
     name: 'OCR Report Analyzer',
     description: 'AI-powered medical report analysis',
-    url: 'https://ai-image-ocr-1.onrender.com',
+    url: 'https://ai-ocr-lab-reports.onrender.com',
     icon: '📄',
   },
   {
@@ -31,7 +31,7 @@ const apps: App[] = [
   {
     name: '90-Day Metrics',
     description: 'Track your 90-day health journey',
-    url: 'https://healthmetrics-render1.onrender.com',
+    url: 'https://healthmetrics30daymeals.onrender.com',
     icon: '📊',
   },
   {

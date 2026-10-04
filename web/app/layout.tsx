@@ -202,7 +202,7 @@ export default function RootLayout({
                   "@type": "SoftwareApplication",
                   "name": "OCR Report Analyzer",
                   "description": "AI-powered medical report analysis using OCR technology",
-                  "url": "https://ai-image-ocr-1.onrender.com",
+                  "url": "https://ai-ocr-lab-reports.onrender.com",
                   "applicationCategory": "HealthApplication",
                   "operatingSystem": "Web",
                   "offers": {
@@ -228,7 +228,7 @@ export default function RootLayout({
                   "@type": "SoftwareApplication",
                   "name": "90-Day Metrics",
                   "description": "Track your 90-day health journey and metabolic metrics",
-                  "url": "https://healthmetrics-render1.onrender.com",
+                  "url": "https://healthmetrics30daymeals.onrender.com",
                   "applicationCategory": "HealthApplication",
                   "operatingSystem": "Web",
                   "offers": {
@@ -312,7 +312,7 @@ export default function RootLayout({
                     <span className="text-gray-400">•</span>
                     <a href="https://wa.me/919963721999?text=I want to donate" target="_blank" className="hover:text-yellow-300 transition-colors">DONATE</a>
                     <span className="text-gray-400">•</span>
-                    <a href="https://wa.me/919963721999?text=I am interested in franchise" target="_blank" className="hover:text-pink-300 transition-colors">FRANCHISE</a>
+                    <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" className="hover:text-pink-300 transition-colors">FRANCHISE</a>
                     <span className="text-gray-400 hidden md:inline">|</span>
                     <HeaderAuth />
                   </div>
@@ -546,7 +546,7 @@ export default function RootLayout({
                   </a>
 
                   <a
-                    href="https://ai-image-ocr-1.onrender.com"
+                    href="https://ai-ocr-lab-reports.onrender.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gray-800 hover:bg-gray-700 rounded-xl p-4 text-white transition-all transform hover:scale-105 border border-gray-600"
@@ -572,7 +572,7 @@ export default function RootLayout({
                   </a>
 
                   <a
-                    href="https://healthmetrics-render1.onrender.com"
+                    href="https://healthmetrics30daymeals.onrender.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gray-800 hover:bg-gray-700 rounded-xl p-4 text-white transition-all transform hover:scale-105 border border-gray-600"
@@ -916,7 +916,7 @@ export default function RootLayout({
                   <a href="https://wa.me/919963721999?text=I want to DONATE" target="_blank" rel="noopener noreferrer" className="bg-yellow-600 hover:bg-yellow-700 px-3 py-1 rounded transition-colors">
                     DONATE
                   </a>
-                  <a href="https://wa.me/919963721999?text=I want FRANCHISE info" target="_blank" rel="noopener noreferrer" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded transition-colors">
+                  <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" rel="noopener noreferrer" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded transition-colors">
                     FRANCHISE
                   </a>
                 </div>
