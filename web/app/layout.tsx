@@ -15,7 +15,7 @@ import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com'),
+  metadataBase: new URL('https://mvp.homahealthcarecenter.in'),
   title: 'Dr Muddu\'s HOMA Clinic Gachibowli Hyderabad India - Diabetes Cardio Obesity REMISSION',
   description: 'Years struggling? We test FASTING INSULIN (not glucose) + HOMA-IR. 32yrs ethics-guided care, 35L patients, India #1 5K+ HOMA tests, pioneer cardio-obesity-metabolism. 25 apps built. Pioneer close monitoring → REMISSION.',
   verification: {
@@ -53,17 +53,17 @@ export default function RootLayout({
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com" />
+        <meta property="og:url" content="https://mvp.homahealthcarecenter.in" />
         <meta property="og:title" content="Dr Muddu Nehru | Diabetologist Gachibowli" />
         <meta property="og:description" content="90 Day Diabetes Remission | 85% Success" />
-        <meta property="og:image" content="https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com/images/obesity-reversal-hyderabad-jpg.jpg" />
+        <meta property="og:image" content="https://mvp.homahealthcarecenter.in/images/obesity-reversal-hyderabad-jpg.jpg" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com" />
+        <meta name="twitter:url" content="https://mvp.homahealthcarecenter.in" />
         <meta name="twitter:title" content="Dr Muddu Nehru | Diabetologist Gachibowli" />
         <meta name="twitter:description" content="90 Day Diabetes Remission | 85% Success" />
-        <meta name="twitter:image" content="https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com/images/obesity-reversal-hyderabad-jpg.jpg" />
+        <meta name="twitter:image" content="https://mvp.homahealthcarecenter.in/images/obesity-reversal-hyderabad-jpg.jpg" />
         
         <script
           type="application/ld+json"
@@ -82,7 +82,7 @@ export default function RootLayout({
                 "streetAddress": "Diabetes Reversal Center Health care center Gachibowli"
               },
               "telephone": "09963721999",
-              "url": "https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com",
+              "url": "https://mvp.homahealthcarecenter.in",
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.7",
@@ -160,7 +160,7 @@ export default function RootLayout({
                 "addressCountry": "IN"
               },
               "telephone": "+919963721999",
-              "url": "https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com",
+              "url": "https://mvp.homahealthcarecenter.in",
               "sameAs": [
                 "https://www.justdial.com/Hyderabad/HOMA-Health-Care-Center",
                 "https://www.practo.com/hyderabad/clinic/homa-health-care-center-gachibowli",
@@ -263,8 +263,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Dr. Muddu Surendra Nehru, MD",
-              "url": "https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com/about",
-              "image": "https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com/images/kishnblur1.jpg",
+              "url": "https://mvp.homahealthcarecenter.in/about",
+              "image": "https://mvp.homahealthcarecenter.in/images/kishnblur1.jpg",
               "jobTitle": "Professor of Medicine",
               "affiliation": "HOMA Health Clinics",
               "address": {
@@ -696,7 +696,7 @@ export default function RootLayout({
                     <a href="https://wa.me/919963721999" target="_blank" className="text-gray-300 hover:text-green-400 transition-colors">
                       💬 WhatsApp
                     </a>
-                    <a href="https://dr-muddus-mvp-miracle-value-proposition-2l36.onrender.com" target="_blank" className="text-gray-300 hover:text-white transition-colors">
+                    <a href="https://mvp.homahealthcarecenter.in" target="_blank" className="text-gray-300 hover:text-white transition-colors">
                       🌐 HOMA Clinic Website
                     </a>
                     <a 
