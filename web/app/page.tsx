@@ -116,6 +116,10 @@ export default function HomePage() {
   return (
     <>
       {/* GOV LEADERS START */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", padding: "16px 4% 0", background: "#07153a" }}>
+        <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
+        <a href="/daily-goals" style={{ display: "inline-block", background: "#ffffff", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "12px", textDecoration: "none", border: "2px solid #d4af37", maxWidth: "220px" }}>Get good health tips and coins. Daily goals.</a>
+      </div>
       <section style={{ background: "#07153a", padding: "44px 5% 40px", borderTop: "4px solid #d4af37", borderBottom: "4px solid #d4af37", textAlign: "center" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontSize: "12px", fontWeight: 700, letterSpacing: "0.08em", padding: "6px 14px", borderRadius: "20px", marginBottom: "16px" }}>
