@@ -127,7 +127,7 @@ export default function HomePage() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: "24px", justifyContent: "center", alignItems: "flex-start", marginBottom: "28px" }}>
             {[
               { src: "/images/cm-revanth-reddy-book-homa.jpg", alt: "Hon'ble Chief Minister Sri A. Revanth Reddy receiving Dr. Muddu's book BP: The Untold Truth", caption: "Hon\u2019ble Chief Minister Sri A. Revanth Reddy receiving Dr. Muddu\u2019s book \u2018BP: The Untold Truth\u2019" },
-              { src: "/images/minister-sridhar-babu-homa.jpg", alt: "Hon'ble Minister Sri Duddilla Sridhar Babu with Dr. Muddu Surendra Nehru", caption: "Hon\u2019ble Minister Sri Duddilla Sridhar Babu, IT & Industries, Govt of Telangana" },
+              { src: "/images/minister-sridhar-babu-homa.jpg", alt: "Hon'ble Minister Sri Duddilla Sridhar Babu receiving BP: The Untold Truth at HOMA Healthcare Center", caption: "Hon\u2019ble Minister Sri Duddilla Sridhar Babu, Government of Telangana, receiving \u2018BP: The Untold Truth\u2019 at HOMA Healthcare Center." },
             ].map((p) => (
               <figure key={p.src} style={{ flex: "1 1 300px", maxWidth: "460px", margin: 0 }}>
                 <img
