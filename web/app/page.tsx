@@ -161,6 +161,12 @@ export default function HomePage() {
             >
               CME 2026 Conference Photos &rarr;
             </a>
+            <a
+              href="/books"
+              style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "16px", padding: "14px 28px", borderRadius: "8px", textDecoration: "none" }}
+            >
+              Our Books &rarr;
+            </a>
           </div>
           {/* Hero buttons (moved from old Chiranjeevi hero) */}
           <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
