@@ -1235,6 +1235,92 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* BOOKS STRIP */}
+      <section
+        style={{
+          background: "#FDF3DC",
+          padding: "40px 6%",
+          borderTop: "3px solid #F5A623",
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+          <h2
+            style={{
+              fontSize: "clamp(20px, 3.5vw, 28px)",
+              fontWeight: 800,
+              color: "#0D3B5E",
+              margin: "0 0 24px",
+              lineHeight: 1.3,
+            }}
+          >
+            Books by Dr Muddu Surendra Nehru MD
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              gap: "28px",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              flexWrap: "wrap",
+              marginBottom: "22px",
+            }}
+          >
+            <a href="/books" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
+              <img
+                src="/images/bp-book.jpg"
+                alt="BP: The Untold Truth book cover"
+                style={{
+                  width: "100%",
+                  maxWidth: "140px",
+                  aspectRatio: "2 / 3",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  border: "2px solid #F5A623",
+                  boxShadow: "0 4px 14px rgba(13,59,94,0.18)",
+                  display: "block",
+                  margin: "0 auto 10px",
+                }}
+              />
+              <div style={{ fontSize: "14px", fontWeight: 700, color: "#0D3B5E", lineHeight: 1.35 }}>
+                BP: The Untold Truth
+              </div>
+            </a>
+            <a href="/books" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
+              <img
+                src="/images/glp1-book.jpg"
+                alt="The HOMA GLP-1 Prescribing Guide book cover"
+                style={{
+                  width: "100%",
+                  maxWidth: "140px",
+                  aspectRatio: "2 / 3",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  border: "2px solid #F5A623",
+                  boxShadow: "0 4px 14px rgba(13,59,94,0.18)",
+                  display: "block",
+                  margin: "0 auto 10px",
+                }}
+              />
+              <div style={{ fontSize: "14px", fontWeight: 700, color: "#0D3B5E", lineHeight: 1.35 }}>
+                The HOMA GLP-1 Prescribing Guide
+              </div>
+            </a>
+          </div>
+          <Link
+            href="/books"
+            style={{
+              color: "#F5A623",
+              fontWeight: 700,
+              fontSize: "15px",
+              textDecoration: "none",
+              borderBottom: "2px solid #F5A623",
+              paddingBottom: "2px",
+            }}
+          >
+            See books &amp; buy on Amazon
+          </Link>
+        </div>
+      </section>
       {/* FOOTER */}
       <footer
         style={{
@@ -1259,6 +1345,9 @@ export default function HomePage() {
           </Link>
           <Link href="/tools" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
             Free Tools
+          </Link>
+          <Link href="/books" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
+            Books
           </Link>
         </div>
       </footer>
