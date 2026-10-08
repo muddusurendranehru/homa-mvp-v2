@@ -138,6 +138,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ HERO — Central Obesity Warning ============ */}
+      <section style={{ background: "#07153a", padding: "32px 6%" }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto", background: "rgba(255,255,255,0.04)", border: "2px solid #d4af37", borderRadius: "16px", overflow: "hidden", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center" }}>
+          <img src="/images/hero-waist.jpg" alt="Real waist measurement — central obesity detection" style={{ flex: "1 1 240px", width: "100%", maxWidth: "280px", aspectRatio: "3 / 4", objectFit: "cover", display: "block" }} />
+          <div style={{ flex: "1 1 300px", padding: "22px 24px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: "#d4af37", letterSpacing: "0.12em", marginBottom: "8px" }}>
+              THE SILENT WARNING
+            </div>
+            <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 800, color: "#ffffff", margin: "0 0 12px", lineHeight: 1.3 }}>
+              Central Obesity is the #1 warning sign
+            </h2>
+            <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)", lineHeight: 1.6, margin: "0 0 18px" }}>
+              Not weight. Not BMI. <strong style={{ color: "#d4af37" }}>Where the fat is stored</strong> decides your risk of diabetes, heart attack, and stroke.
+            </p>
+            <a href="/tools/waist-circumference" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 800, fontSize: "15px", padding: "12px 24px", borderRadius: "8px", textDecoration: "none" }}>
+              Know Your Waist Risk →
+            </a>
+            <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginTop: "10px" }}>
+              Free · 30 seconds · No signup
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* GOV LEADERS START */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", padding: "16px 4% 0", background: "#07153a" }}>
         <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
