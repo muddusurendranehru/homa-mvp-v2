@@ -120,6 +120,28 @@ export default function HomePage() {
         <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
         <a href="/daily-goals" style={{ display: "inline-block", background: "#ffffff", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "12px", textDecoration: "none", border: "2px solid #d4af37", maxWidth: "220px" }}>Get good health tips and coins. Daily goals.</a>
       </div>
+      {/* FREE TOOLS STRIP */}
+      <section style={{ background: "#d4af37", padding: "20px 6%", textAlign: "center" }}>
+        <div style={{ fontSize: "14px", fontWeight: 800, color: "#06152b", marginBottom: "14px", letterSpacing: "1px" }}>
+          🔬 FREE METABOLIC TOOLS — No Signup Required
+        </div>
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+          {[
+            { label: "HOMA-IR Calculator", icon: "🧪", href: "/tools" },
+            { label: "Waist Risk Check", icon: "📏", href: "/tools" },
+            { label: "TyG Index", icon: "📊", href: "/tools" },
+            { label: "Organ Age Quiz", icon: "❤️", href: "#organ-age" },
+          ].map((t) => (
+            <a key={t.label} href={t.href} style={{
+              background: "#06152b", color: "#d4af37", fontWeight: 700, fontSize: "14px",
+              padding: "10px 20px", borderRadius: "30px", textDecoration: "none",
+              border: "2px solid #06152b", whiteSpace: "nowrap",
+            }}>
+              {t.icon} {t.label}
+            </a>
+          ))}
+        </div>
+      </section>
       <section style={{ background: "#07153a", padding: "44px 5% 40px", borderTop: "4px solid #d4af37", borderBottom: "4px solid #d4af37", textAlign: "center" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontSize: "12px", fontWeight: 700, letterSpacing: "0.08em", padding: "6px 14px", borderRadius: "20px", marginBottom: "16px" }}>
@@ -526,29 +548,6 @@ export default function HomePage() {
                 <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FREE TOOLS STRIP */}
-      <section style={{ background: "#d4af37", padding: "20px 6%", textAlign: "center" }}>
-        <div style={{ fontSize: "14px", fontWeight: 800, color: "#06152b", marginBottom: "14px", letterSpacing: "1px" }}>
-          🔬 FREE METABOLIC TOOLS — No Signup Required
-        </div>
-        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-          {[
-            { label: "HOMA-IR Calculator", icon: "🧪", href: "/tools" },
-            { label: "Waist Risk Check", icon: "📏", href: "/tools" },
-            { label: "TyG Index", icon: "📊", href: "/tools" },
-            { label: "Organ Age Quiz", icon: "❤️", href: "#organ-age" },
-          ].map((t) => (
-            <a key={t.label} href={t.href} style={{
-              background: "#06152b", color: "#d4af37", fontWeight: 700, fontSize: "14px",
-              padding: "10px 20px", borderRadius: "30px", textDecoration: "none",
-              border: "2px solid #06152b", whiteSpace: "nowrap",
-            }}>
-              {t.icon} {t.label}
-            </a>
           ))}
         </div>
       </section>
