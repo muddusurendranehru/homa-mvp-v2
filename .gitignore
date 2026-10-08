@@ -34,3 +34,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+
+# Local backups
+*.bak-*
+
+# Personal medical documents
+_dinesh-prescription.txt
