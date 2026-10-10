@@ -128,6 +128,16 @@ export default function RemissionProgramPage() {
               <p className="text-sm text-gray-600">
                 Day <span className="font-bold text-teal-600">{highestDayLogged}</span> of 90 • {daysRemaining} days remaining
               </p>
+              <a
+                href="https://healthmetrics30daymeals.onrender.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 px-6 py-3 hover:opacity-90 text-white font-bold rounded-lg"
+                style={{ background: "#16a34a" }}
+              >
+                🍽️ Open my 30-day meal plan
+              </a>
+              <p className="text-xs text-gray-500 mt-1">Sign in with your meal-plan login.</p>
             </div>
             <div className="flex items-center space-x-4">
               <Link
