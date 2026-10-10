@@ -686,6 +686,15 @@ export default function RootLayout({
                     >
                       📩 Enquire Now
                     </a>
+                    <a
+                      href="https://feature-step-1-structure-97dp.onrender.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block w-full text-center mt-2 hover:opacity-90 text-white text-xs font-bold py-2 px-3 rounded transition-colors"
+                      style={{ background: "#16a34a" }}
+                    >
+                      🏥 Franchise — Interested?
+                    </a>
                   </div>
                 </div>
 
