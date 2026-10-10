@@ -777,6 +777,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* REAL CAMPS START */}
+      <section style={{ padding: "64px 6%", background: "#ffffff" }}>
+        <div style={{ textAlign: "center", marginBottom: "28px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#00A896", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px" }}>
+            HOMA Camps
+          </div>
+          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 500, color: "#0D2B4E", lineHeight: 1.1, margin: "0 0 10px" }}>
+            Real Camps. Real Checks. <em style={{ fontStyle: "italic", color: "#00A896" }}>Not AI.</em>
+          </h2>
+          <p style={{ fontSize: "15px", color: "#666", fontWeight: 300, margin: 0 }}>
+            Waist, calf and BP checks at our HOMA camps — every photo taken by our team.
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(140px, 45%), 1fr))", gap: "12px", maxWidth: "1200px", margin: "0 auto" }}>
+          {Array.from({ length: 14 }, (_, i) => `/images/camp-${String(i + 1).padStart(2, "0")}.jpg`).map((src) => (
+            <img
+              key={src}
+              src={src}
+              alt="HOMA camp health check"
+              loading="lazy"
+              style={{ width: "100%", aspectRatio: "3 / 4", objectFit: "cover", borderRadius: "12px", display: "block", background: "#f1f1f1" }}
+            />
+          ))}
+        </div>
+      </section>
+      {/* REAL CAMPS END */}
+
            {/* PATIENT COMMUNITIES */}
       <section style={{ background: "#07153a", padding: "72px 6%" }}>
         <div style={{ textAlign: "center", marginBottom: "40px" }}>

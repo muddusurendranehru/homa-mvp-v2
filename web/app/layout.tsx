@@ -9,7 +9,6 @@ import Image from 'next/image'
 import MobileNav from '@/components/MobileNav'
 import HeaderAuth from '@/components/HeaderAuth'
 import OnboardingDemo from '@/components/OnboardingDemo'
-import WelcomeBot from '@/components/WelcomeBot'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -949,7 +948,6 @@ export default function RootLayout({
           </div>
 
           {/* Welcome Bot */}
-          <WelcomeBot />
 
           {/* Floating Metabolic Check Button — appears on ALL pages */}
           <a
