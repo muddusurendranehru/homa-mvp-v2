@@ -116,9 +116,9 @@ export default function HomePage() {
   return (
     <>
       {/* FREE TOOLS STRIP */}
-      <section style={{ background: "#d4af37", padding: "20px 6%", textAlign: "center" }}>
-        <div style={{ fontSize: "14px", fontWeight: 800, color: "#06152b", marginBottom: "14px", letterSpacing: "1px" }}>
-          🔬 FREE METABOLIC TOOLS — No Signup Required
+      <section style={{ background: "linear-gradient(#ffffff, #e8f7ee)", borderBottom: "3px solid #16a34a", padding: "20px 6%", textAlign: "center" }}>
+        <div style={{ fontSize: "14px", fontWeight: 800, color: "#14532d", marginBottom: "14px", letterSpacing: "1px" }}>
+          🔬 Free Sugar, Waist & Heart Risk Check — No Signup
         </div>
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
           {[
@@ -128,9 +128,9 @@ export default function HomePage() {
             { label: "Organ Age Quiz", icon: "❤️", href: "#organ-age" },
           ].map((t) => (
             <a key={t.label} href={t.href} style={{
-              background: "#06152b", color: "#d4af37", fontWeight: 700, fontSize: "14px",
+              background: "#16a34a", color: "#ffffff", fontWeight: 700, fontSize: "14px",
               padding: "10px 20px", borderRadius: "30px", textDecoration: "none",
-              border: "2px solid #06152b", whiteSpace: "nowrap",
+              border: "2px solid #16a34a", whiteSpace: "nowrap",
             }}>
               {t.icon} {t.label}
             </a>
@@ -266,6 +266,66 @@ export default function HomePage() {
         </div>
       </section>
       {/* GOV LEADERS END */}
+      {/* DDDD DIRECTION BLOCK START */}
+      <section style={{ background: "linear-gradient(#ffffff, #e8f7ee)", borderTop: "4px solid #16a34a", color: "#1a2e22", padding: "40px 6%", textAlign: "center" }}>
+        <div style={{ maxWidth: "1080px", margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "28px" }}>
+        <div style={{ flex: "3 1 420px", minWidth: 0 }}>
+          <h2 style={{ fontFamily: "Montserrat, Arial, sans-serif", fontSize: "clamp(26px, 4.6vw, 42px)", fontWeight: 800, color: "#14532d", margin: "0 0 12px", lineHeight: 1.2 }}>
+            Sugar still high after years of tablets?
+          </h2>
+          <p style={{ fontSize: "18px", lineHeight: 1.6, margin: "0 0 14px", color: "#1a2e22" }}>
+            Tired of diet charts that don&apos;t work and hours of confusing diet videos?
+          </p>
+          <p style={{ fontSize: "20px", fontWeight: 800, color: "#16a34a", margin: "0 0 14px" }}>
+            DDDD: Door to Door Diabetes Delivery
+          </p>
+          <p style={{ fontSize: "17px", lineHeight: 1.6, margin: "0 auto 22px", maxWidth: "680px", color: "#1a2e22" }}>
+            A doctor&apos;s prescription, 30 different diet sheets for 30 days on your phone, and follow-up until your HbA1c comes down.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center" }}>
+            <a href="/tools" style={{ display: "inline-block", background: "#16a34a", color: "#ffffff", fontWeight: 800, fontSize: "17px", padding: "16px 30px", borderRadius: "10px", textDecoration: "none", boxShadow: "0 6px 16px rgba(22,163,74,0.25)" }}>
+              Check your sugar risk online, free
+            </a>
+            <a href="https://wa.me/919963721999?text=I%20want%20to%20send%20my%20reports%20for%20the%20DDDD%2030-day%20diet%20plan" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#ffffff", color: "#16a34a", fontWeight: 800, fontSize: "17px", padding: "14px 28px", borderRadius: "10px", textDecoration: "none", border: "2px solid #16a34a" }}>
+              Send reports on WhatsApp
+            </a>
+          </div>
+        </div>
+        <figure style={{ flex: "2 1 280px", margin: 0, minWidth: 0 }}>
+          <img src="/images/camp-checkup.jpg" alt="Metabolic fitness check-up camp by Dr M Surendra Nehru" style={{ display: "block", width: "100%", maxHeight: "420px", objectFit: "cover", borderRadius: "14px", boxShadow: "0 10px 26px rgba(20,83,45,0.18)" }} />
+          <figcaption style={{ fontSize: "13px", color: "#14532d", marginTop: "8px", textAlign: "center" }}>
+            Our metabolic fitness check-up camp
+          </figcaption>
+        </figure>
+        </div>
+      </section>
+      {/* DDDD DIRECTION BLOCK END */}
+      {/* 30-DAY DIET HERO START */}
+      <section style={{ background: "#FDF3DC", padding: "40px 6%", textAlign: "center" }}>
+        <div style={{ maxWidth: "820px", margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "Montserrat, Arial, sans-serif", fontSize: "clamp(26px, 4.5vw, 40px)", fontWeight: 800, color: "#0D3B5E", margin: "0 0 12px", lineHeight: 1.2 }}>
+            Your Reports. Your Diet. 30 Days.
+          </h2>
+          <p lang="te" style={{ fontSize: "18px", color: "#0D3B5E", margin: "0 0 12px", lineHeight: 1.6 }}>
+            మీ రిపోర్ట్స్ ఆధారంగా మీకోసమే తయారైన 30 రోజుల డైట్ — డాక్టర్ పర్యవేక్షణలో
+          </p>
+          <p style={{ fontSize: "17px", color: "#333", margin: "0 auto 22px", lineHeight: 1.6, maxWidth: "680px" }}>
+            A Professor of Medicine reads your HbA1c, HOMA-IR and kidney reports, then gives you a personal Indian meal plan you follow day by day on your phone.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center", marginBottom: "20px" }}>
+            <a href="/tools" style={{ display: "inline-block", background: "#F5A623", color: "#0D3B5E", fontWeight: 800, fontSize: "16px", padding: "14px 26px", borderRadius: "10px", textDecoration: "none" }}>
+              Check Your Health Free
+            </a>
+            <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#25D366", color: "#fff", fontWeight: 800, fontSize: "16px", padding: "14px 26px", borderRadius: "10px", textDecoration: "none" }}>
+              WhatsApp Dr. Surendra
+            </a>
+          </div>
+          <p style={{ fontSize: "14px", fontWeight: 700, color: "#0D3B5E", margin: 0 }}>
+            23 condition-specific diet plans · 30-day daily tracker · Telugu support
+          </p>
+        </div>
+      </section>
+      {/* 30-DAY DIET HERO END */}
 
       {/* DPIIT CERTIFICATE */}
       <section style={{ background: "#ffffff", padding: "28px 6%", textAlign: "center" }}>
@@ -461,6 +521,9 @@ export default function HomePage() {
           </a>
         ))}
       </div>
+
+      {/* SCIENCE SLIDES CAROUSEL */}
+      <ScienceSlides />
 
       {/* TRUST STRIP */}
       <div
@@ -708,9 +771,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* SCIENCE SLIDES CAROUSEL */}
-      <ScienceSlides />
 
            {/* PATIENT COMMUNITIES */}
       <section style={{ background: "#07153a", padding: "72px 6%" }}>
@@ -978,11 +1038,12 @@ export default function HomePage() {
             ["💗", "PCOS", "Hormonal balance"],
             ["⚖️", "Obesity", "Visceral fat reversal"],
             ["❤️", "Heart Risk", "Cardio-metabolic care"],
-            ["🫘", "Diabetes + Kidney", "Nephropathy care"],
+            ["🫘", "Diabetes + Kidney", "Nephropathy care", "/conditions/diabetes-kidney"],
             ["🛡️", "Pre-Diabetes", "Prevention first"],
             ["🔋", "Fatigue & IR", "Root cause care"],
             ["👴", "Senior Metabolic", "Age-tailored protocol"],
-          ].map(([icon, name, sub]) => (
+          ].map(([icon, name, sub, href]) => {
+            const tile = (
             <div
               key={String(name)}
               style={{
@@ -996,7 +1057,15 @@ export default function HomePage() {
               <div style={{ fontSize: "14px", fontWeight: 600, color: "#0D2B4E", marginBottom: "4px" }}>{name}</div>
               <div style={{ fontSize: "12px", color: "#999" }}>{sub}</div>
             </div>
-          ))}
+            );
+            return href ? (
+              <Link key={String(name)} href={href} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+                {tile}
+              </Link>
+            ) : (
+              tile
+            );
+          })}
         </div>
       </section>
 

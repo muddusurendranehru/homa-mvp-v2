@@ -358,7 +358,7 @@ export default function RootLayout({
                     🫘 Kidney Health
                   </Link>
                   <Link 
-                    href="/conditions/diabetes-swelling-in-legs?utm_source=footer&utm_medium=condition_tile&utm_campaign=diabetes_kidney" 
+                    href="/conditions/diabetes-kidney?utm_source=footer&utm_medium=condition_tile&utm_campaign=diabetes_kidney" 
                     className="bg-gradient-to-br from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white px-4 py-3 rounded-lg text-center text-sm font-semibold transition-all transform hover:scale-105 hover:shadow-lg border-2 border-cyan-400"
                   >
                     💧 Diabetes + Kidney
