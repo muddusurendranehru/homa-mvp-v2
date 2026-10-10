@@ -294,9 +294,12 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
                 <div className="flex flex-col md:flex-row md:items-center md:gap-4">
-                  <h1 className="text-sm md:text-base font-bold">
-                    DR. MUDDU SURENDRA NEHRU M.D.
-                  </h1>
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <img src="/images/dr-muddu-header.jpg" alt="Dr Muddu Surendra Nehru MD" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shrink-0" style={{ objectFit: "cover", objectPosition: "top" }} />
+                    <h1 className="text-sm md:text-base font-bold">
+                      DR. MUDDU SURENDRA NEHRU M.D.
+                    </h1>
+                  </div>
                   <div className="hidden md:block text-gray-300">|</div>
                   <p className="text-xs md:text-sm text-gray-200">
                     Professor of Medicine • Senior Physician • 30+ Years Experience

@@ -300,6 +300,11 @@ export default function HomePage() {
         </div>
       </section>
       {/* DDDD DIRECTION BLOCK END */}
+      {/* OLD VS OUR MODEL START */}
+      <section style={{ background: "#ffffff", padding: "24px 4%", textAlign: "center" }}>
+        <img src="/images/old-vs-our-model.jpg" alt="Old model vs HOMA model: paper diet slip vs 30-day app with follow-up" style={{ display: "block", width: "100%", maxWidth: "960px", height: "auto", margin: "0 auto", borderRadius: "12px", boxShadow: "0 8px 24px rgba(0,0,0,0.12)" }} />
+      </section>
+      {/* OLD VS OUR MODEL END */}
       {/* 30-DAY DIET HERO START */}
       <section style={{ background: "#FDF3DC", padding: "40px 6%", textAlign: "center" }}>
         <div style={{ maxWidth: "820px", margin: "0 auto" }}>
