@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { api } from '@/lib/api';
 import Link from 'next/link';
+import MealAppProgress from '@/components/MealAppProgress';
 
 interface DailyLog {
   day: number;
@@ -169,6 +170,7 @@ export default function RemissionProgramPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
+        <MealAppProgress />
         
         {/* Program Overview */}
         <div className="mb-8 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg shadow-lg p-6 text-white">
