@@ -288,39 +288,26 @@ export default function RootLayout({
           {/* Mobile Navigation */}
           <MobileNav />
           
-          {/* Global Header */}
-          <header className="bg-teal-600 text-white py-3 px-4 shadow-md">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
-                <div className="flex flex-col md:flex-row md:items-center md:gap-4">
-                  <div className="flex items-center justify-center md:justify-start gap-2">
-                    <img src="/images/dr-muddu-header.jpg" alt="Dr Muddu Surendra Nehru MD" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shrink-0" style={{ objectFit: "cover", objectPosition: "top" }} />
-                    <h1 className="text-sm md:text-base font-bold">
-                      DR. MUDDU SURENDRA NEHRU M.D.
-                    </h1>
-                  </div>
-                  <div className="hidden md:block text-gray-300">|</div>
-                  <p className="text-xs md:text-sm text-gray-200">
-                    Professor of Medicine • Senior Physician • 30+ Years Experience
-                  </p>
-                </div>
-                <div className="flex items-center justify-center md:justify-end gap-2 md:gap-4 mt-1 md:mt-0">
-                  <a href="tel:+919963721999" className="text-xs md:text-sm font-semibold hover:text-yellow-300 transition-colors">
-                    📞 09963721999
-                  </a>
-                  <span className="text-gray-400 hidden md:inline">|</span>
-                  <div className="flex gap-2 text-xs items-center">
-                    <a href="https://wa.me/919963721999" target="_blank" className="hover:text-green-300 transition-colors">JOIN</a>
-                    <span className="text-gray-400">•</span>
-                    <a href="https://wa.me/919963721999?text=I want to donate" target="_blank" className="hover:text-yellow-300 transition-colors">DONATE</a>
-                    <span className="text-gray-400">•</span>
-                    <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" className="hover:text-pink-300 transition-colors">FRANCHISE</a>
-                    <span className="text-gray-400 hidden md:inline">|</span>
-                    <HeaderAuth />
-                  </div>
-                </div>
+          {/* Global Header — slim navbar (doctor details moved to "About Dr. Muddu" on the homepage) */}
+          <header className="sticky top-0 z-[1000] bg-white/95 backdrop-blur border-b border-slate-200" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
+            <nav className="mx-auto flex h-16 max-w-[1080px] items-center gap-2 pl-3 pr-[70px] sm:gap-3 sm:pl-4 sm:pr-[76px] lg:pr-[84px]" aria-label="Main">
+              <Link href="/" className="flex min-w-0 flex-1 items-center gap-2 sm:gap-2.5 text-slate-900 no-underline sm:flex-none">
+                <img src="/images/homa-logo.png" alt="HOMA Healthcare Center logo" width={32} height={32} className="h-8 w-8 shrink-0 rounded-full" />
+                <span className="min-w-0 leading-tight">
+                  <span className="block truncate text-[12.5px] sm:text-[14px] font-extrabold tracking-tight text-[#1e3a8a]">HOMA Healthcare Center</span>
+                  <span className="block truncate text-[10.5px] font-medium text-slate-500 sm:text-xs">Dr. Muddu Surendra Nehru MD</span>
+                </span>
+              </Link>
+              <div className="ml-auto hidden items-center gap-1 text-sm font-medium text-slate-600 sm:flex">
+                <Link href="/#how-it-works" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">How it works</Link>
+                <Link href="/tools" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Free Tools</Link>
+                <Link href="/#about" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">About</Link>
+                <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Join</a>
               </div>
-            </div>
+              <div className="shrink-0">
+                <HeaderAuth variant="pill" />
+              </div>
+            </nav>
           </header>
 
           {/* Main Content */}
@@ -465,35 +452,7 @@ export default function RootLayout({
                   <div className="text-4xl mb-3">📱</div>
                   <span className="font-bold text-base mb-2">3. Get in Touch</span>
                   <span className="text-xs text-blue-100 mb-2">Connect via Social Media</span>
-                  <div className="flex gap-2 mt-2">
-                    <a 
-                      href="https://www.youtube.com/channel/UCf8avHrw6K07POXSIoKgHwg" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-300 hover:text-red-200 transition-colors"
-                      aria-label="YouTube"
-                    >
-                      📺
-                    </a>
-                    <a 
-                      href="https://instagram.com/homahealthcarecenter" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-pink-300 hover:text-pink-200 transition-colors"
-                      aria-label="Instagram"
-                    >
-                      📷
-                    </a>
-                    <a 
-                      href="https://wa.me/919963721999" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-green-300 hover:text-green-200 transition-colors"
-                      aria-label="WhatsApp"
-                    >
-                      💬
-                    </a>
-                  </div>
+                  <a href="#footer-follow" className="mt-2 text-sm underline hover:text-yellow-300 transition-colors">Follow us below ↓</a>
                 </div>
                 <div className="flex flex-col items-center text-center bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <div className="text-4xl mb-3">📚</div>
@@ -650,7 +609,10 @@ export default function RootLayout({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 {/* Doctor Info */}
                 <div>
-                  <h3 className="text-lg font-bold text-teal-400 mb-3">🩺 HOMA Clinic</h3>
+                  <div className="flex items-center gap-3 mb-3">
+                    <img src="/images/homa-logo.png" alt="HOMA Healthcare Center logo" width={48} height={48} className="h-12 w-12 shrink-0 rounded-full bg-white/5" loading="lazy" />
+                    <h3 className="text-lg font-bold text-teal-400 leading-tight">HOMA Healthcare Center</h3>
+                  </div>
                   <p className="text-sm text-gray-300 mb-2">
                     <strong>Dr. Muddu Surendra Nehru M.D.</strong>
                   </p>
@@ -685,15 +647,25 @@ export default function RootLayout({
                     >
                       📩 Enquire Now
                     </a>
-                    <a
-                      href="https://feature-step-1-structure-97dp.onrender.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block w-full text-center mt-2 hover:opacity-90 text-white text-xs font-bold py-2 px-3 rounded transition-colors"
-                      style={{ background: "#16a34a" }}
-                    >
-                      🏥 Franchise — Interested?
-                    </a>
+                    <div className="flex gap-2 mt-2">
+                      <a
+                        href="https://feature-step-1-structure-97dp.onrender.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-block text-center hover:opacity-90 text-white text-xs font-bold py-2 px-3 rounded transition-colors"
+                        style={{ background: "#16a34a" }}
+                      >
+                        🏥 Franchise — Interested?
+                      </a>
+                      <a
+                        href="https://feature-step-1-structure-97dp.onrender.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-center border border-green-500 text-green-300 hover:bg-green-900/40 text-xs font-bold py-2 px-3 rounded transition-colors"
+                      >
+                        🤝 Partners
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -704,22 +676,17 @@ export default function RootLayout({
                     <a href="tel:+919963721999" className="text-gray-300 hover:text-white transition-colors">
                       📞 09963721999
                     </a>
-                    <a href="https://wa.me/919963721999" target="_blank" className="text-gray-300 hover:text-green-400 transition-colors">
-                      💬 WhatsApp
+                    <a href="https://wa.me/919963721999?text=Hi%20Dr.%20Nehru%2C%20I%20want%20to%20start%20my%20free%20metabolic%20risk%20assessment." target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-green-400 transition-colors">
+                      💬 Chat on WhatsApp
+                    </a>
+                    <a href="mailto:info@homahealthcarecenter.in" className="text-gray-300 hover:text-white transition-colors break-all">
+                      ✉️ info@homahealthcarecenter.in
+                    </a>
+                    <a href="mailto:surendra.muddu@gmail.com" className="text-gray-300 hover:text-white transition-colors break-all">
+                      ✉️ surendra.muddu@gmail.com
                     </a>
                     <a href="https://mvp.homahealthcarecenter.in" target="_blank" className="text-gray-300 hover:text-white transition-colors">
                       🌐 HOMA Clinic Website
-                    </a>
-                    <a 
-                      href="https://www.youtube.com/channel/UCf8avHrw6K07POXSIoKgHwg" 
-                      target="_blank"
-                      rel="noopener noreferrer" 
-                      className="text-gray-300 hover:text-red-400 transition-colors"
-                    >
-                      📺 YouTube
-                    </a>
-                    <a href="https://instagram.com/homahealthcarecenter" target="_blank" className="text-gray-300 hover:text-pink-400 transition-colors">
-                      📷 Instagram/FB: homahealthcarecenter
                     </a>
                     <a 
                       href="https://play.google.com/store/apps/details?id=com.homaclinic.app&utm_source=whatsapp&utm_medium=staff_message&utm_campaign=app_launch" 
@@ -729,6 +696,7 @@ export default function RootLayout({
                     >
                       📱 Download Android App
                     </a>
+                    {/* YouTube / Instagram text links removed here — they are in the "Follow us" icon row below */}
                   </div>
                 </div>
               </div>
@@ -801,17 +769,14 @@ export default function RootLayout({
               <div className="border-t border-gray-700 mt-4 pt-4 text-center">
                 {/* SEO Internal Links */}
                 <div className="flex flex-wrap justify-center gap-4 mb-4 text-sm">
-                  <Link href="/" className="text-gray-300 hover:text-white transition-colors">
-                    Home
-                  </Link>
                   <Link href="/assessment" className="text-gray-300 hover:text-white transition-colors">
                     Free Assessment
                   </Link>
-                  <Link href="/gallery" className="text-gray-300 hover:text-white transition-colors">
-                    Success Stories
+                  <Link href="/books" className="text-gray-300 hover:text-white transition-colors">
+                    Books
                   </Link>
-                  <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
-                    Blog
+                  <Link href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
+                    Privacy Policy
                   </Link>
                 </div>
                 
@@ -822,7 +787,7 @@ export default function RootLayout({
                 </div>
                 
                 {/* Follow us */}
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+                <div id="footer-follow" className="mt-4 flex flex-wrap items-center justify-center gap-3">
                   <span className="text-sm font-medium text-[#d4af37]">Follow us:</span>
                   <div className="flex flex-wrap items-center justify-center gap-2">
                     <a
@@ -845,6 +810,17 @@ export default function RootLayout({
                     >
                       <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
                         <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2zM17.7 6.3a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z" />
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.facebook.com/homahealthcarecenter"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#d4af37]/70 text-[#d4af37] transition-colors hover:bg-[#d4af37] hover:text-[#07153a]"
+                    >
+                      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                        <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z" />
                       </svg>
                     </a>
                     <a
@@ -884,18 +860,6 @@ export default function RootLayout({
                   </div>
                 </div>
                 
-                {/* WhatsApp Button */}
-                <div className="flex justify-center mb-4">
-                  <a
-                    href="https://wa.me/919963721999?text=Hi%20Dr.%20Nehru%2C%20I%20want%20to%20start%20my%20free%20metabolic%20risk%20assessment."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors font-medium"
-                  >
-                    💬 Chat on WhatsApp
-                  </a>
-                </div>
-
                 {/* UPI QR Code Section - Payment QR Code */}
                 <div className="mt-4 text-center">
                   <p className="text-sm font-medium text-gray-300 mb-2">Pay via UPI:</p>
@@ -920,25 +884,10 @@ export default function RootLayout({
                 <p className="text-xs text-gray-500 mt-4">
                   🎯 "Achieve Metabolic Remission in 90 Days — Not Just Manage It"
                 </p>
-                <div className="flex justify-center gap-4 mt-3 text-xs">
-                  <a href="https://wa.me/919963721999?text=I want to JOIN" target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded transition-colors">
-                    JOIN
-                  </a>
-                  <a href="https://wa.me/919963721999?text=I want to DONATE" target="_blank" rel="noopener noreferrer" className="bg-yellow-600 hover:bg-yellow-700 px-3 py-1 rounded transition-colors">
-                    DONATE
-                  </a>
-                  <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" rel="noopener noreferrer" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded transition-colors">
-                    FRANCHISE
-                  </a>
-                </div>
               </div>
             </div>
           </footer>
           
-          {/* Service Area Footer Notice - Outside main footer */}
-          <footer className="mt-16 py-6 text-center text-sm text-gray-600 bg-white">
-            Serving Gachibowli, Ameerpet, Bachupally & Patancheru with at-home metabolic assessments.
-          </footer>
           
           {/* PCOS/Insulin Resistance Message - Bottom */}
           <div className="bg-gradient-to-r from-pink-50 to-purple-50 border-t border-pink-200 py-6 px-4">
@@ -949,37 +898,7 @@ export default function RootLayout({
 
           {/* Welcome Bot */}
 
-          {/* Floating Metabolic Check Button — appears on ALL pages */}
-          <a
-            href="/tools"
-            style={{
-              position: "fixed",
-              bottom: "24px",
-              right: "24px",
-              zIndex: 9999,
-              width: "68px",
-              height: "68px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle at 35% 35%, #dc2626, #7f1d1d)",
-              boxShadow: "0 0 0 6px rgba(220,38,38,0.2), 0 4px 24px rgba(220,38,38,0.5)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textDecoration: "none",
-              animation: "float-pulse 2.5s ease-in-out infinite",
-            }}
-            title="Free Metabolic Check"
-          >
-            <span style={{ fontSize: "22px", lineHeight: 1 }}>⚠️</span>
-            <span style={{ fontSize: "8px", color: "#fff", fontWeight: 700, marginTop: "2px", textAlign: "center", lineHeight: 1.2, letterSpacing: "0.02em" }}>CHECK<br/>FREE</span>
-          </a>
-          <style>{`
-            @keyframes float-pulse {
-              0%, 100% { box-shadow: 0 0 0 6px rgba(220,38,38,0.2), 0 4px 24px rgba(220,38,38,0.5); transform: translateY(0); }
-              50% { box-shadow: 0 0 0 12px rgba(220,38,38,0.25), 0 8px 40px rgba(220,38,38,0.7); transform: translateY(-4px); }
-            }
-          `}</style>
+          {/* Floating CHECK FREE badge removed (Oct 2026) — free tools are linked from the navbar and homepage */}
         </AuthProvider>
         </ClerkProvider>
       </body>

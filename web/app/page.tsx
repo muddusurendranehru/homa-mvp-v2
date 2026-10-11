@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import HomeHero from "@/components/HomeHero";
+import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } from "@/components/HomeSections";
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -115,53 +117,10 @@ export default function HomePage() {
 
   return (
     <>
-      {/* FREE TOOLS STRIP */}
-      <section style={{ background: "linear-gradient(#ffffff, #e8f7ee)", borderBottom: "3px solid #16a34a", padding: "20px 6%", textAlign: "center" }}>
-        <div style={{ fontSize: "14px", fontWeight: 800, color: "#14532d", marginBottom: "14px", letterSpacing: "1px" }}>
-          🔬 Free Sugar, Waist & Heart Risk Check — No Signup
-        </div>
-        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-          {[
-            { label: "HOMA-IR Calculator", icon: "🧪", href: "/tools" },
-            { label: "Waist Risk Check", icon: "📏", href: "/tools" },
-            { label: "TyG Index", icon: "📊", href: "/tools" },
-            { label: "Organ Age Quiz", icon: "❤️", href: "#organ-age" },
-          ].map((t) => (
-            <a key={t.label} href={t.href} style={{
-              background: "#16a34a", color: "#ffffff", fontWeight: 700, fontSize: "14px",
-              padding: "10px 20px", borderRadius: "30px", textDecoration: "none",
-              border: "2px solid #16a34a", whiteSpace: "nowrap",
-            }}>
-              {t.icon} {t.label}
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ HERO — Central Obesity Warning ============ */}
-      <section style={{ background: "#07153a", padding: "32px 6%" }}>
-        <div style={{ maxWidth: "700px", margin: "0 auto", background: "rgba(255,255,255,0.04)", border: "2px solid #d4af37", borderRadius: "16px", overflow: "hidden", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center" }}>
-          <img src="/images/hero-waist.jpg" alt="Real waist measurement — central obesity detection" style={{ flex: "1 1 240px", width: "100%", maxWidth: "280px", aspectRatio: "3 / 4", objectFit: "cover", display: "block" }} />
-          <div style={{ flex: "1 1 300px", padding: "22px 24px" }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, color: "#d4af37", letterSpacing: "0.12em", marginBottom: "8px" }}>
-              THE SILENT WARNING
-            </div>
-            <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 800, color: "#ffffff", margin: "0 0 12px", lineHeight: 1.3 }}>
-              Central Obesity is the #1 warning sign
-            </h2>
-            <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)", lineHeight: 1.6, margin: "0 0 18px" }}>
-              Not weight. Not BMI. <strong style={{ color: "#d4af37" }}>Where the fat is stored</strong> decides your risk of diabetes, heart attack, and stroke.
-            </p>
-            <a href="/tools/waist-circumference" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 800, fontSize: "15px", padding: "12px 24px", borderRadius: "8px", textDecoration: "none" }}>
-              Know Your Waist Risk →
-            </a>
-            <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginTop: "10px" }}>
-              Free · 30 seconds · No signup
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <HomeFadeIn />
+      {/* HOME HERO START */}
+      <HomeHero />
+      {/* HOME HERO END */}
       {/* GOV LEADERS START */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", padding: "16px 4% 0", background: "#07153a" }}>
         <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
@@ -247,25 +206,19 @@ export default function HomePage() {
             >
               💬 WhatsApp Us
             </a>
-            <Link
-              href="/tools"
-              style={{
-                fontSize: "15px",
-                fontWeight: 600,
-                padding: "14px 30px",
-                borderRadius: "6px",
-                textDecoration: "none",
-                background: "rgba(255,255,255,0.12)",
-                color: "#fff",
-                border: "1px solid rgba(255,255,255,0.3)",
-              }}
-            >
-              🔬 Free Metabolic Check
-            </Link>
           </div>
         </div>
       </section>
       {/* GOV LEADERS END */}
+      {/* FREE HEALTH TOOLS (replaces old white tools strip) */}
+      <FreeHealthTools />
+      {/* THE SILENT WARNING (migrated Central Obesity card) */}
+      <SilentWarning />
+      {/* HOW IT WORKS (moved up from the bottom, restyled) */}
+      <HowItWorks />
+      {/* ABOUT DR. MUDDU (details moved from the old teal header bar) */}
+      <AboutDrMuddu />
+
       {/* DDDD DIRECTION BLOCK START */}
       <section style={{ background: "linear-gradient(#ffffff, #e8f7ee)", borderTop: "4px solid #16a34a", color: "#1a2e22", padding: "40px 6%", textAlign: "center" }}>
         <div style={{ maxWidth: "1080px", margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "28px" }}>
@@ -1292,74 +1245,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FLOATING BALLOONS */}
-      {/* Left — Check Your Health */}
-      <a
-        href="/tools"
-        style={{
-          position: "fixed", left: "0", top: "50%", transform: "translateY(-50%)",
-          background: "linear-gradient(135deg, #1a3a8f, #0f2557)",
-          color: "#fff", fontWeight: 700, fontSize: "13px",
-          padding: "14px 10px", borderRadius: "0 12px 12px 0",
-          textDecoration: "none", zIndex: 9999, writingMode: "vertical-rl",
-          textOrientation: "mixed", letterSpacing: "1px",
-          boxShadow: "2px 2px 12px rgba(0,0,0,0.3)",
-          border: "2px solid #d4af37", borderLeft: "none",
-        }}
-      >
-        🔬 Check Your Health
-      </a>
-      {/* Right — WhatsApp */}
-      <a
-        href="https://wa.me/919963721999"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          position: "fixed", right: "0", top: "50%", transform: "translateY(-50%)",
-          background: "#25D366",
-          color: "#fff", fontWeight: 700, fontSize: "13px",
-          padding: "14px 10px", borderRadius: "12px 0 0 12px",
-          textDecoration: "none", zIndex: 9999, writingMode: "vertical-rl",
-          textOrientation: "mixed", letterSpacing: "1px",
-          boxShadow: "-2px 2px 12px rgba(0,0,0,0.3)",
-        }}
-      >
-        💬 WhatsApp Us
-      </a>
-
-      {/* OUR APPROACH SECTION */}
-      <section style={{ background: "#f8faff", padding: "60px 6%", textAlign: "center" }}>
-        <div style={{ fontSize: "13px", color: "#1a3a8f", fontWeight: 700, letterSpacing: "2px", marginBottom: "8px" }}>HOW IT WORKS</div>
-        <h2 style={{ fontSize: "clamp(24px,4vw,36px)", fontWeight: 800, color: "#06152b", marginBottom: "8px" }}>
-          The HOMA Approach to <span style={{ color: "#1a3a8f" }}>Diabetes Reversal</span>
-        </h2>
-        <p style={{ color: "#555", fontSize: "16px", marginBottom: "48px" }}>Doctor-led. Science-backed. No app required.</p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "24px", maxWidth: "1000px", margin: "0 auto" }}>
-          {[
-            { num: "1", title: "Understand Your Body", desc: "HOMA-IR test + organ age assessment — detect risk years before symptoms" },
-            { num: "2", title: "Find the Root Cause", desc: "Not just sugar — full metabolic diagnosis by a real MD doctor" },
-            { num: "3", title: "Doctor-Designed Plan", desc: "Personally by Dr. Muddu — not an algorithm, not a chatbot" },
-            { num: "4", title: "Regular Follow-up", desc: "Weekly check-ins with the doctor himself — phone, clinic, or home visit" },
-            { num: "5", title: "Long-Term Remission", desc: "Goal: off medicines, not just managed. Hundreds of patients have done it" },
-          ].map((step) => (
-            <div key={step.num} style={{
-              background: "#fff", borderRadius: "16px", padding: "28px 20px",
-              boxShadow: "0 2px 16px rgba(0,0,0,0.07)", textAlign: "left",
-            }}>
-              <div style={{
-                width: "40px", height: "40px", borderRadius: "50%",
-                background: "linear-gradient(135deg, #1a3a8f, #0f2557)",
-                color: "#fff", fontWeight: 800, fontSize: "18px",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                marginBottom: "14px",
-              }}>{step.num}</div>
-              <div style={{ fontWeight: 700, fontSize: "16px", color: "#06152b", marginBottom: "8px" }}>{step.title}</div>
-              <div style={{ fontSize: "14px", color: "#666", lineHeight: "1.5" }}>{step.desc}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* BOOKS STRIP */}
       <section
         style={{
@@ -1446,36 +1331,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-      {/* FOOTER */}
-      <footer
-        style={{
-          background: "#06152b",
-          padding: "32px 6%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "12px",
-        }}
-      >
-        <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)" }}>
-          © 2026 HOMA Healthcare Center · Gachibowli, Hyderabad · <a href="tel:+919963721999" style={{ color: "inherit", textDecoration: "none" }}>09963721999</a>
-        </div>
-        <div style={{ display: "flex", gap: "20px" }}>
-          <Link href="/privacy-policy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
-            Privacy Policy
-          </Link>
-          <Link href="/blog" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
-            Blog
-          </Link>
-          <Link href="/tools" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
-            Free Tools
-          </Link>
-          <Link href="/books" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
-            Books
-          </Link>
-        </div>
-      </footer>
     </>
   );
 }

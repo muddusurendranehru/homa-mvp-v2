@@ -63,18 +63,14 @@ export default function MobileNav() {
       {/* Hamburger Button - orange so it doesn't mix with green; safe-area for Android/notched screens */}
       <button
         onClick={toggleMenu}
-        className="fixed z-[100050] p-3 rounded-lg shadow-lg transition-all text-white border-2"
+        className="fixed z-[100050] flex h-12 w-12 items-center justify-center rounded-[14px] border transition-colors"
         style={{
-          top: 'calc(2.5rem + env(safe-area-inset-top, 0px))',
+          /* sits inside the 64px slim navbar (layout.tsx) */
+          top: 'calc(8px + env(safe-area-inset-top, 0px))',
           right: 'max(1rem, env(safe-area-inset-right, 1rem))',
-          backgroundColor: '#ea580c',
-          borderColor: '#f97316',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#c2410c';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = '#ea580c';
+          backgroundColor: isOpen ? '#ffffff' : '#0f172a',
+          borderColor: isOpen ? '#e2e8f0' : '#0f172a',
+          color: isOpen ? '#0f172a' : '#ffffff',
         }}
         aria-label="Toggle menu"
       >

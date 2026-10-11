@@ -78,3 +78,84 @@ export function shortText(v: unknown, max = 60): string {
   if (t === '' || t === '""' || t === 'null') return ''
   return t.length > max ? t.slice(0, max) + '…' : t
 }
+
+/** Parse a meal-app JSON text field; null when it is not a JSON object. */
+function jsonObject(v: unknown): Record<string, unknown> | null {
+  if (v == null) return null
+  if (typeof v === 'object') return v as Record<string, unknown>
+  const t = String(v).trim()
+  if (!t.startsWith('{')) return null
+  try {
+    const p = JSON.parse(t)
+    return p && typeof p === 'object' ? (p as Record<string, unknown>) : null
+  } catch {
+    return null
+  }
+}
+
+function positive(v: unknown): number | null {
+  const n = typeof v === 'string' ? Number(v.trim()) : Number(v)
+  return Number.isFinite(n) && n > 0 ? n : null
+}
+
+/**
+ * Exercise text for the remission page. New meal-app format (v2 JSON) -> its summary,
+ * e.g. "Walking 30 min (7600 steps); Yoga 20 min". Old plain text is unchanged.
+ */
+export function exerciseText(v: unknown, max = 60): string {
+  const p = jsonObject(v)
+  if (!p) return shortText(v, max)
+  if (Array.isArray(p.activities)) {
+    if (p.activities.length === 0) return ''
+    const mins = positive(p.total_minutes)
+    return shortText(typeof p.summary === 'string' && p.summary.trim() ? p.summary : mins ? `${mins} min` : 'Logged', max)
+  }
+  return shortText(v, max)
+}
+
+/** "7 h" / "6 h 40 min" */
+export function hoursText(minutes: number): string {
+  const h = Math.floor(minutes / 60)
+  const m = Math.round(minutes % 60)
+  return m ? `${h} h ${m} min` : `${h} h`
+}
+
+/** Sleep text for the remission page: v2 JSON -> "7 h 0 min"-style hours; old plain text unchanged. */
+export function sleepText(v: unknown, max = 30): string {
+  const p = jsonObject(v)
+  if (!p) return shortText(v, max)
+  if (p.v === 2) {
+    const mins = positive(p.total_minutes)
+    if (mins) return shortText(hoursText(mins), max)
+    const fallback = typeof p.summary === 'string' && p.summary.trim() ? p.summary : typeof p.earlier_note === 'string' ? p.earlier_note : ''
+    return shortText(fallback, max)
+  }
+  return shortText(v, max)
+}
+
+/** kcal eaten from food_log JSON: total_calories, else the numeric "raw" value. null if not readable. */
+export function foodKcal(foodLog: unknown): number | null {
+  const p = jsonObject(foodLog)
+  if (!p) return null
+  const n = positive(p.total_calories) ?? positive(p.raw)
+  return n != null ? Math.round(n) : null
+}
+
+/** Approximate kcal burned from exercise_log v2 (total_kcal, else sum of activity kcal). null if not available. */
+export function exerciseKcal(exerciseLog: unknown): number | null {
+  const p = jsonObject(exerciseLog)
+  if (!p || !Array.isArray(p.activities)) return null
+  const total = positive(p.total_kcal)
+  if (total != null) return Math.round(total)
+  let sum = 0
+  for (const a of p.activities) sum += positive((a as Record<string, unknown>)?.kcal) ?? 0
+  return sum > 0 ? Math.round(sum) : null
+}
+
+/** Minutes slept from sleep_log v2 (total_minutes). null for old plain text or empty. */
+export function sleepMinutes(sleepLog: unknown): number | null {
+  const p = jsonObject(sleepLog)
+  if (!p || p.v !== 2) return null
+  const n = positive(p.total_minutes)
+  return n != null ? Math.round(n) : null
+}

@@ -5,9 +5,13 @@ import {
   computeCoins,
   currentStreak,
   daysBetween,
+  exerciseKcal,
+  exerciseText,
+  foodKcal,
   mealAppSql,
   mealsTicked,
-  shortText,
+  sleepMinutes,
+  sleepText,
   todayIST,
 } from '@/lib/meal-app-db'
 
@@ -60,8 +64,11 @@ export async function GET() {
       .map((r) => ({
         date: String(r.log_date),
         meals: mealsTicked(r.food_log),
-        exercise: shortText(r.exercise_log),
-        sleep: shortText(r.sleep_log, 30),
+        exercise: exerciseText(r.exercise_log),
+        sleep: sleepText(r.sleep_log),
+        eatenKcal: foodKcal(r.food_log),
+        burnedKcal: exerciseKcal(r.exercise_log),
+        sleepMinutes: sleepMinutes(r.sleep_log),
       }))
       .filter((l) => l.meals > 0 || l.exercise !== '' || l.sleep !== '')
 
@@ -81,6 +88,20 @@ export async function GET() {
       : 0
 
     const allDates = logs.map((l) => l.date)
+
+    // Energy summary: today's row; if nothing yet today, the latest logged day (dated on screen).
+    // Only numbers the meal app actually stores. No BMR/expenditure/deficit is estimated here.
+    const energyLog = todayLog ?? logs.find((l) => l.date <= today) ?? null
+    const energy = energyLog
+      ? {
+          date: energyLog.date,
+          isToday: energyLog.date === today,
+          eatenKcal: energyLog.eatenKcal,
+          burnedKcal: energyLog.burnedKcal,
+          sleepMinutes: energyLog.sleepMinutes,
+          planKcal: null as number | null,
+        }
+      : null
     const { coins, bonusWeeks } = computeCoins(allDates)
 
     return reply({
@@ -111,6 +132,7 @@ export async function GET() {
         streak: currentStreak(allDates),
       },
       coins: { total: coins, bonusWeeks },
+      energy,
     })
   } catch (err) {
     console.error('meal-progress error:', err instanceof Error ? err.message : err)
