@@ -37,9 +37,13 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401 || error.response?.status === 403) {
       // Token invalid or expired
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/auth';
+        // Signed in with Clerk (Google)? Stay on the page; the old backend just can't verify this login yet.
+        const clerkSignedIn = !!(window as any).Clerk?.user;
+        if (!clerkSignedIn && window.location.pathname !== '/auth') {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          window.location.href = '/auth';
+        }
       }
     }
     return Promise.reject(error);
