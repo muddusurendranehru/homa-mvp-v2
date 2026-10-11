@@ -53,16 +53,16 @@ export default function RootLayout({
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mvp.homahealthcarecenter.in" />
-        <meta property="og:title" content="Dr Muddu Nehru | Diabetologist Gachibowli" />
-        <meta property="og:description" content="90 Day Diabetes Remission | 85% Success" />
-        <meta property="og:image" content="https://mvp.homahealthcarecenter.in/images/obesity-reversal-hyderabad-jpg.jpg" />
+        <meta property="og:title" content="Dr Muddu Surendra Nehru MD | HOMA Healthcare Center" />
+        <meta property="og:description" content="Door to Door Diabetes Delivery | Gachibowli, Hyderabad" />
+        <meta property="og:image" content="https://mvp.homahealthcarecenter.in/images/og-minister-book.jpg" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://mvp.homahealthcarecenter.in" />
-        <meta name="twitter:title" content="Dr Muddu Nehru | Diabetologist Gachibowli" />
-        <meta name="twitter:description" content="90 Day Diabetes Remission | 85% Success" />
-        <meta name="twitter:image" content="https://mvp.homahealthcarecenter.in/images/obesity-reversal-hyderabad-jpg.jpg" />
+        <meta name="twitter:title" content="Dr Muddu Surendra Nehru MD | HOMA Healthcare Center" />
+        <meta name="twitter:description" content="Door to Door Diabetes Delivery | Gachibowli, Hyderabad" />
+        <meta name="twitter:image" content="https://mvp.homahealthcarecenter.in/images/og-minister-book.jpg" />
         
         <script
           type="application/ld+json"
