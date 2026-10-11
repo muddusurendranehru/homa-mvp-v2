@@ -10,6 +10,7 @@
  * slate #64748b, border #e2e8f0, light bg #f1f5f9, radius 20 cards / 14 buttons.
  */
 import { useEffect } from "react";
+import Link from "next/link";
 
 const WA = "https://wa.me/919963721999";
 
@@ -49,10 +50,19 @@ export function SilentWarning() {
     <section className="hs-sec hs-navy" aria-labelledby="silent-warning-title">
       <div className="hs-wrap">
         <div className="hs-split">
-          <div className="hs-split-img">
-            <img src="/images/hero-waist.jpg" alt="Real waist measurement — central obesity detection" loading="lazy" />
-            <span className="hs-tint" aria-hidden="true" />
-          </div>
+          <figure className="hs-split-img">
+            <div className="hs-imgbox hs-sw-box">
+              <img
+                src="/images/waist-measurement.jpg"
+                alt="Health worker measuring a patient's waist circumference with a measuring tape."
+                width={544}
+                height={1200}
+                loading="lazy"
+                style={{ objectPosition: "center 25%" }}
+              />
+            </div>
+            <figcaption>Waist measurement is a better predictor of metabolic risk than weight alone.</figcaption>
+          </figure>
           <div className="hs-split-txt">
             <div className="hs-eyebrow hs-eyebrow-dark">THE SILENT WARNING</div>
             <h2 id="silent-warning-title" className="hs-h2 hs-left hs-on-dark">Central Obesity is the #1 warning sign</h2>
@@ -93,6 +103,7 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
+        <div className="hs-learn"><Link href="/how-it-works">Learn more →</Link></div>
       </div>
     </section>
   );
@@ -106,14 +117,20 @@ export function AboutDrMuddu() {
       <div className="hs-wrap">
         <div className="hs-about">
           <figure className="hs-about-media">
-            <div className="hs-about-ph">
-              <img
-                src="/images/about-minister-book.jpg"
-                alt="Dr. Muddu Surendra Nehru presenting his book 'BP: The Untold Truth' to Telangana Minister Duddilla Sridhar Babu"
-                width={727}
-                height={1600}
-                loading="lazy"
-              />
+            <div className="hs-about-pair">
+              <div className="hs-imgbox">
+                <img src="/images/dr-muddu-portrait.jpg" alt="Dr. Muddu Surendra Nehru, M.D." width={399} height={600} loading="lazy" style={{ objectPosition: "center top" }} />
+              </div>
+              <div className="hs-imgbox">
+                <img
+                  src="/images/about-minister-book.jpg"
+                  alt="Dr. Muddu Surendra Nehru presenting his book 'BP: The Untold Truth' to Telangana Minister Duddilla Sridhar Babu"
+                  width={727}
+                  height={1600}
+                  loading="lazy"
+                  style={{ objectPosition: "center 25%" }}
+                />
+              </div>
             </div>
             <figcaption>Dr. Muddu presenting &lsquo;BP: The Untold Truth&rsquo; to Minister Sridhar Babu.</figcaption>
           </figure>
@@ -144,11 +161,74 @@ export function AboutDrMuddu() {
             </div>
             <div className="hs-about-cta">
               <a href="tel:+919963721999" className="hs-btn hs-btn-primary">📞 Call 09963721999</a>
+              <Link href="/about" className="hs-btn hs-btn-ghost">Learn more →</Link>
             </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------- Photo gallery (used on /about and /how-it-works pages, not the homepage) ---------- */
+export type GalleryPhoto = { src: string; alt: string; pos?: string; caption?: string };
+
+export function PhotoGallery({ photos, title }: { photos: GalleryPhoto[]; title?: string }) {
+  return (
+    <div className="hs-gallery-wrap">
+      <style>{CSS}</style>
+      {title && <h2 className="hs-h3">{title}</h2>}
+      <div className="hs-gallery">
+        {photos.map((p) => (
+          <figure key={p.src} className="hs-gallery-item">
+            <div className="hs-imgbox">
+              <img src={p.src} alt={p.alt} loading="lazy" style={{ objectPosition: p.pos ?? "center top" }} />
+            </div>
+            {p.caption && <figcaption>{p.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- /how-it-works page body (reuses the homepage 5 steps) ---------- */
+export function HowItWorksPageBody() {
+  return (
+    <>
+      <style>{CSS}</style>
+      <section className="hs-sec hs-slate">
+        <div className="hs-wrap">
+          <div className="hs-eyebrow hs-eyebrow-teal">HOW IT WORKS</div>
+          <h1 className="hs-h2 hs-navy-txt">The HOMA Approach to Diabetes Reversal</h1>
+          <p className="hs-sub">Doctor-led. Science-backed. No app required.</p>
+          <ol className="hs-steps">
+            {STEPS.map((s) => (
+              <li key={s.num} className="hs-step">
+                <span className="hs-step-n" aria-hidden="true">{s.num}</span>
+                <div className="hs-step-t">{s.title}</div>
+                <div className="hs-step-d">{s.desc}</div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+      <section className="hs-sec hs-white">
+        <div className="hs-wrap">
+          <PhotoGallery
+            title="Inside a HOMA check-up"
+            photos={[
+              { src: "/images/consultation.jpg", alt: "A patient having her blood sugar checked at HOMA Healthcare Center.", pos: "center 45%", caption: "Step 1 — blood sugar and HOMA-IR testing." },
+              { src: "/images/silent-warning.jpg", alt: "Doctor measuring a patient's waist with a measuring tape during a metabolic health check at HOMA Healthcare Center.", pos: "center top", caption: "Step 2 — waist measurement as part of the full metabolic diagnosis." },
+            ]}
+          />
+          <div className="hs-page-cta">
+            <a href="/remission-program" className="hs-btn hs-btn-primary">Start your 90-day reset →</a>
+            <a href="/tools" className="hs-btn hs-btn-ghost">Try free health checks</a>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -204,6 +284,11 @@ const CSS = `
 .hs-btn-primary{background:#f97316;color:#fff;box-shadow:0 10px 22px -10px rgba(249,115,22,.8)}
 .hs-btn-primary:hover{background:#ea580c}
 .hs-btn:active{transform:scale(.98)}
+.hs-btn-ghost{background:#fff;color:#1e3a8a;border:1px solid #e2e8f0}
+.hs-btn-ghost:hover{background:#f8fafc;border-color:#cbd5e1}
+.hs-learn{text-align:center;margin-top:24px}
+.hs-learn a{display:inline-flex;align-items:center;min-height:48px;padding:0 6px;color:#1e3a8a;font-weight:700;font-size:16px;text-decoration:none}
+.hs-learn a:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* tools */
 .hs-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -220,14 +305,16 @@ const CSS = `
 .hs-more a{display:inline-flex;align-items:center;min-height:48px;color:#0f172a;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:3px}
 
 /* silent warning */
-.hs-split{display:grid;grid-template-columns:1fr;border-radius:20px;overflow:hidden;background:#111c33;border:1px solid rgba(148,163,184,.18)}
-@media (min-width:768px){.hs-split{grid-template-columns:5fr 7fr}}
-.hs-split-img{position:relative;aspect-ratio:4/3;overflow:hidden}
-@media (min-width:768px){.hs-split-img{aspect-ratio:auto;min-height:380px}}
-.hs-split-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block}
-.hs-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,64,175,.28),rgba(15,23,42,.45))}
-.hs-split-txt{padding:28px 22px 30px}
-@media (min-width:768px){.hs-split-txt{padding:48px 44px;align-self:center}}
+.hs-split{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
+@media (min-width:768px){.hs-split{grid-template-columns:5fr 7fr;gap:40px}}
+.hs-split-img{margin:0}
+.hs-imgbox{position:relative;overflow:hidden;background:#e2e8f0;border-radius:12px;box-shadow:0 8px 20px rgba(15,23,42,.08)}
+.hs-imgbox img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.hs-sw-box{border-radius:20px;aspect-ratio:4/5;max-height:520px}
+@media (min-width:768px){.hs-sw-box{aspect-ratio:3/4}}
+.hs-split-img figcaption{margin-top:10px;font-size:13px;line-height:1.45;color:#94a3b8}
+.hs-split-txt{padding:0 2px}
+@media (min-width:768px){.hs-split-txt{padding:0}}
 .hs-body-dark{color:rgba(226,232,240,.85);font-size:16px;line-height:1.65;margin:0 0 24px;max-width:520px}
 .hs-body-dark strong{color:#fff}
 .hs-micro{color:#94a3b8;font-size:13px;margin-top:12px}
@@ -241,19 +328,29 @@ const CSS = `
 .hs-step-t{font-weight:700;font-size:16px;margin-bottom:6px;color:#0f172a}
 .hs-step-d{color:#64748b;font-size:14px;line-height:1.55}
 
+/* gallery (sub-pages) */
+.hs-h3{font-size:clamp(22px,3vw,30px);font-weight:800;color:#1e3a8a;margin:0 0 18px;letter-spacing:-.01em}
+.hs-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:768px){.hs-gallery{gap:20px}}
+@media (max-width:359px){.hs-gallery{grid-template-columns:1fr}}
+.hs-gallery-item{margin:0}
+.hs-gallery-item .hs-imgbox{aspect-ratio:3/4;border-radius:16px}
+.hs-gallery-item figcaption{margin-top:8px;font-size:13px;line-height:1.45;color:#64748b}
+.hs-page-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:36px}
+
 /* about */
 #about{scroll-margin-top:72px}
 .hs-eyebrow-teal{color:#0d9488}
 .hs-navy-txt{color:#1e3a8a}
 .hs-about{display:flex;flex-direction:column;align-items:center;gap:24px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:20px 20px 28px;overflow:hidden}
-@media (min-width:768px){.hs-about{flex-direction:row;align-items:center;gap:44px;padding:28px 48px 28px 28px}}
-.hs-about-media{margin:0;width:100%;max-width:420px;flex-shrink:0}
-.hs-about-ph{border-radius:16px;overflow:hidden;background:#e2e8f0;height:420px;box-shadow:0 12px 28px -16px rgba(15,23,42,.45)}
-.hs-about-ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+@media (min-width:960px){.hs-about{flex-direction:row;align-items:center;gap:44px;padding:28px 48px 28px 28px}}
+.hs-about-media{margin:0;width:100%;max-width:460px;flex-shrink:0}
+.hs-about-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hs-about-pair .hs-imgbox{aspect-ratio:3/4}
 .hs-about-media figcaption{margin-top:10px;font-size:13px;line-height:1.45;color:#64748b;text-align:center}
-@media (min-width:768px){.hs-about-media{width:340px;max-width:340px}.hs-about-ph{height:480px}.hs-about-media figcaption{text-align:left}}
+@media (min-width:960px){.hs-about-media{width:400px;max-width:400px}.hs-about-media figcaption{text-align:left}}
 .hs-about-txt{width:100%;min-width:0}
-@media (min-width:768px){.hs-about-txt{padding:16px 0}}
+@media (min-width:960px){.hs-about-txt{padding:16px 0}}
 .hs-about-txt .hs-eyebrow{text-align:left}
 .hs-check{list-style:none;padding:0;margin:6px 0 18px;display:grid;gap:8px}
 .hs-check li{position:relative;padding-left:30px;color:#0f172a;font-size:16px}

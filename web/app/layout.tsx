@@ -299,9 +299,9 @@ export default function RootLayout({
                 </span>
               </Link>
               <div className="ml-auto hidden items-center gap-1 text-sm font-medium text-slate-600 sm:flex">
-                <Link href="/#how-it-works" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">How it works</Link>
+                <Link href="/how-it-works" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">How it works</Link>
                 <Link href="/tools" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Free Tools</Link>
-                <Link href="/#about" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">About</Link>
+                <Link href="/about" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">About</Link>
                 <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Join</a>
               </div>
               <div className="shrink-0">

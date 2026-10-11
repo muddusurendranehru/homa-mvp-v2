@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { PhotoGallery } from '@/components/HomeSections';
 
 export const metadata: Metadata = {
   title: "About Dr. Muddu Surendra Nehru, MD – HOMA Health Clinics",
@@ -42,6 +43,19 @@ export default function AboutPage() {
               <div className="text-2xl font-bold text-red-600">500+</div>
               <div className="text-gray-600 text-sm">Patients Reversed</div>
             </div>
+          </div>
+
+          {/* Photo gallery */}
+          <div className="mb-12">
+            <PhotoGallery
+              title="At the clinic"
+              photos={[
+                { src: '/images/dr-muddu-portrait.jpg', alt: 'Dr. Muddu Surendra Nehru, M.D.', pos: 'center top' },
+                { src: '/images/about-minister-book.jpg', alt: "Dr. Muddu Surendra Nehru presenting his book 'BP: The Untold Truth' to Telangana Minister Duddilla Sridhar Babu", pos: 'center 25%', caption: "Dr. Muddu presenting 'BP: The Untold Truth' to Minister Sridhar Babu." },
+                { src: '/images/exam-room.jpg', alt: 'A metabolic examination in the HOMA clinic room.', pos: 'center 40%' },
+                { src: '/images/silent-warning.jpg', alt: "Doctor measuring a patient's waist with a measuring tape during a metabolic health check at HOMA Healthcare Center.", pos: 'center top' },
+              ]}
+            />
           </div>
 
           {/* Bio */}
