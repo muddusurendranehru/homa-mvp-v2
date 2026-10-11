@@ -32,6 +32,14 @@ export default function ToolsPage() {
           <p className="text-lg text-gray-600">
             Use our free tools to assess your metabolic health risk.
           </p>
+          <a
+            href="https://wa.me/919963721999?text=Hi%2C%20I%27m%20interested%20in%20the%20Diabetes%20Reversal%20program"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg"
+          >
+            I'm interested
+          </a>
         </div>
       </header>
 

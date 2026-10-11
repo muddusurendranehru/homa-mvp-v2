@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feature Showcase - HOMA Healthcare Center</title>
+<style>
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#0f172a;background:#fff}
+  .stub{padding:60px 20px;text-align:center;color:#94a3b8;border:2px dashed #e2e8f0;margin:20px}
+
+  /* ===== FEATURE SHOWCASE (copy from here) ===== */
+  .fs-section{background:#faf7f2;padding:100px 20px;overflow-x:hidden}
+  .fs-head{text-align:center;margin:0 auto 56px}
+  .fs-eyebrow{color:#0d9488;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px}
+  .fs-title{color:#1e3a8a;font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.15;margin:0 0 14px}
+  .fs-sub{color:#64748b;font-size:16px;max-width:540px;margin:0 auto;line-height:1.5}
+
+  .fs-track{position:relative;display:flex;justify-content:center;align-items:center;padding:30px 0}
+  .fs-card{
+    --y:0px;--s:1;
+    flex:0 0 260px;width:260px;height:400px;box-sizing:border-box;padding:16px;border-radius:20px;
+    box-shadow:0 12px 32px rgba(15,23,42,.12);
+    transform:translateY(var(--y)) scale(var(--s));
+    transition:transform .5s ease,opacity .5s ease,box-shadow .25s ease;
+    opacity:0;--y:32px;cursor:default;-webkit-tap-highlight-color:transparent;
+  }
+  .fs-card:nth-child(n+2){margin-left:-40px}
+  .fs-card:nth-child(1){z-index:1;background:#0d4a4a}
+  .fs-card:nth-child(2){z-index:2;background:#f5a623}
+  .fs-card:nth-child(3){z-index:10;background:#f97316;--s:1.10;box-shadow:0 24px 48px rgba(15,23,42,.25)}
+  .fs-card:nth-child(4){z-index:4;background:#0f172a}
+  .fs-card:nth-child(5){z-index:5;background:#38bdf8}
+  .fs-card.fs-in{opacity:1;--y:0px}
+
+  /* Image container: same colour as the card, so a slow image still looks intentional */
+  .fs-photo{position:relative;height:220px;border-radius:12px;overflow:hidden;margin-bottom:20px;background:inherit}
+  .fs-photo::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.14)}
+  .fs-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .fs-photo svg{position:absolute;inset:0;width:100%;height:100%}
+  .fs-card h3{margin:0;color:#fff;font-size:20px;font-weight:700;line-height:1.25;letter-spacing:-.3px}
+
+  @media (hover:hover) and (min-width:1024px){
+    .fs-card.fs-in:hover{--y:-6px;box-shadow:0 20px 40px rgba(15,23,42,.2)}
+  }
+
+  .fs-dots{display:none}
+
+  .fs-cta{text-align:center;margin-top:48px}
+  .fs-cta p{color:#64748b;font-size:16px;margin:0 0 16px}
+  .fs-btn{background:#f97316;color:#fff;border:0;border-radius:999px;padding:14px 28px;font-size:16px;font-weight:700;cursor:pointer}
+  .fs-btn:hover{background:#ea580c}
+  .fs-btn:focus-visible,.fs-close:focus-visible{outline:3px solid #1e3a8a;outline-offset:3px}
+
+  /* Mobile / tablet: scroll-snap carousel */
+  @media (max-width:1023px){
+    .fs-section{padding:60px 16px}
+    .fs-head{margin-bottom:32px}
+    .fs-track{
+      justify-content:flex-start;gap:14px;padding:12px 16px 20px;margin:0 -16px;
+      overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+      -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    }
+    .fs-track::-webkit-scrollbar{display:none}
+    .fs-card,.fs-card:nth-child(3){
+      flex:0 0 min(78vw,300px);width:min(78vw,300px);margin-left:0;--s:1;
+      scroll-snap-align:center;scroll-snap-stop:normal;
+      box-shadow:0 12px 32px rgba(15,23,42,.12);
+    }
+    .fs-card:nth-child(n+2){margin-left:0}
+    .fs-card:active{--s:.98}
+    .fs-dots{display:flex;justify-content:center;gap:8px;margin-top:6px}
+    .fs-dot{width:8px;height:8px;border-radius:50%;background:#cbd5e1;transition:background .2s,transform .2s}
+    .fs-dot.fs-active{background:#1e3a8a;transform:scale(1.25)}
+  }
+
+  /* Modal */
+  .fs-modal{position:fixed;inset:0;background:#fff;display:none;z-index:1000}
+  .fs-modal.fs-open{display:block}
+  .fs-modal-box{position:absolute;inset:0;overflow-y:auto;padding:64px 20px 40px;box-sizing:border-box;outline:none}
+  .fs-close{position:fixed;top:12px;right:14px;width:44px;height:44px;border:0;border-radius:50%;background:#f1f5f9;color:#0f172a;font-size:26px;line-height:1;cursor:pointer;z-index:1001}
+  .fs-prev-wrap{min-height:80vh;min-height:80dvh;max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .fs-prev-img{display:none;max-width:100%;max-height:80vh;object-fit:contain;border-radius:12px}
+  .fs-prev-wrap.fs-loaded .fs-prev-img{display:block}
+  .fs-prev-cap{display:none;color:#64748b;font-size:13px;margin:12px 0 0}
+  .fs-prev-wrap.fs-loaded .fs-prev-cap{display:block}
+  .fs-empty{display:none;color:#64748b;font-size:17px;line-height:1.5;max-width:340px}
+  .fs-prev-wrap.fs-failed .fs-empty{display:block}
+  @media (prefers-reduced-motion:reduce){.fs-card{transition:none;opacity:1;--y:0px}}
+</style>
+</head>
+<body>
+
+<div class="stub">HERO SECTION (your existing hero stays here)</div>
+
+<!-- ===== FEATURE SHOWCASE ===== -->
+<section class="fs-section" id="feature-showcase" aria-labelledby="fs-title">
+  <div class="fs-head">
+    <p class="fs-eyebrow">Why HOMA works</p>
+    <h2 class="fs-title" id="fs-title">One app. Every metabolic signal.</h2>
+    <p class="fs-sub">Track. See. Adjust. The 90-day loop that actually moves your numbers.</p>
+  </div>
+
+  <div class="fs-track" id="fsTrack">
+
+    <!-- Card 1: Unsplash (fresh food) -->
+    <article class="fs-card" role="article" aria-label="Reach and maintain your goal weight">
+      <div class="fs-photo">
+        <img loading="lazy"
+          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80&fm=webp"
+          srcset="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=400&q=80&fm=webp 400w,
+                  https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80&fm=webp 800w"
+          sizes="(max-width:1023px) min(78vw,300px), 260px"
+          alt="Fresh fruits and vegetables arranged on a dark cloth">
+      </div>
+      <h3>Reach &amp; maintain your goal weight</h3>
+    </article>
+
+    <!-- Card 2: PLACEHOLDER - app screenshot on phone.
+         To replace: save your screenshot as app-screenshot.png next to this file
+         (in Next.js: web/public/app-screenshot.png and use src="/app-screenshot.png"). -->
+    <article class="fs-card" role="article" aria-label="Log from any phone, works offline">
+      <div class="fs-photo">
+        <svg viewBox="0 0 228 220" aria-hidden="true" focusable="false">
+          <rect x="79" y="14" width="70" height="192" rx="12" fill="rgba(255,255,255,.55)"/>
+          <rect x="85" y="28" width="58" height="164" rx="6" fill="rgba(255,255,255,.75)"/>
+          <rect x="91" y="38" width="46" height="8" rx="4" fill="rgba(245,166,35,.8)"/>
+          <rect x="91" y="54" width="46" height="26" rx="5" fill="rgba(245,166,35,.45)"/>
+          <rect x="91" y="88" width="46" height="26" rx="5" fill="rgba(245,166,35,.45)"/>
+          <rect x="91" y="122" width="46" height="26" rx="5" fill="rgba(245,166,35,.45)"/>
+        </svg>
+        <img loading="lazy" src="app-screenshot.png" alt="HOMA app screen on a phone" onerror="this.style.display='none'">
+      </div>
+      <h3>Log from any phone, works offline</h3>
+    </article>
+
+    <!-- Card 3: real clinic photo (clinic.jpg in the same folder) -->
+    <article class="fs-card" role="article" aria-label="Develop healthy habits daily">
+      <div class="fs-photo">
+        <img loading="lazy" src="clinic.jpg" alt="HOMA Healthcare Center clinic" onerror="this.style.display='none'">
+      </div>
+      <h3>Develop healthy habits daily</h3>
+    </article>
+
+    <!-- Card 4: Unsplash (vegetables) -->
+    <article class="fs-card" role="article" aria-label="Doctor-designed meal plan">
+      <div class="fs-photo">
+        <img loading="lazy"
+          src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80&fm=webp"
+          srcset="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80&fm=webp 400w,
+                  https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80&fm=webp 800w"
+          sizes="(max-width:1023px) min(78vw,300px), 260px"
+          alt="Colorful fresh vegetables spread out on a table">
+      </div>
+      <h3>Doctor-designed meal plan</h3>
+    </article>
+
+    <!-- Card 5: PLACEHOLDER - dashboard mockup.
+         To replace: save your mockup as dashboard-mockup.png next to this file
+         (in Next.js: web/public/dashboard-mockup.png and use src="/dashboard-mockup.png"). -->
+    <article class="fs-card" role="article" aria-label="Get a 90-day view of your health">
+      <div class="fs-photo">
+        <svg viewBox="0 0 228 220" aria-hidden="true" focusable="false">
+          <rect x="24" y="24" width="180" height="172" rx="12" fill="rgba(255,255,255,.7)"/>
+          <circle cx="68" cy="76" r="22" fill="none" stroke="rgba(56,189,248,.8)" stroke-width="8"/>
+          <circle cx="114" cy="76" r="22" fill="none" stroke="rgba(56,189,248,.55)" stroke-width="8"/>
+          <circle cx="160" cy="76" r="22" fill="none" stroke="rgba(56,189,248,.35)" stroke-width="8"/>
+          <rect x="40" y="118" width="70" height="30" rx="6" fill="rgba(56,189,248,.35)"/>
+          <rect x="118" y="118" width="70" height="30" rx="6" fill="rgba(56,189,248,.35)"/>
+          <rect x="40" y="156" width="70" height="26" rx="6" fill="rgba(56,189,248,.25)"/>
+          <rect x="118" y="156" width="70" height="26" rx="6" fill="rgba(56,189,248,.25)"/>
+        </svg>
+        <img loading="lazy" src="dashboard-mockup.png" alt="HOMA dashboard showing your 90-day health view" onerror="this.style.display='none'">
+      </div>
+      <h3>Get a 90-day view of your health</h3>
+    </article>
+
+  </div>
+
+  <div class="fs-dots" id="fsDots" aria-hidden="true">
+    <span class="fs-dot fs-active"></span><span class="fs-dot"></span><span class="fs-dot"></span><span class="fs-dot"></span><span class="fs-dot"></span>
+  </div>
+
+  <div class="fs-cta">
+    <p>Want to see what the tracker looks like inside?</p>
+    <button type="button" class="fs-btn" id="fsOpen" aria-haspopup="dialog" aria-controls="fsModal">Preview the dashboard &rarr;</button>
+  </div>
+</section>
+
+<div class="fs-modal" id="fsModal" role="dialog" aria-modal="true" aria-label="Dashboard preview">
+  <button type="button" class="fs-close" id="fsClose" aria-label="Close preview">&times;</button>
+  <div class="fs-modal-box" id="fsBox" tabindex="-1">
+    <div class="fs-prev-wrap" id="fsPrevWrap">
+      <img class="fs-prev-img" id="fsPrevImg" data-src="dashboard-preview.png" alt="Sample preview of the HOMA Remission Tracker dashboard">
+      <p class="fs-prev-cap">Sample preview</p>
+      <p class="fs-empty">Dashboard preview coming soon. Start logging to see it live.</p>
+    </div>
+  </div>
+</div>
+
+<div class="stub">HOW IT WORKS, FREE HEALTH TOOLS, THE SILENT WARNING, ABOUT DR. MUDDU, FOOTER (your existing sections stay here)</div>
+
+<script>
+(function(){
+  var track=document.getElementById('fsTrack');
+  var cards=[].slice.call(track.querySelectorAll('.fs-card'));
+  var dots=[].slice.call(document.querySelectorAll('#fsDots .fs-dot'));
+
+  // Fade in from bottom, staggered 100ms
+  function reveal(){
+    cards.forEach(function(c,i){
+      c.style.transitionDelay=(i*100)+'ms';
+      c.classList.add('fs-in');
+    });
+    setTimeout(function(){cards.forEach(function(c){c.style.transitionDelay=''})},1200);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){reveal();io.disconnect();}
+    },{threshold:.2});
+    io.observe(track);
+  }else{reveal();}
+
+  // Pagination dots: nearest card to the centre of the carousel
+  var ticking=false;
+  function updateDots(){
+    var mid=track.scrollLeft+track.clientWidth/2,best=0,bestD=1e9;
+    cards.forEach(function(c,i){
+      var d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid);
+      if(d<bestD){bestD=d;best=i;}
+    });
+    dots.forEach(function(d,k){d.classList.toggle('fs-active',k===best)});
+    ticking=false;
+  }
+  track.addEventListener('scroll',function(){
+    if(!ticking){ticking=true;requestAnimationFrame(updateDots);}
+  },{passive:true});
+
+  // Modal
+  var modal=document.getElementById('fsModal');
+  var box=document.getElementById('fsBox');
+  var openBtn=document.getElementById('fsOpen');
+  var closeBtn=document.getElementById('fsClose');
+  var wrap=document.getElementById('fsPrevWrap');
+  var img=document.getElementById('fsPrevImg');
+  var lastFocus=null;
+
+  function loadPreview(){
+    if(img.getAttribute('src'))return;
+    img.onload=function(){wrap.classList.add('fs-loaded');wrap.classList.remove('fs-failed');};
+    img.onerror=function(){img.removeAttribute('src');wrap.classList.add('fs-failed');wrap.classList.remove('fs-loaded');};
+    img.src=img.getAttribute('data-src');
+  }
+  function open(){
+    lastFocus=document.activeElement;
+    modal.classList.add('fs-open');
+    document.body.style.overflow='hidden';
+    loadPreview();
+    closeBtn.focus();
+  }
+  function close(){
+    modal.classList.remove('fs-open');
+    document.body.style.overflow='';
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  openBtn.addEventListener('click',open);
+  closeBtn.addEventListener('click',close);
+  // Tap outside the image / message dismisses
+  modal.addEventListener('click',function(e){
+    if(!e.target.closest('.fs-prev-img,.fs-empty,.fs-prev-cap,.fs-close'))close();
+  });
+  // Escape closes; Tab stays inside the dialog
+  document.addEventListener('keydown',function(e){
+    if(!modal.classList.contains('fs-open'))return;
+    if(e.key==='Escape'){e.preventDefault();close();return;}
+    if(e.key==='Tab'){
+      var f=[].slice.call(modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'));
+      if(!f.length){e.preventDefault();return;}
+      var first=f[0],last=f[f.length-1];
+      if(!modal.contains(document.activeElement)){e.preventDefault();first.focus();}
+      else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+    }
+  });
+})();
+</script>
+</body>
+</html>

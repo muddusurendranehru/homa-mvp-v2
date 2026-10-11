@@ -35,6 +35,9 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   if (req.nextUrl.pathname.startsWith('/api/admin/blog')) {
     return NextResponse.next();
   }
+  if (req.nextUrl.pathname === '/dashboard.html') {
+    return NextResponse.next();
+  }
   if (isProtectedRoute(req)) {
     await auth.protect();
   }

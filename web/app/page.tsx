@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } from "@/components/HomeSections";
-
+import FeatureShowcase from "@/components/FeatureShowcase";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -121,6 +121,8 @@ export default function HomePage() {
       {/* HOME HERO START */}
       <HomeHero />
       {/* HOME HERO END */}
+            {/* FEATURE SHOWCASE */}
+      <FeatureShowcase />
       {/* GOV LEADERS START */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", padding: "16px 4% 0", background: "#07153a" }}>
         <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
