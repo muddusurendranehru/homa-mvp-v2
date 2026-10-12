@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { api } from '@/lib/api';
@@ -9,15 +10,15 @@ const WA = 'https://wa.me/919963721999';
 const MEAL_APP = 'https://healthmetrics30daymeals.onrender.com';
 
 const FEATURES = [
-  { icon: '🧬', title: 'HOMA-IR + TyG Assessment', caption: 'The early markers that predict diabetes years before HbA1c' },
-  { icon: '🥗', title: 'Personalized Indian Diet Plan', caption: '30-day rolling meal plans based on your reports' },
-  { icon: '📱', title: 'Daily Tracking App', caption: '60-second daily logs on your phone' },
-  { icon: '👨‍⚕️', title: 'Doctor Follow-up', caption: "Weekly reviews by Dr. Muddu's team" },
-  { icon: '💬', title: 'WhatsApp Support', caption: 'Ask anything, get answers within hours' },
-  { icon: '🏠', title: 'DDDD Home Visits', caption: 'Door-to-door monitoring in Hyderabad (Gachibowli, Ameerpet, Bachupally, Patancheru)' },
-  { icon: '🚫', title: 'No CGM Required', caption: 'Uses your existing lab reports — no sensors, no finger pricks' },
-  { icon: '🔬', title: 'Peer-Reviewed Protocol', caption: 'Based on published research (IJCPR 2026, IJM 2026)' },
-] as const;
+  { icon: "🧬", title: "HOMA-IR + TyG Assessment", caption: "The early markers that predict diabetes years before HbA1c", href: "/tools/homa-ir-calculator", external: false },
+  { icon: "🥗", title: "Personalized Indian Diet Plan", caption: "30-day rolling meal plans based on your reports", href: "https://healthmetrics30daymeals.onrender.com", external: true },
+  { icon: "📱", title: "Daily Tracking App", caption: "60-second daily logs on your phone", href: "/dashboard", external: false },
+  { icon: "👨‍⚕️", title: "Doctor Follow-up", caption: "Weekly reviews by Dr. Muddu's team", href: "https://wa.me/919963721999", external: true },
+  { icon: "💬", title: "WhatsApp Support", caption: "Ask anything, get answers within hours", href: "https://wa.me/919963721999", external: true },
+  { icon: "🏠", title: "DDDD Home Visits", caption: "Door-to-door monitoring in Hyderabad (Gachibowli, Ameerpet, Bachupally, Patancheru)", href: "https://wa.me/919963721999?text=I%20want%20a%20home%20visit%20from%20HOMA", external: true },
+  { icon: "🚫", title: "No CGM Required", caption: "Uses your existing lab reports — no sensors, no finger pricks", href: "/tools", external: false },
+  { icon: "🔬", title: "Peer-Reviewed Protocol", caption: "Based on published research (IJCPR 2026, IJM 2026)", href: "/research", external: false },
+];
 
 const PILLARS = [
   { title: 'Insulin Resistance', detail: 'HOMA-IR, TyG Index' },
@@ -26,7 +27,40 @@ const PILLARS = [
   { title: 'Early Renal Injury', detail: 'UACR, Glomerular Hyperfiltration' },
 ] as const;
 
-const VISITS = ['Diet review', 'Waist check', 'Follow-up visit', 'Lab report review'] as const;
+const STORIES = [
+  {
+    name: 'Lakshmi R.',
+    hba1c: '7.2 → 5.8',
+    quote: 'After 3 months with Dr. Muddu’s program, my HOMA-IR dropped from 8.5 to 2.1. The daily tracking kept me accountable.',
+  },
+  {
+    name: 'Rajesh K.',
+    hba1c: '6.8 → 5.4',
+    quote: 'My triglycerides were 380 and my TyG index was dangerously high. I finally understood the science behind insulin resistance.',
+  },
+  {
+    name: 'Priya S.',
+    hba1c: '6.5 → 5.2',
+    quote: 'Post-pregnancy weight and PCOD made life difficult. My waist went from 96 cm to 82 cm, and I feel confident again.',
+  },
+  {
+    name: 'Suresh M.',
+    hba1c: '8.1 → 6.2',
+    quote: 'I ignored my health for years. Fasting insulin was through the roof. The scientific approach and daily habit tracking changed everything.',
+  },
+] as const;
+
+const VISITS = [
+  { src: '/images/patients/visit-01.jpg', alt: 'Woman at a HOMA clinic visit', caption: 'HOMA clinic visit' },
+  { src: '/images/patients/visit-02.jpg', alt: 'Woman at a HOMA clinic visit', caption: 'HOMA clinic visit' },
+  { src: '/images/patients/visit-03.jpg', alt: 'Man at a HOMA clinic visit', caption: 'HOMA clinic visit' },
+  { src: '/images/patients/visit-04.jpg', alt: 'Seated patient at a HOMA clinic visit', caption: 'HOMA clinic visit' },
+  { src: '/images/patients/visit-05.jpg', alt: 'Doctor measuring waist at the clinic', caption: 'Waist measurement at the clinic' },
+  { src: '/images/patients/visit-06.jpg', alt: 'Knee circumference measured with a tape at the clinic', caption: 'Knee measurement at the clinic' },
+  { src: '/images/patients/visit-07.jpg', alt: 'Waist tape over a striped shirt, face not shown', caption: 'Waist measurement at the clinic' },
+  { src: '/images/patients/visit-08.jpg', alt: 'Seated finger-stick check at the clinic', caption: 'Finger-stick check at the clinic' },
+  { src: '/images/patients/visit-09.jpg', alt: 'Standing waist check with arms raised', caption: 'Standing waist check at the clinic' },
+] as const;
 
 const PRICE_FEATURES = [
   'HOMA-IR + TyG assessment',
@@ -223,13 +257,26 @@ export default function RemissionProgramPage() {
       <section className="mx-auto max-w-5xl px-4 py-12" style={pad}>
         <h2 className="text-2xl font-extrabold text-[#1e3a8a] sm:text-3xl">What&apos;s included in your 90-day program</h2>
         <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {FEATURES.map((feature) => (
-            <article key={feature.title} className="min-w-0 rounded-[20px] bg-white p-4 shadow-sm">
-              <div className="text-2xl" aria-hidden="true">{feature.icon}</div>
-              <h3 className="mt-2 text-sm font-bold leading-snug text-slate-900 sm:text-base">{feature.title}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">{feature.caption}</p>
-            </article>
-          ))}
+          {FEATURES.map((feature) => {
+            const label = `${feature.title}. ${feature.caption}`;
+            const card = (
+              <article className="flex min-h-12 min-w-0 flex-col rounded-[20px] bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                <div className="text-2xl" aria-hidden="true">{feature.icon}</div>
+                <h3 className="mt-2 text-sm font-bold leading-snug text-slate-900 sm:text-base">{feature.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">{feature.caption}</p>
+                <span className="mt-2 text-xs font-bold text-[#0d9488]">Open →</span>
+              </article>
+            );
+            return feature.external ? (
+              <a key={feature.title} href={feature.href} target="_blank" rel="noopener noreferrer" className="rounded-[20px] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a8a]" aria-label={label}>
+                {card}
+              </a>
+            ) : (
+              <Link key={feature.title} href={feature.href} className="rounded-[20px] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a8a]" aria-label={label}>
+                {card}
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -289,11 +336,25 @@ export default function RemissionProgramPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 pb-12" style={pad}>
-        <h2 className="text-2xl font-extrabold text-[#1e3a8a] sm:text-3xl">Patients at HOMA</h2>
+        <h2 className="text-2xl font-extrabold text-[#1e3a8a] sm:text-3xl">Real patients. Real results.</h2>
         <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {VISITS.map((caption) => (
-            <article key={caption} className="min-w-0 rounded-[20px] bg-white p-4 shadow-sm">
-              <h3 className="text-base font-bold text-slate-900">{caption}</h3>
+          {VISITS.map((visit) => (
+            <article key={visit.src} className="min-w-0 overflow-hidden rounded-[20px] bg-white shadow-sm">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-200">
+                <Image src={visit.src} alt={visit.alt} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover object-top" />
+              </div>
+              <div className="p-4">
+                <h3 className="font-bold text-slate-900">{visit.caption}</h3>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {STORIES.map((story) => (
+            <article key={story.name} className="min-w-0 rounded-[20px] bg-white p-4 shadow-sm">
+              <p className="text-lg font-bold text-[#f97316]">HbA1c {story.hba1c}</p>
+              <h3 className="mt-1 font-bold text-slate-900">{story.name}</h3>
+              <p className="mt-2 text-sm font-normal leading-relaxed text-slate-600">&ldquo;{story.quote}&rdquo;</p>
             </article>
           ))}
         </div>
