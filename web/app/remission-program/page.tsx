@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { api } from '@/lib/api';
@@ -9,57 +8,34 @@ import { api } from '@/lib/api';
 const WA = 'https://wa.me/919963721999';
 const MEAL_APP = 'https://healthmetrics30daymeals.onrender.com';
 
-const FEATURES = [
-  { icon: "🧬", title: "HOMA-IR + TyG Assessment", caption: "The early markers that predict diabetes years before HbA1c", href: "/tools/homa-ir-calculator", external: false },
+const FEATURES: { icon: string; title: string; caption: string; href: string; external: boolean; img?: string }[] = [
+  { icon: "🧬", title: "HOMA-IR + TyG Assessment", caption: "The early markers that predict diabetes years before HbA1c", href: "/tools/homa-ir-calculator", external: false, img: "/images/tiles/feat-homa-ir.jpg" },
   { icon: "🥗", title: "Personalized Indian Diet Plan", caption: "30-day rolling meal plans based on your reports", href: "https://healthmetrics30daymeals.onrender.com", external: true },
   { icon: "📱", title: "Daily Tracking App", caption: "60-second daily logs on your phone", href: "/dashboard", external: false },
-  { icon: "👨‍⚕️", title: "Doctor Follow-up", caption: "Weekly reviews by Dr. Muddu's team", href: "https://wa.me/919963721999", external: true },
-  { icon: "💬", title: "WhatsApp Support", caption: "Ask anything, get answers within hours", href: "https://wa.me/919963721999", external: true },
+  { icon: "👨‍⚕️", title: "Doctor Follow-up", caption: "Weekly reviews by Dr. Muddu's team", href: "https://wa.me/919963721999", external: true, img: "/images/tiles/feat-doctor.jpg" },
+  { icon: "💬", title: "WhatsApp Support", caption: "Ask anything, get answers within hours", href: "https://wa.me/919963721999", external: true, img: "/images/tiles/feat-whatsapp.jpg" },
   { icon: "🏠", title: "DDDD Home Visits", caption: "Door-to-door monitoring in Hyderabad (Gachibowli, Ameerpet, Bachupally, Patancheru)", href: "https://wa.me/919963721999?text=I%20want%20a%20home%20visit%20from%20HOMA", external: true },
-  { icon: "🚫", title: "No CGM Required", caption: "Uses your existing lab reports — no sensors, no finger pricks", href: "/tools", external: false },
-  { icon: "🔬", title: "Peer-Reviewed Protocol", caption: "Based on published research (IJCPR 2026, IJM 2026)", href: "/research", external: false },
+  { icon: "🚫", title: "No CGM Required", caption: "Uses your existing lab reports — no sensors, no finger pricks", href: "/tools", external: false, img: "/images/tiles/feat-no-cgm.jpg" },
+  { icon: "🔬", title: "Peer-Reviewed Protocol", caption: "Based on published research (IJCPR 2026, IJM 2026)", href: "/research", external: false, img: "/images/tiles/feat-research.jpg" },
 ];
 
-const PILLARS = [
+const PILLARS: readonly { title: string; detail: string; img?: string }[] = [
   { title: 'Insulin Resistance', detail: 'HOMA-IR, TyG Index' },
-  { title: 'Central Obesity', detail: 'Waist Circumference' },
+  { title: 'Central Obesity', detail: 'Waist Circumference', img: '/images/tiles/pillar-obesity.jpg' },
   { title: 'Inflammation', detail: 'CRP, TNF-α, IL-6' },
   { title: 'Early Renal Injury', detail: 'UACR, Glomerular Hyperfiltration' },
 ] as const;
 
-const STORIES = [
-  {
-    name: 'Lakshmi R.',
-    hba1c: '7.2 → 5.8',
-    quote: 'After 3 months with Dr. Muddu’s program, my HOMA-IR dropped from 8.5 to 2.1. The daily tracking kept me accountable.',
-  },
-  {
-    name: 'Rajesh K.',
-    hba1c: '6.8 → 5.4',
-    quote: 'My triglycerides were 380 and my TyG index was dangerously high. I finally understood the science behind insulin resistance.',
-  },
-  {
-    name: 'Priya S.',
-    hba1c: '6.5 → 5.2',
-    quote: 'Post-pregnancy weight and PCOD made life difficult. My waist went from 96 cm to 82 cm, and I feel confident again.',
-  },
-  {
-    name: 'Suresh M.',
-    hba1c: '8.1 → 6.2',
-    quote: 'I ignored my health for years. Fasting insulin was through the roof. The scientific approach and daily habit tracking changed everything.',
-  },
-] as const;
-
 const VISITS = [
-  { src: '/images/patients/visit-01.jpg', alt: 'Woman at a HOMA clinic visit', caption: 'HOMA clinic visit' },
-  { src: '/images/patients/visit-02.jpg', alt: 'Woman at a HOMA clinic visit', caption: 'HOMA clinic visit' },
-  { src: '/images/patients/visit-03.jpg', alt: 'Man at a HOMA clinic visit', caption: 'HOMA clinic visit' },
-  { src: '/images/patients/visit-04.jpg', alt: 'Seated patient at a HOMA clinic visit', caption: 'HOMA clinic visit' },
-  { src: '/images/patients/visit-05.jpg', alt: 'Doctor measuring waist at the clinic', caption: 'Waist measurement at the clinic' },
-  { src: '/images/patients/visit-06.jpg', alt: 'Knee circumference measured with a tape at the clinic', caption: 'Knee measurement at the clinic' },
-  { src: '/images/patients/visit-07.jpg', alt: 'Waist tape over a striped shirt, face not shown', caption: 'Waist measurement at the clinic' },
-  { src: '/images/patients/visit-08.jpg', alt: 'Seated finger-stick check at the clinic', caption: 'Finger-stick check at the clinic' },
-  { src: '/images/patients/visit-09.jpg', alt: 'Standing waist check with arms raised', caption: 'Standing waist check at the clinic' },
+  { src: '/images/patients/visit-01.jpg', caption: 'Clinic visit' },
+  { src: '/images/patients/visit-02.jpg', caption: 'Clinic visit' },
+  { src: '/images/patients/visit-03.jpg', caption: 'Clinic visit' },
+  { src: '/images/patients/visit-04.jpg', caption: 'Clinic consultation' },
+  { src: '/images/patients/visit-05.jpg', caption: 'Waist measurement' },
+  { src: '/images/patients/visit-06.jpg', caption: 'Knee and leg measurement' },
+  { src: '/images/patients/visit-07.jpg', caption: 'Waist measurement' },
+  { src: '/images/patients/visit-08.jpg', caption: 'Finger-stick sugar check' },
+  { src: '/images/patients/visit-09.jpg', caption: 'Standing waist check' },
 ] as const;
 
 const PRICE_FEATURES = [
@@ -260,11 +236,18 @@ export default function RemissionProgramPage() {
           {FEATURES.map((feature) => {
             const label = `${feature.title}. ${feature.caption}`;
             const card = (
-              <article className="flex min-h-12 min-w-0 flex-col rounded-[20px] bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <div className="text-2xl" aria-hidden="true">{feature.icon}</div>
-                <h3 className="mt-2 text-sm font-bold leading-snug text-slate-900 sm:text-base">{feature.title}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">{feature.caption}</p>
-                <span className="mt-2 text-xs font-bold text-[#0d9488]">Open →</span>
+              <article className="flex h-full min-h-12 min-w-0 flex-col overflow-hidden rounded-[20px] bg-white shadow-sm transition-shadow hover:shadow-md">
+                {feature.img ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={feature.img} alt={feature.title} loading="lazy" width={800} height={600} className="aspect-[4/3] w-full rounded-t-[20px] object-cover" />
+                ) : (
+                  <div className="flex aspect-[4/3] w-full items-center justify-center rounded-t-[20px] bg-gradient-to-br from-teal-50 to-teal-100 text-4xl" aria-hidden="true">{feature.icon}</div>
+                )}
+                <div className="flex flex-1 flex-col p-4">
+                  <h3 className="text-sm font-bold leading-snug text-slate-900 sm:text-base">{feature.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">{feature.caption}</p>
+                  <span className="mt-auto pt-2 text-xs font-bold text-[#0d9488]">Open →</span>
+                </div>
               </article>
             );
             return feature.external ? (
@@ -324,9 +307,17 @@ export default function RemissionProgramPage() {
         <h2 className="text-2xl font-extrabold text-[#1e3a8a] sm:text-3xl">Beyond HbA1c — the 4 pillars of metabolic risk</h2>
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
           {PILLARS.map((pillar) => (
-            <article key={pillar.title} className="min-w-0 rounded-[20px] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-bold text-slate-900 sm:text-base">{pillar.title}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">{pillar.detail}</p>
+            <article key={pillar.title} className="min-w-0 overflow-hidden rounded-[20px] bg-white shadow-sm">
+              {pillar.img ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={pillar.img} alt={pillar.title} loading="lazy" width={800} height={600} className="aspect-[4/3] w-full rounded-t-[20px] object-cover" />
+              ) : (
+                <div className="flex aspect-[4/3] w-full items-center justify-center rounded-t-[20px] bg-gradient-to-br from-teal-50 to-teal-100 px-3 text-center text-sm font-extrabold text-[#0d9488]" aria-hidden="true">{pillar.title}</div>
+              )}
+              <div className="p-4">
+                <h3 className="text-sm font-bold text-slate-900 sm:text-base">{pillar.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">{pillar.detail}</p>
+              </div>
             </article>
           ))}
         </div>
@@ -336,25 +327,16 @@ export default function RemissionProgramPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 pb-12" style={pad}>
-        <h2 className="text-2xl font-extrabold text-[#1e3a8a] sm:text-3xl">Real patients. Real results.</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <h2 className="text-2xl font-extrabold text-[#1e3a8a] sm:text-3xl">Patients at HOMA</h2>
+        <p className="mt-2 text-sm text-slate-600">Real clinic photos. Faces blurred for privacy.</p>
+        <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {VISITS.map((visit) => (
             <article key={visit.src} className="min-w-0 overflow-hidden rounded-[20px] bg-white shadow-sm">
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-200">
-                <Image src={visit.src} alt={visit.alt} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover object-top" />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={visit.src} alt={visit.caption} loading="lazy" width={800} height={600} className="aspect-[4/3] w-full rounded-t-[20px] object-cover" />
               <div className="p-4">
-                <h3 className="font-bold text-slate-900">{visit.caption}</h3>
+                <h3 className="text-sm font-bold text-slate-900 sm:text-base">{visit.caption}</h3>
               </div>
-            </article>
-          ))}
-        </div>
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {STORIES.map((story) => (
-            <article key={story.name} className="min-w-0 rounded-[20px] bg-white p-4 shadow-sm">
-              <p className="text-lg font-bold text-[#f97316]">HbA1c {story.hba1c}</p>
-              <h3 className="mt-1 font-bold text-slate-900">{story.name}</h3>
-              <p className="mt-2 text-sm font-normal leading-relaxed text-slate-600">&ldquo;{story.quote}&rdquo;</p>
             </article>
           ))}
         </div>
