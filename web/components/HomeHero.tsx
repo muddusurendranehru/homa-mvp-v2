@@ -76,7 +76,7 @@ export default function HomeHero() {
             <a href="/remission-program" className="hh-btn hh-primary">
               Start your 90-day reset →
             </a>
-            <a href="/tools" className="hh-btn hh-glass">
+            <a href="/health-check" className="hh-btn hh-glass">
               Try free health checks
             </a>
           </div>
