@@ -727,6 +727,7 @@ export default function RootLayout({
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 text-sm">
                   <Link href="/" className="text-gray-300 hover:text-white transition-colors text-center py-2">🏠 Home</Link>
                   <Link href="/tools" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">📊 Calculators</Link>
+                  <Link href="/tools/metabolic-analyzer.html" target="_blank" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">Metabolic Analyzer</Link>
                   <Link href="/conditions" className="text-gray-300 hover:text-purple-400 transition-colors text-center py-2">🩺 Conditions</Link>
                   <Link href="/auth" className="text-gray-300 hover:text-white transition-colors text-center py-2">🔐 Login</Link>
                   <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors text-center py-2">📊 Dashboard</Link>

@@ -212,8 +212,8 @@ export default function RemissionProgramPage() {
             <span>₹13,500 for 90 days</span>
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link href="/reversal-score" className="inline-flex min-h-12 items-center justify-center rounded-[20px] bg-[#f97316] px-5 text-base font-bold text-white no-underline hover:bg-orange-600">
-              Get My Risk Score →
+            <Link href="/tools/metabolic-analyzer.html" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-[20px] bg-[#f97316] px-5 text-base font-bold text-white no-underline hover:bg-orange-600">
+              Get My Metabolic Score →
             </Link>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-[20px] border-2 border-white px-5 text-base font-bold text-white no-underline hover:bg-white/10">
               Book Free Session →
@@ -371,8 +371,8 @@ export default function RemissionProgramPage() {
           <h2 className="text-3xl font-extrabold">Start Your 90-Day Reset Today</h2>
           <p className="mt-3 text-white">Free 20-minute consultation. No obligation.</p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/reversal-score" className="inline-flex min-h-12 items-center justify-center rounded-[20px] bg-[#f97316] px-5 font-bold text-white no-underline hover:bg-orange-600">
-              Get My Risk Score →
+            <Link href="/tools/metabolic-analyzer.html" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-[20px] bg-[#f97316] px-5 font-bold text-white no-underline hover:bg-orange-600">
+              Get My Metabolic Score →
             </Link>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-[20px] bg-[#16a34a] px-5 font-bold text-white no-underline hover:bg-green-700">
               Book Free Session →
