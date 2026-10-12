@@ -5,6 +5,7 @@ import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } from "@/components/HomeSections";
 import FeatureShowcase from "@/components/FeatureShowcase";
+import GovernmentTrust from "@/components/GovernmentTrust";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -123,6 +124,8 @@ export default function HomePage() {
       {/* HOME HERO END */}
             {/* FEATURE SHOWCASE */}
       <FeatureShowcase />
+      {/* GOVERNMENT TRUST */}
+      <GovernmentTrust />
       {/* GOV LEADERS START */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", padding: "16px 4% 0", background: "#07153a" }}>
         <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
@@ -331,10 +334,10 @@ export default function HomePage() {
           margin: "0 0 4px",
           lineHeight: 1.15,
         }}>
-          Free Webinar Tonight — 6 to 7 PM
+          Free Webinar Tonight — 7 PM
         </h2>
         <p style={{ color: "#ffffff", fontSize: "clamp(14px, 2vw, 18px)", fontWeight: 400, margin: "0 0 20px", opacity: 0.85 }}>
-          Dr. Muddu Surendra Nehru MD · Today 6–7 PM · Join for just 20 Minutes · Free · No Sign-up
+          Dr. Muddu Surendra Nehru MD · Today 7 PM · Join for just 20 Minutes · Free · No Sign-up
         </p>
 
         {/* Countdown */}
@@ -373,7 +376,7 @@ export default function HomePage() {
           borderRadius: "20px",
           marginBottom: "24px",
         }}>
-          {countdown.started ? "🟢 Seminar is LIVE now!" : "⚡ Limited seats — Register free"}
+          {countdown.started ? "🟢 Webinar is LIVE now!" : "⚡ Limited seats — Register free"}
         </p>
 
         {/* Buttons */}
@@ -390,7 +393,7 @@ export default function HomePage() {
             boxShadow: "0 4px 20px rgba(212,175,55,0.45)",
             letterSpacing: "0.02em",
           }}>
-            👉 Join Seminar Free
+            👉 Join Webinar Free
           </a>
           <a href="/tools" style={{
             backgroundColor: "transparent",
@@ -498,8 +501,8 @@ export default function HomePage() {
         {[
           ["5,000+", "Patients Treated"],
           ["90", "Day Reversal Program"],
-          ["32+", "Years Clinical Experience"],
-          ["4", "Books Published"],
+          ["34", "Years Clinical Experience"],
+          ["11", "Books Published"],
         ].map(([num, lbl], i) => (
           <div
             key={i}
