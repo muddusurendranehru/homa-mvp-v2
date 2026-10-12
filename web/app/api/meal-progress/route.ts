@@ -130,6 +130,7 @@ export async function GET() {
         firstWeekLogged,
         last7DaysLogged: logs.filter((l) => l.date >= weekAgo).length,
         streak: currentStreak(allDates),
+        last7Dates: logs.filter((l) => l.date >= weekAgo && l.date <= today).map((l) => l.date),
       },
       coins: { total: coins, bonusWeeks },
       energy,
