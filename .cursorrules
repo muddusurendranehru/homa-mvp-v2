@@ -1,0 +1,50 @@
+# HOMA Project — Cursor Rules
+
+## ABSOLUTE RULES — Do Not Violate
+
+1. NEVER auto-commit changes.
+2. NEVER auto-push changes to git.
+3. NEVER run `git commit` or `git push` without explicit user approval.
+4. ALWAYS save changes to the local file first.
+5. STOP after editing the file. Do not proceed to git.
+
+## WORKFLOW
+
+When I ask you to make a code change:
+- Edit the file in place.
+- Save to disk.
+- Show me a diff.
+- STOP. Wait for my approval.
+
+When I approve, I will:
+- Open VS Code
+- Verify the change
+- Run `npm run build` locally
+- Test on localhost:3004
+- Run git commands manually in PowerShell
+
+You do NOT do any of these steps. You only edit the file.
+
+## TOOLS
+
+- Cursor (you): edit code only. Stop before git.
+- VS Code: view the edited file.
+- PowerShell: run `npm run build`, `git add`, `git commit`, `git push`.
+- Browser: test locally at localhost:3004.
+
+## WHAT NOT TO DO
+
+- Do not run `git add .`
+- Do not run `git commit`
+- Do not run `git push`
+- Do not run "accept all and commit"
+- Do not auto-save multiple files
+- Do not edit files outside the one I asked about
+
+## WHAT TO DO
+
+- Make the requested change.
+- Save the file locally.
+- Show the diff.
+- STOP.
+- Wait for approval.
