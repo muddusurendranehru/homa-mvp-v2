@@ -32,11 +32,8 @@ const POC_DOCS: Item[] = [
   { files: ["poc1-1.jpeg", "poc1 (2).jpeg"], caption: "Pilot documentation 1" },
   { files: ["poc1-2.jpeg", "poc1 (4).jpeg"], caption: "Pilot documentation 2" },
   { files: ["poc1-3.jpeg", "poc1 (6).jpeg"], caption: "Pilot documentation 3" },
-  { files: ["pocform1.jpeg"], caption: "Government form (page 1)" },
-  { files: ["pocform1impsign.jpeg"], caption: "Signed approval" },
   { files: ["pocform2.jpeg"], caption: "Government form (page 2)" },
   { files: ["pocpage1.jpeg"], caption: "Pilot proposal" },
-  { files: ["pocsigned5.jpeg"], caption: "Final signed document" },
 ];
 
 const NAVY = "#1e3a8a";
