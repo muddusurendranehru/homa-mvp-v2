@@ -13,6 +13,7 @@ export interface BlogPost {
   date: string;
   author?: string;
   description?: string;
+  image?: string;
   content: string;
   htmlContent: string;
 }
@@ -70,6 +71,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       date: data.date || '',
       author: data.author,
       description: data.description,
+      image: data.image,
       content,
       htmlContent,
     };

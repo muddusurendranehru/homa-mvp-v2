@@ -1,9 +1,12 @@
-/** 
+/**
  * Blog posts render from content/blog/{slug}.md only.
  */
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ShareButtons from '@/components/ShareButtons';
 import { getBlogPost, getAllBlogSlugs } from '@/lib/content';
+
+const SITE_URL = 'https://mvp.homahealthcarecenter.in';
 
 export async function generateStaticParams() {
   return getAllBlogSlugs();
@@ -24,6 +27,13 @@ export async function generateMetadata({
   return {
     title: `${post.title} | HOMA Clinic`,
     description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      url: `${SITE_URL}/blog/${slug}`,
+      images: post.image ? [{ url: post.image }] : undefined,
+    },
   };
 }
 
@@ -66,6 +76,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </Link>
         </p>
 
+        {post.image ? (
+          <div className="mb-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-auto rounded-xl shadow-sm"
+            />
+          </div>
+        ) : null}
+
         <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium mb-4">
           Blog
         </span>
@@ -81,6 +102,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           className="max-w-none text-gray-800 leading-relaxed space-y-4 mb-12 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-6"
           dangerouslySetInnerHTML={{ __html: post.htmlContent }}
         />
+
+        <div className="mt-10 mb-6">
+          <ShareButtons
+            url={`${SITE_URL}/blog/${slug}`}
+            title={post.title}
+          />
+        </div>
 
         <footer className="border-t border-gray-200 pt-8 text-sm text-gray-600 space-y-2">
           <p className="font-medium text-gray-800">
