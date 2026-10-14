@@ -115,9 +115,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             Dr Muddu Surendra Nehru MD | HOMA Healthcare Center | Gachibowli | 09963721999
           </p>
           <p>
-            <a href="https://homahealthcarecenter.in" className="text-teal-600 hover:underline">
-              homahealthcarecenter.in
-            </a>
+            <Link href="/health-check" className="text-teal-600 hover:underline">
+              Free metabolic health check →
+            </Link>
           </p>
         </footer>
     </article>
