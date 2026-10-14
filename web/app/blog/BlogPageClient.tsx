@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import BlogLayout from '@/components/BlogLayout';
 
 export type BlogCardPost = {
   id: number | string;
@@ -21,7 +20,7 @@ type Props = {
 
 export default function BlogPageClient({ posts }: Props) {
   return (
-    <BlogLayout>
+    <div>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-green-600 to-teal-600 text-white py-16 px-4 -mx-4 sm:-mx-6 lg:-mx-8 mb-8">
         <div className="max-w-4xl mx-auto text-center">
@@ -153,6 +152,6 @@ export default function BlogPageClient({ posts }: Props) {
           </div>
         </div>
       </div>
-    </BlogLayout>
+    </div>
   );
 }
