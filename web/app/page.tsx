@@ -133,14 +133,12 @@ export default function HomePage() {
           <p className="text-slate-600 mb-6">
             Full clinical assessment — HOMA-IR, TyG Index, BMI, waist-to-height ratio, and the Dr. Nehru Method CWR. India-specific cutoffs.
           </p>
-          <Link
-            href="/tools/metabolic-analyzer.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#f97316] text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors"
-          >
-            Open the Analyzer →
-          </Link>
+         <Link
+  href="/tools"
+  className="inline-block bg-[#f97316] text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors"
+>
+  Open the Analyzer →
+</Link>
         </div>
       </section>
             {/* FEATURE SHOWCASE */}
