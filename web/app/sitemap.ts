@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next';
+import { getAllBlogSlugs } from '@/lib/content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://mvp.homahealthcarecenter.in';
   const now = new Date();
+  const blogSlugs = getAllBlogSlugs();
 
   return [
     // Core pages
@@ -31,10 +33,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/hyderabad/patancheru`, lastModified: now, priority: 0.8 },
     { url: `${baseUrl}/hyderabad/bachupally`, lastModified: now, priority: 0.8 },
 
-    // Blog posts
-    { url: `${baseUrl}/blog/can-prediabetes-be-reversed-in-90-days`, lastModified: now, priority: 0.8 },
-    { url: `${baseUrl}/blog/insulin-resistance-kidney-link`, lastModified: now, priority: 0.7 },
-    // Add future blogs here
+    // Blog posts — auto-generated from web/content/blog/*.md
+    ...blogSlugs.map(({ slug }) => ({
+      url: `${baseUrl}/blog/${slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
 
     // Condition pages
     { url: `${baseUrl}/conditions/diabetes`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
