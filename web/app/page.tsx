@@ -711,29 +711,57 @@ export default function HomePage() {
             See all stories →
           </Link>
         </div>
+                <div style={{ marginTop: "40px", marginBottom: "8px" }}>
+          <div
+            style={{
+              fontFamily: "'EB Garamond', serif",
+              fontSize: "clamp(40px, 6vw, 72px)",
+              fontWeight: 600,
+              color: "#00A896",
+              textAlign: "center",
+              lineHeight: 1,
+            }}
+          >
+            500+
+          </div>
+          <div
+            style={{
+              fontSize: "12px",
+              color: "#666",
+              fontWeight: 400,
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              marginTop: "8px",
+              textAlign: "center",
+            }}
+          >
+            patients treated · real results
+          </div>
+        </div>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: "16px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+            gap: "12px",
+            marginTop: "32px",
           }}
         >
           {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786782867/pt3_xjwa8v.jpg", role: "✅ Diabetes Reversed · Hyderabad" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786783593/wc3_kwewhe.jpg", role: "✅ Central Obesity Reversed · Gachibowli" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786782867/pt2_xtvbhg.jpg", role: "✅ −12 kg · No Medication · Ameerpet" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801928/pt28_tlwch0.jpg", role: "✅ Pre-Diabetes Reversed · Bachupally" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801928/pt26_qjkp9x.jpg", role: "✅ Diabetes Reversed · Kondapur" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801929/pt29_lga0ax.jpg", role: "✅ −18 kg · Off Insulin · Madhapur" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801927/pt25_mrynmj.jpg", role: "✅ HbA1c Normal · No Surgery · Patancheru" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_500,c_fill,g_face/v1786801926/pt23_osuhcg.jpg", role: "✅ Obesity Reversed · Telangana" },
+            { img: "/images/patients/pt-01.jpg", role: "✅ Diabetes Reversed · Hyderabad" },
+            { img: "/images/patients/pt-02.jpg", role: "✅ Central Obesity Reversed · Gachibowli" },
+            { img: "/images/patients/pt-03.jpg", role: "✅ −12 kg · No Medication · Ameerpet" },
+            { img: "/images/patients/pt-04.jpg", role: "✅ Pre-Diabetes Reversed · Bachupally" },
+            { img: "/images/patients/pt-05.jpg", role: "✅ Diabetes Reversed · Kondapur" },
+            { img: "/images/patients/pt-06.jpg", role: "✅ −18 kg · Off Insulin · Madhapur" },
+            { img: "/images/patients/pt-07.jpg", role: "✅ HbA1c Normal · No Surgery · Patancheru" },
+            { img: "/images/patients/pt-08.jpg", role: "✅ Obesity Reversed · Telangana" },
           ].map((p) => (
             <div
               key={p.role}
               onClick={() => window.open("/testimonials", "_blank")}
               style={{
                 position: "relative",
-                borderRadius: "16px",
+                borderRadius: "14px",
                 overflow: "hidden",
                 aspectRatio: "3/4",
                 cursor: "pointer",
@@ -745,14 +773,14 @@ export default function HomePage() {
                 alt={p.role}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px" }}>
-                <div style={{ fontSize: "13px", fontWeight: 600, color: "#fff" }}>{p.role}</div>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 55%)" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "14px 12px" }}>
+                <div style={{ fontSize: "11px", fontWeight: 600, color: "#fff" }}>{p.role}</div>
               </div>
             </div>
           ))}
         </div>
-      </section>
+              </section>
 
       {/* REAL CAMPS START */}
       <section style={{ padding: "64px 6%", background: "#ffffff" }}>
