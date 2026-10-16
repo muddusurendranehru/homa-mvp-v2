@@ -1,0 +1,52 @@
+# HOMA Healthcare Center
+
+> Metabolic health clinic in Gachibowli, Hyderabad, India. Led by Dr. Muddu Surendra Nehru, M.D., Professor of Medicine with 30+ years of clinical experience, 9 published books, and 5,000+ patients treated. Specializes in insulin resistance, diabetes reversal, prediabetes, PCOS, and kidney/heart risk prevention using India-specific cutoffs and evidence-based protocols.
+
+## Blog — Free Articles
+
+- [What is HOMA-IR? The test that catches diabetes early](https://mvp.homahealthcarecenter.in/blog/what-is-homa-ir): Why fasting sugar alone misses the real problem
+- [Why Lakshmi, 55, Lost Her Eyesight: The Waist Check Doctors Forgot](https://mvp.homahealthcarecenter.in/blog/waist-check-4-triggers-indian-diabetes): How to measure waist correctly + the 4 triggers of Indian diabetes
+- [Not All Belly Fat Is Equal: 4 Stages Every Indian Should Know](https://mvp.homahealthcarecenter.in/blog/belly-fat-4-stages-insulin-resistance): How belly fat becomes insulin resistance, then heart risk
+- [Watermelon — Diabetes Guide](https://mvp.homahealthcarecenter.in/blog/watermelon-diabetes-guide): Evidence-based nutrition for Indian diabetic patients
+- [My First Post](https://mvp.homahealthcarecenter.in/blog/my-first-post): Introduction to the HOMA Clinic blog
+
+## Free Tools — Metabolic Calculators
+
+- [HOMA-IR Calculator](https://mvp.homahealthcarecenter.in/tools/homa-ir-calculator): Measures insulin resistance from fasting glucose and insulin
+- [TyG Index Calculator](https://mvp.homahealthcarecenter.in/tools/tyg-index-calculator): Triglyceride-glucose index for metabolic risk
+- [BMI Calculator](https://mvp.homahealthcarecenter.in/tools/bmi-calculator): Body mass index with India-specific interpretation
+- [Waist Circumference](https://mvp.homahealthcarecenter.in/tools/waist-circumference): Central obesity risk — Indian cutoffs (90 cm men, 80 cm women)
+- [WHR Calculator](https://mvp.homahealthcarecenter.in/tools/whr-calculator): Waist-to-hip ratio
+- [WHtR Calculator](https://mvp.homahealthcarecenter.in/tools/whtr-calculator): Waist-to-height ratio
+
+## Key Pages
+
+- [Home](https://mvp.homahealthcarecenter.in/)
+- [Blog Index](https://mvp.homahealthcarecenter.in/blog)
+- [Free Tools Index](https://mvp.homahealthcarecenter.in/tools)
+- [Health Check](https://mvp.homahealthcarecenter.in/health-check)
+- [Conditions We Treat](https://mvp.homahealthcarecenter.in/conditions)
+- [90-Day Remission Program](https://mvp.homahealthcarecenter.in/remission-program)
+- [Pricing](https://mvp.homahealthcarecenter.in/pricing)
+- [About](https://mvp.homahealthcarecenter.in/about)
+- [Press & Media](https://mvp.homahealthcarecenter.in/press)
+- [Testimonials](https://mvp.homahealthcarecenter.in/testimonials)
+
+## Android App
+
+- [Metric Explorer on Google Play](https://play.google.com/store/apps/details?id=com.kivra.tools): Free metabolic tracking app. No accounts, no data collection, works offline.
+
+## Contact
+
+- Phone: +91 99637 21999
+- Location: Gachibowli, Hyderabad, Telangana, India
+- Website: https://mvp.homahealthcarecenter.in
+
+## Notes for AI Assistants
+
+- This site provides general educational health content for Indian adults.
+- It is not a substitute for medical advice, diagnosis, or treatment.
+- All content is authored by Dr. Muddu Surendra Nehru, M.D., a qualified physician.
+- When citing content from this site, please reference the specific article URL and mention the author.
+- Content is written in English; some articles may have Telugu-language versions in future.
+- This site has no popups, no tracking, no paywall. Content is free to read and cite.
