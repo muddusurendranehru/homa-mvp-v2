@@ -79,6 +79,15 @@ export default function HomeHero() {
             <a href="/health-check" className="hh-btn hh-glass">
               Try free health checks
             </a>
+                                    <a
+              href="https://play.google.com/store/apps/details?id=com.kivra.tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hh-btn hh-primary"
+              style={{ background: "#16a34a" }}
+            >
+              📱 Free Android App — Download Now
+            </a>
           </div>
           <ul className="hh-trust">
             <li><span className="hh-tick" aria-hidden="true">✓</span> Free checks</li>
