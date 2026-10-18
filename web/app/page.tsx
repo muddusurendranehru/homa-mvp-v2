@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } from "@/components/HomeSections";
+import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
 export default function HomePage() {
@@ -121,6 +122,7 @@ export default function HomePage() {
       <HomeFadeIn />
       {/* HOME HERO START */}
       <HomeHero />
+      <SubtypeBanner />
       {/* HOME HERO END */}
       <section className="bg-white py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
@@ -1386,3 +1388,4 @@ export default function HomePage() {
     </>
   );
 }
+
