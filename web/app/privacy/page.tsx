@@ -110,14 +110,46 @@ export default function PrivacyPage() {
                   Phone: +91 99637 21999
                 </a>
               </p>
-              <p>
-                <a href="mailto:homasurendranehru@gmail.com" className="text-green-600 hover:text-green-700 hover:underline">
-                  Email: homasurendranehru@gmail.com
+                         <p>
+                <a href="mailto:info@homahealthcarecenter.in" className="text-green-600 hover:text-green-700 hover:underline">
+                  Email: info@homahealthcarecenter.in
                 </a>
               </p>
             </div>
           </div>
 
+          {/* Cookies */}
+          <section className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-green-700">
+              Cookies
+            </h2>
+            <p className="text-gray-700 mb-4">
+              This website uses a small number of essential cookies required for the site to
+              function — for example, to keep you signed in if you use an account, and to
+              remember basic preferences. We do not currently use advertising or third-party
+              tracking cookies. You can block or delete cookies in your browser settings at
+              any time; doing so may affect some features of the site.
+            </p>
+          </section>
+
+          {/* Grievance Officer */}
+          <section className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-green-700">
+              Grievance Officer
+            </h2>
+            <p className="text-gray-700 mb-4">
+              As required under India&apos;s Digital Personal Data Protection Act, 2023, the
+              details of our Grievance Officer are provided below. You may contact the
+              Grievance Officer to exercise your data rights, raise a complaint about how
+              your personal data has been handled, or ask questions about this policy.
+            </p>
+            <ul className="list-disc pl-6 text-gray-700 mb-4 space-y-1">
+              <li><strong>Name:</strong> Dr. Muddu Surendra Nehru, Director-CEO</li>
+              <li><strong>Email:</strong> info@homahealthcarecenter.in</li>
+              <li><strong>Phone:</strong> 09963721999</li>
+              <li><strong>Address:</strong> HOMA Healthcare Center, Gachibowli, Hyderabad</li>
+            </ul>
+          </section>
           {/* Footer */}
           <footer className="mt-12 pt-6 border-t border-gray-200 text-center">
             <p className="text-sm text-gray-500 mb-2">
