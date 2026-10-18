@@ -790,6 +790,9 @@ export default function RootLayout({
 <Link href="/affiliate-disclosure" className="text-gray-300 hover:text-white transition-colors">
   Affiliate Disclosure
 </Link>
+                  <Link href="/directory" className="text-gray-300 hover:text-white transition-colors">
+                    Health Directory
+                  </Link>
                 </div>
                 
                 <div className="text-center text-gray-400 space-y-1">
