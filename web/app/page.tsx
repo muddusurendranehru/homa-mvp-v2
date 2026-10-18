@@ -7,6 +7,7 @@ import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } 
 import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
+import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -840,7 +841,13 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          ))}
+                   ))}
+          
+                    {/* HOMA Lifestyle Card */}
+          <div className="flex items-center justify-center h-full">
+            <QualityOfLifeBanner />
+          </div>
+
         </div>
         <div style={{ textAlign: "center" }}>
           <a href="/communities" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontWeight: 600, fontSize: "14px", padding: "12px 28px", borderRadius: "100px", textDecoration: "none" }}>See All 10 Free Tribes</a>
