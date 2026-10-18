@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function QualityOfLifeBanner() {
   return (
-    <Link href="/partners" className="group block w-full max-w-sm mx-auto h-full">
+    <Link href="/lifestyle" className="group block w-full max-w-sm mx-auto h-full">
       <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col h-full">
         
         {/* Thumbnail Image */}
