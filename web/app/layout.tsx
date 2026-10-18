@@ -784,6 +784,12 @@ export default function RootLayout({
                                     <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
                     Privacy Policy
                   </Link>
+                  <Link href="/editorial-policy" className="text-gray-300 hover:text-white transition-colors">
+  Editorial Policy
+</Link>
+<Link href="/affiliate-disclosure" className="text-gray-300 hover:text-white transition-colors">
+  Affiliate Disclosure
+</Link>
                 </div>
                 
                 <div className="text-center text-gray-400 space-y-1">
