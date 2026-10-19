@@ -26,25 +26,24 @@ export default function AboutPage() {
       <main className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-12">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-12">
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
+              <div className="text-2xl font-bold text-purple-600">13</div>
+              <div className="text-gray-600 text-sm">Books Authored</div>
+            </div>
             <div className="bg-white p-4 rounded-lg shadow-sm border">
               <div className="text-2xl font-bold text-blue-600">32+</div>
               <div className="text-gray-600 text-sm">Years Experience</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <div className="text-2xl font-bold text-green-600">300+</div>
-              <div className="text-gray-600 text-sm">Articles Published</div>
+              <div className="text-2xl font-bold text-green-600">5 Lakh+</div>
+              <div className="text-gray-600 text-sm">OP Patients</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <div className="text-2xl font-bold text-purple-600">4</div>
-              <div className="text-gray-600 text-sm">Books Authored</div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <div className="text-2xl font-bold text-red-600">500+</div>
-              <div className="text-gray-600 text-sm">Patients Reversed</div>
+              <div className="text-2xl font-bold text-red-600">5,000+</div>
+              <div className="text-gray-600 text-sm">HOMA Tests Done</div>
             </div>
           </div>
-
           {/* Photo gallery */}
           <div className="mb-12">
             <PhotoGallery
@@ -131,6 +130,22 @@ export default function AboutPage() {
           })
         }}
       />
+              {/* Certifications Section */}
+        <section className="mt-16 pt-8 border-t border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            Our Certifications & Recognitions
+          </h2>
+          <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg border border-gray-100">
+            <img 
+              src="/images/honcode-certificate.jpg" 
+              alt="HONcode Certification and DPIIT Recognition" 
+              className="w-full h-auto"
+            />
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-4">
+            HOMA Healthcare Center is officially HONcode certified for trustworthy health information and recognized by DPIIT.
+          </p>
+        </section>
     </div>
   );
 }
