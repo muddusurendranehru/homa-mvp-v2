@@ -1,0 +1,54 @@
+I promise. Here are the **Compulsory Guardrails** for the HOMA Website. 
+
+Write these down. Print them. Tape them to your monitor. This is the exact protocol we follow from now on. No jumping. No guessing. No breaking the 1,400-line file.
+
+---
+
+# 🚨 THE HOMA PROTOCOL (Fool-Proof Rules)
+
+### RULE 1: THE 1,400-LINE FILE IS A LANDMINE
+**File:** `web/app/page.tsx`
+- **NEVER** copy-paste this entire file into a chat (Grok, DeepSeek, Cowork) to "fix" it. AI will hallucinate and break it.
+- **NEVER** manually delete lines in the middle of it. 
+- **ONLY ALLOWED ACTION:** You are allowed to type exactly **two lines** into this file:
+  1. `import ComponentName from "@/components/ComponentName";` (at the top)
+  2. `<ComponentName />` (in the `return` block)
+- **If the 1,400-line file breaks:** Revert it immediately from GitHub (`git restore web/app/page.tsx`). Do not try to fix it manually.
+
+### RULE 2: THE COMPONENT WAY (How we build)
+If you want to add anything new to the homepage:
+1. Create a new file in `web/components/` (e.g., `NewSection.tsx`).
+2. Build and test it in isolation.
+3. Once it is perfect (`✖ 0` errors), import it into `page.tsx` using the 2 lines allowed in Rule 1.
+
+### RULE 3: THE NEW PAGE WAY
+If you want to build a whole new page (like `/subtypes`, `/about`, `/camps`):
+1. Create a new folder in `web/app/` (e.g., `web/app/camps/`).
+2. Create `page.tsx` inside that folder.
+3. Build it completely separate from the homepage.
+4. Link to it from the Header or a Component.
+
+### RULE 4: THE MAGIC CHECKLIST (No jumping)
+Before **ANY** code is pushed to the live website, we must do these 4 steps in order:
+1. **`npx tsc --noEmit`**: Run this in PowerShell. If it prints any red text, STOP. Fix the error.
+2. **`npm run dev`**: Open `localhost:3004` in the browser. Click every button. Check the layout. Does it look perfect?
+3. **`npm run build`**: Wait for `✓ Compiled successfully`. If it says `Failed to compile`, STOP. Do not push.
+4. **`git status`**: Verify ONLY the files you intended to change are listed. Then `git add`, `git commit`, `git push`.
+
+### RULE 5: NO TOOL MIXING
+- **Cowork / Grok / Cursor:** Use them to *write* code in the chat.
+- **VS Code:** Use it to *paste* the code into the file and save.
+- **PowerShell:** Use it to *check* (tsc), *run* (dev), *build*, and *push*.
+- Do not use AI to edit files directly. Do not use PowerShell to edit code.
+
+### RULE 6: THE GOLDEN RULE
+**If it is working live on production, DO NOT TOUCH IT.**
+If you must update it, do it locally, verify it is 100% perfect, and then push. Never fix live code directly.
+
+---
+
+I promise to follow these rules strictly. No more jumping ahead. No more panics. 
+
+**Save this text.** Tomorrow, if we open a new chat, paste this at the top so the next AI knows the rules. 
+
+You have a perfect, live, working site right now. You are safe. Rest.
