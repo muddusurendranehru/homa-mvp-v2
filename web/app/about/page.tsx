@@ -46,13 +46,13 @@ export default function AboutPage() {
           </div>
           {/* Photo gallery */}
           <div className="mb-12">
-            <PhotoGallery
+                      <PhotoGallery
               title="At the clinic"
               photos={[
                 { src: '/images/dr-muddu-portrait.jpg', alt: 'Dr. Muddu Surendra Nehru, M.D.', pos: 'center top' },
-                { src: '/images/about-minister-book.jpg', alt: "Dr. Muddu Surendra Nehru presenting his book 'BP: The Untold Truth' to Telangana Minister Duddilla Sridhar Babu", pos: 'center 25%', caption: "Dr. Muddu presenting 'BP: The Untold Truth' to Minister Sridhar Babu." },
-                { src: '/images/exam-room.jpg', alt: 'A metabolic examination in the HOMA clinic room.', pos: 'center 40%' },
-                { src: '/images/silent-warning.jpg', alt: "Doctor measuring a patient's waist with a measuring tape during a metabolic health check at HOMA Healthcare Center.", pos: 'center top' },
+                { src: '/images/about-minister-book.jpg', alt: "Dr. Muddu Surendra Nehru presenting his book to Telangana Minister", pos: 'center 25%', caption: "Dr. Muddu presenting his book to Minister Sridhar Babu." },
+                { src: '/images/doctor-premier-flyer.jpg', alt: 'Dr. Muddu Surendra Nehru at Premier Hospital', pos: 'center top', caption: 'Professor of Medicine, Premier Hospital.' },
+                { src: '/images/staff3.jpg', alt: 'The HOMA Healthcare Center team celebrating', pos: 'center', caption: 'The HOMA Team at the Gachibowli clinic.' },
               ]}
             />
           </div>
