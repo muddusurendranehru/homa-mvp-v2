@@ -801,6 +801,8 @@ export default function RootLayout({
                   <p className="text-xs">Serving Gachibowli, Ameerpet, Bachupally & Patancheru with at-home metabolic assessments.</p>
                 </div>
                 
+                <p className="mt-4 text-sm text-center"><a href="https://docs.google.com/forms/d/e/1FAIpQLScFyqzVxG4DzDlEgCHFlwNnPbo6Iz1jHLPHrxdQKQBwA9fEcQ/viewform" target="_blank" rel="noopener noreferrer" className="underline hover:text-yellow-300">Collaborate / Volunteer</a></p>
+
                 {/* Follow us */}
                 <div id="footer-follow" className="mt-4 flex flex-wrap items-center justify-center gap-3">
                   <span className="text-sm font-medium text-[#d4af37]">Follow us:</span>

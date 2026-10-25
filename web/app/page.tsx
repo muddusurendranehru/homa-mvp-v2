@@ -8,6 +8,7 @@ import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
 import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
+import { FreeScreeningCamps, LecturesRecognition, VisitClinic } from "@/components/HomaPhotoSections";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -41,7 +42,7 @@ export default function HomePage() {
   const faqs = [
     {
       q: "How much does the HOMA 90-day program cost?",
-      a: "₹13,500 for the full 90-day metabolic reversal program. This includes HOMA-IR testing, TyG Index, NutriBot AI access, D·D·D home visits, and all follow-ups. Others charge ₹20,000–₹25,000 for less.",
+      a: "₹13,500 for the full 90-day metabolic care program. This includes HOMA-IR testing, TyG Index, NutriBot AI access, D·D·D home visits, and all follow-ups. Others charge ₹20,000–₹25,000 for less.",
     },
     {
       q: "What is D·D·D — Door to Door Diabetes Delivery?",
@@ -52,8 +53,8 @@ export default function HomePage() {
       a: "HOMA-IR (Homeostatic Model Assessment of Insulin Resistance) measures how insulin-resistant your cells are. It detects diabetes risk years before fasting glucose becomes abnormal. HOMA Healthcare is the first clinic in India to offer this free online.",
     },
     {
-      q: "Can Type 2 Diabetes really be reversed?",
-      a: "Yes — in patients with less than 10 years of diabetes and preserved beta-cell function. Our 90-day protocol using metabolic nutrition, movement, and HOMA-IR monitoring has reversed diabetes in hundreds of patients.",
+      q: "Can Type 2 Diabetes be improved?",
+      a: "Many patients, especially those diagnosed recently, can improve blood sugar control and sometimes need fewer medicines with nutrition, movement, and regular HOMA-IR monitoring under medical supervision. Results vary from person to person, and no outcome is guaranteed.",
     },
     {
       q: "Do I need to stop my medications immediately?",
@@ -61,7 +62,7 @@ export default function HomePage() {
     },
     {
       q: "Is this program suitable for PCOS?",
-      a: "Yes. PCOS is driven by insulin resistance in most cases. The same HOMA-IR protocol that reverses diabetes also corrects the hormonal imbalance causing PCOS. Many patients see improvement in 60–90 days.",
+      a: "Yes. PCOS is driven by insulin resistance in most cases. The same HOMA-IR based approach used for diabetes can help address insulin resistance in PCOS. Progress is reviewed regularly with Dr. Muddu.",
     },
     {
       q: "Which areas in Hyderabad do you serve?",
@@ -124,6 +125,8 @@ export default function HomePage() {
       {/* HOME HERO START */}
       <HomeHero />
       <SubtypeBanner />
+      <FreeScreeningCamps />
+      <LecturesRecognition />
       {/* HOME HERO END */}
       <section className="bg-white py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
@@ -245,6 +248,7 @@ export default function HomePage() {
       <HowItWorks />
       {/* ABOUT DR. MUDDU (details moved from the old teal header bar) */}
       <AboutDrMuddu />
+      <VisitClinic />
 
       {/* DDDD DIRECTION BLOCK START */}
       <section style={{ background: "linear-gradient(#ffffff, #e8f7ee)", borderTop: "4px solid #16a34a", color: "#1a2e22", padding: "40px 6%", textAlign: "center" }}>
@@ -854,35 +858,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FREE SUGAR CAMP */}
-      <section style={{ background: "#ffffff", padding: "28px 6%", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 500, color: "#0D2B4E", margin: "0 0 14px" }}>
-          Free sugar camp
-        </h2>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "12px", maxWidth: "640px", margin: "0 auto" }}>
-          <img
-            src="https://res.cloudinary.com/drhsco04l/image/upload/w_400,c_fill,f_auto,q_auto/v1791036659/WhatsApp_Image_2026-10-03_at_19.36.32_1_ewjv3z.jpg"
-            alt="Free sugar camp waist check"
-            style={{ width: "180px", maxWidth: "100%", height: "auto", borderRadius: "8px", display: "block" }}
-          />
-          <img
-            src="https://res.cloudinary.com/drhsco04l/image/upload/w_400,c_fill,f_auto,q_auto/v1791036659/WhatsApp_Image_2026-10-03_at_19.36.32_lz1wj8.jpg"
-            alt="Free sugar camp waist check"
-            style={{ width: "180px", maxWidth: "100%", height: "auto", borderRadius: "8px", display: "block" }}
-          />
-          <img
-            src="https://res.cloudinary.com/drhsco04l/image/upload/w_400,c_fill,f_auto,q_auto/v1791036659/WhatsApp_Image_2026-10-03_at_19.36.31_3_hq1u1h.jpg"
-            alt="Free sugar camp waist check"
-            style={{ width: "180px", maxWidth: "100%", height: "auto", borderRadius: "8px", display: "block" }}
-          />
-        </div>
-        <p style={{ margin: "12px 0 0", fontSize: "14px", color: "#333" }}>Waist check.</p>
-        <p style={{ margin: "14px 0 0" }}>
-          <a href="/normal-values" style={{ color: "#0D2B4E", fontWeight: 700, fontSize: "15px", textDecoration: "underline" }}>Cutoff values: BMI, waist, and daily needs</a>
-        </p>
-      </section>
-
- {/* AWARDS SECTION */}
+      {/* AWARDS SECTION */}
       <section style={{ background: "#f8f5ee", padding: "72px 6%" }}>
         <div style={{ textAlign: "center", marginBottom: "44px" }}>
           <div style={{ fontSize: "11px", fontWeight: 600, color: "#c0392b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Honours &amp; Awards</div>

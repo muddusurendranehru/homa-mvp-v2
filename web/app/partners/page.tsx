@@ -37,7 +37,7 @@ const features = [
   {
     title: "Trust & Compliance",
     description:
-      "Leverage our HONcode ethical certification and DPDPA-compliant privacy standards.",
+      "Leverage our commitment to HONcode principles and DPDPA-compliant privacy standards.",
     icon: (
       <path
         strokeLinecap="round"

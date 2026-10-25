@@ -138,12 +138,12 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg border border-gray-100">
             <img 
               src="/images/honcode-certificate.jpg" 
-              alt="HONcode Certification and DPIIT Recognition" 
+              alt="HONcode principles and DPIIT Recognition" 
               className="w-full h-auto"
             />
           </div>
           <p className="text-center text-sm text-gray-500 mt-4">
-            HOMA Healthcare Center is officially HONcode certified for trustworthy health information and recognized by DPIIT.
+            HOMA Healthcare Center follows HONcode principles for trustworthy health information and is recognized by DPIIT.
           </p>
         </section>
     </div>
