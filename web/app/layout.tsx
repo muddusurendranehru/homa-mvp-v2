@@ -304,6 +304,7 @@ export default function RootLayout({
                 <Link href="/about" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">About</Link>
                 <Link href="/blog" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Blog</Link>
                 <Link href="/press" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Press</Link>
+                <Link href="/conferences" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Conferences</Link>
                 <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" rel="noopener noreferrer" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Partners</a>
                 <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Join</a>
               </div>

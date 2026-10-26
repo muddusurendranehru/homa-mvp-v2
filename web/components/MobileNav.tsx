@@ -14,6 +14,7 @@ const navLinks = [
   { href: '/pricing', label: 'Pricing', icon: '💳' },
   { href: '/zoom', label: 'Zoom Sundays', icon: '📹' },
   { href: '/gallery', label: 'Gallery', icon: '📸' },
+  { href: '/conferences', label: 'Conferences', icon: '🎤' },
   { href: '/blog', label: 'Blog', icon: '📝' },
   { href: '/dashboard', label: 'Dashboard', icon: '📊' },
   { href: '/nutri-bot', label: 'NutriBot AI', icon: '🤖' },

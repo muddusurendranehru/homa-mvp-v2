@@ -1,5 +1,5 @@
 /**
- * Homepage photo sections: Free Screening Camps, Lectures & Recognition, Visit the Clinic.
+ * Homepage photo sections: Free Screening Camps, MEND trust spotlight, Visit the Clinic.
  * Uses plain <img loading="lazy"> like HomepagePhotoGallery (avoids Next Image optimizer issues).
  * Patient faces are blurred in the source images. No names, numbers or results in captions.
  */
@@ -15,24 +15,8 @@ const screening: Photo[] = [
   { src: "/images/homa-sugar-test-3.jpg", alt: "Blood sugar test at a community screening camp", caption: "Community sugar screening" },
 ];
 
-const lectures: Photo[] = [
-  { src: "/images/homa-thub-agenda-launch.jpg", alt: "HOMA Agenda conference launch with doctors and partners on stage", caption: "HOMA Agenda conference: diabetes care research launch", pos: "center 40%" },
-  { src: "/images/homa-thub-junior-doctors.jpg", alt: "Junior doctors from the HOMA research team at T-Hub, Hyderabad", caption: "Junior doctors outreach and T-Hub research collaboration", pos: "center 45%" },
-  { src: "/images/homa-lecture-premier-talk.jpg", alt: "Dr. Muddu Surendra Nehru MD giving a metabolic health talk at Premier Hospital", caption: "Metabolic health talk at Premier Hospital", pos: "center 40%" },
-  { src: "/images/homa-lecture-premier-screen.jpg", alt: "Dr. Muddu Surendra Nehru MD presenting on obesity and metabolic health at Premier Hospital", caption: "Patient education session on metabolic health", pos: "center 35%" },
-  { src: "/images/homa-mnr-book-handover.jpg", alt: "Dr. Muddu Surendra Nehru MD presenting his book at MNR Medical College, Sangareddy", caption: "Book presentation at MNR Medical College" },
-  { src: "/images/homa-mnr-vice-chairman-students.jpg", alt: "Dr. Muddu Surendra Nehru MD with MNR Vice Chairman Sri Manthena Raju and a student volunteer", caption: "With Vice Chairman Sri Manthena Raju and student volunteer", pos: "center 30%" },
-  { src: "/images/homa-mnr-research-meeting.jpg", alt: "Research team meeting at MNR Medical College", caption: "TyG index research team, MNR Sangareddy" },
-  { src: "/images/homa-lecture-book-launch.jpg", alt: "Book launch event for HOMA Agenda on diabetes care", caption: "HOMA Agenda book launch", pos: "center 25%" },
-  { src: "/images/homa-lecture-agenda-team.jpg", alt: "HOMA team presenting the HOMA Agenda", caption: "Presenting the HOMA Agenda" },
-  { src: "/images/homa-lecture-press-coverage.jpg", alt: "Newspaper coverage of a HOMA health event", caption: "In the news", pos: "center top" },
-  { src: "/images/homa-mnr-cme-certificate.jpg", alt: "Certificate for HOMA 2026 Metabolic Medicine CME at MNR Medical College", caption: "HOMA 2026 Metabolic Medicine CME" },
-  { src: "/images/homa-press-meet-panel.jpg", alt: "Dr. Muddu Surendra Nehru MD at a press meet panel", caption: "Press meet on metabolic health" },
-  { src: "/images/homa-event-stage-panel.jpg", alt: "Dr. Muddu Surendra Nehru MD on a stage panel", caption: "Speaking on a health panel" },
-  { src: "/images/homa-felicitation-1.jpg", alt: "Dr. Muddu Surendra Nehru MD being felicitated", caption: "Felicitation at an event" },
-  { src: "/images/homa-felicitation-2.jpg", alt: "Dr. Muddu Surendra Nehru MD receiving recognition", caption: "Recognition for service" },
-  { src: "/images/homa-felicitation-group.jpg", alt: "Group photo at a felicitation event", caption: "With the organising team" },
-];
+const MEND_TRUST_CAPTION =
+  "MEND 2026 — Outstanding Clinical Award · Dr. Muddu Surendra Nehru, M.D.";
 
 function PhotoGrid({ photos }: { photos: Photo[] }) {
   return (
@@ -72,16 +56,39 @@ export function FreeScreeningCamps() {
   );
 }
 
-export function LecturesRecognition() {
+/** Single MEND award photo on the homepage for trust — full gallery lives on /conferences */
+export function MendTrustAward() {
   return (
-    <section id="lectures-recognition" className="bg-[#f8f7f3] py-12 px-4">
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#07153a]">Lectures &amp; Recognition</h2>
-        <p className="mt-3 text-gray-700">
-          Dr. Muddu Surendra Nehru MD of HOMA Healthcare Center speaks at medical colleges, press meets and public health events on diabetes and metabolic health. At MNR Medical College, Sangareddy, with Vice Chairman Sri Manthena Raju, student volunteers join our TyG index research and CME work.
+    <section id="clinical-trust" className="bg-[#f8f7f3] py-10 px-4" aria-labelledby="mend-trust-title">
+      <div className="max-w-2xl mx-auto text-center">
+        <h2 id="mend-trust-title" className="text-xl md:text-2xl font-bold text-[#07153a]">
+          Clinical recognition
+        </h2>
+        <p className="mt-2 text-sm md:text-base text-gray-700">
+          Peer honours for work on insulin resistance, TyG index research, and metabolic medicine
+          education — not a promise of individual outcomes.
+        </p>
+        <figure className="mt-6 m-0">
+          <div className="w-full overflow-hidden rounded-xl bg-gray-100 shadow-md" style={{ aspectRatio: "16 / 10" }}>
+            <img
+              src="/images/conferences/mend-2026/mend-2026-award-02.jpg"
+              alt="Dr. Muddu Surendra Nehru receiving the MEND 2026 Outstanding Clinical Award"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: "center 35%" }}
+            />
+          </div>
+          <figcaption className="mt-3 text-sm md:text-base font-semibold text-[#1e3a8a]">
+            {MEND_TRUST_CAPTION}
+          </figcaption>
+        </figure>
+        <p className="mt-4">
+          <a href="/conferences" className="text-[#0d9488] font-semibold underline hover:text-[#0f766e]">
+            See all conference &amp; lecture photos →
+          </a>
         </p>
       </div>
-      <PhotoGrid photos={lectures} />
     </section>
   );
 }
