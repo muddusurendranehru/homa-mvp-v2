@@ -8,7 +8,7 @@ import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
 import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
-import { FreeScreeningCamps, LecturesRecognition, VisitClinic } from "@/components/HomaPhotoSections";
+import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -126,7 +126,7 @@ export default function HomePage() {
       <HomeHero />
       <SubtypeBanner />
       <FreeScreeningCamps />
-      <LecturesRecognition />
+      <MendTrustAward />
       {/* HOME HERO END */}
       <section className="bg-white py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">

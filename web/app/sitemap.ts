@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/tools`, lastModified: now, priority: 0.8 },
     { url: `${baseUrl}/testimonials`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/gallery`, lastModified: now, priority: 0.7 },
+    { url: `${baseUrl}/conferences`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/disclaimer`, lastModified: now, priority: 0.5 },
     { url: `${baseUrl}/upgrade`, lastModified: now, priority: 0.6 },
     { url: `${baseUrl}/onboarding-emails`, lastModified: now, priority: 0.5 },
