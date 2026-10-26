@@ -16,28 +16,78 @@ const WA = "https://wa.me/919963721999";
 
 /* ---------- Free Health Tools ---------- */
 const TOOLS = [
-  { icon: "🧮", title: "HOMA-IR Calculator", sub: "Insulin resistance score", href: "/tools/homa-ir-calculator", fg: "#059669", bg: "#ecfdf5" },
-  { icon: "📏", title: "Waist Risk Check", sub: "Central obesity screening", href: "/tools/waist-circumference", fg: "#ea580c", bg: "#fff7ed" },
-  { icon: "📊", title: "TyG Index", sub: "Triglyceride-glucose marker", href: "/tools/tyg-index-calculator", fg: "#7c3aed", bg: "#f5f3ff" },
-  { icon: "💓", title: "Organ Age Quiz", sub: "Biological age estimate", href: "#organ-age", fg: "#dc2626", bg: "#fef2f2" },
+  {
+    img: "/images/tools/diabetes-home-check.jpg",
+    title: "Free Diabetes Check",
+    sub: "Am I at high risk for diabetes?",
+    hook: "From your lab report — at home, 30 seconds",
+    href: "/tools/homa-ir-calculator",
+    fg: "#059669",
+  },
+  {
+    img: "/images/tools/prediabetes-waist.jpg",
+    title: "Prediabetes From Home",
+    sub: "Waist check — no hospital visit",
+    hook: "Tired of waiting rooms? Tape measure + 30 seconds",
+    href: "/tools/waist-circumference",
+    fg: "#ea580c",
+  },
+  {
+    img: "/images/tools/heart-risk-check.jpg",
+    title: "Diabetes + Heart Risk",
+    sub: "Know your risk before a heart attack",
+    hook: "Fasting labs you already have — check from home",
+    href: "/tools/tyg-index-calculator",
+    fg: "#7c3aed",
+  },
+  {
+    img: "/images/tools/heart-attack-risk.jpg",
+    title: "Heart Risk Snapshot",
+    sub: "Afraid to visit the hospital?",
+    hook: "Quick organ & heart risk quiz — private, free",
+    href: "#organ-age",
+    fg: "#dc2626",
+  },
 ];
 
 export function FreeHealthTools() {
   return (
     <section id="free-tools" className="hs-sec hs-white" aria-labelledby="free-tools-title">
       <div className="hs-wrap">
-        <div className="hs-eyebrow">NO SIGNUP REQUIRED</div>
-        <h2 id="free-tools-title" className="hs-h2">Free Sugar, Waist &amp; Heart Risk Checks</h2>
-        <p className="hs-sub">Instant results. 30 seconds each.</p>
+        <div className="hs-eyebrow">FREE ONLINE CHECKS · ABOUT 30 SECONDS EACH</div>
+        <h2 id="free-tools-title" className="hs-h2">
+          Free Online Diabetes &amp; Prediabetes Risk Check
+        </h2>
+        <p className="hs-sub">
+          Heart attack risk from home too — no hospital wait. Know if you are at high risk for diabetes, prediabetes, or heart disease in about 30 seconds each.
+        </p>
         <div className="hs-tools">
           {TOOLS.map((t) => (
             <a key={t.title} href={t.href} className="hs-tool">
-              <span className="hs-tool-ic" style={{ background: t.bg, color: t.fg }} aria-hidden="true">{t.icon}</span>
+              <span className="hs-tool-thumb" aria-hidden="true">
+                <img src={t.img} alt="" width={120} height={90} loading="lazy" decoding="async" />
+                <span className="hs-tool-badge">FREE</span>
+                <span className="hs-tool-time">~30 sec</span>
+              </span>
               <span className="hs-tool-t">{t.title}</span>
               <span className="hs-tool-s">{t.sub}</span>
-              <span className="hs-tool-go" style={{ color: t.fg }}>Start →</span>
+              <span className="hs-tool-hook">{t.hook}</span>
+              <span className="hs-tool-go" style={{ color: t.fg }}>
+                Start {'→'}
+              </span>
             </a>
           ))}
+        </div>
+        <div className="hs-tools-cta">
+          <a
+            className="hs-btn hs-btn-primary"
+            href="https://wa.me/919963721999?text=I%27m%20interested%20in%20the%20free%20diabetes%20and%20heart%20risk%20checks%20from%20home"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            I&apos;m interested {'→'}
+          </a>
+          <span className="hs-tools-cta-note">WhatsApp us — we guide the next step</span>
         </div>
       </div>
     </section>
@@ -69,7 +119,7 @@ export function SilentWarning() {
             <p className="hs-body-dark">
               Not weight. Not BMI. <strong>Where the fat is stored</strong> decides your risk of diabetes, heart attack, and stroke.
             </p>
-            <a href="/tools/waist-circumference" className="hs-btn hs-btn-primary">Know Your Waist Risk →</a>
+            <a href="/tools/waist-circumference" className="hs-btn hs-btn-primary">Know Your Waist Risk {'>'}</a>
             <div className="hs-micro">Free · 30 seconds · No signup</div>
           </div>
         </div>
@@ -223,7 +273,7 @@ export function HowItWorksPageBody() {
             ]}
           />
           <div className="hs-page-cta">
-            <a href="/remission-program" className="hs-btn hs-btn-primary">Start your 90-day reset →</a>
+            <a href="/remission-program" className="hs-btn hs-btn-primary">Start your 90-day reset {'\u2192'}</a>
             <a href="/tools" className="hs-btn hs-btn-ghost">Try free health checks</a>
           </div>
         </div>
@@ -292,15 +342,16 @@ const CSS = `
 
 /* tools */
 .hs-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-@media (min-width:900px){.hs-tools{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
-.hs-tool{display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:18px 16px;min-height:168px;text-decoration:none;color:#0f172a;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:box-shadow .2s,transform .2s,border-color .2s}
-.hs-tool:hover{border-color:#cbd5e1;box-shadow:0 12px 28px -14px rgba(15,23,42,.25);transform:translateY(-2px)}
-@media (min-width:900px){.hs-tool{padding:24px 22px;min-height:196px}}
-.hs-tool-ic{width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px}
-.hs-tool-t{font-weight:700;font-size:15px;line-height:1.25}
-@media (min-width:900px){.hs-tool-t{font-size:17px}}
-.hs-tool-s{color:#64748b;font-size:13px;line-height:1.35}
-.hs-tool-go{margin-top:auto;padding-top:10px;font-weight:700;font-size:14px}
+@media (min-width:900px){.hs-tools{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
+.hs-tool{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px;min-height:0;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s,border-color .2s}
+.hs-tool:hover{border-color:#cbd5e1;box-shadow:0 12px 28px -14px rgba(15,23,42,.22);transform:translateY(-2px)}
+.hs-tool-thumb{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#f1f5f9}
+.hs-tool-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.hs-tool-t{font-weight:700;font-size:14px;line-height:1.25;padding:0 2px}
+@media (min-width:900px){.hs-tool-t{font-size:15px}}
+.hs-tool-s{color:#64748b;font-size:12px;line-height:1.35;padding:0 2px}
+.hs-tool-hook{color:#0f766e;font-size:11px;font-weight:600;line-height:1.35;padding:0 2px}
+.hs-tool-go{margin-top:auto;padding:4px 2px 2px;font-weight:700;font-size:13px}.hs-tool-badge{position:absolute;top:8px;right:8px;z-index:2;background:#dc2626;color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em;padding:5px 10px;border-radius:999px;box-shadow:0 6px 14px rgba(220,38,38,.35)}.hs-tool-time{position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(15,23,42,.78);color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:999px}.hs-tools-cta{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}.hs-tools-cta-note{color:#64748b;font-size:13px;font-weight:600}
 .hs-more{text-align:center;margin-top:20px}
 .hs-more a{display:inline-flex;align-items:center;min-height:48px;color:#0f172a;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:3px}
 

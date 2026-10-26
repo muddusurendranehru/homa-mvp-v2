@@ -124,9 +124,10 @@ export default function HomePage() {
       <HomeFadeIn />
       {/* HOME HERO START */}
       <HomeHero />
-      <SubtypeBanner />
+      <FreeHealthTools />
       <FreeScreeningCamps />
       <MendTrustAward />
+      <SubtypeBanner />
       {/* HOME HERO END */}
       <section className="bg-white py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
@@ -240,8 +241,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* GOV LEADERS END */}
-      {/* FREE HEALTH TOOLS (replaces old white tools strip) */}
-      <FreeHealthTools />
+      {/* FreeHealthTools duplicate removed — lives under HomeHero */}
       {/* THE SILENT WARNING (migrated Central Obesity card) */}
       <SilentWarning />
       {/* HOW IT WORKS (moved up from the bottom, restyled) */}
