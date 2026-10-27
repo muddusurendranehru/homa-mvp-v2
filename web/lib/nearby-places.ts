@@ -12,6 +12,7 @@ export type NearbyPlace = {
 /** Gachibowli — used when geolocation is denied or unavailable */
 export const HYDERABAD_FALLBACK = { lat: 17.4487, lng: 78.3987 };
 
+/** Sample listings (3 each). Replace via Google Places when API key is configured. */
 export const MOCK_LABS: NearbyPlace[] = [
   {
     id: 'lab-1',
@@ -36,30 +37,6 @@ export const MOCK_LABS: NearbyPlace[] = [
     phone: '04044556677',
     lat: 17.4612,
     lng: 78.3662,
-  },
-  {
-    id: 'lab-4',
-    name: 'Apollo Diagnostics — Financial District',
-    address: 'Nanakramguda, Financial District, Hyderabad, Telangana 500032',
-    phone: '04066778899',
-    lat: 17.4239,
-    lng: 78.3418,
-  },
-  {
-    id: 'lab-5',
-    name: 'Vijaya Diagnostic Centre — Ameerpet',
-    address: 'Ameerpet Main Road, Hyderabad, Telangana 500016',
-    phone: '04027654321',
-    lat: 17.4375,
-    lng: 78.4482,
-  },
-  {
-    id: 'lab-6',
-    name: 'Lucid Medical Diagnostics — Secunderabad',
-    address: 'SP Road, Secunderabad, Telangana 500003',
-    phone: '04027891234',
-    lat: 17.4399,
-    lng: 78.4983,
   },
 ];
 
@@ -87,30 +64,6 @@ export const MOCK_PHARMACIES: NearbyPlace[] = [
     phone: '04033445566',
     lat: 17.4588,
     lng: 78.3711,
-  },
-  {
-    id: 'ph-4',
-    name: 'Netmeds Store — Jubilee Hills',
-    address: 'Road No. 36, Jubilee Hills, Hyderabad, Telangana 500033',
-    phone: '04066770011',
-    lat: 17.4326,
-    lng: 78.4071,
-  },
-  {
-    id: 'ph-5',
-    name: 'Guardian Pharmacy — Banjara Hills',
-    address: 'Banjara Hills Road No. 12, Hyderabad, Telangana 500034',
-    phone: '04023334455',
-    lat: 17.4156,
-    lng: 78.4487,
-  },
-  {
-    id: 'ph-6',
-    name: 'Trust Chemists — Secunderabad',
-    address: 'MG Road, Secunderabad, Telangana 500003',
-    phone: '04027880099',
-    lat: 17.4419,
-    lng: 78.5021,
   },
 ];
 
@@ -172,4 +125,19 @@ export function sortPlacesByDistance(
       distanceKm: distanceKm(originLat, originLng, p.lat, p.lng),
     }))
     .sort((a, b) => a.distanceKm - b.distanceKm);
+}
+
+/**
+ * Nearby places data source. Today: static Hyderabad samples.
+ * Future: call Google Places (or similar) when `NEXT_PUBLIC_GOOGLE_PLACES_API_KEY` is set.
+ */
+export async function fetchNearbyPlaces(
+  kind: 'lab' | 'pharmacy',
+  _lat: number,
+  _lng: number,
+): Promise<NearbyPlace[]> {
+  void _lat;
+  void _lng;
+  // if (process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY) { ... }
+  return kind === 'lab' ? MOCK_LABS : MOCK_PHARMACIES;
 }

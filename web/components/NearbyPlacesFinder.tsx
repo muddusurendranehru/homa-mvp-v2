@@ -12,24 +12,28 @@ import {
   telHref,
 } from '@/lib/nearby-places';
 
-export type PartnerLink = { label: string; href: string };
+export type PartnerLink = {
+  label: string;
+  href: string;
+  buttonLabel: string;
+};
 
 type Props = {
   kind: 'lab' | 'pharmacy';
   pageTitle: string;
   intro: string;
-  partnersTitle: string;
+  partnersSectionTitle: string;
   partners: PartnerLink[];
-  onlineBannerTitle?: string;
+  nearYouSectionTitle: string;
 };
 
 export default function NearbyPlacesFinder({
   kind,
   pageTitle,
   intro,
-  partnersTitle,
+  partnersSectionTitle,
   partners,
-  onlineBannerTitle,
+  nearYouSectionTitle,
 }: Props) {
   const places: NearbyPlace[] = kind === 'lab' ? MOCK_LABS : MOCK_PHARMACIES;
   const [search, setSearch] = useState('');
@@ -71,7 +75,7 @@ export default function NearbyPlacesFinder({
     return sortPlacesByDistance(places, lat, lng, search);
   }, [places, origin, search]);
 
-  const showDefaultList = !origin && !search.trim();
+  const showDistance = Boolean(origin || search.trim());
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -83,30 +87,40 @@ export default function NearbyPlacesFinder({
       </header>
 
       <main className="max-w-3xl mx-auto px-4 py-8 space-y-8">
-        <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-5">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-[#0D9488]">
-            {partnersTitle}
-          </h2>
-          {onlineBannerTitle && (
-            <p className="mt-1 text-lg font-semibold text-slate-800">{onlineBannerTitle}</p>
-          )}
-          <div className="mt-4 flex flex-wrap gap-2">
+        <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+          <h2 className="text-lg font-bold text-slate-900">{partnersSectionTitle}</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            {kind === 'lab'
+              ? 'Book a home sample collection with a trusted partner (links open in a new tab).'
+              : 'Order medicines online from verified storefronts (links open in a new tab).'}
+          </p>
+          <ul className="mt-5 space-y-3">
             {partners.map((p) => (
-              <a
-                key={p.href}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-[#0D9488]/30 bg-teal-50 px-4 py-2 text-sm font-medium text-[#0D9488] hover:bg-teal-100 transition-colors"
+              <li
+                key={p.label}
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50/80 px-4 py-3 shadow-sm"
               >
-                {p.label}
-              </a>
+                <span className="font-semibold text-slate-800">{p.label}</span>
+                <a
+                  href={p.href}
+                  {...(p.href !== '#'
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                  className="inline-flex justify-center rounded-xl bg-[#0D9488] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-700 transition-colors"
+                >
+                  {p.buttonLabel}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
-        <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-5">
-          <label htmlFor="place-search" className="block text-sm font-medium text-slate-700">
+        <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+          <h2 className="text-lg font-bold text-slate-900">{nearYouSectionTitle}</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Sample local listings for Hyderabad — ready to plug in Google Places when an API key is added.
+          </p>
+          <label htmlFor="place-search" className="mt-4 block text-sm font-medium text-slate-700">
             Search by name or area
           </label>
           <div className="mt-2 flex flex-col sm:flex-row gap-3">
@@ -132,15 +146,15 @@ export default function NearbyPlacesFinder({
               {locationNote}
             </p>
           )}
-          {showDefaultList && (
+          {!showDistance && (
             <p className="mt-3 text-sm text-slate-500">
-              Tap &quot;Use My Location&quot; to sort by distance, or search above. Sample listings are for
-              education only — confirm hours and services with the lab or pharmacy directly.
+              Tap &quot;Use My Location&quot; to sort by distance. Confirm hours and services with each location
+              directly.
             </p>
           )}
         </section>
 
-        <ul className="space-y-4">
+        <ul className="space-y-4" aria-label={nearYouSectionTitle}>
           {sorted.map((place) => (
             <li
               key={place.id}
@@ -148,15 +162,15 @@ export default function NearbyPlacesFinder({
             >
               <h3 className="text-lg font-semibold text-slate-900">{place.name}</h3>
               <p className="mt-1 text-sm text-slate-600">{place.address}</p>
-              <p className="mt-2 text-sm font-medium text-[#0D9488]">
-                {origin || search.trim()
-                  ? `~${formatDistanceKm(place.distanceKm)} away`
-                  : 'Distance shown after you use location or search'}
-              </p>
+              {showDistance && (
+                <p className="mt-2 text-sm font-medium text-[#0D9488]">
+                  ~{formatDistanceKm(place.distanceKm)} away
+                </p>
+              )}
               <div className="mt-4 flex flex-wrap gap-2">
                 <a
                   href={telHref(place.phone)}
-                  className="inline-flex rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-200"
+                  className="inline-flex rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
                 >
                   Call
                 </a>
@@ -172,7 +186,9 @@ export default function NearbyPlacesFinder({
             </li>
           ))}
           {sorted.length === 0 && (
-            <li className="text-center text-slate-500 py-8">No matches for your search.</li>
+            <li className="text-center text-slate-500 py-8 bg-white rounded-2xl border border-slate-100">
+              No matches for your search.
+            </li>
           )}
         </ul>
       </main>

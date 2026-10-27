@@ -291,8 +291,8 @@ export default function RootLayout({
           
           {/* Global Header — slim navbar (doctor details moved to "About Dr. Muddu" on the homepage) */}
           <header className="sticky top-0 z-[1000] bg-white/95 backdrop-blur border-b border-slate-200" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
-            <nav className="mx-auto flex h-16 max-w-[1080px] items-center gap-2 pl-3 pr-[70px] sm:gap-3 sm:pl-4 sm:pr-[76px] lg:pr-[84px]" aria-label="Main">
-              <Link href="/" className="flex min-w-0 flex-1 items-center gap-2 sm:gap-2.5 text-slate-900 no-underline sm:flex-none">
+            <nav className="relative z-[1001] mx-auto flex h-16 max-w-[1080px] items-center gap-2 pl-3 pr-[70px] sm:gap-3 sm:pl-4 sm:pr-[76px] lg:pr-[84px]" aria-label="Main">
+              <Link href="/" className="relative z-[1002] flex min-w-0 shrink-0 items-center gap-2 sm:gap-2.5 text-slate-900 no-underline max-w-[52%] sm:max-w-none">
                 <img src="/images/homa-logo.png" alt="HOMA Healthcare Center logo" width={32} height={32} className="h-8 w-8 shrink-0 rounded-full" />
                 <span className="min-w-0 leading-tight">
                   <span className="block truncate text-[12.5px] sm:text-[14px] font-extrabold tracking-tight text-[#1e3a8a]">HOMA Healthcare Center</span>
@@ -300,7 +300,7 @@ export default function RootLayout({
                 </span>
               </Link>
               <MainHeaderLinks />
-              <div className="shrink-0">
+              <div className="relative z-[1002] shrink-0">
                 <HeaderAuth variant="pill" />
               </div>
             </nav>

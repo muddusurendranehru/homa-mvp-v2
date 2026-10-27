@@ -24,6 +24,9 @@ const OFFLINE_PAGES = [
   '/tools/bmi-calculator',
   '/conditions/diabetes',
   '/about',
+  '/labs',
+  '/pharmacy',
+  '/emergency',
 ];
 
 const SHELL_ASSETS = ['/manifest.json', '/icon-192x192.png', '/icon-512x512.png'];

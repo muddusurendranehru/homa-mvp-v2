@@ -162,8 +162,9 @@ export default function MobileNav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  prefetch={true}
                   onClick={closeMenu}
-                  className={`group flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg ${
+                  className={`group relative z-[1] flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg ${
                     pathname === link.href
                       ? 'bg-teal-500/25 text-white border border-teal-400/50 shadow-teal-500/30 shadow-xl'
                       : 'bg-white/5 backdrop-blur-sm text-gray-200 hover:bg-white/10 hover:shadow-lg border border-white/10'
