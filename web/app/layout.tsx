@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import MobileNav from '@/components/MobileNav'
 import HeaderAuth from '@/components/HeaderAuth'
+import MainHeaderLinks from '@/components/MainHeaderLinks'
 import OnboardingDemo from '@/components/OnboardingDemo'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 
@@ -298,16 +299,7 @@ export default function RootLayout({
                   <span className="block truncate text-[10.5px] font-medium text-slate-500 sm:text-xs">Dr. Muddu Surendra Nehru MD</span>
                 </span>
               </Link>
-              <div className="ml-auto hidden items-center gap-1 text-sm font-medium text-slate-600 sm:flex">
-                <Link href="/how-it-works" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">How it works</Link>
-                <Link href="/tools" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Free Tools</Link>
-                <Link href="/about" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">About</Link>
-                <Link href="/blog" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Blog</Link>
-                <Link href="/press" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Press</Link>
-                <Link href="/conferences" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Conferences</Link>
-                <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" rel="noopener noreferrer" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Partners</a>
-                <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" className="rounded-lg px-2.5 py-2 hover:bg-slate-100 hover:text-slate-900">Join</a>
-              </div>
+              <MainHeaderLinks />
               <div className="shrink-0">
                 <HeaderAuth variant="pill" />
               </div>
@@ -731,6 +723,9 @@ export default function RootLayout({
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 text-sm">
                   <Link href="/" className="text-gray-300 hover:text-white transition-colors text-center py-2">🏠 Home</Link>
                   <Link href="/tools" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">📊 Calculators</Link>
+                  <Link href="/labs" className="text-gray-300 hover:text-teal-400 transition-colors text-center py-2">🧪 Labs</Link>
+                  <Link href="/pharmacy" className="text-gray-300 hover:text-teal-400 transition-colors text-center py-2">💊 Pharmacy</Link>
+                  <Link href="/emergency" className="text-gray-300 hover:text-red-400 transition-colors text-center py-2">🚨 Emergency</Link>
                   <Link href="/tools/metabolic-analyzer.html" target="_blank" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">Metabolic Analyzer</Link>
                   <Link href="/conditions" className="text-gray-300 hover:text-purple-400 transition-colors text-center py-2">🩺 Conditions</Link>
                   <Link href="/auth" className="text-gray-300 hover:text-white transition-colors text-center py-2">🔐 Login</Link>

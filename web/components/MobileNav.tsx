@@ -5,9 +5,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUser, SignOutButton } from '@clerk/nextjs';
 
-const navLinks = [
+const navLinks: {
+  href: string;
+  label: string;
+  icon: string;
+  alertDot?: boolean;
+}[] = [
   { href: '/', label: 'Home', icon: '🏠' },
   { href: '/ddd', label: 'D·D·D Campaign', icon: '🩸' },
+  { href: '/labs', label: 'Labs', icon: '🧪' },
+  { href: '/pharmacy', label: 'Pharmacy', icon: '💊' },
+  { href: '/emergency', label: 'Emergency', icon: '🚨', alertDot: true },
   { href: '/products', label: 'Apps & tools', icon: '📱' },
   { href: '/packages', label: 'Packages', icon: '💰' },
   { href: '/portfolio', label: 'Portfolio', icon: '👤' },
@@ -157,7 +165,7 @@ export default function MobileNav() {
                   onClick={closeMenu}
                   className={`group flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg ${
                     pathname === link.href
-                      ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-teal-500/50 shadow-xl'
+                      ? 'bg-teal-500/25 text-white border border-teal-400/50 shadow-teal-500/30 shadow-xl'
                       : 'bg-white/5 backdrop-blur-sm text-gray-200 hover:bg-white/10 hover:shadow-lg border border-white/10'
                   }`}
                 >
@@ -167,8 +175,11 @@ export default function MobileNav() {
                   <span className={`font-semibold text-base flex-1 ${pathname === link.href ? 'text-white' : 'text-gray-100'}`}>
                     {link.label}
                   </span>
+                  {link.alertDot && (
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-500 shrink-0" aria-hidden />
+                  )}
                   {pathname === link.href && (
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-teal-300 rounded-full animate-pulse"></div>
                   )}
                 </Link>
               </li>
