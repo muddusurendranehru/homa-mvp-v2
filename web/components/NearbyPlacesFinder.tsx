@@ -79,15 +79,13 @@ export default function NearbyPlacesFinder({
   const showDistance = Boolean(origin || search.trim());
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-3xl mx-auto px-4 py-10">
-          <h1 className="text-3xl font-bold text-slate-900">{pageTitle}</h1>
-          <p className="mt-3 text-slate-600">{intro}</p>
-        </div>
+    <div className="w-full space-y-8">
+      <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <h1 className="text-3xl font-bold text-slate-900">{pageTitle}</h1>
+        <p className="mt-3 text-slate-600">{intro}</p>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-8 space-y-8">
+      <div className="space-y-8">
         <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
           <h2 className="text-lg font-bold text-slate-900">{partnersSectionTitle}</h2>
           <p className="mt-1 text-sm text-slate-600">
@@ -203,7 +201,7 @@ export default function NearbyPlacesFinder({
             </li>
           )}
         </ul>
-      </main>
+      </div>
     </div>
   );
 }

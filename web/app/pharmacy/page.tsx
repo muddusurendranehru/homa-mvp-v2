@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import AppShell from '@/components/AppShell';
 import NearbyPlacesFinder from '@/components/NearbyPlacesFinder';
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ const ONLINE_PARTNERS = [
 
 export default function PharmacyPage() {
   return (
+    <AppShell>
     <NearbyPlacesFinder
       kind="pharmacy"
       pageTitle="Nearby Medical Shops"
@@ -24,5 +26,6 @@ export default function PharmacyPage() {
       partners={ONLINE_PARTNERS}
       nearYouSectionTitle="Pharmacies Near You"
     />
+    </AppShell>
   );
 }
