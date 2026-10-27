@@ -8,6 +8,7 @@ type NavItem = { href: string; label: string; alertDot?: boolean };
 const patientCareLinks: NavItem[] = [
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
+  { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];
 

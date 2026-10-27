@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Patient-care layout only — wrap /labs, /pharmacy, /emergency page content.
+ * Patient-care layout only — wrap /labs, /pharmacy, /emergency, /tracker page content.
  * Do not use on the marketing homepage or global layout (keeps HomeHero clean).
  */
 import { useEffect, useState } from 'react';
@@ -18,6 +18,7 @@ const shellNav: ShellNavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
+  { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];
 
@@ -100,7 +101,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <span className="text-sm font-semibold text-slate-800">Labs · Pharmacy · Emergency</span>
+        <span className="text-sm font-semibold text-slate-800">Patient care menu</span>
       </div>
 
       {mobileOpen && (

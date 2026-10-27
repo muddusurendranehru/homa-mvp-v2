@@ -27,6 +27,7 @@ const OFFLINE_PAGES = [
   '/labs',
   '/pharmacy',
   '/emergency',
+  '/tracker',
 ];
 
 const SHELL_ASSETS = ['/manifest.json', '/icon-192x192.png', '/icon-512x512.png'];
