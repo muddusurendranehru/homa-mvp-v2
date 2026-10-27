@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS patient_assessments (
   current_meds TEXT,
   procedures TEXT,
   post_menopausal BOOLEAN,
+  clerk_user_id TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -42,6 +43,7 @@ CREATE TABLE IF NOT EXISTS patient_assessments (
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_assessments_user_id ON patient_assessments(user_id);
 CREATE INDEX IF NOT EXISTS idx_assessments_created_at ON patient_assessments(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_assessments_clerk_user_id ON patient_assessments(clerk_user_id) WHERE clerk_user_id IS NOT NULL;
 
 -- Add comments for documentation
 COMMENT ON TABLE users IS 'Stores user account information';

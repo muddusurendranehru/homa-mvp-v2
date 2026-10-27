@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
+import ClinicalBaselineStrip, { type ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
 
 const BASE_COINS = 120;
 const HABIT_COIN_REWARD = 5;
@@ -22,7 +23,12 @@ const MEALS = [
   { slot: 'Dinner', time: '7:30 PM', item: 'Grilled paneer/tofu + mixed veg soup', note: 'Light dinner window' },
 ];
 
-export default function PatientTracker() {
+type BaselineState =
+  | { kind: 'baseline'; data: ClinicalBaselineData }
+  | { kind: 'processing' }
+  | { kind: 'sign_in' };
+
+export default function PatientTracker({ baseline }: { baseline: BaselineState }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -116,6 +122,12 @@ export default function PatientTracker() {
           Track your meals, movement, and sleep. Earn HOMA Coins.
         </p>
       </header>
+
+      {baseline.kind === 'baseline' && (
+        <ClinicalBaselineStrip variant="baseline" data={baseline.data} />
+      )}
+      {baseline.kind === 'processing' && <ClinicalBaselineStrip variant="processing" />}
+      {baseline.kind === 'sign_in' && <ClinicalBaselineStrip variant="sign_in" />}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-md">
