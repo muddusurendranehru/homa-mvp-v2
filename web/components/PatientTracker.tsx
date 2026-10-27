@@ -2,10 +2,19 @@
 
 import { useCallback, useRef, useState } from 'react';
 
-const MOCK_COINS = 120;
+const BASE_COINS = 120;
+const HABIT_COIN_REWARD = 5;
 const CURRENT_DAY = 14;
 const PROGRAM_DAYS = 90;
 const DAY_PCT = Math.round((CURRENT_DAY / PROGRAM_DAYS) * 100);
+
+type HabitId = 'exercise' | 'water' | 'sleep';
+
+const HABITS: { id: HabitId; emoji: string; label: string }[] = [
+  { id: 'exercise', emoji: '🏃', label: 'Exercise 30 mins' },
+  { id: 'water', emoji: '💧', label: 'Water 2L' },
+  { id: 'sleep', emoji: '😴', label: 'Sleep 7+ hrs' },
+];
 
 const MEALS = [
   { slot: 'Breakfast', time: '8:00 AM', item: 'Vegetable upma + cucumber salad', note: 'Low GI, high fiber' },
@@ -20,6 +29,13 @@ export default function PatientTracker() {
   const [dragOver, setDragOver] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState(false);
+  const [coins, setCoins] = useState(BASE_COINS);
+  const [habits, setHabits] = useState<Record<HabitId, boolean>>({
+    exercise: false,
+    water: false,
+    sleep: false,
+  });
+  const [habitFlash, setHabitFlash] = useState<HabitId | null>(null);
 
   const clearFile = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -31,12 +47,31 @@ export default function PatientTracker() {
   const applyFile = useCallback(
     (next: File | null) => {
       if (!next || !next.type.startsWith('image/')) return;
-      clearFile();
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
       setFile(next);
       setPreviewUrl(URL.createObjectURL(next));
     },
-    [clearFile],
+    [previewUrl],
   );
+
+  const toggleHabit = (id: HabitId) => {
+    const completed = !habits[id];
+    setHabits((prev) => ({ ...prev, [id]: completed }));
+    setCoins((c) => c + (completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD));
+    console.log('[mock Neon] habit_log', {
+      table: 'daily_habits',
+      day: CURRENT_DAY,
+      habit: id,
+      completed,
+      coinsDelta: completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD,
+      homaCoins: coins + (completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD),
+      loggedAt: new Date().toISOString(),
+    });
+    if (completed) {
+      setHabitFlash(id);
+      window.setTimeout(() => setHabitFlash(null), 1600);
+    }
+  };
 
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -52,7 +87,7 @@ export default function PatientTracker() {
     console.log('[mock Neon] meal_photo_submit', {
       table: 'meal_logs',
       day: CURRENT_DAY,
-      homaCoins: MOCK_COINS,
+      homaCoins: coins,
       fileName: file.name,
       fileSize: file.size,
       mimeType: file.type,
@@ -77,7 +112,9 @@ export default function PatientTracker() {
 
       <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
         <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">My 90-Day Journey</h1>
-        <p className="mt-2 text-slate-600">Track your meals. Earn HOMA Coins. Improve your numbers.</p>
+        <p className="mt-2 text-slate-600">
+          Track your meals, movement, and sleep. Earn HOMA Coins.
+        </p>
       </header>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -91,8 +128,8 @@ export default function PatientTracker() {
             </span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">HOMA Coins</p>
-              <p className="mt-1 text-3xl font-bold text-[#0D9488]">{MOCK_COINS}</p>
-              <p className="mt-1 text-xs text-slate-500">Mock balance for demo</p>
+              <p className="mt-1 text-3xl font-bold text-[#0D9488]">{coins}</p>
+              <p className="mt-1 text-xs text-slate-500">+{HABIT_COIN_REWARD} per habit today</p>
             </div>
           </div>
         </div>
@@ -120,6 +157,47 @@ export default function PatientTracker() {
           </div>
         </div>
       </div>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md">
+        <h2 className="text-lg font-bold text-slate-900">Today&apos;s Healthy Habits</h2>
+        <p className="mt-1 text-sm text-slate-600">Check each habit when you complete it today (+{HABIT_COIN_REWARD} coins each).</p>
+        <ul className="mt-4 space-y-3">
+          {HABITS.map((h) => {
+            const done = habits[h.id];
+            const flash = habitFlash === h.id;
+            return (
+              <li key={h.id}>
+                <label
+                  className={[
+                    'flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-all',
+                    done
+                      ? 'border-teal-300 bg-teal-50 shadow-sm'
+                      : 'border-slate-100 bg-slate-50/80 hover:border-slate-200',
+                    flash ? 'ring-2 ring-green-400 ring-offset-1' : '',
+                  ].join(' ')}
+                >
+                  <input
+                    type="checkbox"
+                    checked={done}
+                    onChange={() => toggleHabit(h.id)}
+                    className="h-5 w-5 shrink-0 rounded border-slate-300 text-teal-600 focus:ring-teal-500"
+                  />
+                  <span className="text-xl" aria-hidden>{h.emoji}</span>
+                  <span className="flex-1 font-medium text-slate-800">{h.label}</span>
+                  {done && (
+                    <span className="shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-800">
+                      +{HABIT_COIN_REWARD} ✓
+                    </span>
+                  )}
+                  {flash && (
+                    <span className="shrink-0 text-xs font-bold text-green-600 animate-pulse">+{HABIT_COIN_REWARD} coins!</span>
+                  )}
+                </label>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md">
         <h2 className="text-lg font-bold text-slate-900">Today&apos;s Meal Plan</h2>
