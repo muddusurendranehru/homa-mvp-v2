@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUser, SignOutButton } from '@clerk/nextjs';
+import { usesPatientCareAppShell } from '@/lib/patient-care-routes';
 
 const navLinks: {
   href: string;
@@ -62,8 +63,8 @@ export default function MobileNav() {
     };
   }, [isOpen]);
 
-  /* Conversion landing: no floating menu clutter */
-  if (pathname === '/ddd') {
+  /* Focused landings + patient-care pages use their own nav (AppShell) */
+  if (pathname === '/ddd' || usesPatientCareAppShell(pathname)) {
     return null;
   }
 

@@ -1,5 +1,9 @@
 'use client';
 
+/**
+ * Patient-care layout only — wrap /labs, /pharmacy, /emergency page content.
+ * Do not use on the marketing homepage or global layout (keeps HomeHero clean).
+ */
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,7 +19,6 @@ const shellNav: ShellNavItem[] = [
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
-  { href: '/nutri-bot', label: 'NutriBot' },
 ];
 
 function isActive(pathname: string, href: string) {
