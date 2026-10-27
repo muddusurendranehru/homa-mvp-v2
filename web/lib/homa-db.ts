@@ -7,6 +7,12 @@ export type PatientBaselineRow = {
   fbs: number | null;
   fasting_insulin: number | null;
   hba1c: number | null;
+  height_cm?: number | null;
+  weight_kg?: number | null;
+  waist_cm?: number | null;
+  triglycerides?: number | null;
+  hdl?: number | null;
+  ldl?: number | null;
   created_at: string;
 };
 
@@ -49,7 +55,20 @@ export async function getLatestBaselineByClerkUserId(
 
   try {
     const rows = await sql`
-      SELECT id, age, gender, fbs, fasting_insulin, hba1c, created_at
+      SELECT
+        id,
+        age,
+        gender,
+        fbs,
+        fasting_insulin,
+        hba1c,
+        height_cm,
+        weight_kg,
+        waist_cm,
+        triglycerides,
+        hdl,
+        ldl,
+        created_at
       FROM patient_assessments
       WHERE clerk_user_id = ${clerkUserId}
       ORDER BY created_at DESC

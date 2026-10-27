@@ -1,13 +1,13 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import ClinicalBaselineStrip, { type ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
-
-const BASE_COINS = 120;
-const HABIT_COIN_REWARD = 5;
-const CURRENT_DAY = 14;
-const PROGRAM_DAYS = 90;
-const DAY_PCT = Math.round((CURRENT_DAY / PROGRAM_DAYS) * 100);
+import {
+  HABIT_COIN_REWARD,
+  type PatientJourneyJson,
+  type PatientMeResponse,
+  emptyJourney,
+} from '@/lib/patient-me';
 
 type HabitId = 'exercise' | 'water' | 'sleep';
 
@@ -26,22 +26,72 @@ const MEALS = [
 type BaselineState =
   | { kind: 'baseline'; data: ClinicalBaselineData }
   | { kind: 'processing' }
-  | { kind: 'sign_in' };
+  | { kind: 'sign_in' }
+  | { kind: 'loading' };
 
-export default function PatientTracker({ baseline }: { baseline: BaselineState }) {
+export default function PatientTracker() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState(false);
-  const [coins, setCoins] = useState(BASE_COINS);
+  const [baseline, setBaseline] = useState<BaselineState>({ kind: 'loading' });
+  const [journey, setJourney] = useState<PatientJourneyJson>(emptyJourney());
+  const [coins, setCoins] = useState(0);
   const [habits, setHabits] = useState<Record<HabitId, boolean>>({
     exercise: false,
     water: false,
     sleep: false,
   });
   const [habitFlash, setHabitFlash] = useState<HabitId | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadPatient() {
+      setBaseline({ kind: 'loading' });
+      try {
+        const res = await fetch('/api/patient/me', { cache: 'no-store' });
+        if (cancelled) return;
+
+        if (res.status === 401) {
+          setBaseline({ kind: 'sign_in' });
+          setJourney(emptyJourney());
+          setCoins(0);
+          return;
+        }
+
+        if (!res.ok) {
+          setBaseline({ kind: 'processing' });
+          setJourney(emptyJourney());
+          setCoins(0);
+          return;
+        }
+
+        const data = (await res.json()) as PatientMeResponse;
+        setJourney(data.journey);
+        setCoins(data.journey.coinsBalance ?? 0);
+
+        if (data.status === 'linked' && data.baseline) {
+          setBaseline({ kind: 'baseline', data: data.baseline });
+        } else {
+          setBaseline({ kind: 'processing' });
+        }
+      } catch {
+        if (!cancelled) {
+          setBaseline({ kind: 'processing' });
+          setJourney(emptyJourney());
+          setCoins(0);
+        }
+      }
+    }
+
+    void loadPatient();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const clearFile = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -64,15 +114,19 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
     const completed = !habits[id];
     setHabits((prev) => ({ ...prev, [id]: completed }));
     setCoins((c) => c + (completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD));
-    console.log('[mock Neon] habit_log', {
-      table: 'daily_habits',
-      day: CURRENT_DAY,
-      habit: id,
-      completed,
-      coinsDelta: completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD,
-      homaCoins: coins + (completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD),
-      loggedAt: new Date().toISOString(),
+
+    void fetch('/api/patient/habit-log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        habit: id,
+        completed,
+        programDay: journey.currentDay,
+      }),
+    }).catch(() => {
+      /* session-only fallback; route may return 401 when signed out */
     });
+
     if (completed) {
       setHabitFlash(id);
       window.setTimeout(() => setHabitFlash(null), 1600);
@@ -89,21 +143,32 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
   const onSubmit = async () => {
     if (!file || submitting) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 2000));
-    console.log('[mock Neon] meal_photo_submit', {
-      table: 'meal_logs',
-      day: CURRENT_DAY,
-      homaCoins: coins,
-      fileName: file.name,
-      fileSize: file.size,
-      mimeType: file.type,
-      submittedAt: new Date().toISOString(),
-    });
-    setSubmitting(false);
-    setToast(true);
-    clearFile();
-    window.setTimeout(() => setToast(false), 4500);
+    try {
+      await fetch('/api/patient/meal-photo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileSize: file.size,
+          mimeType: file.type,
+          programDay: journey.currentDay,
+        }),
+      });
+      setToast(true);
+      clearFile();
+      window.setTimeout(() => setToast(false), 4500);
+    } catch {
+      setToast(true);
+      window.setTimeout(() => setToast(false), 4500);
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  const coinsHint =
+    journey.coinsBalance == null
+      ? 'Includes today’s habits (saved to your account after clinic sync)'
+      : `+${HABIT_COIN_REWARD} per habit today`;
 
   return (
     <div className="space-y-6 pb-8">
@@ -123,6 +188,15 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
         </p>
       </header>
 
+      {baseline.kind === 'loading' && (
+        <section
+          className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm sm:p-6"
+          aria-busy="true"
+          aria-label="Loading clinical baseline"
+        >
+          <p className="text-sm text-slate-600">Loading your clinic baseline…</p>
+        </section>
+      )}
       {baseline.kind === 'baseline' && (
         <ClinicalBaselineStrip variant="baseline" data={baseline.data} />
       )}
@@ -141,7 +215,7 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">HOMA Coins</p>
               <p className="mt-1 text-3xl font-bold text-[#0D9488]">{coins}</p>
-              <p className="mt-1 text-xs text-slate-500">+{HABIT_COIN_REWARD} per habit today</p>
+              <p className="mt-1 text-xs text-slate-500">{coinsHint}</p>
             </div>
           </div>
         </div>
@@ -156,15 +230,15 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
             <div className="min-w-0 flex-1">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Current day</p>
               <p className="mt-1 text-lg font-bold text-slate-900">
-                Day {CURRENT_DAY} of {PROGRAM_DAYS}
+                Day {journey.currentDay} of {journey.programDays}
               </p>
               <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100">
                 <div
                   className="h-full rounded-full bg-teal-600 transition-all"
-                  style={{ width: `${DAY_PCT}%` }}
+                  style={{ width: `${journey.dayPercent}%` }}
                 />
               </div>
-              <p className="mt-1 text-xs text-slate-500">~{DAY_PCT}% of program</p>
+              <p className="mt-1 text-xs text-slate-500">~{journey.dayPercent}% of program</p>
             </div>
           </div>
         </div>
@@ -172,7 +246,10 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
 
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md">
         <h2 className="text-lg font-bold text-slate-900">Today&apos;s Healthy Habits</h2>
-        <p className="mt-1 text-sm text-slate-600">Check each habit when you complete it today (+{HABIT_COIN_REWARD} coins each).</p>
+        <p className="mt-1 text-sm text-slate-600">
+          Check each habit when you complete it today (+{HABIT_COIN_REWARD} coins each). Checked habits stay in this
+          browser session until daily habit sync is enabled.
+        </p>
         <ul className="mt-4 space-y-3">
           {HABITS.map((h) => {
             const done = habits[h.id];
@@ -202,7 +279,9 @@ export default function PatientTracker({ baseline }: { baseline: BaselineState }
                     </span>
                   )}
                   {flash && (
-                    <span className="shrink-0 text-xs font-bold text-green-600 animate-pulse">+{HABIT_COIN_REWARD} coins!</span>
+                    <span className="shrink-0 text-xs font-bold text-green-600 animate-pulse">
+                      +{HABIT_COIN_REWARD} coins!
+                    </span>
                   )}
                 </label>
               </li>
