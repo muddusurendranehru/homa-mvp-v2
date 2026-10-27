@@ -11,6 +11,7 @@ import {
   sortPlacesByDistance,
   telHref,
 } from '@/lib/nearby-places';
+import { buildStaffGuideWhatsAppUrl } from '@/lib/homa-contact';
 
 export type PartnerLink = {
   label: string;
@@ -120,6 +121,9 @@ export default function NearbyPlacesFinder({
           <p className="mt-1 text-sm text-slate-600">
             Sample local listings for Hyderabad — ready to plug in Google Places when an API key is added.
           </p>
+          <p className="mt-2 text-sm text-[#0D9488]">
+            Not sure which location to choose? HOMA staff can guide you on WhatsApp — tap WhatsApp on any card below.
+          </p>
           <label htmlFor="place-search" className="mt-4 block text-sm font-medium text-slate-700">
             Search by name or area
           </label>
@@ -181,6 +185,14 @@ export default function NearbyPlacesFinder({
                   className="inline-flex rounded-xl bg-[#0D9488] px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
                 >
                   Get Directions
+                </a>
+                <a
+                  href={buildStaffGuideWhatsAppUrl(place.name, kind)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+                >
+                  WhatsApp
                 </a>
               </div>
             </li>
