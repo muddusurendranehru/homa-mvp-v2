@@ -22,3 +22,10 @@ export function buildStaffGuideWhatsAppUrl(
       : `నాకు సమీపంలో మెడిసిన్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding a pharmacy near me — ${placeName}`;
   return `https://wa.me/${getHomaWhatsAppNumber()}?text=${encodeURIComponent(text)}`;
 }
+
+/** Emergency page: staff support only — not a substitute for 112 / 108. */
+export function buildEmergencySupportWhatsAppUrl(): string {
+  const text =
+    'అత్యవసర డయాబెటిస్ మార్గదర్శకత్వం కావాలి / I need emergency diabetes guidance — please help.';
+  return `https://wa.me/${getHomaWhatsAppNumber()}?text=${encodeURIComponent(text)}`;
+}

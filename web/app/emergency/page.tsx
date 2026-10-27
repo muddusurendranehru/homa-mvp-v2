@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { buildEmergencySupportWhatsAppUrl } from '@/lib/homa-contact';
 
 export const metadata: Metadata = {
   title: 'Emergency First Aid | HOMA Healthcare Center',
@@ -43,6 +44,21 @@ export default function EmergencyPage() {
               <span className="block mt-1 text-sm font-medium text-red-50">Ambulance</span>
             </a>
           </div>
+          <p className="mt-4 text-center text-xs font-medium text-red-50">
+            Life-threatening emergency? Call <strong>112</strong> or <strong>108</strong> first — do not use WhatsApp
+            instead of ambulance services.
+          </p>
+          <a
+            href={buildEmergencySupportWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white/50 bg-green-600 px-5 py-3.5 text-base font-bold text-white shadow-md hover:bg-green-700 transition-colors"
+          >
+            WhatsApp HOMA staff (diabetes emergency guidance)
+          </a>
+          <p className="mt-2 text-center text-xs text-red-100">
+            Support messaging only — not a replacement for <strong>112</strong> / <strong>108</strong>.
+          </p>
           <p className="mt-4 text-sm text-red-100">
             HOMA clinic line (non-emergency):{' '}
             <a href="tel:+919963721999" className="underline font-semibold text-white">
