@@ -30,7 +30,11 @@ export type PatientJourneyJson = {
 };
 
 export type PatientMeResponse = {
+  /** true when a linked assessment row exists for this Clerk user. */
+  success: boolean;
   status: 'processing' | 'linked';
+  /** Human-readable hint for empty or error cases (safe to show in UI). */
+  message?: string;
   assessment: PatientAssessmentJson | null;
   baseline: ClinicalBaselineData | null;
   journey: PatientJourneyJson;
@@ -91,7 +95,9 @@ export function assessmentToJson(row: PatientBaselineRow): PatientAssessmentJson
 export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeResponse {
   if (!row) {
     return {
+      success: false,
       status: 'processing',
+      message: 'No linked clinic assessment yet. Staff can link your Clerk user id after your visit.',
       assessment: null,
       baseline: null,
       journey: emptyJourney(),
@@ -99,6 +105,7 @@ export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeRespo
   }
   const baseline = baselineFromRow(row);
   return {
+    success: true,
     status: 'linked',
     assessment: assessmentToJson(row),
     baseline,

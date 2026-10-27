@@ -47,11 +47,20 @@ export function baselineFromRow(row: {
   };
 }
 
-export async function getLatestBaselineByClerkUserId(
+export type BaselineLookupResult =
+  | { kind: 'found'; row: PatientBaselineRow }
+  | { kind: 'not_found' }
+  | { kind: 'db_unconfigured' }
+  | { kind: 'error'; message: string };
+
+export async function lookupLatestBaselineByClerkUserId(
   clerkUserId: string,
-): Promise<PatientBaselineRow | null> {
+): Promise<BaselineLookupResult> {
   const sql = homaSql();
-  if (!sql) return null;
+  if (!sql) return { kind: 'db_unconfigured' };
+
+  const clerkId = clerkUserId.trim();
+  if (!clerkId) return { kind: 'not_found' };
 
   try {
     const rows = await sql`
@@ -70,19 +79,28 @@ export async function getLatestBaselineByClerkUserId(
         ldl,
         created_at
       FROM patient_assessments
-      WHERE clerk_user_id = ${clerkUserId}
+      WHERE TRIM(clerk_user_id) = ${clerkId}
       ORDER BY created_at DESC
       LIMIT 1
     `;
     const row = rows[0] as PatientBaselineRow | undefined;
-    return row ?? null;
+    return row ? { kind: 'found', row } : { kind: 'not_found' };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     if (msg.includes('clerk_user_id')) {
       console.error('[homa-db] clerk_user_id column missing — run server/migrations/add_clerk_user_id.sql');
     } else {
-      console.error('[homa-db] getLatestBaselineByClerkUserId', msg);
+      console.error('[homa-db] lookupLatestBaselineByClerkUserId', msg);
     }
-    return null;
+    return { kind: 'error', message: msg };
   }
+}
+
+/** @deprecated Prefer lookupLatestBaselineByClerkUserId for explicit empty vs DB errors. */
+export async function getLatestBaselineByClerkUserId(
+  clerkUserId: string,
+): Promise<PatientBaselineRow | null> {
+  const result = await lookupLatestBaselineByClerkUserId(clerkUserId);
+  if (result.kind === 'found') return result.row;
+  return null;
 }

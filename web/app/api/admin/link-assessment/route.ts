@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
     const updated = await sql`
       UPDATE patient_assessments
-      SET clerk_user_id = ${clerkUserId}
+      SET clerk_user_id = ${clerkUserId.trim()}
       WHERE id = ${targetId}
       RETURNING id, clerk_user_id, age, gender, hba1c, created_at
     `;

@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuth } from '@clerk/nextjs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ClinicalBaselineStrip, { type ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
 import {
@@ -29,15 +30,48 @@ type BaselineState =
   | { kind: 'sign_in' }
   | { kind: 'loading' };
 
-export default function PatientTracker() {
+function applyPatientMe(
+  data: PatientMeResponse,
+  setBaseline: (s: BaselineState) => void,
+  setJourney: (j: PatientJourneyJson) => void,
+  setCoins: (n: number) => void,
+) {
+  setJourney(data.journey);
+  setCoins(data.journey.coinsBalance ?? 0);
+
+  if (data.success && data.status === 'linked' && data.baseline) {
+    setBaseline({ kind: 'baseline', data: data.baseline });
+  } else {
+    setBaseline({ kind: 'processing' });
+  }
+}
+
+type PatientTrackerProps = {
+  /** Optional server-rendered payload so baseline shows before client hydration. */
+  initialPatientMe?: PatientMeResponse | null;
+};
+
+function baselineFromPatientMe(me: PatientMeResponse | null | undefined): BaselineState {
+  if (!me) return { kind: 'loading' };
+  if (me.success && me.status === 'linked' && me.baseline) {
+    return { kind: 'baseline', data: me.baseline };
+  }
+  if (me.status === 'processing') return { kind: 'processing' };
+  return { kind: 'loading' };
+}
+
+export default function PatientTracker({ initialPatientMe = null }: PatientTrackerProps) {
+  const { isLoaded: clerkLoaded, isSignedIn } = useAuth();
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState(false);
-  const [baseline, setBaseline] = useState<BaselineState>({ kind: 'loading' });
-  const [journey, setJourney] = useState<PatientJourneyJson>(emptyJourney());
+  const [baseline, setBaseline] = useState<BaselineState>(() => baselineFromPatientMe(initialPatientMe));
+  const [journey, setJourney] = useState<PatientJourneyJson>(
+    () => initialPatientMe?.journey ?? emptyJourney(),
+  );
   const [coins, setCoins] = useState(0);
   const [habits, setHabits] = useState<Record<HabitId, boolean>>({
     exercise: false,
@@ -47,12 +81,28 @@ export default function PatientTracker() {
   const [habitFlash, setHabitFlash] = useState<HabitId | null>(null);
 
   useEffect(() => {
+    if (!clerkLoaded) return;
+
     let cancelled = false;
 
     async function loadPatient() {
-      setBaseline({ kind: 'loading' });
+      if (!isSignedIn) {
+        setBaseline({ kind: 'sign_in' });
+        setJourney(emptyJourney());
+        setCoins(0);
+        return;
+      }
+
+      const skipLoadingFlash =
+        initialPatientMe?.success === true && initialPatientMe.status === 'linked' && !!initialPatientMe.baseline;
+      if (!skipLoadingFlash) {
+        setBaseline({ kind: 'loading' });
+      }
       try {
-        const res = await fetch('/api/patient/me', { cache: 'no-store' });
+        const res = await fetch('/api/patient/me', {
+          cache: 'no-store',
+          credentials: 'same-origin',
+        });
         if (cancelled) return;
 
         if (res.status === 401) {
@@ -70,14 +120,7 @@ export default function PatientTracker() {
         }
 
         const data = (await res.json()) as PatientMeResponse;
-        setJourney(data.journey);
-        setCoins(data.journey.coinsBalance ?? 0);
-
-        if (data.status === 'linked' && data.baseline) {
-          setBaseline({ kind: 'baseline', data: data.baseline });
-        } else {
-          setBaseline({ kind: 'processing' });
-        }
+        applyPatientMe(data, setBaseline, setJourney, setCoins);
       } catch {
         if (!cancelled) {
           setBaseline({ kind: 'processing' });
@@ -91,7 +134,7 @@ export default function PatientTracker() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [clerkLoaded, isSignedIn, initialPatientMe]);
 
   const clearFile = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
