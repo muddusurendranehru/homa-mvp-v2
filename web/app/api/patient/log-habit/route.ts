@@ -35,10 +35,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const completed =
-    body.completed === true ||
-    body.completed === 'true' ||
-    (body.completed === undefined && body.habit_type != null);
+  if (body.completed === undefined) {
+    return NextResponse.json(
+      { error: 'completed (boolean) is required' },
+      { status: 400, headers: NO_STORE },
+    );
+  }
+  const completed = body.completed === true || body.completed === 'true';
 
   try {
     const { row, coinsDelta, totalCoins } = await upsertPatientHabit(userId, habitType, completed);

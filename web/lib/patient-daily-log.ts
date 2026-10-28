@@ -23,7 +23,9 @@ export type TodayLogJson = {
   coinsEarnedToday: number;
 };
 
-const TABLE_ENSURED = { value: false };
+/** Skip CREATE TABLE on every request unless explicitly enabled (local dev only). */
+const AUTO_DDL_ENABLED = process.env.HOMA_AUTO_MIGRATE_DAILY_LOGS === 'true';
+const TABLE_BOOTSTRAP_DONE = { value: false };
 
 /** UTC calendar date YYYY-MM-DD (matches program day math in patient-me). */
 export function todayLogDateUtc(): string {
@@ -33,35 +35,49 @@ export function todayLogDateUtc(): string {
     .slice(0, 10);
 }
 
-/**
- * Idempotent table bootstrap for deploys that have not run the SQL migration yet.
- * Prefer running server/migrations/add_patient_daily_logs.sql on Neon once.
- */
-export async function ensurePatientDailyLogsTable(): Promise<void> {
-  if (TABLE_ENSURED.value) return;
-  const sql = homaSql();
-  if (!sql) throw new Error('DATABASE_URL not configured');
+function isPgPermissionDenied(err: unknown): boolean {
+  const msg = (err instanceof Error ? err.message : String(err)).toLowerCase();
+  return msg.includes('permission denied') || msg.includes('42501');
+}
 
-  await sql`
-    CREATE TABLE IF NOT EXISTS patient_daily_logs (
-      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-      clerk_user_id TEXT NOT NULL,
-      log_date DATE NOT NULL DEFAULT (CURRENT_DATE),
-      walked BOOLEAN NOT NULL DEFAULT FALSE,
-      slept BOOLEAN NOT NULL DEFAULT FALSE,
-      water BOOLEAN NOT NULL DEFAULT FALSE,
-      meal_photo_url TEXT,
-      coins_earned INTEGER NOT NULL DEFAULT 0,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      CONSTRAINT patient_daily_logs_clerk_date_unique UNIQUE (clerk_user_id, log_date)
-    )
-  `;
-  await sql`
-    CREATE INDEX IF NOT EXISTS idx_patient_daily_logs_clerk_user_id
-      ON patient_daily_logs (clerk_user_id)
-  `;
-  TABLE_ENSURED.value = true;
+function pgBool(value: unknown): boolean {
+  return value === true || value === 't' || value === 'true' || value === 1;
+}
+
+/**
+ * Optional dev bootstrap only. Production must use server/migrations/add_patient_daily_logs.sql
+ * (run once by Neon owner). Render DATABASE_URL roles typically cannot CREATE on schema public.
+ */
+async function maybeBootstrapPatientDailyLogsTable(): Promise<void> {
+  if (TABLE_BOOTSTRAP_DONE.value) return;
+  TABLE_BOOTSTRAP_DONE.value = true;
+
+  if (!AUTO_DDL_ENABLED) return;
+
+  const sql = homaSql();
+  if (!sql) return;
+
+  try {
+    await sql`
+      CREATE TABLE IF NOT EXISTS patient_daily_logs (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        clerk_user_id TEXT NOT NULL,
+        log_date DATE NOT NULL DEFAULT (CURRENT_DATE),
+        walked BOOLEAN NOT NULL DEFAULT FALSE,
+        slept BOOLEAN NOT NULL DEFAULT FALSE,
+        water BOOLEAN NOT NULL DEFAULT FALSE,
+        meal_photo_url TEXT,
+        coins_earned INTEGER NOT NULL DEFAULT 0
+      )
+    `;
+    await sql`
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_patient_daily_logs_clerk_user_log_date
+        ON patient_daily_logs (clerk_user_id, log_date)
+    `;
+  } catch (err) {
+    if (isPgPermissionDenied(err)) return;
+    throw err;
+  }
 }
 
 function boolCol(habit: HabitTypeApi): 'walked' | 'slept' | 'water' {
@@ -81,16 +97,15 @@ function mapRow(raw: Record<string, unknown>): PatientDailyLogRow {
     id: String(raw.id),
     clerk_user_id: String(raw.clerk_user_id),
     log_date: dateStr,
-    walked: raw.walked === true,
-    slept: raw.slept === true,
-    water: raw.water === true,
+    walked: pgBool(raw.walked),
+    slept: pgBool(raw.slept),
+    water: pgBool(raw.water),
     meal_photo_url: raw.meal_photo_url != null ? String(raw.meal_photo_url) : null,
     coins_earned: Number(raw.coins_earned ?? 0) || 0,
   };
 }
 
 export async function fetchTodayDailyLog(clerkUserId: string): Promise<PatientDailyLogRow | null> {
-  await ensurePatientDailyLogsTable();
   const sql = homaSql();
   if (!sql) throw new Error('DATABASE_URL not configured');
 
@@ -99,7 +114,7 @@ export async function fetchTodayDailyLog(clerkUserId: string): Promise<PatientDa
     SELECT *
     FROM patient_daily_logs
     WHERE clerk_user_id = ${clerkUserId.trim()}
-      AND log_date = ${logDate}::date
+      AND log_date = ${logDate}
     LIMIT 1
   `;
   const list = Array.isArray(rows) ? rows : [];
@@ -108,7 +123,6 @@ export async function fetchTodayDailyLog(clerkUserId: string): Promise<PatientDa
 }
 
 export async function sumPatientCoins(clerkUserId: string): Promise<number> {
-  await ensurePatientDailyLogsTable();
   const sql = homaSql();
   if (!sql) throw new Error('DATABASE_URL not configured');
 
@@ -149,6 +163,61 @@ export type LogHabitResult = {
   totalCoins: number;
 };
 
+type DailyLogWrite = {
+  walked: boolean;
+  slept: boolean;
+  water: boolean;
+  meal_photo_url: string | null;
+  coins_earned: number;
+};
+
+async function writeTodayDailyLog(
+  clerkId: string,
+  logDate: string,
+  payload: DailyLogWrite,
+): Promise<PatientDailyLogRow> {
+  const sql = homaSql();
+  if (!sql) throw new Error('DATABASE_URL not configured');
+
+  const updated = await sql`
+    UPDATE patient_daily_logs
+    SET
+      walked = ${payload.walked},
+      slept = ${payload.slept},
+      water = ${payload.water},
+      meal_photo_url = ${payload.meal_photo_url},
+      coins_earned = ${payload.coins_earned}
+    WHERE clerk_user_id = ${clerkId}
+      AND log_date = ${logDate}
+    RETURNING *
+  `;
+  const updatedList = Array.isArray(updated) ? updated : [];
+  if (updatedList.length > 0) {
+    return mapRow(updatedList[0] as Record<string, unknown>);
+  }
+
+  const inserted = await sql`
+    INSERT INTO patient_daily_logs (
+      clerk_user_id, log_date, walked, slept, water, meal_photo_url, coins_earned
+    )
+    VALUES (
+      ${clerkId},
+      ${logDate},
+      ${payload.walked},
+      ${payload.slept},
+      ${payload.water},
+      ${payload.meal_photo_url},
+      ${payload.coins_earned}
+    )
+    RETURNING *
+  `;
+  const insertList = Array.isArray(inserted) ? inserted : [];
+  if (insertList.length === 0) {
+    throw new Error('Failed to save daily log row');
+  }
+  return mapRow(insertList[0] as Record<string, unknown>);
+}
+
 /**
  * Set one habit for today. Awards +5 coins when turning on (once per habit per day).
  * Removes 5 when turning off if it was on.
@@ -158,9 +227,7 @@ export async function upsertPatientHabit(
   habitType: HabitTypeApi,
   completed: boolean,
 ): Promise<LogHabitResult> {
-  await ensurePatientDailyLogsTable();
-  const sql = homaSql();
-  if (!sql) throw new Error('DATABASE_URL not configured');
+  await maybeBootstrapPatientDailyLogsTable();
 
   const clerkId = clerkUserId.trim();
   const logDate = todayLogDateUtc();
@@ -178,33 +245,15 @@ export async function upsertPatientHabit(
   const nextCoins = Math.max(0, (existing?.coins_earned ?? 0) + coinsDelta);
   const mealUrl = existing?.meal_photo_url ?? null;
 
-  const rows = await sql`
-    INSERT INTO patient_daily_logs (
-      clerk_user_id, log_date, walked, slept, water, meal_photo_url, coins_earned, updated_at
-    )
-    VALUES (
-      ${clerkId},
-      ${logDate}::date,
-      ${nextWalked},
-      ${nextSlept},
-      ${nextWater},
-      ${mealUrl},
-      ${nextCoins},
-      NOW()
-    )
-    ON CONFLICT (clerk_user_id, log_date) DO UPDATE SET
-      walked = EXCLUDED.walked,
-      slept = EXCLUDED.slept,
-      water = EXCLUDED.water,
-      coins_earned = EXCLUDED.coins_earned,
-      updated_at = NOW()
-    RETURNING *
-  `;
+  const row = await writeTodayDailyLog(clerkId, logDate, {
+    walked: nextWalked,
+    slept: nextSlept,
+    water: nextWater,
+    meal_photo_url: mealUrl,
+    coins_earned: nextCoins,
+  });
 
-  const list = Array.isArray(rows) ? rows : [];
-  const row = mapRow(list[0] as Record<string, unknown>);
   const totalCoins = await sumPatientCoins(clerkId);
-
   return { row, coinsDelta, totalCoins };
 }
 
@@ -214,36 +263,20 @@ export async function upsertMealPhotoUrl(
   clerkUserId: string,
   mealPhotoUrl: string,
 ): Promise<{ row: PatientDailyLogRow; totalCoins: number }> {
-  await ensurePatientDailyLogsTable();
-  const sql = homaSql();
-  if (!sql) throw new Error('DATABASE_URL not configured');
+  await maybeBootstrapPatientDailyLogsTable();
 
   const clerkId = clerkUserId.trim();
   const logDate = todayLogDateUtc();
   const existing = await fetchTodayDailyLog(clerkId);
 
-  const rows = await sql`
-    INSERT INTO patient_daily_logs (
-      clerk_user_id, log_date, walked, slept, water, meal_photo_url, coins_earned, updated_at
-    )
-    VALUES (
-      ${clerkId},
-      ${logDate}::date,
-      ${existing?.walked ?? false},
-      ${existing?.slept ?? false},
-      ${existing?.water ?? false},
-      ${mealPhotoUrl},
-      ${existing?.coins_earned ?? 0},
-      NOW()
-    )
-    ON CONFLICT (clerk_user_id, log_date) DO UPDATE SET
-      meal_photo_url = EXCLUDED.meal_photo_url,
-      updated_at = NOW()
-    RETURNING *
-  `;
+  const row = await writeTodayDailyLog(clerkId, logDate, {
+    walked: existing?.walked ?? false,
+    slept: existing?.slept ?? false,
+    water: existing?.water ?? false,
+    meal_photo_url: mealPhotoUrl,
+    coins_earned: existing?.coins_earned ?? 0,
+  });
 
-  const list = Array.isArray(rows) ? rows : [];
-  const row = mapRow(list[0] as Record<string, unknown>);
   const totalCoins = await sumPatientCoins(clerkId);
   return { row, totalCoins };
 }
