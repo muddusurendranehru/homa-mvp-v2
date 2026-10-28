@@ -1,6 +1,7 @@
 import type { ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
-import { baselineFromRow, type PatientBaselineRow } from '@/lib/homa-db';
+import { baselineFromRow, persistProgramStartDateIfEmpty, type PatientBaselineRow } from '@/lib/homa-db';
 import {
+  fetchEarliestDailyLogDate,
   fetchTodayDailyLog,
   sumPatientCoins,
   todayLogDateUtc,
@@ -72,14 +73,51 @@ export function emptyJourney(): PatientJourneyJson {
   };
 }
 
-export function journeyFromAssessmentCreatedAt(createdAt: string): PatientJourneyJson {
-  const currentDay = programDayFromStart(createdAt);
+export function journeyFromProgramStart(programStart: string): PatientJourneyJson {
+  const currentDay = programDayFromStart(programStart);
   return {
     programDays: PROGRAM_DAYS,
     currentDay,
     dayPercent: Math.round((currentDay / PROGRAM_DAYS) * 100),
     coinsBalance: null,
   };
+}
+
+/** @deprecated Use journeyFromProgramStart — assessment created_at is baseline visit, not program start. */
+export function journeyFromAssessmentCreatedAt(createdAt: string): PatientJourneyJson {
+  return journeyFromProgramStart(createdAt);
+}
+
+/**
+ * Day 1 anchor: persisted program_start_date → earliest daily log → today (UTC).
+ * Baseline assessment created_at is intentionally not used (visit may predate the 90-day tracker).
+ */
+export async function resolveProgramStartDate(
+  clerkUserId: string,
+  row: PatientBaselineRow | null,
+): Promise<string> {
+  const fromRow = row?.program_start_date?.trim();
+  if (fromRow && /^\d{4}-\d{2}-\d{2}$/.test(fromRow.slice(0, 10))) {
+    return fromRow.slice(0, 10);
+  }
+
+  const clerkId = clerkUserId.trim();
+  let resolved = todayLogDateUtc();
+
+  if (clerkId) {
+    try {
+      const earliest = await fetchEarliestDailyLogDate(clerkId);
+      if (earliest) resolved = earliest;
+    } catch {
+      /* use today */
+    }
+  }
+
+  if (row?.id) {
+    await persistProgramStartDateIfEmpty(row.id, resolved);
+  }
+
+  return resolved;
 }
 
 export function assessmentToJson(row: PatientBaselineRow): PatientAssessmentJson {
@@ -128,11 +166,7 @@ export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeRespo
     status: 'linked',
     assessment: assessmentToJson(row),
     baseline,
-    journey: journeyFromAssessmentCreatedAt(
-      typeof row.created_at === 'string'
-        ? row.created_at
-        : new Date(row.created_at).toISOString(),
-    ),
+    journey: journeyFromProgramStart(todayLogDateUtc()),
     todayLog: emptyTodayLog(),
     totalCoins: 0,
   };
@@ -147,14 +181,14 @@ export async function buildPatientMeResponse(
   if (!clerkUserId.trim()) return base;
 
   try {
+    const programStart = await resolveProgramStartDate(clerkUserId, row);
+    const journeyFromStart = journeyFromProgramStart(programStart);
+
     const [todayRow, totalCoins] = await Promise.all([
       fetchTodayDailyLog(clerkUserId),
       sumPatientCoins(clerkUserId),
     ]);
-    const journey =
-      base.journey.coinsBalance === null
-        ? { ...base.journey, coinsBalance: totalCoins }
-        : { ...base.journey, coinsBalance: totalCoins };
+    const journey = { ...journeyFromStart, coinsBalance: totalCoins };
 
     return {
       ...base,

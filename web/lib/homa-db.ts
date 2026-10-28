@@ -14,6 +14,8 @@ export type PatientBaselineRow = {
   hdl?: number | null;
   ldl?: number | null;
   created_at: string;
+  /** When set, Day 1 of 90 is this UTC calendar date (not baseline visit created_at). */
+  program_start_date?: string | null;
 };
 
 export function homaSql() {
@@ -64,6 +66,14 @@ export function mapPatientAssessmentRow(raw: Record<string, unknown>): PatientBa
         ? String(created)
         : new Date().toISOString();
 
+  const programStart = raw.program_start_date;
+  const programStartDate =
+    programStart instanceof Date
+      ? programStart.toISOString().slice(0, 10)
+      : programStart != null && String(programStart).trim()
+        ? String(programStart).slice(0, 10)
+        : null;
+
   return {
     id: String(raw.id),
     age: numOrNull(raw.age),
@@ -78,6 +88,7 @@ export function mapPatientAssessmentRow(raw: Record<string, unknown>): PatientBa
     hdl: numOrNull(raw.hdl),
     ldl: numOrNull(raw.ldl),
     created_at: createdAt,
+    program_start_date: programStartDate,
   };
 }
 
@@ -138,5 +149,29 @@ export async function getLatestBaselineByClerkUserId(
     return await fetchLatestPatientAssessmentByClerkUserId(clerkUserId);
   } catch {
     return null;
+  }
+}
+
+/**
+ * Set program_start_date once (Clerk link / first tracker visit). No-op if column missing or already set.
+ */
+export async function persistProgramStartDateIfEmpty(
+  assessmentId: string,
+  startDateYmd: string,
+): Promise<void> {
+  const sql = homaSql();
+  if (!sql || !assessmentId.trim()) return;
+  const ymd = startDateYmd.slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(ymd)) return;
+
+  try {
+    await sql`
+      UPDATE patient_assessments
+      SET program_start_date = ${ymd}::date
+      WHERE id = ${assessmentId.trim()}
+        AND program_start_date IS NULL
+    `;
+  } catch {
+    /* column may not exist yet — migration add_program_start_date.sql */
   }
 }

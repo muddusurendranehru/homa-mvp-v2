@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS patient_assessments (
   procedures TEXT,
   post_menopausal BOOLEAN,
   clerk_user_id TEXT,
+  program_start_date DATE,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

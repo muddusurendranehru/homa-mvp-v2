@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireCalculatorSaveAuth } from '@/lib/calculator-save-auth';
 import { homaSql } from '@/lib/homa-db';
+import { todayLogDateUtc } from '@/lib/patient-daily-log';
 
 export const dynamic = 'force-dynamic';
 
@@ -68,17 +69,18 @@ export async function POST(request: NextRequest) {
   }
 
   const mapped = mapPayload(body);
+  const programStart = mapped.clerk_user_id ? todayLogDateUtc() : null;
 
   try {
     const rows = await sql`
       INSERT INTO patient_assessments (
         age, gender, height_cm, weight_kg, waist_cm,
         fbs, fasting_insulin, hba1c, hdl, ldl, triglycerides,
-        clerk_user_id, created_at
+        clerk_user_id, program_start_date, created_at
       ) VALUES (
         ${mapped.age}, ${mapped.gender}, ${mapped.height_cm}, ${mapped.weight_kg}, ${mapped.waist_cm},
         ${mapped.fbs}, ${mapped.fasting_insulin}, ${mapped.hba1c}, ${mapped.hdl}, ${mapped.ldl}, ${mapped.triglycerides},
-        ${mapped.clerk_user_id}, NOW()
+        ${mapped.clerk_user_id}, ${programStart}::date, NOW()
       )
       RETURNING id
     `;
@@ -86,6 +88,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, id });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
+    if (msg.includes('program_start_date') || msg.includes('clerk_user_id')) {
+      try {
+        const rows = await sql`
+          INSERT INTO patient_assessments (
+            age, gender, height_cm, weight_kg, waist_cm,
+            fbs, fasting_insulin, hba1c, hdl, ldl, triglycerides,
+            clerk_user_id, created_at
+          ) VALUES (
+            ${mapped.age}, ${mapped.gender}, ${mapped.height_cm}, ${mapped.weight_kg}, ${mapped.waist_cm},
+            ${mapped.fbs}, ${mapped.fasting_insulin}, ${mapped.hba1c}, ${mapped.hdl}, ${mapped.ldl}, ${mapped.triglycerides},
+            ${mapped.clerk_user_id}, NOW()
+          )
+          RETURNING id
+        `;
+        const id = String((rows[0] as { id: string }).id);
+        return NextResponse.json({ success: true, id });
+      } catch {
+        /* fall through */
+      }
+    }
     if (msg.includes('clerk_user_id')) {
       return NextResponse.json(
         {

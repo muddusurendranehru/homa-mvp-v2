@@ -34,9 +34,9 @@ export async function POST(request: NextRequest) {
       : null;
   const useLatest = body.use_latest === true || body.use_latest === 'true' || !assessmentId;
 
-  try {
-    let targetId = assessmentId;
+  let targetId = assessmentId;
 
+  try {
     if (useLatest) {
       const latest = await sql`
         SELECT id
@@ -56,9 +56,11 @@ export async function POST(request: NextRequest) {
 
     const updated = await sql`
       UPDATE patient_assessments
-      SET clerk_user_id = ${clerkUserId.trim()}
+      SET
+        clerk_user_id = ${clerkUserId.trim()},
+        program_start_date = COALESCE(program_start_date, CURRENT_DATE)
       WHERE id = ${targetId}
-      RETURNING id, clerk_user_id, age, gender, hba1c, created_at
+      RETURNING id, clerk_user_id, age, gender, hba1c, created_at, program_start_date
     `;
 
     if (updated.length === 0) {
@@ -68,6 +70,24 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, assessment: updated[0] });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
+    if (msg.includes('program_start_date')) {
+      try {
+        const updated = await sql`
+          UPDATE patient_assessments
+          SET clerk_user_id = ${clerkUserId.trim()}
+          WHERE id = ${targetId}
+          RETURNING id, clerk_user_id, age, gender, hba1c, created_at
+        `;
+        if (updated.length === 0) {
+          return NextResponse.json({ error: 'Assessment not found for that id' }, { status: 404 });
+        }
+        return NextResponse.json({ success: true, assessment: updated[0] });
+      } catch (inner) {
+        const innerMsg = inner instanceof Error ? inner.message : String(inner);
+        console.error('[admin/link-assessment]', innerMsg);
+        return NextResponse.json({ error: 'Failed to link assessment' }, { status: 500 });
+      }
+    }
     if (msg.includes('clerk_user_id')) {
       return NextResponse.json(
         {
