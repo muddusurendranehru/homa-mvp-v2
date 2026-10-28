@@ -39,8 +39,11 @@ function applyPatientMe(
   setJourney(data.journey);
   setCoins(data.journey.coinsBalance ?? 0);
 
-  if (data.success && data.status === 'linked' && data.baseline) {
-    setBaseline({ kind: 'baseline', data: data.baseline });
+  if (data.success && data.status === 'linked') {
+    setBaseline({
+      kind: 'baseline',
+      data: data.baseline ?? { age: null, gender: null, hba1c: null, homaIr: null },
+    });
   } else {
     setBaseline({ kind: 'processing' });
   }
@@ -53,8 +56,11 @@ type PatientTrackerProps = {
 
 function baselineFromPatientMe(me: PatientMeResponse | null | undefined): BaselineState {
   if (!me) return { kind: 'loading' };
-  if (me.success && me.status === 'linked' && me.baseline) {
-    return { kind: 'baseline', data: me.baseline };
+  if (me.success && me.status === 'linked') {
+    return {
+      kind: 'baseline',
+      data: me.baseline ?? { age: null, gender: null, hba1c: null, homaIr: null },
+    };
   }
   if (me.status === 'processing') return { kind: 'processing' };
   return { kind: 'loading' };

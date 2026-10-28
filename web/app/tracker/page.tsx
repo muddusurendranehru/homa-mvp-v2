@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { auth } from '@clerk/nextjs/server';
 import AppShell from '@/components/AppShell';
 import PatientTracker from '@/components/PatientTracker';
-import { lookupLatestBaselineByClerkUserId } from '@/lib/homa-db';
+import { fetchLatestPatientAssessmentByClerkUserId } from '@/lib/homa-db';
 import { patientMeFromRow } from '@/lib/patient-me';
 
 export const metadata: Metadata = {
@@ -14,15 +14,15 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function TrackerPage() {
-  const { isAuthenticated, userId } = await auth();
+  const { userId } = await auth();
   let initialPatientMe = null;
 
-  if (isAuthenticated && userId) {
-    const lookup = await lookupLatestBaselineByClerkUserId(userId);
-    if (lookup.kind === 'found') {
-      initialPatientMe = patientMeFromRow(lookup.row);
-    } else if (lookup.kind === 'not_found') {
-      initialPatientMe = patientMeFromRow(null);
+  if (userId) {
+    try {
+      const row = await fetchLatestPatientAssessmentByClerkUserId(userId);
+      initialPatientMe = patientMeFromRow(row);
+    } catch (err) {
+      console.error('[tracker] baseline load failed:', err instanceof Error ? err.message : err);
     }
   }
 
