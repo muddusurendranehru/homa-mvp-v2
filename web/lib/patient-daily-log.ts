@@ -122,6 +122,24 @@ export async function fetchTodayDailyLog(clerkUserId: string): Promise<PatientDa
   return mapRow(list[0] as Record<string, unknown>);
 }
 
+/** Earliest habit log date for this Clerk user (program anchor fallback). */
+export async function fetchEarliestDailyLogDate(clerkUserId: string): Promise<string | null> {
+  await maybeBootstrapPatientDailyLogsTable();
+  const sql = homaSql();
+  if (!sql) throw new Error('DATABASE_URL not configured');
+
+  const rows = await sql`
+    SELECT MIN(log_date)::text AS earliest
+    FROM patient_daily_logs
+    WHERE clerk_user_id = ${clerkUserId.trim()}
+  `;
+  const list = Array.isArray(rows) ? rows : [];
+  const earliest = list[0]?.earliest;
+  if (earliest == null) return null;
+  const s = String(earliest).slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : null;
+}
+
 export async function sumPatientCoins(clerkUserId: string): Promise<number> {
   const sql = homaSql();
   if (!sql) throw new Error('DATABASE_URL not configured');
