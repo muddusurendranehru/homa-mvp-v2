@@ -18,6 +18,12 @@ const HABITS: { id: HabitId; emoji: string; label: string }[] = [
   { id: 'sleep', emoji: '😴', label: 'Sleep 7+ hrs' },
 ];
 
+const HABIT_API: Record<HabitId, 'walk' | 'sleep' | 'water'> = {
+  exercise: 'walk',
+  water: 'water',
+  sleep: 'sleep',
+};
+
 const MEALS = [
   { slot: 'Breakfast', time: '8:00 AM', item: 'Vegetable upma + cucumber salad', note: 'Low GI, high fiber' },
   { slot: 'Lunch', time: '1:00 PM', item: '2 millet rotis + dal + sautéed greens', note: 'Portion-controlled carbs' },
@@ -35,9 +41,15 @@ function applyPatientMe(
   setBaseline: (s: BaselineState) => void,
   setJourney: (j: PatientJourneyJson) => void,
   setCoins: (n: number) => void,
+  setHabits: (h: Record<HabitId, boolean>) => void,
 ) {
   setJourney(data.journey);
-  setCoins(data.journey.coinsBalance ?? 0);
+  setCoins(data.totalCoins ?? data.journey.coinsBalance ?? 0);
+  setHabits({
+    exercise: data.todayLog?.walked ?? false,
+    water: data.todayLog?.water ?? false,
+    sleep: data.todayLog?.slept ?? false,
+  });
 
   if (data.success && data.status === 'linked') {
     setBaseline({
@@ -73,17 +85,21 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [toast, setToast] = useState(false);
+  const [statusToast, setStatusToast] = useState<string | null>(null);
+  const showToast = useCallback((message: string, ms = 4500) => {
+    setStatusToast(message);
+    window.setTimeout(() => setStatusToast(null), ms);
+  }, []);
   const [baseline, setBaseline] = useState<BaselineState>(() => baselineFromPatientMe(initialPatientMe));
   const [journey, setJourney] = useState<PatientJourneyJson>(
     () => initialPatientMe?.journey ?? emptyJourney(),
   );
-  const [coins, setCoins] = useState(0);
-  const [habits, setHabits] = useState<Record<HabitId, boolean>>({
-    exercise: false,
-    water: false,
-    sleep: false,
-  });
+  const [coins, setCoins] = useState(() => initialPatientMe?.totalCoins ?? 0);
+  const [habits, setHabits] = useState<Record<HabitId, boolean>>(() => ({
+    exercise: initialPatientMe?.todayLog?.walked ?? false,
+    water: initialPatientMe?.todayLog?.water ?? false,
+    sleep: initialPatientMe?.todayLog?.slept ?? false,
+  }));
   const [habitFlash, setHabitFlash] = useState<HabitId | null>(null);
 
   useEffect(() => {
@@ -96,9 +112,9 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
         setBaseline({ kind: 'sign_in' });
         setJourney(emptyJourney());
         setCoins(0);
+        setHabits({ exercise: false, water: false, sleep: false });
         return;
       }
-
       const skipLoadingFlash =
         initialPatientMe?.success === true && initialPatientMe.status === 'linked' && !!initialPatientMe.baseline;
       if (!skipLoadingFlash) {
@@ -115,6 +131,7 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
           setBaseline({ kind: 'sign_in' });
           setJourney(emptyJourney());
           setCoins(0);
+          setHabits({ exercise: false, water: false, sleep: false });
           return;
         }
 
@@ -122,11 +139,12 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
           setBaseline({ kind: 'processing' });
           setJourney(emptyJourney());
           setCoins(0);
+          setHabits({ exercise: false, water: false, sleep: false });
           return;
         }
 
         const data = (await res.json()) as PatientMeResponse;
-        applyPatientMe(data, setBaseline, setJourney, setCoins);
+        applyPatientMe(data, setBaseline, setJourney, setCoins, setHabits);
       } catch {
         if (!cancelled) {
           setBaseline({ kind: 'processing' });
@@ -161,25 +179,47 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
 
   const toggleHabit = (id: HabitId) => {
     const completed = !habits[id];
+    const prevHabits = habits;
+    const prevCoins = coins;
+
     setHabits((prev) => ({ ...prev, [id]: completed }));
-    setCoins((c) => c + (completed ? HABIT_COIN_REWARD : -HABIT_COIN_REWARD));
 
-    void fetch('/api/patient/habit-log', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        habit: id,
-        completed,
-        programDay: journey.currentDay,
-      }),
-    }).catch(() => {
-      /* session-only fallback; route may return 401 when signed out */
-    });
-
-    if (completed) {
-      setHabitFlash(id);
-      window.setTimeout(() => setHabitFlash(null), 1600);
-    }
+    void (async () => {
+      try {
+        const res = await fetch('/api/patient/log-habit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            habit_type: HABIT_API[id],
+            completed,
+          }),
+        });
+        const data = (await res.json()) as {
+          persisted?: boolean;
+          total_coins?: number;
+          coins_delta?: number;
+          error?: string;
+        };
+        if (!res.ok || !data.persisted) {
+          setHabits(prevHabits);
+          showToast(data.error ?? 'Could not save habit. Try again.');
+          return;
+        }
+        if (typeof data.total_coins === 'number') {
+          setCoins(data.total_coins);
+        }
+        if (completed && (data.coins_delta ?? 0) > 0) {
+          setHabitFlash(id);
+          window.setTimeout(() => setHabitFlash(null), 1600);
+          showToast(`Habit saved! +${HABIT_COIN_REWARD} HOMA Coins.`, 3200);
+        }
+      } catch {
+        setHabits(prevHabits);
+        setCoins(prevCoins);
+        showToast('Could not save habit. Check your connection.');
+      }
+    })();
   };
 
   const onDrop = (e: React.DragEvent) => {
@@ -193,40 +233,40 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
     if (!file || submitting) return;
     setSubmitting(true);
     try {
-      await fetch('/api/patient/meal-photo', {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch('/api/patient/upload-meal', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fileName: file.name,
-          fileSize: file.size,
-          mimeType: file.type,
-          programDay: journey.currentDay,
-        }),
+        credentials: 'same-origin',
+        body: form,
       });
-      setToast(true);
+      const data = (await res.json()) as { persisted?: boolean; error?: string; total_coins?: number };
+      if (!res.ok || !data.persisted) {
+        showToast(data.error ?? 'Upload failed. Try a smaller JPG/PNG.');
+        return;
+      }
+      if (typeof data.total_coins === 'number') {
+        setCoins(data.total_coins);
+      }
+      showToast('Meal photo saved! HOMA staff will review it.');
       clearFile();
-      window.setTimeout(() => setToast(false), 4500);
     } catch {
-      setToast(true);
-      window.setTimeout(() => setToast(false), 4500);
+      showToast('Upload failed. Check your connection.');
     } finally {
       setSubmitting(false);
     }
   };
 
-  const coinsHint =
-    journey.coinsBalance == null
-      ? 'Includes today’s habits (saved to your account after clinic sync)'
-      : `+${HABIT_COIN_REWARD} per habit today`;
+  const coinsHint = `+${HABIT_COIN_REWARD} per habit today · saved to your account`;
 
   return (
     <div className="space-y-6 pb-8">
-      {toast && (
+      {statusToast && (
         <div
           role="status"
           className="fixed bottom-6 left-4 right-4 z-[1100] mx-auto max-w-md rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-center text-sm font-semibold text-green-800 shadow-lg sm:left-auto sm:right-6"
         >
-          Meal photo sent to HOMA staff. Thank you!
+          {statusToast}
         </div>
       )}
 
@@ -296,8 +336,8 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md">
         <h2 className="text-lg font-bold text-slate-900">Today&apos;s Healthy Habits</h2>
         <p className="mt-1 text-sm text-slate-600">
-          Check each habit when you complete it today (+{HABIT_COIN_REWARD} coins each). Checked habits stay in this
-          browser session until daily habit sync is enabled.
+          Check each habit when you complete it today (+{HABIT_COIN_REWARD} coins each). Your checks are saved to your
+          HOMA account and stay checked after refresh.
         </p>
         <ul className="mt-4 space-y-3">
           {HABITS.map((h) => {
