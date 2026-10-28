@@ -1,5 +1,7 @@
 -- Daily habit + meal photo log for Clerk-linked patients (HOMA MVP tracker).
 -- Run once on Neon (same DATABASE_URL as web/): psql "$DATABASE_URL" -f server/migrations/add_patient_daily_logs.sql
+--
+-- Then grant DML to the Render app role (NOT the owner): see grant_patient_daily_logs.sql
 
 CREATE TABLE IF NOT EXISTS patient_daily_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
