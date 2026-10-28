@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { fetchLatestPatientAssessmentByClerkUserId } from '@/lib/homa-db';
-import { patientMeFromRow } from '@/lib/patient-me';
+import { buildPatientMeResponse } from '@/lib/patient-me';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,7 +25,7 @@ export async function GET() {
     const row = await fetchLatestPatientAssessmentByClerkUserId(userId);
     console.log('DB Query Result:', row);
 
-    const body = patientMeFromRow(row);
+    const body = await buildPatientMeResponse(userId, row);
     return NextResponse.json(body, { headers: NO_STORE });
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);

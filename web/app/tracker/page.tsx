@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server';
 import AppShell from '@/components/AppShell';
 import PatientTracker from '@/components/PatientTracker';
 import { fetchLatestPatientAssessmentByClerkUserId } from '@/lib/homa-db';
-import { patientMeFromRow } from '@/lib/patient-me';
+import { buildPatientMeResponse } from '@/lib/patient-me';
 
 export const metadata: Metadata = {
   title: 'My 90-Day Journey | HOMA Healthcare Center',
@@ -20,7 +20,7 @@ export default async function TrackerPage() {
   if (userId) {
     try {
       const row = await fetchLatestPatientAssessmentByClerkUserId(userId);
-      initialPatientMe = patientMeFromRow(row);
+      initialPatientMe = await buildPatientMeResponse(userId, row);
     } catch (err) {
       console.error('[tracker] baseline load failed:', err instanceof Error ? err.message : err);
     }

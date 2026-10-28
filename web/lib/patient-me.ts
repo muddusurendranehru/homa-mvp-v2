@@ -1,5 +1,14 @@
 import type { ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
 import { baselineFromRow, type PatientBaselineRow } from '@/lib/homa-db';
+import {
+  fetchTodayDailyLog,
+  sumPatientCoins,
+  todayLogDateUtc,
+  todayLogToJson,
+  type TodayLogJson,
+} from '@/lib/patient-daily-log';
+
+export type { TodayLogJson };
 
 export const PROGRAM_DAYS = 90;
 export const HABIT_COIN_REWARD = 5;
@@ -38,6 +47,10 @@ export type PatientMeResponse = {
   assessment: PatientAssessmentJson | null;
   baseline: ClinicalBaselineData | null;
   journey: PatientJourneyJson;
+  /** Today's habit checkboxes + meal flag from patient_daily_logs. */
+  todayLog: TodayLogJson;
+  /** Sum of coins_earned across all daily logs for this Clerk user. */
+  totalCoins: number;
 };
 
 export function programDayFromStart(createdAt: string | Date, programDays = PROGRAM_DAYS): number {
@@ -92,6 +105,10 @@ export function assessmentToJson(row: PatientBaselineRow): PatientAssessmentJson
   };
 }
 
+function emptyTodayLog(): TodayLogJson {
+  return todayLogToJson(null, todayLogDateUtc());
+}
+
 export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeResponse {
   if (!row) {
     return {
@@ -101,6 +118,8 @@ export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeRespo
       assessment: null,
       baseline: null,
       journey: emptyJourney(),
+      todayLog: emptyTodayLog(),
+      totalCoins: 0,
     };
   }
   const baseline = baselineFromRow(row);
@@ -114,5 +133,36 @@ export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeRespo
         ? row.created_at
         : new Date(row.created_at).toISOString(),
     ),
+    todayLog: emptyTodayLog(),
+    totalCoins: 0,
   };
+}
+
+/** Assessment row + Neon daily log (when DATABASE_URL is set). */
+export async function buildPatientMeResponse(
+  clerkUserId: string,
+  row: PatientBaselineRow | null,
+): Promise<PatientMeResponse> {
+  const base = patientMeFromRow(row);
+  if (!clerkUserId.trim()) return base;
+
+  try {
+    const [todayRow, totalCoins] = await Promise.all([
+      fetchTodayDailyLog(clerkUserId),
+      sumPatientCoins(clerkUserId),
+    ]);
+    const journey =
+      base.journey.coinsBalance === null
+        ? { ...base.journey, coinsBalance: totalCoins }
+        : { ...base.journey, coinsBalance: totalCoins };
+
+    return {
+      ...base,
+      journey,
+      todayLog: todayLogToJson(todayRow),
+      totalCoins,
+    };
+  } catch {
+    return base;
+  }
 }
