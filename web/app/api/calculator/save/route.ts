@@ -19,7 +19,25 @@ function str(v: unknown): string | null {
   return s || null;
 }
 
+function mobileFromBody(body: SaveBody): string | null {
+  const raw =
+    str(body.mobile_number) ??
+    str(body.mobile) ??
+    str(body.phone) ??
+    str(body.patient_phone) ??
+    str(body.phone_number);
+  if (!raw) return null;
+  const digits = raw.replace(/\D/g, '');
+  if (digits.length >= 10) {
+    return digits.length > 10 && digits.startsWith('91') ? digits.slice(-10) : digits;
+  }
+  return raw;
+}
+
 function mapPayload(body: SaveBody) {
+  const patient_name = str(body.patient_name ?? body.name);
+  const email = str(body.email ?? body.patient_email);
+  const mobile_number = mobileFromBody(body);
   const age = num(body.patient_age ?? body.age);
   const gender = str(body.patient_sex ?? body.gender);
   const height_cm = num(body.height_cm);
@@ -34,6 +52,9 @@ function mapPayload(body: SaveBody) {
   const clerk_user_id = str(body.clerk_user_id);
 
   return {
+    patient_name,
+    email,
+    mobile_number,
     age,
     gender,
     height_cm,
@@ -74,10 +95,12 @@ export async function POST(request: NextRequest) {
   try {
     const rows = await sql`
       INSERT INTO patient_assessments (
+        patient_name, email, mobile_number,
         age, gender, height_cm, weight_kg, waist_cm,
         fbs, fasting_insulin, hba1c, hdl, ldl, triglycerides,
         clerk_user_id, program_start_date, created_at
       ) VALUES (
+        ${mapped.patient_name}, ${mapped.email}, ${mapped.mobile_number},
         ${mapped.age}, ${mapped.gender}, ${mapped.height_cm}, ${mapped.weight_kg}, ${mapped.waist_cm},
         ${mapped.fbs}, ${mapped.fasting_insulin}, ${mapped.hba1c}, ${mapped.hdl}, ${mapped.ldl}, ${mapped.triglycerides},
         ${mapped.clerk_user_id}, ${programStart}::date, NOW()
@@ -88,7 +111,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, id });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
-    if (msg.includes('program_start_date') || msg.includes('clerk_user_id')) {
+    if (
+      msg.includes('program_start_date') ||
+      msg.includes('clerk_user_id') ||
+      msg.includes('mobile_number') ||
+      msg.includes('patient_name') ||
+      msg.includes('email')
+    ) {
       try {
         const rows = await sql`
           INSERT INTO patient_assessments (
