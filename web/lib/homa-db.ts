@@ -155,10 +155,39 @@ export async function getLatestBaselineByClerkUserId(
 /**
  * Set program_start_date once (Clerk link / first tracker visit). No-op if column missing or already set.
  */
-/**
- * Program Day 1 anchor from staff-entered patient_tracker (preferred over assessment program_start_date).
- */
-export async function fetchPatientTrackerStartDate(clerkUserId: string): Promise<string | null> {
+export type PatientTrackerRecord = {
+  id: string;
+  clerk_user_id: string | null;
+  mobile_number: string | null;
+  email: string | null;
+  patient_name: string | null;
+  start_date: string | null;
+};
+
+function mapPatientTrackerRecord(raw: Record<string, unknown>): PatientTrackerRecord {
+  const start = raw.start_date;
+  let startDate: string | null = null;
+  if (start instanceof Date) {
+    startDate = start.toISOString().slice(0, 10);
+  } else if (start != null && String(start).trim()) {
+    const ymd = String(start).slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(ymd)) startDate = ymd;
+  }
+
+  return {
+    id: String(raw.id),
+    clerk_user_id: raw.clerk_user_id != null ? String(raw.clerk_user_id) : null,
+    mobile_number: raw.mobile_number != null ? String(raw.mobile_number) : null,
+    email: raw.email != null ? String(raw.email) : null,
+    patient_name: raw.patient_name != null ? String(raw.patient_name) : null,
+    start_date: startDate,
+  };
+}
+
+/** Full patient_tracker row for signed-in Clerk user (90-day program registry). */
+export async function fetchPatientTrackerByClerkUserId(
+  clerkUserId: string,
+): Promise<PatientTrackerRecord | null> {
   const sql = homaSql();
   if (!sql) return null;
 
@@ -167,7 +196,7 @@ export async function fetchPatientTrackerStartDate(clerkUserId: string): Promise
 
   try {
     const rows = await sql`
-      SELECT start_date
+      SELECT id, clerk_user_id, mobile_number, email, patient_name, start_date
       FROM patient_tracker
       WHERE clerk_user_id = ${clerkId}
          OR TRIM(clerk_user_id) = ${clerkId}
@@ -175,19 +204,16 @@ export async function fetchPatientTrackerStartDate(clerkUserId: string): Promise
     `;
     const list = Array.isArray(rows) ? rows : [];
     if (list.length === 0) return null;
-
-    const raw = (list[0] as Record<string, unknown>).start_date;
-    if (raw instanceof Date) {
-      return raw.toISOString().slice(0, 10);
-    }
-    if (raw != null && String(raw).trim()) {
-      const ymd = String(raw).slice(0, 10);
-      if (/^\d{4}-\d{2}-\d{2}$/.test(ymd)) return ymd;
-    }
-    return null;
+    return mapPatientTrackerRecord(list[0] as Record<string, unknown>);
   } catch {
     return null;
   }
+}
+
+/** Program Day 1 anchor from staff-entered patient_tracker.start_date. */
+export async function fetchPatientTrackerStartDate(clerkUserId: string): Promise<string | null> {
+  const record = await fetchPatientTrackerByClerkUserId(clerkUserId);
+  return record?.start_date ?? null;
 }
 
 export async function persistProgramStartDateIfEmpty(

@@ -2,7 +2,11 @@ import { Metadata } from 'next';
 import { auth } from '@clerk/nextjs/server';
 import AppShell from '@/components/AppShell';
 import PatientTracker from '@/components/PatientTracker';
-import { fetchLatestPatientAssessmentByClerkUserId } from '@/lib/homa-db';
+import {
+  fetchLatestPatientAssessmentByClerkUserId,
+  fetchPatientTrackerByClerkUserId,
+} from '@/lib/homa-db';
+import { fetchTodayDailyLog } from '@/lib/patient-daily-log';
 import { buildPatientMeResponse } from '@/lib/patient-me';
 
 export const metadata: Metadata = {
@@ -19,10 +23,13 @@ export default async function TrackerPage() {
 
   if (userId) {
     try {
-      const row = await fetchLatestPatientAssessmentByClerkUserId(userId);
-      initialPatientMe = await buildPatientMeResponse(userId, row);
+      // patient_tracker.start_date drives Day X; patient_daily_logs supplies today's habits.
+      await fetchPatientTrackerByClerkUserId(userId);
+      await fetchTodayDailyLog(userId);
+      const assessmentRow = await fetchLatestPatientAssessmentByClerkUserId(userId);
+      initialPatientMe = await buildPatientMeResponse(userId, assessmentRow);
     } catch (err) {
-      console.error('[tracker] baseline load failed:', err instanceof Error ? err.message : err);
+      console.error('[tracker] load failed:', err instanceof Error ? err.message : err);
     }
   }
 
