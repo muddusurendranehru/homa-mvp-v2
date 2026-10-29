@@ -155,6 +155,41 @@ export async function getLatestBaselineByClerkUserId(
 /**
  * Set program_start_date once (Clerk link / first tracker visit). No-op if column missing or already set.
  */
+/**
+ * Program Day 1 anchor from staff-entered patient_tracker (preferred over assessment program_start_date).
+ */
+export async function fetchPatientTrackerStartDate(clerkUserId: string): Promise<string | null> {
+  const sql = homaSql();
+  if (!sql) return null;
+
+  const clerkId = clerkUserId.trim();
+  if (!clerkId) return null;
+
+  try {
+    const rows = await sql`
+      SELECT start_date
+      FROM patient_tracker
+      WHERE clerk_user_id = ${clerkId}
+         OR TRIM(clerk_user_id) = ${clerkId}
+      LIMIT 1
+    `;
+    const list = Array.isArray(rows) ? rows : [];
+    if (list.length === 0) return null;
+
+    const raw = (list[0] as Record<string, unknown>).start_date;
+    if (raw instanceof Date) {
+      return raw.toISOString().slice(0, 10);
+    }
+    if (raw != null && String(raw).trim()) {
+      const ymd = String(raw).slice(0, 10);
+      if (/^\d{4}-\d{2}-\d{2}$/.test(ymd)) return ymd;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export async function persistProgramStartDateIfEmpty(
   assessmentId: string,
   startDateYmd: string,

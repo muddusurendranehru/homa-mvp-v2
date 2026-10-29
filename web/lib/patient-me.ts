@@ -1,5 +1,10 @@
 import type { ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
-import { baselineFromRow, persistProgramStartDateIfEmpty, type PatientBaselineRow } from '@/lib/homa-db';
+import {
+  baselineFromRow,
+  fetchPatientTrackerStartDate,
+  persistProgramStartDateIfEmpty,
+  type PatientBaselineRow,
+} from '@/lib/homa-db';
 import {
   fetchEarliestDailyLogDate,
   fetchTodayDailyLog,
@@ -89,13 +94,18 @@ export function journeyFromAssessmentCreatedAt(createdAt: string): PatientJourne
 }
 
 /**
- * Day 1 anchor: persisted program_start_date → earliest daily log → today (UTC).
+ * Day 1 anchor: patient_tracker.start_date → assessment program_start_date → earliest daily log → today (UTC).
  * Baseline assessment created_at is intentionally not used (visit may predate the 90-day tracker).
  */
 export async function resolveProgramStartDate(
   clerkUserId: string,
   row: PatientBaselineRow | null,
 ): Promise<string> {
+  const fromTracker = await fetchPatientTrackerStartDate(clerkUserId);
+  if (fromTracker) {
+    return fromTracker;
+  }
+
   const fromRow = row?.program_start_date?.trim();
   if (fromRow && /^\d{4}-\d{2}-\d{2}$/.test(fromRow.slice(0, 10))) {
     return fromRow.slice(0, 10);

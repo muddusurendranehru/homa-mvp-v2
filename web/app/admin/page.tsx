@@ -3,6 +3,15 @@
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
 
+type PatientTrackerRow = {
+  id: string;
+  clerk_user_id: string | null;
+  mobile_number: string | null;
+  email: string | null;
+  patient_name: string | null;
+  start_date: string | null;
+};
+
 type AssessmentRow = {
   id: string;
   patient_name: string | null;
@@ -21,6 +30,11 @@ function formatDate(iso: string): string {
 }
 
 export default function AdminLinkAssessmentPage() {
+  const [registryQuery, setRegistryQuery] = useState('');
+  const [registryLoading, setRegistryLoading] = useState(false);
+  const [registryResults, setRegistryResults] = useState<PatientTrackerRow[]>([]);
+  const [registryMessage, setRegistryMessage] = useState<string | null>(null);
+
   const [mobileQuery, setMobileQuery] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
   const [results, setResults] = useState<AssessmentRow[]>([]);
@@ -30,6 +44,30 @@ export default function AdminLinkAssessmentPage() {
   const [linkLoading, setLinkLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const onRegistrySearch = useCallback(async () => {
+    setRegistryLoading(true);
+    setRegistryMessage(null);
+    setRegistryResults([]);
+    try {
+      const q = encodeURIComponent(registryQuery.trim());
+      const res = await fetch(`/api/admin/search-patients?mobile=${q}`);
+      const data = await res.json();
+      if (!res.ok) {
+        setRegistryMessage(data.error || 'Search failed');
+        return;
+      }
+      const list = (data.patients ?? []) as PatientTrackerRow[];
+      setRegistryResults(list);
+      if (list.length === 0) {
+        setRegistryMessage('No patients in patient_tracker for that mobile number.');
+      }
+    } catch {
+      setRegistryMessage('Network error — try again');
+    } finally {
+      setRegistryLoading(false);
+    }
+  }, [registryQuery]);
 
   const onSearch = useCallback(async () => {
     setSearchLoading(true);
@@ -105,21 +143,106 @@ export default function AdminLinkAssessmentPage() {
           Blog admin
         </Link>
       </p>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">Link patient to assessment</h1>
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <h1 className="text-2xl font-bold text-slate-900">Admin — patients &amp; assessments</h1>
+        <Link
+          href="/admin/add-patient"
+          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+        >
+          Add New Patient
+        </Link>
+      </div>
       <p className="mt-2 text-sm text-slate-600">
-        Search by the patient&apos;s mobile number, pick the exact assessment row, then paste their Clerk
-        user id. Connects a row in <code className="text-xs">patient_assessments</code> so{' '}
-        <Link href="/tracker" className="text-teal-700 underline">
-          /tracker
-        </Link>{' '}
-        shows baseline labs. Sign in with a staff email (same allowlist as{' '}
+        Search the <code className="text-xs">patient_tracker</code> registry by mobile, or link clinic
+        assessments below. Sign in with a staff email (same allowlist as{' '}
         <code className="text-xs">/staff</code>).
       </p>
 
       <div className="mt-8 space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-slate-900">Patient registry</h2>
+        <div>
+          <label className="block text-sm font-medium text-slate-700" htmlFor="registry-mobile">
+            Search patient_tracker by mobile
+          </label>
+          <div className="mt-1 flex gap-2">
+            <input
+              id="registry-mobile"
+              className="min-w-0 flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              placeholder="e.g. 96665… or +91 996…"
+              value={registryQuery}
+              onChange={(e) => setRegistryQuery(e.target.value)}
+              autoComplete="off"
+            />
+            <button
+              type="button"
+              disabled={registryLoading || registryQuery.trim().length < 4}
+              onClick={onRegistrySearch}
+              className="shrink-0 rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-900 disabled:opacity-50"
+            >
+              {registryLoading ? 'Searching…' : 'Search'}
+            </button>
+          </div>
+        </div>
+
+        {registryResults.length > 0 && (
+          <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-slate-50 text-xs uppercase text-slate-600">
+                <tr>
+                  <th className="px-2 py-2" scope="col">
+                    Name
+                  </th>
+                  <th className="px-2 py-2" scope="col">
+                    Mobile
+                  </th>
+                  <th className="px-2 py-2" scope="col">
+                    Email
+                  </th>
+                  <th className="px-2 py-2" scope="col">
+                    Start
+                  </th>
+                  <th className="px-2 py-2" scope="col">
+                    Clerk id
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {registryResults.map((row) => (
+                  <tr key={row.id} className="border-t border-slate-100">
+                    <td className="px-2 py-2">{row.patient_name ?? '—'}</td>
+                    <td className="px-2 py-2 font-mono text-xs">{row.mobile_number ?? '—'}</td>
+                    <td className="px-2 py-2 text-xs">{row.email ?? '—'}</td>
+                    <td className="px-2 py-2 whitespace-nowrap">
+                      {row.start_date ? formatDate(row.start_date) : '—'}
+                    </td>
+                    <td className="px-2 py-2 font-mono text-xs">{row.clerk_user_id ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {registryMessage && (
+          <p className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
+            {registryMessage}
+          </p>
+        )}
+      </div>
+
+      <div className="mt-10 space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-slate-900">Link patient to assessment</h2>
+        <p className="text-sm text-slate-600">
+          Pick a row in <code className="text-xs">patient_assessments</code> so{' '}
+          <Link href="/tracker" className="text-teal-700 underline">
+            /tracker
+          </Link>{' '}
+          shows baseline labs.
+        </p>
+
         <div>
           <label className="block text-sm font-medium text-slate-700" htmlFor="mobile-search">
-            Search by mobile number
+            Search assessments by mobile
           </label>
           <div className="mt-1 flex gap-2">
             <input
