@@ -1,7 +1,10 @@
 import type { ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
-import { baselineFromRow, persistProgramStartDateIfEmpty, type PatientBaselineRow } from '@/lib/homa-db';
 import {
-  fetchEarliestDailyLogDate,
+  baselineFromRow,
+  fetchPatientTrackerByClerkUserId,
+  type PatientBaselineRow,
+} from '@/lib/homa-db';
+import {
   fetchTodayDailyLog,
   sumPatientCoins,
   todayLogDateUtc,
@@ -88,37 +91,7 @@ export function journeyFromAssessmentCreatedAt(createdAt: string): PatientJourne
   return journeyFromProgramStart(createdAt);
 }
 
-/**
- * Day 1 anchor: persisted program_start_date → earliest daily log → today (UTC).
- * Baseline assessment created_at is intentionally not used (visit may predate the 90-day tracker).
- */
-export async function resolveProgramStartDate(
-  clerkUserId: string,
-  row: PatientBaselineRow | null,
-): Promise<string> {
-  const fromRow = row?.program_start_date?.trim();
-  if (fromRow && /^\d{4}-\d{2}-\d{2}$/.test(fromRow.slice(0, 10))) {
-    return fromRow.slice(0, 10);
-  }
-
-  const clerkId = clerkUserId.trim();
-  let resolved = todayLogDateUtc();
-
-  if (clerkId) {
-    try {
-      const earliest = await fetchEarliestDailyLogDate(clerkId);
-      if (earliest) resolved = earliest;
-    } catch {
-      /* use today */
-    }
-  }
-
-  if (row?.id) {
-    await persistProgramStartDateIfEmpty(row.id, resolved);
-  }
-
-  return resolved;
-}
+export const NO_TRACKER_MESSAGE = 'No tracker record found. Please contact clinic.';
 
 export function assessmentToJson(row: PatientBaselineRow): PatientAssessmentJson {
   const baseline = baselineFromRow(row);
@@ -172,18 +145,42 @@ export function patientMeFromRow(row: PatientBaselineRow | null): PatientMeRespo
   };
 }
 
-/** Assessment row + Neon daily log (when DATABASE_URL is set). */
+/** patient_tracker row + today's patient_daily_logs habits (when DATABASE_URL is set). */
 export async function buildPatientMeResponse(
   clerkUserId: string,
   row: PatientBaselineRow | null,
 ): Promise<PatientMeResponse> {
-  const base = patientMeFromRow(row);
-  if (!clerkUserId.trim()) return base;
+  if (!clerkUserId.trim()) {
+    return {
+      success: false,
+      status: 'processing',
+      message: 'Please sign in to view your tracker.',
+      assessment: null,
+      baseline: null,
+      journey: emptyJourney(),
+      todayLog: emptyTodayLog(),
+      totalCoins: 0,
+    };
+  }
+
+  const tracker = await fetchPatientTrackerByClerkUserId(clerkUserId);
+  if (!tracker) {
+    return {
+      success: false,
+      status: 'processing',
+      message: NO_TRACKER_MESSAGE,
+      assessment: row ? assessmentToJson(row) : null,
+      baseline: row ? baselineFromRow(row) : null,
+      journey: emptyJourney(),
+      todayLog: emptyTodayLog(),
+      totalCoins: 0,
+    };
+  }
+
+  const programStart = tracker.start_date?.trim() || todayLogDateUtc();
+  const journeyFromStart = journeyFromProgramStart(programStart);
 
   try {
-    const programStart = await resolveProgramStartDate(clerkUserId, row);
-    const journeyFromStart = journeyFromProgramStart(programStart);
-
     const [todayRow, totalCoins] = await Promise.all([
       fetchTodayDailyLog(clerkUserId),
       sumPatientCoins(clerkUserId),
@@ -191,12 +188,23 @@ export async function buildPatientMeResponse(
     const journey = { ...journeyFromStart, coinsBalance: totalCoins };
 
     return {
-      ...base,
+      success: true,
+      status: 'linked',
+      assessment: row ? assessmentToJson(row) : null,
+      baseline: row ? baselineFromRow(row) : null,
       journey,
       todayLog: todayLogToJson(todayRow),
       totalCoins,
     };
   } catch {
-    return base;
+    return {
+      success: true,
+      status: 'linked',
+      assessment: row ? assessmentToJson(row) : null,
+      baseline: row ? baselineFromRow(row) : null,
+      journey: journeyFromStart,
+      todayLog: emptyTodayLog(),
+      totalCoins: 0,
+    };
   }
 }

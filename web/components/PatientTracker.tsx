@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ClinicalBaselineStrip, { type ClinicalBaselineData } from '@/components/ClinicalBaselineStrip';
 import {
   HABIT_COIN_REWARD,
+  NO_TRACKER_MESSAGE,
   type PatientJourneyJson,
   type PatientMeResponse,
   emptyJourney,
@@ -34,7 +35,8 @@ type BaselineState =
   | { kind: 'baseline'; data: ClinicalBaselineData }
   | { kind: 'processing' }
   | { kind: 'sign_in' }
-  | { kind: 'loading' };
+  | { kind: 'loading' }
+  | { kind: 'none' };
 
 function applyPatientMe(
   data: PatientMeResponse,
@@ -42,7 +44,18 @@ function applyPatientMe(
   setJourney: (j: PatientJourneyJson) => void,
   setCoins: (n: number) => void,
   setHabits: (h: Record<HabitId, boolean>) => void,
+  setTrackerAlert: (msg: string | null) => void,
 ) {
+  if (data.message === NO_TRACKER_MESSAGE) {
+    setTrackerAlert(NO_TRACKER_MESSAGE);
+    setBaseline({ kind: 'none' });
+    setJourney(emptyJourney());
+    setCoins(0);
+    setHabits({ exercise: false, water: false, sleep: false });
+    return;
+  }
+
+  setTrackerAlert(null);
   setJourney(data.journey);
   setCoins(data.totalCoins ?? data.journey.coinsBalance ?? 0);
   setHabits({
@@ -52,12 +65,18 @@ function applyPatientMe(
   });
 
   if (data.success && data.status === 'linked') {
-    setBaseline({
-      kind: 'baseline',
-      data: data.baseline ?? { age: null, gender: null, hba1c: null, homaIr: null },
-    });
-  } else {
+    if (data.baseline) {
+      setBaseline({
+        kind: 'baseline',
+        data: data.baseline,
+      });
+    } else {
+      setBaseline({ kind: 'none' });
+    }
+  } else if (data.status === 'processing') {
     setBaseline({ kind: 'processing' });
+  } else {
+    setBaseline({ kind: 'loading' });
   }
 }
 
@@ -68,10 +87,11 @@ type PatientTrackerProps = {
 
 function baselineFromPatientMe(me: PatientMeResponse | null | undefined): BaselineState {
   if (!me) return { kind: 'loading' };
-  if (me.success && me.status === 'linked') {
+  if (me.message === NO_TRACKER_MESSAGE) return { kind: 'none' };
+  if (me.success && me.status === 'linked' && me.baseline) {
     return {
       kind: 'baseline',
-      data: me.baseline ?? { age: null, gender: null, hba1c: null, homaIr: null },
+      data: me.baseline,
     };
   }
   if (me.status === 'processing') return { kind: 'processing' };
@@ -101,6 +121,9 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
     sleep: initialPatientMe?.todayLog?.slept ?? false,
   }));
   const [habitFlash, setHabitFlash] = useState<HabitId | null>(null);
+  const [trackerAlert, setTrackerAlert] = useState<string | null>(() =>
+    initialPatientMe?.message === NO_TRACKER_MESSAGE ? NO_TRACKER_MESSAGE : null,
+  );
 
   useEffect(() => {
     if (!clerkLoaded) return;
@@ -144,7 +167,7 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
         }
 
         const data = (await res.json()) as PatientMeResponse;
-        applyPatientMe(data, setBaseline, setJourney, setCoins, setHabits);
+        applyPatientMe(data, setBaseline, setJourney, setCoins, setHabits, setTrackerAlert);
       } catch {
         if (!cancelled) {
           setBaseline({ kind: 'processing' });
@@ -277,6 +300,15 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
         </p>
       </header>
 
+      {trackerAlert ? (
+        <section
+          className="rounded-2xl border border-amber-200 bg-amber-50 p-5 shadow-sm sm:p-6"
+          role="alert"
+        >
+          <p className="text-sm font-medium text-amber-950">{trackerAlert}</p>
+        </section>
+      ) : (
+        <>
       {baseline.kind === 'loading' && (
         <section
           className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm sm:p-6"
@@ -475,6 +507,8 @@ export default function PatientTracker({ initialPatientMe = null }: PatientTrack
       <footer className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center text-xs text-slate-500 shadow-sm">
         Your meal photos are private and reviewed by HOMA staff only — not shared publicly.
       </footer>
+        </>
+      )}
     </div>
   );
 }

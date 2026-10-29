@@ -3,96 +3,41 @@
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
 
-type AssessmentRow = {
+type PatientTrackerRow = {
   id: string;
   patient_name: string | null;
-  age: number | null;
   mobile_number: string | null;
-  email: string | null;
-  created_at: string;
-  clerk_user_id: string | null;
 };
 
-function formatDate(iso: string): string {
-  if (!iso) return '—';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
-  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-}
-
-export default function AdminLinkAssessmentPage() {
+export default function AdminPatientsPage() {
   const [mobileQuery, setMobileQuery] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
-  const [results, setResults] = useState<AssessmentRow[]>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-
-  const [clerkUserId, setClerkUserId] = useState('');
-  const [linkLoading, setLinkLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const [results, setResults] = useState<PatientTrackerRow[]>([]);
+  const [message, setMessage] = useState<string | null>(null);
 
   const onSearch = useCallback(async () => {
     setSearchLoading(true);
-    setError(null);
-    setSuccess(null);
+    setMessage(null);
     setResults([]);
-    setSelectedId(null);
     try {
       const q = encodeURIComponent(mobileQuery.trim());
-      const res = await fetch(`/api/admin/search-assessments?mobile=${q}`);
+      const res = await fetch(`/api/admin/search-patients?mobile=${q}`);
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || 'Search failed');
+        setMessage(data.error || 'Search failed');
         return;
       }
-      const list = (data.assessments ?? []) as AssessmentRow[];
+      const list = (data.patients ?? []) as PatientTrackerRow[];
       setResults(list);
       if (list.length === 0) {
-        setError('No assessments found for that mobile number.');
+        setMessage('No patient found for that mobile number.');
       }
     } catch {
-      setError('Network error — try again');
+      setMessage('Network error — try again');
     } finally {
       setSearchLoading(false);
     }
   }, [mobileQuery]);
-
-  const onLink = useCallback(async () => {
-    if (!selectedId) {
-      setError('Select an assessment from the search results first.');
-      return;
-    }
-    setLinkLoading(true);
-    setError(null);
-    setSuccess(null);
-    try {
-      const res = await fetch('/api/admin/link-assessment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          clerk_user_id: clerkUserId.trim(),
-          assessment_id: selectedId,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || 'Link failed');
-        return;
-      }
-      const a = data.assessment as AssessmentRow & { clerk_user_id: string };
-      const mobile =
-        a.mobile_number ??
-        results.find((r) => r.id === selectedId)?.mobile_number ??
-        mobileQuery.trim();
-      setSuccess(`Successfully linked ${mobile} to Clerk ID ${a.clerk_user_id}.`);
-    } catch {
-      setError('Network error — try again');
-    } finally {
-      setLinkLoading(false);
-    }
-  }, [clerkUserId, mobileQuery, results, selectedId]);
-
-  const selectedRow = results.find((r) => r.id === selectedId);
 
   return (
     <main className="mx-auto max-w-xl px-4 py-10">
@@ -105,15 +50,19 @@ export default function AdminLinkAssessmentPage() {
           Blog admin
         </Link>
       </p>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">Link patient to assessment</h1>
+
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <h1 className="text-2xl font-bold text-slate-900">Admin — patients</h1>
+        <Link
+          href="/admin/add-patient"
+          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+        >
+          Add New Patient
+        </Link>
+      </div>
       <p className="mt-2 text-sm text-slate-600">
-        Search by the patient&apos;s mobile number, pick the exact assessment row, then paste their Clerk
-        user id. Connects a row in <code className="text-xs">patient_assessments</code> so{' '}
-        <Link href="/tracker" className="text-teal-700 underline">
-          /tracker
-        </Link>{' '}
-        shows baseline labs. Sign in with a staff email (same allowlist as{' '}
-        <code className="text-xs">/staff</code>).
+        Search <code className="text-xs">patient_tracker</code> by mobile. Sign in with a staff email
+        (same allowlist as <code className="text-xs">/staff</code>).
       </p>
 
       <div className="mt-8 space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -139,105 +88,23 @@ export default function AdminLinkAssessmentPage() {
               {searchLoading ? 'Searching…' : 'Search'}
             </button>
           </div>
-          <p className="mt-1 text-xs text-slate-500">
-            Matches digits in saved mobile numbers (10-digit India or with +91).
-          </p>
         </div>
 
         {results.length > 0 && (
-          <div className="overflow-x-auto rounded-lg border border-slate-200">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-xs uppercase text-slate-600">
-                <tr>
-                  <th className="px-2 py-2" scope="col">
-                    Pick
-                  </th>
-                  <th className="px-2 py-2" scope="col">
-                    Name
-                  </th>
-                  <th className="px-2 py-2" scope="col">
-                    Age
-                  </th>
-                  <th className="px-2 py-2" scope="col">
-                    Mobile
-                  </th>
-                  <th className="px-2 py-2" scope="col">
-                    Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {results.map((row) => (
-                  <tr
-                    key={row.id}
-                    className={`border-t border-slate-100 ${selectedId === row.id ? 'bg-teal-50' : ''}`}
-                  >
-                    <td className="px-2 py-2">
-                      <input
-                        type="radio"
-                        name="assessment"
-                        checked={selectedId === row.id}
-                        onChange={() => setSelectedId(row.id)}
-                        aria-label={`Select assessment for ${row.patient_name ?? row.mobile_number ?? row.id}`}
-                      />
-                    </td>
-                    <td className="px-2 py-2">{row.patient_name ?? '—'}</td>
-                    <td className="px-2 py-2">{row.age ?? '—'}</td>
-                    <td className="px-2 py-2 font-mono text-xs">{row.mobile_number ?? '—'}</td>
-                    <td className="px-2 py-2 whitespace-nowrap">{formatDate(row.created_at)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {selectedRow?.clerk_user_id && (
-              <p className="border-t border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
-                This row already has Clerk id {selectedRow.clerk_user_id}. Linking will overwrite it.
-              </p>
-            )}
-          </div>
+          <ul className="space-y-2 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            {results.map((row) => (
+              <li key={row.id} className="text-sm text-slate-800">
+                <span className="font-semibold">{row.patient_name ?? '—'}</span>
+                <span className="text-slate-500"> · </span>
+                <span className="font-mono text-xs">{row.mobile_number ?? '—'}</span>
+              </li>
+            ))}
+          </ul>
         )}
 
-        <div>
-          <label className="block text-sm font-medium text-slate-700" htmlFor="clerk-id">
-            Clerk user id
-          </label>
-          <input
-            id="clerk-id"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-            placeholder="user_2abc…"
-            value={clerkUserId}
-            onChange={(e) => setClerkUserId(e.target.value)}
-            autoComplete="off"
-          />
-          <p className="mt-1 text-xs text-slate-500">
-            In Clerk Dashboard → Users → copy User ID. Or ask the patient to open their profile after
-            sign-in.
-          </p>
-        </div>
-
-        <button
-          type="button"
-          disabled={linkLoading || !clerkUserId.trim() || !selectedId}
-          onClick={onLink}
-          className="w-full rounded-xl bg-teal-600 px-4 py-3 text-sm font-bold text-white hover:bg-teal-700 disabled:opacity-50"
-        >
-          {linkLoading ? 'Linking…' : 'Link to Assessment'}
-        </button>
-
-        {error && (
-          <p
-            className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
-            role="alert"
-          >
-            {error}
-          </p>
-        )}
-        {success && (
-          <p
-            className="rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800"
-            role="status"
-          >
-            {success}
+        {message && (
+          <p className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
+            {message}
           </p>
         )}
       </div>
