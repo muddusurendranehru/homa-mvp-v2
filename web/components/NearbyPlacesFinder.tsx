@@ -12,6 +12,7 @@ import {
   telHref,
 } from '@/lib/nearby-places';
 import { buildStaffGuideWhatsAppUrl } from '@/lib/homa-contact';
+import { mapsDirectionsUrl } from '@/utils/maps';
 
 export type PartnerLink = {
   label: string;
@@ -78,6 +79,10 @@ export default function NearbyPlacesFinder({
 
   const showDistance = Boolean(origin || search.trim());
 
+  const runSearch = useCallback((value: string) => {
+    setSearch(value);
+  }, []);
+
   return (
     <div className="w-full space-y-8">
       <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
@@ -131,9 +136,22 @@ export default function NearbyPlacesFinder({
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  runSearch(e.currentTarget.value);
+                }
+              }}
               placeholder={kind === 'lab' ? 'e.g. Gachibowli, Thyrocare…' : 'e.g. Madhapur, MedPlus…'}
               className="flex-1 rounded-xl border border-slate-200 px-4 py-3 text-slate-900 shadow-sm focus:border-[#0D9488] focus:outline-none focus:ring-2 focus:ring-[#0D9488]/20"
             />
+            <button
+              type="button"
+              onClick={() => runSearch(search)}
+              className="rounded-xl border border-[#0D9488] bg-white px-5 py-3 text-sm font-semibold text-[#0D9488] shadow-sm hover:bg-teal-50 transition-colors"
+            >
+              Search
+            </button>
             <button
               type="button"
               onClick={useMyLocation}
@@ -191,6 +209,14 @@ export default function NearbyPlacesFinder({
                   className="inline-flex rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
                 >
                   WhatsApp
+                </a>
+                <a
+                  href={mapsDirectionsUrl(place)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex rounded-xl bg-[#0D9488] px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+                >
+                  Directions
                 </a>
               </div>
             </li>
