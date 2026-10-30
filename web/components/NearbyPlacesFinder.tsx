@@ -7,7 +7,6 @@ import {
   MOCK_PHARMACIES,
   NearbyPlace,
   formatDistanceKm,
-  googleMapsDirectionsUrl,
   sortPlacesByDistance,
   telHref,
 } from '@/lib/nearby-places';
@@ -193,14 +192,6 @@ export default function NearbyPlacesFinder({
                   className="inline-flex rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
                 >
                   Call
-                </a>
-                <a
-                  href={googleMapsDirectionsUrl(place.address)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex rounded-xl bg-[#0D9488] px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-                >
-                  Get Directions
                 </a>
                 <a
                   href={buildStaffGuideWhatsAppUrl(place.name, kind)}
