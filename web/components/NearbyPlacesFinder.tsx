@@ -1,10 +1,8 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   HYDERABAD_FALLBACK,
-  MOCK_LABS,
-  MOCK_PHARMACIES,
   NearbyPlace,
   formatDistanceKm,
   sortPlacesByDistance,
@@ -36,7 +34,10 @@ export default function NearbyPlacesFinder({
   partners,
   nearYouSectionTitle,
 }: Props) {
-  const places: NearbyPlace[] = kind === 'lab' ? MOCK_LABS : MOCK_PHARMACIES;
+  const [labs, setLabs] = useState<NearbyPlace[]>([]);
+  const [pharmacies, setPharmacies] = useState<NearbyPlace[]>([]);
+  const [placesLoaded, setPlacesLoaded] = useState(false);
+  const places: NearbyPlace[] = kind === 'lab' ? labs : pharmacies;
   const [search, setSearch] = useState('');
   const [origin, setOrigin] = useState<{ lat: number; lng: number } | null>(null);
   const [locationNote, setLocationNote] = useState<string | null>(null);
@@ -69,6 +70,54 @@ export default function NearbyPlacesFinder({
       { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 },
     );
   }, [kind]);
+
+  useEffect(() => {
+    function mapPlace(row: Record<string, unknown>): NearbyPlace {
+      return {
+        id: String(row.id ?? ''),
+        name: row.name == null ? '' : String(row.name),
+        address: row.address == null ? '' : String(row.address),
+        phone: row.phone == null ? '' : String(row.phone),
+        lat: Number(row.lat),
+        lng: Number(row.lng),
+      };
+    }
+
+    async function loadPlaces() {
+      const res = await fetch('/api/nearby-places');
+      if (!res.ok) {
+        const detail = await res.text().catch(() => '');
+        throw new Error(`nearby-places ${res.status} ${detail}`);
+      }
+      const data = (await res.json()) as { places?: unknown } | unknown[];
+      const rows = Array.isArray(data) ? data : data.places;
+      if (!Array.isArray(rows)) {
+        throw new Error('nearby-places response missing places array');
+      }
+
+      const nextLabs: NearbyPlace[] = [];
+      const nextPharmacies: NearbyPlace[] = [];
+      for (const raw of rows) {
+        if (!raw || typeof raw !== 'object') continue;
+        const row = raw as Record<string, unknown>;
+        const placeKind = String(row.kind ?? '').trim().toLowerCase();
+        const place = mapPlace(row);
+        if (placeKind === 'lab') nextLabs.push(place);
+        else if (placeKind === 'pharmacy') nextPharmacies.push(place);
+      }
+
+      setLabs(nextLabs);
+      setPharmacies(nextPharmacies);
+    }
+
+    loadPlaces()
+      .catch((error) => {
+        console.error('Failed to load nearby places', error);
+      })
+      .finally(() => {
+        setPlacesLoaded(true);
+      });
+  }, []);
 
   const sorted = useMemo(() => {
     const lat = origin?.lat ?? HYDERABAD_FALLBACK.lat;
@@ -121,7 +170,7 @@ export default function NearbyPlacesFinder({
         <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
           <h2 className="text-lg font-bold text-slate-900">{nearYouSectionTitle}</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Sample local listings for Hyderabad — ready to plug in Google Places when an API key is added.
+            Listings from the HOMA places directory.
           </p>
           <p className="mt-2 text-sm text-[#0D9488]">
             Not sure which location to choose? HOMA staff can guide you on WhatsApp — tap WhatsApp on any card below.
@@ -212,7 +261,7 @@ export default function NearbyPlacesFinder({
               </div>
             </li>
           ))}
-          {sorted.length === 0 && (
+          {placesLoaded && sorted.length === 0 && (
             <li className="text-center text-slate-500 py-8 bg-white rounded-2xl border border-slate-100">
               No matches for your search.
             </li>
