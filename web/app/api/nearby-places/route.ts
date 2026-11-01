@@ -3,7 +3,7 @@ import { getSql } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
-const PLACE_KINDS = ['lab', 'pharmacy', 'organic'] as const;
+const PLACE_KINDS = ['lab', 'pharmacy', 'organic', 'lifestyle', 'electronics'] as const;
 type PlaceKind = (typeof PLACE_KINDS)[number];
 
 function parseKindParam(raw: string | null): PlaceKind | null {

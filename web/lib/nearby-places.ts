@@ -158,8 +158,10 @@ export function sortPlacesByDistance(
  * Nearby places data source. Today: static Hyderabad samples.
  * Future: call Google Places (or similar) when `NEXT_PUBLIC_GOOGLE_PLACES_API_KEY` is set.
  */
+export type NearbyPlaceKind = 'lab' | 'pharmacy' | 'organic' | 'lifestyle' | 'electronics';
+
 export async function fetchNearbyPlaces(
-  kind: 'lab' | 'pharmacy' | 'organic',
+  kind: NearbyPlaceKind,
   _lat: number,
   _lng: number,
 ): Promise<NearbyPlace[]> {
@@ -168,5 +170,6 @@ export async function fetchNearbyPlaces(
   // if (process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY) { ... }
   if (kind === 'lab') return MOCK_LABS;
   if (kind === 'organic') return MOCK_ORGANIC;
+  if (kind === 'lifestyle' || kind === 'electronics') return [];
   return MOCK_PHARMACIES;
 }

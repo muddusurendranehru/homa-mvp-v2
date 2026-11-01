@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { buildAskDoctorProductWhatsAppUrl } from '@/lib/homa-contact';
 
 /** Intrinsic dimensions for product JPGs; CSS scales to compact card height (h-32). */
 const PRODUCT_IMAGE_WIDTH = 800;
@@ -18,6 +20,10 @@ export type GearItem = {
     label: string;
     href: string;
   };
+  /** Mock patient rating (display only). */
+  ratingScore?: number;
+  /** `/blog/{slug}` — defaults from product title when omitted. */
+  reviewSlug?: string;
 };
 
 export type GearSection = {
@@ -156,6 +162,24 @@ export const GEAR_SECTIONS: GearSection[] = [
   },
 ];
 
+function gearReviewSlug(title: string): string {
+  const base = title
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return `${base}-review`;
+}
+
+function mockRatingScore(title: string): number {
+  const seed = title.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+  return Math.round((4.5 + (seed % 5) * 0.1) * 10) / 10;
+}
+
+function formatRatingStars(_score: number): string {
+  return '⭐⭐⭐⭐⭐';
+}
+
 function GearCardMedia({ item }: { item: GearItem }) {
   return (
     <div className="w-full overflow-hidden bg-slate-100">
@@ -181,21 +205,43 @@ function affiliateLabel(cta: GearItem['affiliateCta']) {
 }
 
 function GearCard({ item }: { item: GearItem }) {
+  const rating = item.ratingScore ?? mockRatingScore(item.title);
+  const reviewSlug = item.reviewSlug ?? gearReviewSlug(item.title);
+  const askDoctorHref = buildAskDoctorProductWhatsAppUrl(item.title);
+
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-md transition-shadow hover:shadow-lg">
       <GearCardMedia item={item} />
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
+        <p className="mt-2 text-sm font-medium text-amber-700" aria-label={`Rated ${rating} out of 5`}>
+          {formatRatingStars(rating)}{' '}
+          <span className="text-slate-700">{rating.toFixed(1)}</span>
+        </p>
         <p className="mt-2 flex-1 text-sm italic leading-relaxed text-slate-600">
           Doctor&apos;s Advice: {item.doctorsAdvice}
         </p>
-        <div className="mt-5">
+        <Link
+          href={`/blog/${reviewSlug}`}
+          className="mt-3 text-sm font-semibold text-[#0D9488] hover:text-teal-700 hover:underline"
+        >
+          Read Full Review
+        </Link>
+        <div className="mt-5 flex flex-col gap-2">
+          <a
+            href={askDoctorHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center rounded-xl bg-[#0D9488] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+          >
+            Ask Doctor
+          </a>
           {item.clinicAction ? (
             <a
               href={item.clinicAction.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-center rounded-xl bg-[#0D9488] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+              className="flex w-full items-center justify-center rounded-xl border border-[#0D9488] bg-white px-4 py-2.5 text-sm font-semibold text-[#0D9488] shadow-sm transition-colors hover:bg-teal-50"
             >
               {item.clinicAction.label}
             </a>
@@ -205,7 +251,7 @@ function GearCard({ item }: { item: GearItem }) {
               {...(item.href && item.href !== '#'
                 ? { target: '_blank', rel: 'noopener noreferrer' }
                 : {})}
-              className="flex w-full items-center justify-center rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-700"
+              className="flex w-full items-center justify-center rounded-xl border border-[#0D9488] bg-white px-4 py-2.5 text-sm font-semibold text-[#0D9488] shadow-sm transition-colors hover:bg-teal-50"
             >
               {affiliateLabel(item.affiliateCta)}
             </a>
