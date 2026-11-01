@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Patient-care layout only — wrap /labs, /pharmacy, /emergency, /tracker page content.
+ * Patient-care layout only — wrap /labs, /pharmacy, /organic, /lifestyle, /emergency, /tracker page content.
  * Do not use on the marketing homepage or global layout (keeps HomeHero clean).
  */
 import { useEffect, useState } from 'react';
@@ -19,6 +19,7 @@ const shellNav: ShellNavItem[] = [
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
   { href: '/organic', label: 'Organic' },
+  { href: '/lifestyle', label: 'Lifestyle' },
   { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];

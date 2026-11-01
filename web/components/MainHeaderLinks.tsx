@@ -9,6 +9,7 @@ const patientCareLinks: NavItem[] = [
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
   { href: '/organic', label: 'Organic' },
+  { href: '/lifestyle', label: 'Lifestyle' },
   { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];
