@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-/** Intrinsic dimensions for product JPGs (800×440); CSS scales to card width. */
+/** Intrinsic dimensions for product JPGs; CSS scales to compact card height (h-32). */
 const PRODUCT_IMAGE_WIDTH = 800;
-const PRODUCT_IMAGE_HEIGHT = 440;
+const PRODUCT_IMAGE_HEIGHT = 320;
 const PRODUCT_IMAGE_SIZES = '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw';
 
 export type GearItem = {
@@ -45,7 +45,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           "'White Coat Hypertension' gives false clinic readings. Track your BP at home morning and evening for accurate HTN management.",
         imageSrc: '/images/products/bp-monitor.jpg',
-        imageAlt: 'Blood pressure monitor for home readings',
+        imageAlt: 'Digital blood pressure monitor with arm cuff on a neutral background',
         href: '#',
         affiliateCta: 'amazon',
       },
@@ -54,7 +54,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Essential for monitoring fever and infection, especially for immunocompromised diabetic patients.',
         imageSrc: '/images/products/thermometer.jpg',
-        imageAlt: 'Digital thermometer for fever monitoring',
+        imageAlt: 'White and blue digital thermometer on a light background',
         href: '#',
         affiliateCta: 'amazon',
       },
@@ -174,7 +174,7 @@ function GearCardMedia({ item }: { item: GearItem }) {
         width={PRODUCT_IMAGE_WIDTH}
         height={PRODUCT_IMAGE_HEIGHT}
         sizes={PRODUCT_IMAGE_SIZES}
-        className="h-44 w-full object-cover"
+        className="h-32 w-full object-cover"
       />
     </div>
   );
