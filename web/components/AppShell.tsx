@@ -18,6 +18,7 @@ const shellNav: ShellNavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
+  { href: '/organic', label: 'Organic' },
   { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];

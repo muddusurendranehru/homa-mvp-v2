@@ -14,12 +14,14 @@ export function getHomaWhatsAppNumber(): string {
 
 export function buildStaffGuideWhatsAppUrl(
   placeName: string,
-  kind: 'lab' | 'pharmacy',
+  kind: 'lab' | 'pharmacy' | 'organic',
 ): string {
   const text =
     kind === 'lab'
       ? `నాకు సమీపంలో ల్యాబ్ కనుగొనడంలో సహాయం కావాలి / I need help finding a lab near me — ${placeName}`
-      : `నాకు సమీపంలో మెడిసిన్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding a pharmacy near me — ${placeName}`;
+      : kind === 'organic'
+        ? `నాకు సమీపంలో ఆర్గానిక్ / మిల్లెట్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding an organic or millet shop near me — ${placeName}`
+        : `నాకు సమీపంలో మెడిసిన్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding a pharmacy near me — ${placeName}`;
   return `https://wa.me/${getHomaWhatsAppNumber()}?text=${encodeURIComponent(text)}`;
 }
 

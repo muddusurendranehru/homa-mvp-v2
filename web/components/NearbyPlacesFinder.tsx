@@ -18,7 +18,7 @@ export type PartnerLink = {
 };
 
 type Props = {
-  kind: 'lab' | 'pharmacy';
+  kind: 'lab' | 'pharmacy' | 'organic';
   pageTitle: string;
   intro: string;
   partnersSectionTitle: string;
@@ -34,10 +34,8 @@ export default function NearbyPlacesFinder({
   partners,
   nearYouSectionTitle,
 }: Props) {
-  const [labs, setLabs] = useState<NearbyPlace[]>([]);
-  const [pharmacies, setPharmacies] = useState<NearbyPlace[]>([]);
+  const [places, setPlaces] = useState<NearbyPlace[]>([]);
   const [placesLoaded, setPlacesLoaded] = useState(false);
-  const places: NearbyPlace[] = kind === 'lab' ? labs : pharmacies;
   const [search, setSearch] = useState('');
   const [origin, setOrigin] = useState<{ lat: number; lng: number } | null>(null);
   const [locationNote, setLocationNote] = useState<string | null>(null);
@@ -60,11 +58,13 @@ export default function NearbyPlacesFinder({
       },
       () => {
         setOrigin(HYDERABAD_FALLBACK);
-        setLocationNote(
+        const fallbackNote =
           kind === 'lab'
             ? 'Location access was denied or unavailable. Showing sample diagnostic centers near Gachibowli, Hyderabad.'
-            : 'Location access was denied or unavailable. Showing sample pharmacies near Gachibowli, Hyderabad.',
-        );
+            : kind === 'organic'
+              ? 'Location access was denied or unavailable. Showing sample organic and millet shops near Gachibowli, Hyderabad.'
+              : 'Location access was denied or unavailable. Showing sample pharmacies near Gachibowli, Hyderabad.';
+        setLocationNote(fallbackNote);
         setLocating(false);
       },
       { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 },
@@ -84,7 +84,7 @@ export default function NearbyPlacesFinder({
     }
 
     async function loadPlaces() {
-      const res = await fetch('/api/nearby-places');
+      const res = await fetch(`/api/nearby-places?kind=${encodeURIComponent(kind)}`);
       if (!res.ok) {
         const detail = await res.text().catch(() => '');
         throw new Error(`nearby-places ${res.status} ${detail}`);
@@ -95,19 +95,14 @@ export default function NearbyPlacesFinder({
         throw new Error('nearby-places response missing places array');
       }
 
-      const nextLabs: NearbyPlace[] = [];
-      const nextPharmacies: NearbyPlace[] = [];
+      const nextPlaces: NearbyPlace[] = [];
       for (const raw of rows) {
         if (!raw || typeof raw !== 'object') continue;
         const row = raw as Record<string, unknown>;
-        const placeKind = String(row.kind ?? '').trim().toLowerCase();
-        const place = mapPlace(row);
-        if (placeKind === 'lab') nextLabs.push(place);
-        else if (placeKind === 'pharmacy') nextPharmacies.push(place);
+        nextPlaces.push(mapPlace(row));
       }
 
-      setLabs(nextLabs);
-      setPharmacies(nextPharmacies);
+      setPlaces(nextPlaces);
     }
 
     loadPlaces()
@@ -117,7 +112,7 @@ export default function NearbyPlacesFinder({
       .finally(() => {
         setPlacesLoaded(true);
       });
-  }, []);
+  }, [kind]);
 
   const sorted = useMemo(() => {
     const lat = origin?.lat ?? HYDERABAD_FALLBACK.lat;
@@ -144,7 +139,9 @@ export default function NearbyPlacesFinder({
           <p className="mt-1 text-sm text-slate-600">
             {kind === 'lab'
               ? 'Book a home sample collection with a trusted partner (links open in a new tab).'
-              : 'Order medicines online from verified storefronts (links open in a new tab).'}
+              : kind === 'organic'
+                ? 'Order millets, oils, and organic staples from verified storefronts (links open in a new tab).'
+                : 'Order medicines online from verified storefronts (links open in a new tab).'}
           </p>
           <ul className="mt-5 space-y-3">
             {partners.map((p) => (
@@ -190,7 +187,13 @@ export default function NearbyPlacesFinder({
                   runSearch(e.currentTarget.value);
                 }
               }}
-              placeholder={kind === 'lab' ? 'e.g. Gachibowli, Thyrocare…' : 'e.g. Madhapur, MedPlus…'}
+              placeholder={
+                kind === 'lab'
+                  ? 'e.g. Gachibowli, Thyrocare…'
+                  : kind === 'organic'
+                    ? 'e.g. millet, organic, Gachibowli…'
+                    : 'e.g. Madhapur, MedPlus…'
+              }
               className="flex-1 rounded-xl border border-slate-200 px-4 py-3 text-slate-900 shadow-sm focus:border-[#0D9488] focus:outline-none focus:ring-2 focus:ring-[#0D9488]/20"
             />
             <button

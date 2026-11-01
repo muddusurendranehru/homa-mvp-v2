@@ -67,6 +67,33 @@ export const MOCK_PHARMACIES: NearbyPlace[] = [
   },
 ];
 
+export const MOCK_ORGANIC: NearbyPlace[] = [
+  {
+    id: 'org-1',
+    name: 'Organic Mandi — Gachibowli',
+    address: 'Telecom Nagar, Gachibowli, Hyderabad, Telangana 500032',
+    phone: '04040113344',
+    lat: 17.4415,
+    lng: 78.3521,
+  },
+  {
+    id: 'org-2',
+    name: 'Millet House — Madhapur',
+    address: 'Hitech City Road, Madhapur, Hyderabad, Telangana 500081',
+    phone: '04044558899',
+    lat: 17.4498,
+    lng: 78.3925,
+  },
+  {
+    id: 'org-3',
+    name: 'Nature\'s Basket — Kondapur',
+    address: 'Kothaguda, Kondapur, Hyderabad, Telangana 500084',
+    phone: '04033446677',
+    lat: 17.4595,
+    lng: 78.3702,
+  },
+];
+
 const RADIUS_KM = 6371;
 
 function toRad(deg: number) {
@@ -132,12 +159,14 @@ export function sortPlacesByDistance(
  * Future: call Google Places (or similar) when `NEXT_PUBLIC_GOOGLE_PLACES_API_KEY` is set.
  */
 export async function fetchNearbyPlaces(
-  kind: 'lab' | 'pharmacy',
+  kind: 'lab' | 'pharmacy' | 'organic',
   _lat: number,
   _lng: number,
 ): Promise<NearbyPlace[]> {
   void _lat;
   void _lng;
   // if (process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY) { ... }
-  return kind === 'lab' ? MOCK_LABS : MOCK_PHARMACIES;
+  if (kind === 'lab') return MOCK_LABS;
+  if (kind === 'organic') return MOCK_ORGANIC;
+  return MOCK_PHARMACIES;
 }
