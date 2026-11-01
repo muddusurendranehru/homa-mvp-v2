@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export type GearItem = {
@@ -5,7 +6,8 @@ export type GearItem = {
   description: string;
   href: string;
   linkLabel: string;
-  emoji: string;
+  imageSrc: string;
+  imageAlt: string;
 };
 
 export const GEAR_CATALOG: GearItem[] = [
@@ -15,7 +17,8 @@ export const GEAR_CATALOG: GearItem[] = [
       'ECG, fall detection, and precise workout tracking for your daily walks.',
     href: '#',
     linkLabel: 'View on Amazon',
-    emoji: '⌚',
+    imageSrc: '/images/gear/smartwatch.jpg',
+    imageAlt: 'Smartwatch on wrist for daily activity and heart-rate tracking',
   },
   {
     title: 'Continuous Glucose Monitor (CGM)',
@@ -23,7 +26,8 @@ export const GEAR_CATALOG: GearItem[] = [
       'Real-time data. See exactly how your food and exercise affect your sugar.',
     href: '#',
     linkLabel: 'View options',
-    emoji: '📉',
+    imageSrc: '/images/gear/glucose-meter.jpg',
+    imageAlt: 'Glucose meter and supplies for blood sugar monitoring',
   },
   {
     title: 'New Balance / Nike Running Shoes',
@@ -31,7 +35,8 @@ export const GEAR_CATALOG: GearItem[] = [
       'Protect your joints and feet. Essential for diabetic neuropathy prevention.',
     href: '#',
     linkLabel: 'Shop shoes',
-    emoji: '👟',
+    imageSrc: '/images/gear/running-shoes.jpg',
+    imageAlt: 'Running shoes for safe walking and joint protection',
   },
 ];
 
@@ -73,10 +78,14 @@ export default function GearStore({ showDirectoryLink = true }: GearStoreProps) 
             key={item.title}
             className="rounded-2xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow bg-slate-50/50"
           >
-            <div className="h-40 bg-gradient-to-br from-teal-100 to-emerald-50 relative flex items-center justify-center">
-              <span className="text-4xl" aria-hidden>
-                {item.emoji}
-              </span>
+            <div className="relative h-44 w-full bg-slate-100">
+              <Image
+                src={item.imageSrc}
+                alt={item.imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
             </div>
             <div className="p-5 bg-white">
               <h3 className="font-bold text-lg text-slate-900">{item.title}</h3>
