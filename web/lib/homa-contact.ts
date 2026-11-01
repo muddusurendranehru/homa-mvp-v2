@@ -12,16 +12,32 @@ export function getHomaWhatsAppNumber(): string {
   return DEFAULT_HOMA_WHATSAPP;
 }
 
+export type NearbyPlaceKind =
+  | 'lab'
+  | 'pharmacy'
+  | 'organic'
+  | 'lifestyle'
+  | 'electronics';
+
 export function buildStaffGuideWhatsAppUrl(
   placeName: string,
-  kind: 'lab' | 'pharmacy' | 'organic',
+  kind: NearbyPlaceKind,
 ): string {
   const text =
     kind === 'lab'
       ? `నాకు సమీపంలో ల్యాబ్ కనుగొనడంలో సహాయం కావాలి / I need help finding a lab near me — ${placeName}`
       : kind === 'organic'
         ? `నాకు సమీపంలో ఆర్గానిక్ / మిల్లెట్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding an organic or millet shop near me — ${placeName}`
-        : `నాకు సమీపంలో మెడిసిన్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding a pharmacy near me — ${placeName}`;
+        : kind === 'lifestyle'
+          ? `I need help finding a lifestyle / wellness store near me — ${placeName}`
+          : kind === 'electronics'
+            ? `I need help finding an electronics / health-gadget store near me — ${placeName}`
+            : `నాకు సమీపంలో మెడిసిన్ షాప్ కనుగొనడంలో సహాయం కావాలి / I need help finding a pharmacy near me — ${placeName}`;
+  return `https://wa.me/${getHomaWhatsAppNumber()}?text=${encodeURIComponent(text)}`;
+}
+
+export function buildAskDoctorProductWhatsAppUrl(productName: string): string {
+  const text = `I have a question about ${productName}`;
   return `https://wa.me/${getHomaWhatsAppNumber()}?text=${encodeURIComponent(text)}`;
 }
 

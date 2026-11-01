@@ -103,6 +103,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           dangerouslySetInnerHTML={{ __html: post.htmlContent }}
         />
 
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(
+            `Read this great article from HOMA: ${post.title} ${SITE_URL}/blog/${slug}`,
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-xl bg-green-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700"
+        >
+          Share on WhatsApp
+        </a>
+
         <div className="mt-10 mb-6">
           <ShareButtons
             url={`${SITE_URL}/blog/${slug}`}

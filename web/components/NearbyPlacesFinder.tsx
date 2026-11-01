@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   HYDERABAD_FALLBACK,
   NearbyPlace,
+  NearbyPlaceKind,
   formatDistanceKm,
   sortPlacesByDistance,
   telHref,
@@ -18,12 +19,16 @@ export type PartnerLink = {
 };
 
 type Props = {
-  kind: 'lab' | 'pharmacy' | 'organic';
+  kind: NearbyPlaceKind;
   pageTitle: string;
   intro: string;
   partnersSectionTitle: string;
   partners: PartnerLink[];
   nearYouSectionTitle: string;
+  /** Hide top hero header (e.g. embedded on /lifestyle below page title). */
+  hidePageHeader?: boolean;
+  /** Hide online partners block (local finder only). */
+  hidePartnersSection?: boolean;
 };
 
 export default function NearbyPlacesFinder({
@@ -33,6 +38,8 @@ export default function NearbyPlacesFinder({
   partnersSectionTitle,
   partners,
   nearYouSectionTitle,
+  hidePageHeader = false,
+  hidePartnersSection = false,
 }: Props) {
   const [places, setPlaces] = useState<NearbyPlace[]>([]);
   const [placesLoaded, setPlacesLoaded] = useState(false);
@@ -63,7 +70,11 @@ export default function NearbyPlacesFinder({
             ? 'Location access was denied or unavailable. Showing sample diagnostic centers near Gachibowli, Hyderabad.'
             : kind === 'organic'
               ? 'Location access was denied or unavailable. Showing sample organic and millet shops near Gachibowli, Hyderabad.'
-              : 'Location access was denied or unavailable. Showing sample pharmacies near Gachibowli, Hyderabad.';
+              : kind === 'lifestyle'
+                ? 'Location access was denied or unavailable. Showing lifestyle and wellness stores near Gachibowli, Hyderabad.'
+                : kind === 'electronics'
+                  ? 'Location access was denied or unavailable. Showing electronics and health-gadget stores near Gachibowli, Hyderabad.'
+                  : 'Location access was denied or unavailable. Showing sample pharmacies near Gachibowli, Hyderabad.';
         setLocationNote(fallbackNote);
         setLocating(false);
       },
@@ -128,12 +139,15 @@ export default function NearbyPlacesFinder({
 
   return (
     <div className="w-full space-y-8">
-      <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-        <h1 className="text-3xl font-bold text-slate-900">{pageTitle}</h1>
-        <p className="mt-3 text-slate-600">{intro}</p>
-      </header>
+      {!hidePageHeader ? (
+        <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+          <h1 className="text-3xl font-bold text-slate-900">{pageTitle}</h1>
+          <p className="mt-3 text-slate-600">{intro}</p>
+        </header>
+      ) : null}
 
       <div className="space-y-8">
+        {!hidePartnersSection && partners.length > 0 ? (
         <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
           <h2 className="text-lg font-bold text-slate-900">{partnersSectionTitle}</h2>
           <p className="mt-1 text-sm text-slate-600">
@@ -163,9 +177,13 @@ export default function NearbyPlacesFinder({
             ))}
           </ul>
         </section>
+        ) : null}
 
         <section className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
           <h2 className="text-lg font-bold text-slate-900">{nearYouSectionTitle}</h2>
+          {hidePageHeader && intro ? (
+            <p className="mt-2 text-slate-600">{intro}</p>
+          ) : null}
           <p className="mt-1 text-sm text-slate-600">
             Listings from the HOMA places directory.
           </p>
@@ -192,7 +210,11 @@ export default function NearbyPlacesFinder({
                   ? 'e.g. Gachibowli, Thyrocare…'
                   : kind === 'organic'
                     ? 'e.g. millet, organic, Gachibowli…'
-                    : 'e.g. Madhapur, MedPlus…'
+                    : kind === 'lifestyle'
+                      ? 'e.g. wellness, fitness, Gachibowli…'
+                      : kind === 'electronics'
+                        ? 'e.g. Croma, smartwatch, Madhapur…'
+                        : 'e.g. Madhapur, MedPlus…'
               }
               className="flex-1 rounded-xl border border-slate-200 px-4 py-3 text-slate-900 shadow-sm focus:border-[#0D9488] focus:outline-none focus:ring-2 focus:ring-[#0D9488]/20"
             />

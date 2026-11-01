@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import AppShell from '@/components/AppShell';
 import GearStore from '@/components/GearStore';
+import NearbyPlacesFinder from '@/components/NearbyPlacesFinder';
 
 export const metadata: Metadata = {
   title: "The Doctor's Gear Store | HOMA Healthcare Center",
@@ -12,6 +13,17 @@ export default function LifestylePage() {
   return (
     <AppShell>
       <div className="w-full space-y-8">
+        <NearbyPlacesFinder
+          kind="lifestyle"
+          hidePageHeader
+          hidePartnersSection
+          pageTitle=""
+          intro="Search lifestyle, wellness, and health-gadget stores near Hyderabad. Use your location to sort by distance."
+          partnersSectionTitle=""
+          partners={[]}
+          nearYouSectionTitle="Find Local Store"
+        />
+
         <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <h1 className="text-3xl font-bold text-slate-900">The Doctor&apos;s Gear Store</h1>
           <p className="mt-3 text-slate-600">
