@@ -1,5 +1,10 @@
 import Image from 'next/image';
 
+/** Intrinsic dimensions for product JPGs (800×440); CSS scales to card width. */
+const PRODUCT_IMAGE_WIDTH = 800;
+const PRODUCT_IMAGE_HEIGHT = 440;
+const PRODUCT_IMAGE_SIZES = '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw';
+
 export type GearItem = {
   title: string;
   doctorsAdvice: string;
@@ -158,7 +163,7 @@ export const GEAR_SECTIONS: GearSection[] = [
 
 function GearCardMedia({ item }: { item: GearItem }) {
   return (
-    <div className="relative h-44 w-full bg-slate-100">
+    <div className="w-full overflow-hidden bg-slate-100">
       {/* Add real images to public/images/products/ later (placeholder-teal.jpg copies today) */}
       {item.imagePlaceholder ? (
         <span className="sr-only">Placeholder product image — replace in public/images/products/</span>
@@ -166,9 +171,10 @@ function GearCardMedia({ item }: { item: GearItem }) {
       <Image
         src={item.imageSrc}
         alt={item.imageAlt}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        width={PRODUCT_IMAGE_WIDTH}
+        height={PRODUCT_IMAGE_HEIGHT}
+        sizes={PRODUCT_IMAGE_SIZES}
+        className="h-44 w-full object-cover"
       />
     </div>
   );
