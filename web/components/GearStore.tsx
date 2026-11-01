@@ -78,8 +78,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Diabetic neuropathy can cause muscle stiffness and joint pain. Topical gels or sticker patches offer symptomatic relief. Do not rely on them for deep nerve pain.',
         imageSrc: '/images/products/volini-gel.jpg',
-        imageAlt: 'Topical pain relief gel or patch',
-        imagePlaceholder: true,
+        imageAlt: 'Topical pain relief gel tube on a neutral background',
         href: '#',
         affiliateCta: 'check-price',
       },
@@ -88,8 +87,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Metabolic issues often cause skin pigmentation and dark patches (Acanthosis Nigricans). Use dermatologist-approved creams.',
         imageSrc: '/images/products/skin-cream.jpg',
-        imageAlt: 'Dermatologist-approved skin cream',
-        imagePlaceholder: true,
+        imageAlt: 'Moisturizing skin cream jar with natural styling',
         href: '#',
         affiliateCta: 'check-price',
       },
@@ -104,7 +102,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Poor sleep raises cortisol, worsening insulin resistance. Support your spine with an orthopedic mattress and pillow.',
         imageSrc: '/images/products/mattress.jpg',
-        imageAlt: 'Orthopedic mattress and pillows for spinal support',
+        imageAlt: 'Quilted orthopedic mattress side profile with brand label',
         href: '#',
         affiliateCta: 'check-price',
       },
@@ -113,8 +111,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Clean air improves oxygen intake and sleep quality. Essential for urban patients with respiratory issues.',
         imageSrc: '/images/products/air-purifier.jpg',
-        imageAlt: 'HEPA air purifier for cleaner indoor air',
-        imagePlaceholder: true,
+        imageAlt: 'White tower HEPA air purifier in a bright room',
         href: '#',
         affiliateCta: 'check-price',
       },
@@ -123,7 +120,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Track HRV, deep sleep, and recovery. Popular among health-conscious and Gen Z patients.',
         imageSrc: '/images/products/smart-ring.jpg',
-        imageAlt: 'Smart ring or wearable for sleep and recovery tracking',
+        imageAlt: 'Black smart ring showing internal health sensors',
         href: '#',
         affiliateCta: 'amazon',
       },
@@ -138,8 +135,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'For patients with severe respiratory comorbidities. Contact clinic for prescription and vendor setup.',
         imageSrc: '/images/products/oxygen-concentrator.jpg',
-        imageAlt: 'Home oxygen concentrator for respiratory support',
-        imagePlaceholder: true,
+        imageAlt: 'Medical oxygen cylinders with wall-mounted regulators',
         clinicAction: {
           label: 'Enquire at Clinic',
           href: 'https://wa.me/919963721999?text=Hello%20HOMA%2C%20I%20would%20like%20to%20enquire%20about%20an%20oxygen%20concentrator.',
@@ -150,8 +146,7 @@ export const GEAR_SECTIONS: GearSection[] = [
         doctorsAdvice:
           'Continuous heart rhythm monitoring. Do not buy online. Book this as a diagnostic service at HOMA.',
         imageSrc: '/images/products/holter-monitor.jpg',
-        imageAlt: 'Holter monitor for 24-hour ECG recording',
-        imagePlaceholder: true,
+        imageAlt: 'Portable Holter monitor with ECG leads and electrode patches',
         clinicAction: {
           label: 'Book at Clinic',
           href: 'https://wa.me/919963721999?text=Hello%20HOMA%2C%20I%20would%20like%20to%20book%20a%20Holter%20monitor%20service.',
