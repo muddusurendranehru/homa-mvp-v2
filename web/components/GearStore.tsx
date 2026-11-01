@@ -1,14 +1,14 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 export type GearItem = {
   title: string;
-  description: string;
+  doctorsAdvice: string;
+  imageSrc: string;
+  imageAlt: string;
+  /** True when file is placeholder-teal or duplicate — replace under public/images/products/ */
+  imagePlaceholder?: boolean;
   href?: string;
-  linkLabel?: string;
-  imageSrc?: string;
-  imageAlt?: string;
-  placeholderIcon?: string;
+  affiliateCta?: 'amazon' | 'check-price';
   clinicAction?: {
     label: string;
     href: string;
@@ -28,36 +28,39 @@ export const GEAR_SECTIONS: GearSection[] = [
     items: [
       {
         title: 'BeatO Smart Glucometer',
-        description:
-          "Doctor's Advice: Tight glycemic control is the cornerstone of diabetes reversal. Track fasting sugar daily with a clinically validated device.",
+        doctorsAdvice:
+          'Tight glycemic control is the cornerstone of diabetes reversal. Track fasting sugar daily with a clinically validated device.',
+        imageSrc: '/images/products/glucometer.jpg',
+        imageAlt: 'Smart glucometer for daily blood sugar monitoring',
         href: '#',
-        linkLabel: 'View options',
-        imageSrc: '/images/gear/glucose-meter.jpg',
-        imageAlt: 'Glucose meter for daily blood sugar monitoring',
+        affiliateCta: 'amazon',
       },
       {
         title: 'Omron BP Monitor',
-        description:
-          "Doctor's Advice: 'White Coat Hypertension' gives false clinic readings. Track your BP at home morning and evening for accurate HTN management.",
+        doctorsAdvice:
+          "'White Coat Hypertension' gives false clinic readings. Track your BP at home morning and evening for accurate HTN management.",
+        imageSrc: '/images/products/bp-monitor.jpg',
+        imageAlt: 'Blood pressure monitor for home readings',
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '🩺',
+        affiliateCta: 'amazon',
       },
       {
         title: 'Digital Thermometer',
-        description:
+        doctorsAdvice:
           'Essential for monitoring fever and infection, especially for immunocompromised diabetic patients.',
+        imageSrc: '/images/products/thermometer.jpg',
+        imageAlt: 'Digital thermometer for fever monitoring',
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '🌡️',
+        affiliateCta: 'amazon',
       },
       {
         title: 'Fingertip Pulse Oximeter',
-        description:
+        doctorsAdvice:
           'Track blood oxygen levels (SpO2) and heart rate, especially for patients with respiratory or cardiac comorbidities.',
+        imageSrc: '/images/products/pulse-oximeter.jpg',
+        imageAlt: 'Fingertip pulse oximeter measuring SpO2',
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '💓',
+        affiliateCta: 'check-price',
       },
     ],
   },
@@ -67,19 +70,23 @@ export const GEAR_SECTIONS: GearSection[] = [
     items: [
       {
         title: 'Volini Pain Relief Gel / Patches',
-        description:
-          "Doctor's Advice: Diabetic neuropathy can cause muscle stiffness and joint pain. Topical gels or sticker patches offer symptomatic relief. Do not rely on them for deep nerve pain.",
+        doctorsAdvice:
+          'Diabetic neuropathy can cause muscle stiffness and joint pain. Topical gels or sticker patches offer symptomatic relief. Do not rely on them for deep nerve pain.',
+        imageSrc: '/images/products/volini-gel.jpg',
+        imageAlt: 'Topical pain relief gel or patch',
+        imagePlaceholder: true,
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '💊',
+        affiliateCta: 'check-price',
       },
       {
         title: 'Skin Pigmentation Creams',
-        description:
-          "Doctor's Advice: Metabolic issues often cause skin pigmentation and dark patches (Acanthosis Nigricans). Use dermatologist-approved creams.",
+        doctorsAdvice:
+          'Metabolic issues often cause skin pigmentation and dark patches (Acanthosis Nigricans). Use dermatologist-approved creams.',
+        imageSrc: '/images/products/skin-cream.jpg',
+        imageAlt: 'Dermatologist-approved skin cream',
+        imagePlaceholder: true,
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '🧴',
+        affiliateCta: 'check-price',
       },
     ],
   },
@@ -89,28 +96,31 @@ export const GEAR_SECTIONS: GearSection[] = [
     items: [
       {
         title: 'Orthopedic Mattress & Pillows',
-        description:
-          "Doctor's Advice: Poor sleep raises cortisol, worsening insulin resistance. Support your spine with an orthopedic mattress and pillow.",
+        doctorsAdvice:
+          'Poor sleep raises cortisol, worsening insulin resistance. Support your spine with an orthopedic mattress and pillow.',
+        imageSrc: '/images/products/mattress.jpg',
+        imageAlt: 'Orthopedic mattress and pillows for spinal support',
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '🛏️',
+        affiliateCta: 'check-price',
       },
       {
         title: 'HEPA Air Purifier',
-        description:
+        doctorsAdvice:
           'Clean air improves oxygen intake and sleep quality. Essential for urban patients with respiratory issues.',
+        imageSrc: '/images/products/air-purifier.jpg',
+        imageAlt: 'HEPA air purifier for cleaner indoor air',
+        imagePlaceholder: true,
         href: '#',
-        linkLabel: 'View options',
-        placeholderIcon: '🌬️',
+        affiliateCta: 'check-price',
       },
       {
         title: 'Smart Ring (Oura / Ultrahuman / Genxi)',
-        description:
+        doctorsAdvice:
           'Track HRV, deep sleep, and recovery. Popular among health-conscious and Gen Z patients.',
+        imageSrc: '/images/products/smart-ring.jpg',
+        imageAlt: 'Smart ring or wearable for sleep and recovery tracking',
         href: '#',
-        linkLabel: 'View options',
-        imageSrc: '/images/gear/smartwatch.jpg',
-        imageAlt: 'Wearable device for sleep and recovery tracking',
+        affiliateCta: 'amazon',
       },
     ],
   },
@@ -120,51 +130,53 @@ export const GEAR_SECTIONS: GearSection[] = [
     items: [
       {
         title: 'Philips Oxygen Concentrator',
-        description:
+        doctorsAdvice:
           'For patients with severe respiratory comorbidities. Contact clinic for prescription and vendor setup.',
+        imageSrc: '/images/products/oxygen-concentrator.jpg',
+        imageAlt: 'Home oxygen concentrator for respiratory support',
+        imagePlaceholder: true,
         clinicAction: {
           label: 'Enquire at Clinic',
           href: 'https://wa.me/919963721999?text=Hello%20HOMA%2C%20I%20would%20like%20to%20enquire%20about%20an%20oxygen%20concentrator.',
         },
-        placeholderIcon: '🫁',
       },
       {
         title: 'Holter Monitor (24-hr ECG)',
-        description:
+        doctorsAdvice:
           'Continuous heart rhythm monitoring. Do not buy online. Book this as a diagnostic service at HOMA.',
+        imageSrc: '/images/products/holter-monitor.jpg',
+        imageAlt: 'Holter monitor for 24-hour ECG recording',
+        imagePlaceholder: true,
         clinicAction: {
           label: 'Book at Clinic',
           href: 'https://wa.me/919963721999?text=Hello%20HOMA%2C%20I%20would%20like%20to%20book%20a%20Holter%20monitor%20service.',
         },
-        placeholderIcon: '📈',
       },
     ],
   },
 ];
 
 function GearCardMedia({ item }: { item: GearItem }) {
-  if (item.imageSrc) {
-    return (
-      <div className="relative h-44 w-full bg-slate-100">
-        <Image
-          src={item.imageSrc}
-          alt={item.imageAlt ?? item.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
-      </div>
-    );
-  }
-
   return (
-    <div
-      className="relative flex h-44 w-full items-center justify-center bg-gradient-to-br from-teal-100 to-emerald-50"
-      aria-hidden
-    >
-      <span className="text-4xl opacity-90">{item.placeholderIcon ?? '🏥'}</span>
+    <div className="relative h-44 w-full bg-slate-100">
+      {/* Add real images to public/images/products/ later (placeholder-teal.jpg copies today) */}
+      {item.imagePlaceholder ? (
+        <span className="sr-only">Placeholder product image — replace in public/images/products/</span>
+      ) : null}
+      <Image
+        src={item.imageSrc}
+        alt={item.imageAlt}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
     </div>
   );
+}
+
+function affiliateLabel(cta: GearItem['affiliateCta']) {
+  if (cta === 'check-price') return 'Check Price \u2192';
+  return 'View on Amazon \u2192';
 }
 
 function GearCard({ item }: { item: GearItem }) {
@@ -173,14 +185,16 @@ function GearCard({ item }: { item: GearItem }) {
       <GearCardMedia item={item} />
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{item.description}</p>
-        <div className="mt-4">
+        <p className="mt-2 flex-1 text-sm italic leading-relaxed text-slate-600">
+          Doctor&apos;s Advice: {item.doctorsAdvice}
+        </p>
+        <div className="mt-5">
           {item.clinicAction ? (
             <a
               href={item.clinicAction.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex justify-center rounded-xl bg-[#0D9488] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+              className="flex w-full items-center justify-center rounded-xl bg-[#0D9488] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
             >
               {item.clinicAction.label}
             </a>
@@ -190,9 +204,9 @@ function GearCard({ item }: { item: GearItem }) {
               {...(item.href && item.href !== '#'
                 ? { target: '_blank', rel: 'noopener noreferrer' }
                 : {})}
-              className="text-sm font-semibold text-[#0D9488] hover:underline"
+              className="flex w-full items-center justify-center rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-700"
             >
-              {item.linkLabel ?? 'View options'} &rarr;
+              {affiliateLabel(item.affiliateCta)}
             </a>
           )}
         </div>
@@ -221,18 +235,15 @@ export default function GearStore() {
         </section>
       ))}
 
-      <aside
-        className="rounded-2xl border-2 border-[#0D9488]/30 bg-teal-50/80 p-6 text-center shadow-sm sm:p-8"
+      <footer
+        className="rounded-2xl border border-slate-200 bg-slate-100 px-6 py-5 text-center sm:px-8"
         aria-label="Affiliate disclosure"
       >
-        <p className="text-sm font-medium leading-relaxed text-slate-800">
-          HOMA Health Companion may earn a small commission on purchases made through these links.
-          This does not affect our clinical recommendations.{' '}
-          <Link href="/affiliate-disclosure" className="font-semibold text-[#0D9488] underline">
-            Full disclosure
-          </Link>
+        <p className="text-sm leading-relaxed text-slate-600">
+          HOMA Health Companion may earn a commission on purchases made through these links. This
+          does not affect our clinical recommendations.
         </p>
-      </aside>
+      </footer>
     </div>
   );
 }
