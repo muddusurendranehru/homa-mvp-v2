@@ -46,7 +46,7 @@ export const GEAR_SECTIONS: GearSection[] = [
           "'White Coat Hypertension' gives false clinic readings. Track your BP at home morning and evening for accurate HTN management.",
         imageSrc: '/images/products/bp-monitor.jpg',
         imageAlt: 'Digital blood pressure monitor with arm cuff on a neutral background',
-        href: 'https://www.amazon.in/dp/B01M0YSB90?tag=homaclinics01-21',
+        href: 'https://www.amazon.in/dp/B01AUH8AWW?tag=homaclinics01-21',
         affiliateCta: 'amazon',
       },
       {
