@@ -40,6 +40,8 @@ export default function NearbyPlacesFinder({
   const [origin, setOrigin] = useState<{ lat: number; lng: number } | null>(null);
   const [locationNote, setLocationNote] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
+  const queryLat = origin?.lat ?? HYDERABAD_FALLBACK.lat;
+  const queryLng = origin?.lng ?? HYDERABAD_FALLBACK.lng;
 
   const useMyLocation = useCallback(() => {
     setLocating(true);
@@ -84,7 +86,12 @@ export default function NearbyPlacesFinder({
     }
 
     async function loadPlaces() {
-      const res = await fetch(`/api/nearby-places?kind=${encodeURIComponent(kind)}`);
+      const params = new URLSearchParams({
+        kind,
+        lat: String(queryLat),
+        lng: String(queryLng),
+      });
+      const res = await fetch(`/api/nearby-places?${params.toString()}`);
       if (!res.ok) {
         const detail = await res.text().catch(() => '');
         throw new Error(`nearby-places ${res.status} ${detail}`);
@@ -112,7 +119,7 @@ export default function NearbyPlacesFinder({
       .finally(() => {
         setPlacesLoaded(true);
       });
-  }, [kind]);
+  }, [kind, queryLat, queryLng]);
 
   const sorted = useMemo(() => {
     const lat = origin?.lat ?? HYDERABAD_FALLBACK.lat;
