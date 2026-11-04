@@ -97,19 +97,12 @@ export default function MobileNav() {
         )}
       </button>
 
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-[100040]"
-          onClick={closeMenu}
-        />
-      )}
-
-      {/* Slide-out Menu */}
+      {/* Full-screen mobile menu — solid background so page content cannot bleed through */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 z-[100045] transform transition-transform duration-300 ease-in-out overflow-y-auto shadow-2xl ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 z-[9999] bg-slate-900 transform transition-transform duration-300 ease-in-out overflow-y-auto shadow-2xl ${
+          isOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
         }`}
+        aria-hidden={!isOpen}
       >
         {/* Menu Header - Enhanced */}
         <div className="bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 p-6 pt-8 shadow-lg">
@@ -232,7 +225,7 @@ export default function MobileNav() {
         </nav>
 
         {/* Quick Actions - Enhanced Bottom Section */}
-        <div className="fixed bottom-0 right-0 w-80 p-5 bg-gradient-to-t from-slate-900 via-indigo-900 to-transparent border-t border-indigo-700/50 backdrop-blur-sm">
+        <div className="fixed bottom-0 left-0 right-0 p-5 bg-slate-900 border-t border-indigo-700/50">
           <div className="bg-white/5 rounded-xl p-4 backdrop-blur-sm border border-white/10 shadow-xl">
             <div className="grid grid-cols-2 gap-3 mb-3">
               <a
