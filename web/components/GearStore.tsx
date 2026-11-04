@@ -70,6 +70,21 @@ export const GEAR_SECTIONS: GearSection[] = [
     ],
   },
   {
+    id: 'track-activity-sleep',
+    title: 'Track Your Activity & Sleep',
+    items: [
+      {
+        title: 'Pebble Qore Fitness Band',
+        doctorsAdvice:
+          'Track your daily steps, heart rate, SpO2, and sleep stages. Essential for diabetic patients to monitor activity and prevent sedentary lifestyle.',
+        imageSrc: '/images/products/fitness-band.jpg',
+        imageAlt: 'Pebble Qore fitness band showing health tracking features',
+        href: 'https://www.amazon.in/dp/B0FMRKHN4M?tag=homaclinics01-21',
+        affiliateCta: 'amazon',
+      },
+    ],
+  },
+  {
     id: 'symptom-relief',
     title: 'Symptom Relief & Care',
     items: [
