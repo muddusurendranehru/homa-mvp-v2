@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUser, SignOutButton } from '@clerk/nextjs';
@@ -41,15 +42,24 @@ const appLinks = [
   { name: 'Nutrition Bot', url: 'https://healthmetrics30daymeals.onrender.com', icon: '🍎' },
 ];
 
+/** Above page floats (WelcomeBot, toasts) and global header; hamburger sits one step higher. */
+const MOBILE_MENU_Z = 100041;
+const MOBILE_MENU_TOGGLE_Z = 100060;
+
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [appsOpen, setAppsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { isSignedIn, user, isLoaded } = useUser();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
   const toggleApps = () => setAppsOpen(!appsOpen);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -68,13 +78,177 @@ export default function MobileNav() {
     return null;
   }
 
+  const menuPanel = (
+    <div
+      className={`fixed inset-0 flex h-[100dvh] max-h-[100dvh] flex-col bg-slate-900 transform transition-transform duration-300 ease-in-out shadow-2xl ${
+        isOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+      }`}
+      style={{ zIndex: MOBILE_MENU_Z, backgroundColor: '#0f172a' }}
+      aria-hidden={!isOpen}
+    >
+      {/* Menu Header - Enhanced */}
+      <div className="shrink-0 bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 p-6 pb-6 pt-[max(2rem,env(safe-area-inset-top))] shadow-lg">
+        <div className="mb-2 flex items-center gap-3">
+          <div className="rounded-xl bg-teal-600/80 p-2">
+            <span className="text-2xl">🩺</span>
+          </div>
+          <div>
+            <h2 className="text-xl font-extrabold tracking-tight text-white">HOMA Clinic</h2>
+            <p className="mt-0.5 text-xs font-medium text-cyan-50">Dr. Muddu&apos;s Metabolic Care</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Links — scroll region; opaque rows so bottom CTAs never show through */}
+      <nav className="min-h-0 flex-1 overflow-y-auto p-4">
+        <ul className="space-y-3">
+          {isLoaded && (
+            <li className="border-b border-slate-700 pb-3">
+              {isSignedIn ? (
+                <div className="rounded-xl border border-slate-600 bg-slate-800 px-5 py-3">
+                  <p className="text-white">Hello {user?.firstName}</p>
+                  <SignOutButton>
+                    <button type="button" onClick={closeMenu} className="text-red-400">
+                      Sign Out
+                    </button>
+                  </SignOutButton>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href="/auth"
+                    onClick={closeMenu}
+                    className="block w-full rounded-xl border-2 border-amber-400 bg-amber-500 px-4 py-3 text-center font-semibold text-white transition-all hover:bg-amber-600"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth"
+                    onClick={closeMenu}
+                    className="block w-full rounded-xl border border-slate-500 bg-slate-700 px-4 py-3 text-center font-semibold text-white transition-all hover:bg-slate-600"
+                  >
+                    Create Account
+                  </Link>
+                </div>
+              )}
+            </li>
+          )}
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                prefetch={true}
+                onClick={closeMenu}
+                className={`group relative flex transform items-center gap-4 rounded-xl px-5 py-4 shadow-lg transition-all duration-200 hover:scale-[1.02] ${
+                  pathname === link.href
+                    ? 'border border-teal-400 bg-teal-800 text-white shadow-teal-900/40'
+                    : 'border border-slate-600 bg-slate-800 text-gray-100 hover:bg-slate-700'
+                }`}
+              >
+                <div
+                  className={`text-2xl transition-transform group-hover:scale-110 ${pathname === link.href ? 'drop-shadow-lg' : ''}`}
+                >
+                  {link.icon}
+                </div>
+                <span className="flex-1 text-base font-semibold">{link.label}</span>
+                {link.alertDot && (
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-red-500" aria-hidden />
+                )}
+                {pathname === link.href && (
+                  <div className="h-2 w-2 animate-pulse rounded-full bg-teal-300" />
+                )}
+              </Link>
+            </li>
+          ))}
+
+          <li>
+            <button
+              type="button"
+              onClick={toggleApps}
+              className="group flex w-full transform items-center justify-between gap-4 rounded-xl border border-slate-600 bg-slate-800 px-5 py-4 text-gray-100 transition-all duration-200 hover:scale-[1.02] hover:bg-slate-700"
+            >
+              <div className="flex items-center gap-4">
+                <div className="text-2xl transition-transform group-hover:scale-110">📱</div>
+                <span className="text-base font-semibold">Apps</span>
+              </div>
+              <svg
+                className={`h-5 w-5 text-gray-400 transition-all duration-300 group-hover:text-white ${
+                  appsOpen ? 'rotate-180 text-teal-400' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {appsOpen && (
+              <ul className="mt-3 space-y-2">
+                {appLinks.map((app, index) => (
+                  <li key={index}>
+                    <a
+                      href={app.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={closeMenu}
+                      className="group flex transform items-center gap-3 rounded-lg border border-indigo-700 bg-indigo-950 px-5 py-3 text-gray-200 shadow-md transition-all duration-200 hover:scale-[1.02] hover:border-indigo-500 hover:bg-indigo-900 hover:text-white"
+                    >
+                      <span className="text-xl transition-transform group-hover:scale-110">{app.icon}</span>
+                      <span className="flex-1 text-sm font-medium">{app.name}</span>
+                      <span className="text-xs text-indigo-300 transition-colors group-hover:text-white">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        </ul>
+      </nav>
+
+      {/* Quick actions — in flex flow (not fixed) so links never stack over these buttons */}
+      <div
+        className="shrink-0 border-t border-indigo-700/50 bg-slate-900 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+        style={{ backgroundColor: '#0f172a' }}
+      >
+        <div className="rounded-xl border border-slate-600 bg-slate-800 p-4 shadow-xl">
+          <div className="mb-3 grid grid-cols-2 gap-3">
+            <a
+              href="https://wa.me/919963721999"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+              className="group flex transform items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-green-500/30 transition-all duration-200 hover:scale-105 hover:from-green-600 hover:to-emerald-600"
+            >
+              <span className="text-lg">💬</span>
+              <span>WhatsApp</span>
+            </a>
+            <a
+              href="tel:+919963721999"
+              onClick={closeMenu}
+              className="group flex transform items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/30 transition-all duration-200 hover:scale-105 hover:from-blue-600 hover:to-cyan-600"
+            >
+              <span className="text-lg">📞</span>
+              <span>Call</span>
+            </a>
+          </div>
+          <p className="text-center text-sm font-semibold tracking-wide text-cyan-300">09963721999</p>
+        </div>
+        <div className="mt-4 text-center">
+          <p className="text-xs font-medium text-gray-400">DR. MUDDU SURENDRA NEHRU M.D.</p>
+          <p className="mt-1 text-[10px] text-gray-500">Professor of Medicine • 30+ Years</p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       {/* Hamburger Button - orange so it doesn't mix with green; safe-area for Android/notched screens */}
       <button
         onClick={toggleMenu}
-        className="fixed z-[100050] flex h-12 w-12 items-center justify-center rounded-[14px] border transition-colors"
+        className="fixed flex h-12 w-12 items-center justify-center rounded-[14px] border transition-colors"
         style={{
+          zIndex: MOBILE_MENU_TOGGLE_Z,
           /* sits inside the 64px slim navbar (layout.tsx) */
           top: 'calc(8px + env(safe-area-inset-top, 0px))',
           right: 'max(1rem, env(safe-area-inset-right, 1rem))',
@@ -97,165 +271,7 @@ export default function MobileNav() {
         )}
       </button>
 
-      {/* Full-screen mobile menu — solid background so page content cannot bleed through */}
-      <div
-        className={`fixed inset-0 z-[9999] bg-slate-900 transform transition-transform duration-300 ease-in-out overflow-y-auto shadow-2xl ${
-          isOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
-        }`}
-        aria-hidden={!isOpen}
-      >
-        {/* Menu Header - Enhanced */}
-        <div className="bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 p-6 pt-8 shadow-lg">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-2">
-              <span className="text-2xl">🩺</span>
-            </div>
-            <div>
-              <h2 className="text-white font-extrabold text-xl tracking-tight">HOMA Clinic</h2>
-              <p className="text-cyan-50 text-xs font-medium mt-0.5">Dr. Muddu's Metabolic Care</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation Links - Beautiful Cards */}
-        <nav className="p-4 pb-40">
-          <ul className="space-y-3">
-            {/* Auth: Sign In / Create Account when signed out; Hello + Sign Out when signed in */}
-            {isLoaded && (
-              <li className="pb-3 border-b border-white/10">
-                {isSignedIn ? (
-                  <div className="px-5 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                    <p style={{ color: 'white' }}>Hello {user?.firstName}</p>
-                    <SignOutButton>
-                      <button type="button" onClick={closeMenu} style={{ color: 'red' }}>
-                        Sign Out
-                      </button>
-                    </SignOutButton>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-2">
-                    <Link
-                      href="/auth"
-                      onClick={closeMenu}
-                      className="block w-full text-center py-3 px-4 rounded-xl font-semibold bg-amber-500 hover:bg-amber-600 text-white border-2 border-amber-400/80 transition-all"
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      href="/auth"
-                      onClick={closeMenu}
-                      className="block w-full text-center py-3 px-4 rounded-xl font-semibold bg-white/20 hover:bg-white/30 text-white border border-white/40 transition-all"
-                    >
-                      Create Account
-                    </Link>
-                  </div>
-                )}
-              </li>
-            )}
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  prefetch={true}
-                  onClick={closeMenu}
-                  className={`group relative z-[1] flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg ${
-                    pathname === link.href
-                      ? 'bg-teal-500/25 text-white border border-teal-400/50 shadow-teal-500/30 shadow-xl'
-                      : 'bg-white/5 backdrop-blur-sm text-gray-200 hover:bg-white/10 hover:shadow-lg border border-white/10'
-                  }`}
-                >
-                  <div className={`text-2xl transition-transform group-hover:scale-110 ${pathname === link.href ? 'drop-shadow-lg' : ''}`}>
-                    {link.icon}
-                  </div>
-                  <span className={`font-semibold text-base flex-1 ${pathname === link.href ? 'text-white' : 'text-gray-100'}`}>
-                    {link.label}
-                  </span>
-                  {link.alertDot && (
-                    <span className="h-2.5 w-2.5 rounded-full bg-red-500 shrink-0" aria-hidden />
-                  )}
-                  {pathname === link.href && (
-                    <div className="w-2 h-2 bg-teal-300 rounded-full animate-pulse"></div>
-                  )}
-                </Link>
-              </li>
-            ))}
-            
-            {/* Apps Dropdown - Enhanced */}
-            <li>
-              <button
-                onClick={toggleApps}
-                className="w-full group flex items-center justify-between gap-4 px-5 py-4 rounded-xl transition-all duration-200 bg-white/5 backdrop-blur-sm text-gray-200 hover:bg-white/10 hover:shadow-lg border border-white/10 transform hover:scale-[1.02]"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="text-2xl transition-transform group-hover:scale-110">📱</div>
-                  <span className="font-semibold text-base text-gray-100">Apps</span>
-                </div>
-                <svg
-                  className={`w-5 h-5 transition-all duration-300 text-gray-400 group-hover:text-white ${
-                    appsOpen ? 'rotate-180 text-teal-400' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {appsOpen && (
-                <ul className="mt-3 space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                  {appLinks.map((app, index) => (
-                    <li key={index}>
-                      <a
-                        href={app.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={closeMenu}
-                        className="group flex items-center gap-3 px-5 py-3 rounded-lg transition-all duration-200 bg-indigo-900/40 backdrop-blur-sm text-gray-300 hover:bg-indigo-700/50 hover:text-white border border-indigo-700/30 hover:border-indigo-500 transform hover:scale-[1.02] shadow-md"
-                      >
-                        <span className="text-xl transition-transform group-hover:scale-110">{app.icon}</span>
-                        <span className="font-medium text-sm flex-1">{app.name}</span>
-                        <span className="text-xs text-indigo-400 group-hover:text-white transition-colors">↗</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          </ul>
-        </nav>
-
-        {/* Quick Actions - Enhanced Bottom Section */}
-        <div className="fixed bottom-0 left-0 right-0 p-5 bg-slate-900 border-t border-indigo-700/50">
-          <div className="bg-white/5 rounded-xl p-4 backdrop-blur-sm border border-white/10 shadow-xl">
-            <div className="grid grid-cols-2 gap-3 mb-3">
-              <a
-                href="https://wa.me/919963721999"
-                target="_blank"
-                onClick={closeMenu}
-                className="group flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-sm font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg shadow-green-500/30"
-              >
-                <span className="text-lg">💬</span>
-                <span>WhatsApp</span>
-              </a>
-              <a
-                href="tel:+919963721999"
-                onClick={closeMenu}
-                className="group flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-sm font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg shadow-blue-500/30"
-              >
-                <span className="text-lg">📞</span>
-                <span>Call</span>
-              </a>
-            </div>
-            <p className="text-center text-cyan-300 text-sm font-semibold tracking-wide">
-              09963721999
-            </p>
-          </div>
-          <div className="mt-4 text-center">
-            <p className="text-gray-400 text-xs font-medium">DR. MUDDU SURENDRA NEHRU M.D.</p>
-            <p className="text-gray-500 text-[10px] mt-1">Professor of Medicine • 30+ Years</p>
-          </div>
-        </div>
-      </div>
+      {mounted ? createPortal(menuPanel, document.body) : null}
     </>
   );
 }
