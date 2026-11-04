@@ -41,6 +41,58 @@ function parseRadius(raw: string | null): number {
   return Math.min(value, MAX_RADIUS_M);
 }
 
+/** Supports `q` or `search` query params. */
+function parseSearchQuery(params: URLSearchParams): string | null {
+  const raw = params.get('q') ?? params.get('search');
+  if (raw == null) return null;
+  const trimmed = raw.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+/** Escape ILIKE wildcards in user text. */
+function ilikeContainsPattern(query: string): string {
+  const escaped = query.replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_');
+  return `%${escaped}%`;
+}
+
+function rankRowsByDistance(rows: PlaceRow[], lat: number, lng: number): PlaceRow[] {
+  return [...rows]
+    .map((row) => ({
+      row,
+      meters: distanceKm(lat, lng, Number(row.lat), Number(row.lng)) * 1000,
+    }))
+    .filter((item) => Number.isFinite(item.meters))
+    .sort((a, b) => a.meters - b.meters)
+    .slice(0, RESULT_LIMIT)
+    .map((item) => item.row);
+}
+
+async function fetchPlacesByTextSearch(
+  sql: ReturnType<typeof getSql>,
+  kind: PlaceKind,
+  query: string,
+  lat: number | null,
+  lng: number | null,
+): Promise<PlaceRow[]> {
+  const pattern = ilikeContainsPattern(query);
+  const rows = (await sql`
+    SELECT id, name, address, phone, lat, lng, kind
+    FROM places
+    WHERE kind = ${kind}
+      AND (
+        name ILIKE ${pattern}
+        OR COALESCE(address, '') ILIKE ${pattern}
+      )
+    ORDER BY name ASC
+    LIMIT ${RESULT_LIMIT}
+  `) as PlaceRow[];
+
+  if (lat != null && lng != null) {
+    return rankRowsByDistance(rows, lat, lng);
+  }
+  return rows;
+}
+
 function postgisUnavailable(error: unknown): boolean {
   const message = (error instanceof Error ? error.message : String(error)).toLowerCase();
   return (
@@ -78,17 +130,25 @@ export async function GET(request: Request) {
       );
     }
 
+    const searchQuery = parseSearchQuery(params);
     const lat = parseCoord(params.get('lat'), -90, 90);
     const lng = parseCoord(params.get('lng'), -180, 180);
+
+    const sql = getSql();
+
+    if (searchQuery) {
+      const places = await fetchPlacesByTextSearch(sql, kind, searchQuery, lat, lng);
+      return NextResponse.json({ places });
+    }
+
     if (lat == null || lng == null) {
       return NextResponse.json(
-        { error: 'lat and lng are required (decimal degrees)' },
+        { error: 'lat and lng are required (decimal degrees) unless q/search is provided' },
         { status: 400 },
       );
     }
 
     const radiusM = parseRadius(params.get('radius'));
-    const sql = getSql();
 
     try {
       // ST_DWithin + GiST KNN. Do not filter with ST_Distance(...) < meters.

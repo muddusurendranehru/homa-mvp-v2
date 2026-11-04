@@ -37,6 +37,7 @@ export default function NearbyPlacesFinder({
   const [places, setPlaces] = useState<NearbyPlace[]>([]);
   const [placesLoaded, setPlacesLoaded] = useState(false);
   const [search, setSearch] = useState('');
+  const [apiQuery, setApiQuery] = useState('');
   const [origin, setOrigin] = useState<{ lat: number; lng: number } | null>(null);
   const [locationNote, setLocationNote] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
@@ -74,6 +75,14 @@ export default function NearbyPlacesFinder({
   }, [kind]);
 
   useEffect(() => {
+    const handle = window.setTimeout(() => {
+      setApiQuery(search.trim());
+    }, 400);
+    return () => window.clearTimeout(handle);
+  }, [search]);
+
+  useEffect(() => {
+    setPlacesLoaded(false);
     function mapPlace(row: Record<string, unknown>): NearbyPlace {
       return {
         id: String(row.id ?? ''),
@@ -86,11 +95,12 @@ export default function NearbyPlacesFinder({
     }
 
     async function loadPlaces() {
-      const params = new URLSearchParams({
-        kind,
-        lat: String(queryLat),
-        lng: String(queryLng),
-      });
+      const params = new URLSearchParams({ kind });
+      if (apiQuery) {
+        params.set('q', apiQuery);
+      }
+      params.set('lat', String(queryLat));
+      params.set('lng', String(queryLng));
       const res = await fetch(`/api/nearby-places?${params.toString()}`);
       if (!res.ok) {
         const detail = await res.text().catch(() => '');
@@ -119,19 +129,15 @@ export default function NearbyPlacesFinder({
       .finally(() => {
         setPlacesLoaded(true);
       });
-  }, [kind, queryLat, queryLng]);
+  }, [kind, queryLat, queryLng, apiQuery]);
 
   const sorted = useMemo(() => {
     const lat = origin?.lat ?? HYDERABAD_FALLBACK.lat;
     const lng = origin?.lng ?? HYDERABAD_FALLBACK.lng;
-    return sortPlacesByDistance(places, lat, lng, search);
-  }, [places, origin, search]);
+    return sortPlacesByDistance(places, lat, lng);
+  }, [places, origin]);
 
-  const showDistance = Boolean(origin || search.trim());
-
-  const runSearch = useCallback((value: string) => {
-    setSearch(value);
-  }, []);
+  const showDistance = Boolean(origin || apiQuery);
 
   return (
     <div className="w-full space-y-8">
@@ -180,7 +186,7 @@ export default function NearbyPlacesFinder({
             Not sure which location to choose? HOMA staff can guide you on WhatsApp — tap WhatsApp on any card below.
           </p>
           <label htmlFor="place-search" className="mt-4 block text-sm font-medium text-slate-700">
-            Search by name or area
+            Search by name
           </label>
           <div className="mt-2 flex flex-col sm:flex-row gap-3">
             <input
@@ -191,21 +197,15 @@ export default function NearbyPlacesFinder({
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
-                  runSearch(e.currentTarget.value);
+                  setApiQuery(e.currentTarget.value.trim());
                 }
               }}
-              placeholder={
-                kind === 'lab'
-                  ? 'e.g. Gachibowli, Thyrocare…'
-                  : kind === 'organic'
-                    ? 'e.g. millet, organic, Gachibowli…'
-                    : 'e.g. Madhapur, MedPlus…'
-              }
+              placeholder="Search by name…"
               className="flex-1 rounded-xl border border-slate-200 px-4 py-3 text-slate-900 shadow-sm focus:border-[#0D9488] focus:outline-none focus:ring-2 focus:ring-[#0D9488]/20"
             />
             <button
               type="button"
-              onClick={() => runSearch(search)}
+              onClick={() => setApiQuery(search.trim())}
               className="rounded-xl border border-[#0D9488] bg-white px-5 py-3 text-sm font-semibold text-[#0D9488] shadow-sm hover:bg-teal-50 transition-colors"
             >
               Search
@@ -273,7 +273,9 @@ export default function NearbyPlacesFinder({
           ))}
           {placesLoaded && sorted.length === 0 && (
             <li className="text-center text-slate-500 py-8 bg-white rounded-2xl border border-slate-100">
-              No matches for your search.
+              {apiQuery
+                ? 'No places matched that name. Try another spelling or clear search to see nearby listings.'
+                : 'No nearby listings in range. Try searching by store name.'}
             </li>
           )}
         </ul>
