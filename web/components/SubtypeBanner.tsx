@@ -1,8 +1,39 @@
 import Link from "next/link";
 
-/** Set true after adding `32-subtypes-infographic.webp` to public/images/subtypes/ */
-const SHOW_SUBTYPE_INFOGRAPHIC = false;
-const INFOGRAPHIC_SRC = "/images/subtypes/32-subtypes-infographic.webp";
+const INFOGRAPHIC_SRC = "/images/subtypes/subtypes-32-infographic.webp";
+const INFOGRAPHIC_ALT =
+  "32 Subtypes — Not just HbA1c. Your insulin. Your beta cells. Your subtype.";
+
+const INFOGRAPHIC_FIGURE = (
+  <figure
+    style={{
+      margin: 0,
+      borderRadius: "14px",
+      overflow: "hidden",
+      boxShadow: "0 16px 40px rgba(0,0,0,0.45)",
+      border: "1px solid rgba(255,255,255,0.15)",
+      background: "#0a1628",
+      lineHeight: 0,
+    }}
+  >
+    <img
+      src={INFOGRAPHIC_SRC}
+      alt={INFOGRAPHIC_ALT}
+      width={576}
+      height={1024}
+      loading="lazy"
+      decoding="async"
+      style={{
+        display: "block",
+        width: "100%",
+        maxHeight: "520px",
+        height: "auto",
+        objectFit: "contain",
+        margin: "0 auto",
+      }}
+    />
+  </figure>
+);
 
 const TICKS = [
   "Free calculator — takes 2 minutes",
@@ -14,6 +45,7 @@ export default function SubtypeBanner() {
   return (
     <section
       aria-labelledby="subtype-banner-heading"
+      className="subtype-banner"
       style={{
         position: "relative",
         overflow: "hidden",
@@ -38,7 +70,7 @@ export default function SubtypeBanner() {
             display: "flex",
             height: "100%",
             width: "min(52vw, 520px)",
-            opacity: 0.48,
+            opacity: 0.38,
           }}
         >
           <img
@@ -192,9 +224,14 @@ export default function SubtypeBanner() {
           >
             Find My Subtype — Free →
           </Link>
+
+          <div className="subtype-infographic-mobile" style={{ marginTop: "28px" }}>
+            {INFOGRAPHIC_FIGURE}
+          </div>
         </div>
 
         <div
+          className="subtype-banner-aside"
           style={{
             flex: "1 1 280px",
             maxWidth: "420px",
@@ -203,27 +240,7 @@ export default function SubtypeBanner() {
             gap: "16px",
           }}
         >
-          {SHOW_SUBTYPE_INFOGRAPHIC ? (
-            <figure
-              style={{
-                margin: 0,
-                borderRadius: "12px",
-                overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.12)",
-                background: "rgba(255,255,255,0.04)",
-              }}
-            >
-              <img
-                src={INFOGRAPHIC_SRC}
-                alt="32 metabolic subtypes — HOMA classification overview"
-                width={800}
-                height={1765}
-                loading="lazy"
-                decoding="async"
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
-            </figure>
-          ) : null}
+          <div className="subtype-infographic-desktop">{INFOGRAPHIC_FIGURE}</div>
 
           <div
             style={{
@@ -332,6 +349,25 @@ export default function SubtypeBanner() {
           </a>
         </span>
       </div>
+
+      <style>{`
+        .subtype-infographic-mobile {
+          max-width: 320px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .subtype-infographic-desktop {
+          display: none;
+        }
+        @media (min-width: 900px) {
+          .subtype-infographic-mobile {
+            display: none;
+          }
+          .subtype-infographic-desktop {
+            display: block;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Bebas_Neue, Inter } from 'next/font/google'
 
 const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'], display: 'swap', variable: '--font-bebas' })
@@ -173,6 +174,109 @@ export default function CommunitiesPage() {
             </span>
           ))}
         </div>
+      </section>
+
+      {/* WHY STRUGGLE ALONE — posters */}
+      <section
+        style={{
+          padding: 'clamp(32px,5vw,56px) 6%',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          background: 'linear-gradient(180deg, #0a1020 0%, #06080f 100%)',
+        }}
+        aria-labelledby="why-struggle-alone-heading"
+      >
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+          <h2
+            id="why-struggle-alone-heading"
+            style={{
+              fontFamily: 'var(--font-bebas), "Bebas Neue", sans-serif',
+              fontSize: 'clamp(36px, 6vw, 52px)',
+              letterSpacing: '0.04em',
+              color: '#fff',
+              marginBottom: '12px',
+            }}
+          >
+            Why struggle alone?
+          </h2>
+          <p
+            style={{
+              fontSize: 'clamp(14px, 2vw, 17px)',
+              color: 'rgba(255,255,255,0.65)',
+              lineHeight: 1.65,
+              maxWidth: '560px',
+              margin: '0 auto 28px',
+            }}
+          >
+            Join our free community — share recipes, simple tricks, walks and meals. Earn HOMA Coins
+            for every post.
+          </p>
+
+          <div
+            className="community-poster-row"
+            style={{
+              display: 'grid',
+              gap: '20px',
+              justifyContent: 'center',
+              marginBottom: '28px',
+            }}
+          >
+            {[
+              {
+                src: '/images/communities/community-why-struggle-alone-puzzle.webp',
+                alt: 'Why struggle alone — puzzle poster encouraging community support',
+              },
+              {
+                src: '/images/communities/community-why-struggle-alone-people.webp',
+                alt: 'Why struggle alone — people poster for HOMA community',
+              },
+            ].map((poster) => (
+              <figure key={poster.src} style={{ margin: 0, maxWidth: '320px', width: '100%' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={poster.src}
+                  alt={poster.alt}
+                  width={576}
+                  height={1024}
+                  loading="lazy"
+                  decoding="async"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: '16px',
+                    boxShadow: '0 12px 32px rgba(0,0,0,0.45)',
+                    display: 'block',
+                  }}
+                />
+              </figure>
+            ))}
+          </div>
+
+          <Link
+            href="/track"
+            style={{
+              display: 'inline-block',
+              background: '#00A896',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: '15px',
+              padding: '14px 28px',
+              borderRadius: '100px',
+              textDecoration: 'none',
+            }}
+          >
+            Start tracking — free
+          </Link>
+        </div>
+        <style>{`
+          .community-poster-row {
+            grid-template-columns: minmax(0, 320px);
+          }
+          @media (min-width: 640px) {
+            .community-poster-row {
+              grid-template-columns: repeat(2, minmax(0, 320px));
+            }
+          }
+        `}</style>
       </section>
 
       {/* TRIBE GRID */}
