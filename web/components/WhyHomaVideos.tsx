@@ -32,6 +32,13 @@ export const WHY_HOMA_SHORTS: WhyHomaShort[] = [
     title: "Too Much Health Advice? HOMA Is Your Companion",
     subtitle: "One doctor. One plan. No confusion.",
   },
+  {
+    youtubeId: "hi_eWeYTbEU",
+    title: "Post Your Walk & Meal, Earn HOMA Coins",
+    subtitle: "Free. No blood tests. No payment.",
+    ctaHref: "/communities",
+    ctaLabel: "Join free WhatsApp communities",
+  },
 ];
 
 function thumbUrl(id: string) {
