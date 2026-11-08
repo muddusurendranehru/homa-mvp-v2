@@ -3,6 +3,8 @@ export type CelebrityRecognition = {
   image: string;
   name: string;
   caption: string;
+  /** Default `top` (portraits). Use `center` for landscape photos. */
+  imageFocus?: "top" | "center";
 };
 
 export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
@@ -56,8 +58,8 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
   },
   {
     image: "/images/celebrities/celebrity-doctors-excellence-awards-2024.webp",
-    name: "",
-    caption: "Navanaami Doctors Excellence Awards 2024",
+    name: "JD Lakshmi Narayana, IPS (Retd.)",
+    caption: "With Dr. Muddu · Navanaami Doctors Excellence Awards 2024",
   },
   {
     image: "/images/celebrities/celebrity-evening-gathering-trio.webp",
@@ -78,5 +80,11 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
     image: "/images/celebrities/celebrity-kurnool-medical-college-friend.webp",
     name: "Dr. Murali Angirekula, MD",
     caption: "Florida, USA · HOMA subscriber",
+  },
+  {
+    image: "/images/celebrities/awareness-children-republic-day.webp",
+    name: "Childhood Obesity Awareness",
+    caption: "Republic Day programme — teaching children healthy habits early",
+    imageFocus: "center",
   },
 ];

@@ -58,8 +58,8 @@ type LecturePhoto = { src: string; alt: string; caption: string; pos?: string };
 const CELEBRITIES: LecturePhoto[] = [
   {
     src: "/images/celebrities/celebrity-doctors-excellence-awards-2024.webp",
-    alt: "Dr. Muddu Surendra Nehru at Navanaami Doctors Excellence Awards 2024",
-    caption: "Navanaami Doctors Excellence Awards 2024",
+    alt: "JD Lakshmi Narayana, IPS (Retd.) with Dr. Muddu — Navanaami Doctors Excellence Awards 2024",
+    caption: "JD Lakshmi Narayana, IPS (Retd.) · With Dr. Muddu · Navanaami Doctors Excellence Awards 2024",
   },
   {
     src: "/images/celebrities/celebrity-evening-gathering-trio.webp",

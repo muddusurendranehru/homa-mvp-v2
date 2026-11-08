@@ -48,8 +48,12 @@ export default function CelebrityRecognitionSection() {
 
       <div className="mx-auto grid max-w-[1100px] grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4">
         {cards.map((c) => {
-          const alt = c.name.trim() || c.caption.trim() || "HOMA recognition";
+          const alt =
+            [c.name.trim(), c.caption.trim()].filter(Boolean).join(" — ") ||
+            "HOMA recognition";
           const key = c.image + (c.name || c.caption);
+          const objectClass =
+            c.imageFocus === "center" ? "object-cover object-center" : "object-cover object-top";
 
           return (
             <figure
@@ -61,11 +65,11 @@ export default function CelebrityRecognitionSection() {
                 <img
                   src={c.image}
                   alt={alt}
-                  width={400}
-                  height={400}
+                  width={c.imageFocus === "center" ? 1000 : 400}
+                  height={c.imageFocus === "center" ? 453 : 400}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover object-top"
+                  className={`h-full w-full ${objectClass}`}
                 />
               </div>
               <figcaption className="border-t border-[rgba(212,175,55,0.2)] px-2.5 py-2">
