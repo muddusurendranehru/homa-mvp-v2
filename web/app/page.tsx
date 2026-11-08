@@ -10,6 +10,7 @@ import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
 import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
+import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -153,8 +154,6 @@ export default function HomePage() {
       </section>
             {/* FEATURE SHOWCASE */}
       <FeatureShowcase />
-      {/* GOVERNMENT TRUST */}
-      <GovernmentTrust />
       {/* GOV LEADERS START */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", padding: "16px 4% 0", background: "#07153a" }}>
         <a href="/normal-values" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "12px 16px", borderRadius: "999px", textDecoration: "none", boxShadow: "0 8px 18px rgba(0,0,0,0.25)" }}>Know your cutoff values</a>
@@ -819,33 +818,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* MEDICAL COLLEAGUES */}
-      <section style={{ background: "#07153a", padding: "72px 6%" }}>
-        <div style={{ textAlign: "center", marginBottom: "44px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "#00A896", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Medical Community</div>
-          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 500, color: "#fff", lineHeight: 1.2 }}>
-            Respected by Doctors<br /><em style={{ color: "#d4af37", fontStyle: "italic" }}>Across India &amp; Abroad.</em>
-          </h2>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px", maxWidth: "1060px", margin: "0 auto" }}>
-          {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810254/IMG20250319132952_zvvpfg.jpg", badge: "🏥 Medical College" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810309/IMG20250328192515_okaory.jpg", badge: "🌍 International" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786810647/IMG20250222194655_msfeeh.jpg", badge: "🤝 Medical Peers" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786809817/tsapicon1_y7f5fw.jpg", badge: "📖 Book Inauguration" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_440,c_fill,g_face/v1786844904/IMG_20230612_132006_t6s4sm.jpg", badge: "👩‍⚕️ Lady Doctors" },
-          ].map((item, i) => (
-            <div key={i} style={{ borderRadius: "14px", overflow: "hidden", background: "#0f1f3d", border: "1px solid rgba(212,175,55,0.12)" }}>
-              <div style={{ position: "relative" }}>
-                <img src={item.img} alt={item.badge} style={{ width: "100%", height: "260px", objectFit: "cover", display: "block" }} />
-                <div style={{ position: "absolute", top: "10px", left: "10px", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", borderRadius: "20px", padding: "4px 12px", fontSize: "11px", fontWeight: 600, color: "#d4af37" }}>
-                  {item.badge}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <DoctorPeersSection />
+
+      <GovernmentTrust />
 
       {/* POC LINK START */}
       <section style={{ background: "#07153a", padding: "40px 6%", textAlign: "center" }}>

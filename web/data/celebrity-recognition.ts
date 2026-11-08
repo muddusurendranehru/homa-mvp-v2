@@ -62,11 +62,6 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
     caption: "With Dr. Muddu · Navanaami Doctors Excellence Awards 2024",
   },
   {
-    image: "/images/celebrities/celebrity-evening-gathering-trio.webp",
-    name: "Dr. Rajendra Kumar, MD, DM (Cardiology)",
-    caption: "KIMS Hospital, Hyderabad · with his wife",
-  },
-  {
     image: "/images/celebrities/celebrity-dr-muddu-evening.webp",
     name: "Dr. Muddu Surendra Nehru, MD",
     caption: "",
@@ -77,35 +72,14 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
     caption: "Community event with Telangana Police",
   },
   {
-    image: "/images/celebrities/celebrity-kurnool-medical-college-friend.webp",
-    name: "Dr. Murali Angirekula, MD",
-    caption: "Florida, USA · HOMA subscriber",
-  },
-  {
     image: "/images/celebrities/awareness-children-republic-day.webp",
     name: "Childhood Obesity Awareness",
     caption: "Republic Day programme — teaching children healthy habits early",
     imageFocus: "center",
   },
   {
-    image: "/images/celebrities/celebrity-dr-bhandari-srinivas-adoni.webp",
-    name: "Dr. Bhandari Srinivas, MD",
-    caption: "Physician, Adoni",
-  },
-  {
     image: "/images/celebrities/celebrity-mla-sri-gandhi-glycemic-guardians.webp",
     name: "Sri Gandhi, MLA Serilingampally",
     caption: "Receiving the Glycemic Guardians Conclave book",
-  },
-  {
-    image: "/images/celebrities/celebrity-mamatha-medical-college-faculty.webp",
-    name: "Mamatha Medical College Faculty",
-    caption: "Teaching session with faculty and residents",
-    imageFocus: "center",
-  },
-  {
-    image: "/images/celebrities/celebrity-dr-bharath-patodia-oncologist.webp",
-    name: "Dr. Bharath Patodia",
-    caption: "Oncologist · T-Hub, Hyderabad",
   },
 ];
