@@ -27,6 +27,11 @@ export const WHY_HOMA_SHORTS: WhyHomaShort[] = [
     ctaHref: "/pharmacy",
     ctaLabel: "Nearby medical shop finder",
   },
+  {
+    youtubeId: "hr2e19dMKmc",
+    title: "Too Much Health Advice? HOMA Is Your Companion",
+    subtitle: "One doctor. One plan. No confusion.",
+  },
 ];
 
 function thumbUrl(id: string) {
