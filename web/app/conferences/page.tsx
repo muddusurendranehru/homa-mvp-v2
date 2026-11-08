@@ -63,8 +63,8 @@ const CELEBRITIES: LecturePhoto[] = [
   },
   {
     src: "/images/celebrities/celebrity-evening-gathering-trio.webp",
-    alt: "Dr. Muddu with friends and well-wishers at an evening gathering",
-    caption: "With friends and well-wishers",
+    alt: "Dr. Rajendra Kumar, MD, DM (Cardiology) with his wife — KIMS Hospital, Hyderabad",
+    caption: "Dr. Rajendra Kumar, MD, DM (Cardiology) · KIMS Hospital, Hyderabad · with his wife",
   },
   {
     src: "/images/celebrities/celebrity-dr-muddu-evening.webp",
@@ -78,8 +78,8 @@ const CELEBRITIES: LecturePhoto[] = [
   },
   {
     src: "/images/celebrities/celebrity-kurnool-medical-college-friend.webp",
-    alt: "Kurnool Medical College alumni with Dr. Muddu",
-    caption: "Kurnool Medical College alumni",
+    alt: "Dr. Murali Angirekula, MD — Florida, USA · HOMA subscriber",
+    caption: "Dr. Murali Angirekula, MD · Florida, USA · HOMA subscriber",
   },
 ];
 

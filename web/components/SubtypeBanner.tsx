@@ -22,35 +22,64 @@ export default function SubtypeBanner() {
         color: "#fff",
       }}
     >
-      <img
-        src="/images/subtypes/metro-crowd-standing-blur.webp"
-        alt=""
-        width={800}
-        height={1765}
-        loading="lazy"
-        decoding="async"
+      <div
         aria-hidden
         style={{
           position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "min(42vw, 380px)",
-          height: "auto",
-          maxHeight: "100%",
-          objectFit: "cover",
-          opacity: 0.45,
+          inset: 0,
+          display: "flex",
+          justifyContent: "flex-end",
           pointerEvents: "none",
           userSelect: "none",
         }}
-      />
+      >
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            width: "min(52vw, 520px)",
+            opacity: 0.48,
+          }}
+        >
+          <img
+            src="/images/subtypes/metro-crowd-seated-blur.webp"
+            alt=""
+            width={800}
+            height={1765}
+            loading="lazy"
+            decoding="async"
+            style={{
+              flex: "1.15 1 0",
+              minWidth: 0,
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+            }}
+          />
+          <img
+            src="/images/subtypes/metro-crowd-standing-blur.webp"
+            alt=""
+            width={800}
+            height={1765}
+            loading="lazy"
+            decoding="async"
+            style={{
+              flex: "0.85 1 0",
+              minWidth: 0,
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+            }}
+          />
+        </div>
+      </div>
       <div
         aria-hidden
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(105deg, rgba(7,21,58,0.97) 0%, rgba(7,21,58,0.92) 55%, rgba(7,21,58,0.72) 100%)",
+            "linear-gradient(105deg, rgba(7,21,58,0.97) 0%, rgba(7,21,58,0.93) 50%, rgba(7,21,58,0.78) 72%, rgba(7,21,58,0.55) 100%)",
         }}
       />
 

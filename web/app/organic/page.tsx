@@ -22,21 +22,38 @@ export default function OrganicPage() {
         className="mx-auto mb-6 max-w-4xl rounded-2xl border border-emerald-200/80 bg-white p-4 shadow-sm sm:p-5"
         aria-label="Partner store highlights"
       >
-        <figure className="m-0 flex flex-col gap-3 sm:flex-row sm:items-stretch">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/organic/organic-vendor-max-protein-shelf.webp"
-            alt="Healthy snacks at partner stores — millet, jowar, ragi, low GI options on shelf"
-            width={800}
-            height={1765}
-            loading="lazy"
-            decoding="async"
-            className="h-auto w-full max-w-[220px] shrink-0 rounded-xl object-cover sm:max-w-[200px]"
-          />
-          <figcaption className="flex flex-1 items-center text-sm leading-relaxed text-slate-700 sm:text-base">
-            Healthy snacks at our partner stores — millet, jowar, ragi, low GI
-          </figcaption>
-        </figure>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <figure className="m-0 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/organic/organic-vendor-max-protein-shelf.webp"
+              alt="Healthy snacks at partner stores — millet, jowar, ragi, low GI options on shelf"
+              width={800}
+              height={1765}
+              loading="lazy"
+              decoding="async"
+              className="aspect-square h-auto w-full max-w-[160px] shrink-0 rounded-xl object-cover object-top sm:max-w-[140px]"
+            />
+            <figcaption className="flex flex-1 items-center text-sm leading-relaxed text-slate-700">
+              Healthy snacks at our partner stores — millet, jowar, ragi, low GI
+            </figcaption>
+          </figure>
+          <figure className="m-0 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/organic/organic-hemp-hearts-superfood.webp"
+              alt="Hulled hemp hearts — protein, omegas, minerals"
+              width={800}
+              height={1765}
+              loading="lazy"
+              decoding="async"
+              className="aspect-square h-auto w-full max-w-[160px] shrink-0 rounded-xl object-cover object-top sm:max-w-[140px]"
+            />
+            <figcaption className="flex flex-1 items-center text-sm leading-relaxed text-slate-700">
+              Hulled hemp hearts — protein, omegas, minerals
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <NearbyPlacesFinder

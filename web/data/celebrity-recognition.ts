@@ -61,8 +61,8 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
   },
   {
     image: "/images/celebrities/celebrity-evening-gathering-trio.webp",
-    name: "",
-    caption: "With friends and well-wishers",
+    name: "Dr. Rajendra Kumar, MD, DM (Cardiology)",
+    caption: "KIMS Hospital, Hyderabad · with his wife",
   },
   {
     image: "/images/celebrities/celebrity-dr-muddu-evening.webp",
@@ -76,7 +76,7 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
   },
   {
     image: "/images/celebrities/celebrity-kurnool-medical-college-friend.webp",
-    name: "",
-    caption: "Kurnool Medical College alumni",
+    name: "Dr. Murali Angirekula, MD",
+    caption: "Florida, USA · HOMA subscriber",
   },
 ];
