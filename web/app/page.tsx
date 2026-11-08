@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } from "@/components/HomeSections";
+import WhyHomaVideos from "@/components/WhyHomaVideos";
 import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
@@ -125,6 +126,7 @@ export default function HomePage() {
       {/* HOME HERO START */}
       <HomeHero />
       <FreeHealthTools />
+      <WhyHomaVideos />
       <FreeScreeningCamps />
       <MendTrustAward />
       <SubtypeBanner />
