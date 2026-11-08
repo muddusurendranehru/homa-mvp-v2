@@ -8,6 +8,7 @@ import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
 import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
+import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -558,76 +559,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* CELEBRITY & VIP RECOGNITION */}
-      <section style={{ background: "#07153a", padding: "72px 6%" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>
-            Trusted at the Highest Level
-          </div>
-          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, color: "#fff", marginBottom: "12px", lineHeight: 1.2 }}>
-            Celebrities. Ministers. Medical Colleagues.<br />
-            <em style={{ color: "#d4af37", fontStyle: "italic" }}>All Chose HOMA.</em>
-          </h2>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", fontWeight: 300, maxWidth: "500px", margin: "0 auto" }}>
-            When Tollywood&apos;s biggest star and Telangana&apos;s IT Minister trust the same doctor — that&apos;s not marketing. That&apos;s proof.
-          </p>
-        </div>
-
-        {/* Celebrities — Chiranjeevi anchor + blood bank side by side */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", maxWidth: "1000px", margin: "0 auto 24px" }}>
-          {[
-            { img: "/images/dr-muddu-chiranjeevi-new.jpg", name: "Megastar Chiranjeevi", sub: "Actor · Philanthropist · Padma Vibhushan · 150M fans" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700,h_500,c_fill,g_face/v1786844071/IMG20241027085019_mh5w0m.jpg", name: "Chiranjeevi Blood Bank", sub: "Dr. Muddu invited to Chiranjeevi Blood Bank initiative — recognition of trust and shared service mission" },
-          ].map((v) => (
-            <div key={v.name} style={{ borderRadius: "20px", overflow: "hidden", position: "relative" }}>
-              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "340px", objectFit: "cover", objectPosition: "top" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%)", padding: "28px 24px 20px" }}>
-                <div style={{ fontSize: "18px", fontWeight: 800, color: "#d4af37" }}>{v.name}</div>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", marginTop: "4px" }}>{v.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Celebrities — Rajendra Prasad + V6 Ravi */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto 48px" }}>
-          {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1773572168/snhc9z3jadq0ex3empoq.jpg", name: "Rajendra Prasad", sub: "National Award Winning Telugu Actor · Padma Shri" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1786811555/IMG20250620132710_nuprlk.jpg", name: "V6 Ravi Sir", sub: "Senior Media Celebrity · V6 News Channel" },
-          ].map((v) => (
-            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
-              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "380px", objectFit: "cover", objectPosition: "top" }} />
-              <div style={{ padding: "14px 16px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
-                <div style={{ fontSize: "14px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* VIP Politicians — separate label */}
-        <div style={{ textAlign: "center", marginBottom: "20px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "rgba(212,175,55,0.6)", textTransform: "uppercase", letterSpacing: "0.12em" }}>
-            Political & Government Recognition
-          </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px", maxWidth: "1000px", margin: "0 auto" }}>
-          {[
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786783988/minsridharsirbook4_y4zoov.jpg", name: "Hon. Minister Sridhar Babu", sub: "IT, Electronics & Commerce — Govt. of Telangana" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810654/IMG20250315083245_np6k3n.jpg", name: "Appreciation Ceremony", sub: "Recognition by Telangana IT Ministry" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810449/IMG20250313090259_01_jpiynp.jpg", name: "Sri Gandhi MLA", sub: "Sherlingampally — Appreciation for Community Service" },
-            { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810865/IMG20240712181743_kyfph4.jpg", name: "State Leadership Meeting", sub: "With MLA Sri Raj Thakur Makkan Singh & IT Minister" },
-          ].map((v) => (
-            <div key={v.name} style={{ borderRadius: "14px", overflow: "hidden", position: "relative", background: "#0f1f3d" }}>
-              <img src={v.img} alt={v.name} style={{ width: "100%", display: "block", height: "200px", objectFit: "cover", objectPosition: "top" }} />
-              <div style={{ padding: "12px 14px", borderTop: "1px solid rgba(212,175,55,0.2)" }}>
-                <div style={{ fontSize: "13px", fontWeight: 700, color: "#d4af37" }}>{v.name}</div>
-                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "3px", lineHeight: 1.4 }}>{v.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <CelebrityRecognitionSection />
 
       {/* ORGAN AGE SECTION */}
       <section id="organ-age" style={{ background: "#06152b", padding: "60px 6%", textAlign: "center" }}>

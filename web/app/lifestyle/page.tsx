@@ -37,6 +37,27 @@ export default function LifestylePage() {
         </section>
 
         <section
+          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
+          aria-labelledby="e-cycling-heading"
+        >
+          <figure className="m-0 overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/lifestyle/lifestyle-ezykle-larc-ebike.webp"
+              alt="E-cycling on a LARC e-bike — an easy way to move more every day"
+              width={800}
+              height={1765}
+              loading="lazy"
+              decoding="async"
+              className="mx-auto block h-auto w-full max-w-md object-cover"
+            />
+            <figcaption className="border-t border-slate-100 px-4 py-3 text-center text-sm font-semibold text-slate-800 sm:text-base">
+              E-cycling: an easy way to move more every day
+            </figcaption>
+          </figure>
+        </section>
+
+        <section
           className="rounded-2xl border border-teal-200/80 bg-teal-50/60 p-6 shadow-sm sm:p-8"
           aria-labelledby="doctors-note-heading"
         >

@@ -61,7 +61,7 @@ export default function SubtypesPage() {
       <section className="bg-[#0D2B4E] px-4 py-16 text-center md:py-24">
         <div className="mx-auto max-w-3xl">
           <h1 className="mb-5 text-3xl font-extrabold leading-tight text-white md:text-5xl">
-            Not One Disease. 23 Metabolic Subtypes.
+            Not One Disease. 32 Metabolic Subtypes.
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
             Two women wear different sarees. Why do they get the same diet? Stop wasting money on superfoods. Find your precise subtype.

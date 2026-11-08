@@ -1,0 +1,82 @@
+/** One line per photo — add `image`, `name`, and `caption` for new entries. */
+export type CelebrityRecognition = {
+  image: string;
+  name: string;
+  caption: string;
+};
+
+export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
+  {
+    image: "/images/dr-muddu-chiranjeevi-new.jpg",
+    name: "Megastar Chiranjeevi",
+    caption: "Actor · Philanthropist · Padma Vibhushan · 150M fans",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_700,h_500,c_fill,g_face/v1786844071/IMG20241027085019_mh5w0m.jpg",
+    name: "Chiranjeevi Blood Bank",
+    caption:
+      "Dr. Muddu invited to Chiranjeevi Blood Bank initiative — recognition of trust and shared service mission",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1773572168/snhc9z3jadq0ex3empoq.jpg",
+    name: "Rajendra Prasad",
+    caption: "National Award Winning Telugu Actor · Padma Shri",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_400,h_560,c_fill,g_face/v1786811555/IMG20250620132710_nuprlk.jpg",
+    name: "V6 Ravi Sir",
+    caption: "Senior Media Celebrity · V6 News Channel",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786783988/minsridharsirbook4_y4zoov.jpg",
+    name: "Hon. Minister Sridhar Babu",
+    caption: "IT, Electronics & Commerce — Govt. of Telangana",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810654/IMG20250315083245_np6k3n.jpg",
+    name: "Appreciation Ceremony",
+    caption: "Recognition by Telangana IT Ministry",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810449/IMG20250313090259_01_jpiynp.jpg",
+    name: "Sri Gandhi MLA",
+    caption: "Sherlingampally — Appreciation for Community Service",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_600,h_450,c_fill,g_face/v1786810865/IMG20240712181743_kyfph4.jpg",
+    name: "State Leadership Meeting",
+    caption: "With MLA Sri Raj Thakur Makkan Singh & IT Minister",
+  },
+  {
+    image: "/images/celebrities/celebrity-doctors-excellence-awards-2024.webp",
+    name: "",
+    caption: "Navanaami Doctors Excellence Awards 2024",
+  },
+  {
+    image: "/images/celebrities/celebrity-evening-gathering-trio.webp",
+    name: "",
+    caption: "With friends and well-wishers",
+  },
+  {
+    image: "/images/celebrities/celebrity-dr-muddu-evening.webp",
+    name: "Dr. Muddu Surendra Nehru, MD",
+    caption: "",
+  },
+  {
+    image: "/images/celebrities/celebrity-community-event-police.webp",
+    name: "",
+    caption: "Community event with Telangana Police",
+  },
+  {
+    image: "/images/celebrities/celebrity-kurnool-medical-college-friend.webp",
+    name: "",
+    caption: "Kurnool Medical College alumni",
+  },
+];

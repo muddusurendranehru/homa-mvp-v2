@@ -55,6 +55,34 @@ const MULUGU = [
 
 type LecturePhoto = { src: string; alt: string; caption: string; pos?: string };
 
+const CELEBRITIES: LecturePhoto[] = [
+  {
+    src: "/images/celebrities/celebrity-doctors-excellence-awards-2024.webp",
+    alt: "Dr. Muddu Surendra Nehru at Navanaami Doctors Excellence Awards 2024",
+    caption: "Navanaami Doctors Excellence Awards 2024",
+  },
+  {
+    src: "/images/celebrities/celebrity-evening-gathering-trio.webp",
+    alt: "Dr. Muddu with friends and well-wishers at an evening gathering",
+    caption: "With friends and well-wishers",
+  },
+  {
+    src: "/images/celebrities/celebrity-dr-muddu-evening.webp",
+    alt: "Dr. Muddu Surendra Nehru, MD",
+    caption: "Dr. Muddu Surendra Nehru, MD",
+  },
+  {
+    src: "/images/celebrities/celebrity-community-event-police.webp",
+    alt: "Community health event with Telangana Police",
+    caption: "Community event with Telangana Police",
+  },
+  {
+    src: "/images/celebrities/celebrity-kurnool-medical-college-friend.webp",
+    alt: "Kurnool Medical College alumni with Dr. Muddu",
+    caption: "Kurnool Medical College alumni",
+  },
+];
+
 const LECTURES: LecturePhoto[] = [
   { src: "/images/homa-thub-agenda-launch.jpg", alt: "HOMA Agenda conference launch with doctors and partners on stage", caption: "HOMA Agenda conference: diabetes care research launch", pos: "center 40%" },
   { src: "/images/homa-thub-junior-doctors.jpg", alt: "Junior doctors from the HOMA research team at T-Hub, Hyderabad", caption: "Junior doctors outreach and T-Hub research collaboration", pos: "center 45%" },
@@ -192,6 +220,21 @@ export default function ConferencesPage() {
           <div className="conf-grid">
             {MULUGU.map((p) => (
               <PhotoFigure key={p.src} {...p} ratio="3 / 4" />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="conf-section" aria-labelledby="celebrities-title">
+        <div className="conf-wrap">
+          <h2 id="celebrities-title" className="conf-h2">Community &amp; recognition</h2>
+          <p className="conf-section-sub">
+            Awards evenings, alumni reunions, and community events alongside dignitaries and
+            well-wishers across Telangana.
+          </p>
+          <div className="conf-grid">
+            {CELEBRITIES.map((p) => (
+              <PhotoFigure key={p.src} {...p} ratio="800 / 1765" />
             ))}
           </div>
         </div>

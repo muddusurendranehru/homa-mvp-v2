@@ -13,7 +13,7 @@ const features = [
   {
     title: "Clinical Data",
     description:
-      "Access to our 23-Subtype Clinical Registry and evidence-based protocols.",
+      "Access to our 32-Subtype Clinical Registry and evidence-based protocols.",
     icon: (
       <path
         strokeLinecap="round"

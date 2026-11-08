@@ -1,60 +1,307 @@
 import Link from "next/link";
 
+/** Set true after adding `32-subtypes-infographic.webp` to public/images/subtypes/ */
+const SHOW_SUBTYPE_INFOGRAPHIC = false;
+const INFOGRAPHIC_SRC = "/images/subtypes/32-subtypes-infographic.webp";
+
+const TICKS = [
+  "Free calculator — takes 2 minutes",
+  "Based on insulin & beta cells, not just HbA1c",
+  "First in India",
+] as const;
+
 export default function SubtypeBanner() {
   return (
-    <section style={{ background: "#07153a", padding: "60px 6%", color: "#fff" }}>
-      <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "40px" }}>
-        
-        {/* Left Side: Text */}
-        <div style={{ flex: "1 1 400px" }}>
-          <div style={{ fontSize: "12px", fontWeight: 700, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
-            Personalized Precision Care
-          </div>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 800, lineHeight: 1.2, marginBottom: "20px" }}>
-            Two women wear different sarees.<br/>
-            <span style={{ color: "#d4af37" }}>Why do they get the same diet?</span>
-          </h2>
-          <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, marginBottom: "24px" }}>
-            Why waste hours watching generic health gurus? Why waste money on superfoods that don't work—or worse, damage your kidneys and heart? 
-            <br/><br/>
-            We are the <strong>first in India</strong> to pioneer 23 specific metabolic subtypes. Don't guess. Know your exact subtype before you waste another day.
-          </p>
-          
-          <Link 
-            href="/subtypes" 
-            style={{ display: "inline-block", background: "#00A896", color: "#fff", fontWeight: 700, fontSize: "16px", padding: "16px 32px", borderRadius: "10px", textDecoration: "none" }}
+    <section
+      aria-labelledby="subtype-banner-heading"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "#07153a",
+        padding: "60px 6%",
+        color: "#fff",
+      }}
+    >
+      <img
+        src="/images/subtypes/metro-crowd-standing-blur.webp"
+        alt=""
+        width={800}
+        height={1765}
+        loading="lazy"
+        decoding="async"
+        aria-hidden
+        style={{
+          position: "absolute",
+          right: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: "min(42vw, 380px)",
+          height: "auto",
+          maxHeight: "100%",
+          objectFit: "cover",
+          opacity: 0.45,
+          pointerEvents: "none",
+          userSelect: "none",
+        }}
+      />
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(105deg, rgba(7,21,58,0.97) 0%, rgba(7,21,58,0.92) 55%, rgba(7,21,58,0.72) 100%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "1100px",
+          margin: "0 auto",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "stretch",
+          gap: "32px 40px",
+        }}
+      >
+        <div style={{ flex: "1 1 380px", minWidth: 0 }}>
+          <div
+            style={{
+              fontSize: "12px",
+              fontWeight: 700,
+              color: "#d4af37",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              marginBottom: "12px",
+            }}
           >
-            Find Your Subtype →
+            PERSONALIZED PRECISION CARE
+          </div>
+          <h2
+            id="subtype-banner-heading"
+            style={{
+              fontSize: "clamp(26px, 4vw, 40px)",
+              fontWeight: 800,
+              lineHeight: 1.2,
+              marginBottom: "14px",
+            }}
+          >
+            Diabetes is not just Type 1 or Type 2.
+            <br />
+            <span style={{ color: "#d4af37" }}>We found 32 types.</span>
+          </h2>
+          <p
+            style={{
+              fontSize: "17px",
+              fontWeight: 600,
+              color: "rgba(255,255,255,0.92)",
+              lineHeight: 1.55,
+              marginBottom: "16px",
+            }}
+          >
+            Look around you on the metro. Everyone is different. Why should everyone get the same
+            diabetes diet?
+          </p>
+          <p
+            style={{
+              fontSize: "16px",
+              color: "rgba(255,255,255,0.82)",
+              lineHeight: 1.65,
+              marginBottom: "22px",
+            }}
+          >
+            Most clinics only check your HbA1c and give everyone the same diet and the same tablets.
+            HOMA looks deeper — at how well your insulin works and how strong your beta cells are.
+            Our free AI calculator places you in 1 of 32 metabolic subtypes, so your diet, walk and
+            medicines fit your body, not everyone&apos;s.
+          </p>
+
+          <ul
+            style={{
+              listStyle: "none",
+              margin: "0 0 26px",
+              padding: 0,
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
+            {TICKS.map((t) => (
+              <li
+                key={t}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  fontSize: "15px",
+                  color: "rgba(255,255,255,0.9)",
+                  lineHeight: 1.45,
+                }}
+              >
+                <span style={{ color: "#00A896", fontWeight: 800 }} aria-hidden>
+                  ✓
+                </span>
+                {t}
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            href="/subtypes"
+            style={{
+              display: "inline-block",
+              background: "#00A896",
+              color: "#fff",
+              fontWeight: 700,
+              fontSize: "16px",
+              padding: "16px 32px",
+              borderRadius: "10px",
+              textDecoration: "none",
+            }}
+          >
+            Find My Subtype — Free →
           </Link>
         </div>
 
-        {/* Right Side: The 3 Language Lines */}
-        <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div style={{ background: "rgba(255,255,255,0.05)", padding: "20px", borderRadius: "12px", borderLeft: "4px solid #00A896" }}>
-            <div style={{ fontSize: "12px", color: "#00A896", fontWeight: 700, marginBottom: "4px" }}>ENGLISH</div>
-            <div style={{ fontSize: "16px", fontWeight: 500 }}>Why generalised diets? Know your precise subtype first.</div>
+        <div
+          style={{
+            flex: "1 1 280px",
+            maxWidth: "420px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+          }}
+        >
+          {SHOW_SUBTYPE_INFOGRAPHIC ? (
+            <figure
+              style={{
+                margin: 0,
+                borderRadius: "12px",
+                overflow: "hidden",
+                border: "1px solid rgba(255,255,255,0.12)",
+                background: "rgba(255,255,255,0.04)",
+              }}
+            >
+              <img
+                src={INFOGRAPHIC_SRC}
+                alt="32 metabolic subtypes — HOMA classification overview"
+                width={800}
+                height={1765}
+                loading="lazy"
+                decoding="async"
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </figure>
+          ) : null}
+
+          <div
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              padding: "20px",
+              borderRadius: "12px",
+              borderLeft: "4px solid #00A896",
+            }}
+          >
+            <div style={{ fontSize: "12px", color: "#00A896", fontWeight: 700, marginBottom: "4px" }}>
+              ENGLISH
+            </div>
+            <div style={{ fontSize: "16px", fontWeight: 500 }}>
+              Why generalised diets? Know your precise subtype first.
+            </div>
           </div>
-          
-          <div style={{ background: "rgba(255,255,255,0.05)", padding: "20px", borderRadius: "12px", borderLeft: "4px solid #d4af37" }}>
-            <div style={{ fontSize: "12px", color: "#d4af37", fontWeight: 700, marginBottom: "4px" }}>हिंदी (HINDI)</div>
-            <div style={{ fontSize: "16px", fontWeight: 500 }}>सामान्य डाइट क्यों? पहले अपना सटीक सबटाइप जानें।</div>
+
+          <div
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              padding: "20px",
+              borderRadius: "12px",
+              borderLeft: "4px solid #d4af37",
+            }}
+          >
+            <div style={{ fontSize: "12px", color: "#d4af37", fontWeight: 700, marginBottom: "4px" }}>
+              हिंदी (HINDI)
+            </div>
+            <div style={{ fontSize: "16px", fontWeight: 500 }}>
+              सामान्य डाइट क्यों? पहले अपना सटीक सबटाइप जानें।
+            </div>
           </div>
-          
-          <div style={{ background: "rgba(255,255,255,0.05)", padding: "20px", borderRadius: "12px", borderLeft: "4px solid #25D366" }}>
-            <div style={{ fontSize: "12px", color: "#25D366", fontWeight: 700, marginBottom: "4px" }}>తెలుగు (TELUGU)</div>
-            <div style={{ fontSize: "16px", fontWeight: 500 }}>సాధారణ డైట్లు ఎందుకు? మొదట మీ ఖచ్చితమైన సబ్‌టైప్ తెలుసుకోండి.</div>
+
+          <div
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              padding: "20px",
+              borderRadius: "12px",
+              borderLeft: "4px solid #25D366",
+            }}
+          >
+            <div style={{ fontSize: "12px", color: "#25D366", fontWeight: 700, marginBottom: "4px" }}>
+              తెలుగు (TELUGU)
+            </div>
+            <div style={{ fontSize: "16px", fontWeight: 500 }}>
+              సాధారణ డైట్లు ఎందుకు? మొదట మీ ఖచ్చితమైన సబ్‌టైప్ తెలుసుకోండి.
+            </div>
           </div>
         </div>
-
       </div>
 
-      {/* Social & Contact Strip */}
-      <div style={{ maxWidth: "1000px", margin: "40px auto 0", paddingTop: "20px", borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center", fontSize: "14px", color: "rgba(255,255,255,0.6)" }}>
-        <span>🌐 <a href="https://mvp.homahealthcarecenter.in" style={{ color: "#d4af37", textDecoration: "none" }}>mvp.homahealthcarecenter.in</a></span>
-        <span>📱 <a href="https://play.google.com/store/apps/details?id=com.kivra.tools" style={{ color: "#d4af37", textDecoration: "none" }}>Download Android App</a></span>
-        <span>📞 <a href="tel:+919963721999" style={{ color: "#d4af37", textDecoration: "none" }}>099637 21999</a></span>
-        <span>✉️ <a href="mailto:surendra.muddu@gmail.com" style={{ color: "#d4af37", textDecoration: "none" }}>Email Us</a></span>
-        <span>Follow us: <a href="#" style={{ color: "#d4af37", textDecoration: "none" }}>Instagram</a> | <a href="#" style={{ color: "#d4af37", textDecoration: "none" }}>YouTube</a></span>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "1100px",
+          margin: "40px auto 0",
+          paddingTop: "20px",
+          borderTop: "1px solid rgba(255,255,255,0.1)",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+          justifyContent: "center",
+          fontSize: "14px",
+          color: "rgba(255,255,255,0.6)",
+        }}
+      >
+        <span>
+          🌐{" "}
+          <a
+            href="https://mvp.homahealthcarecenter.in"
+            style={{ color: "#d4af37", textDecoration: "none" }}
+          >
+            mvp.homahealthcarecenter.in
+          </a>
+        </span>
+        <span>
+          📱{" "}
+          <a
+            href="https://play.google.com/store/apps/details?id=com.kivra.tools"
+            style={{ color: "#d4af37", textDecoration: "none" }}
+          >
+            Download Android App
+          </a>
+        </span>
+        <span>
+          📞{" "}
+          <a href="tel:+919963721999" style={{ color: "#d4af37", textDecoration: "none" }}>
+            099637 21999
+          </a>
+        </span>
+        <span>
+          ✉️{" "}
+          <a href="mailto:surendra.muddu@gmail.com" style={{ color: "#d4af37", textDecoration: "none" }}>
+            Email Us
+          </a>
+        </span>
+        <span>
+          Follow us:{" "}
+          <a href="#" style={{ color: "#d4af37", textDecoration: "none" }}>
+            Instagram
+          </a>{" "}
+          |{" "}
+          <a href="#" style={{ color: "#d4af37", textDecoration: "none" }}>
+            YouTube
+          </a>
+        </span>
       </div>
     </section>
   );

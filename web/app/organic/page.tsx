@@ -18,6 +18,27 @@ const ONLINE_PARTNERS = [
 export default function OrganicPage() {
   return (
     <AppShell>
+      <section
+        className="mx-auto mb-6 max-w-4xl rounded-2xl border border-emerald-200/80 bg-white p-4 shadow-sm sm:p-5"
+        aria-label="Partner store highlights"
+      >
+        <figure className="m-0 flex flex-col gap-3 sm:flex-row sm:items-stretch">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/organic/organic-vendor-max-protein-shelf.webp"
+            alt="Healthy snacks at partner stores — millet, jowar, ragi, low GI options on shelf"
+            width={800}
+            height={1765}
+            loading="lazy"
+            decoding="async"
+            className="h-auto w-full max-w-[220px] shrink-0 rounded-xl object-cover sm:max-w-[200px]"
+          />
+          <figcaption className="flex flex-1 items-center text-sm leading-relaxed text-slate-700 sm:text-base">
+            Healthy snacks at our partner stores — millet, jowar, ragi, low GI
+          </figcaption>
+        </figure>
+      </section>
+
       <NearbyPlacesFinder
         kind="organic"
         pageTitle="Organic & Millets"
