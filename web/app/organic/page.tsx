@@ -83,6 +83,36 @@ export default function OrganicPage() {
               Roasted, not fried — jowar puffs (Roast Foods)
             </figcaption>
           </figure>
+          <figure className="m-0 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/organic/organic-24-mantra-chitkabra-rajma.webp"
+              alt="Certified organic chitkabra rajma from 24 Mantra"
+              width={800}
+              height={1765}
+              loading="lazy"
+              decoding="async"
+              className="aspect-square h-auto w-full max-w-[160px] shrink-0 rounded-xl object-cover object-top sm:max-w-[140px]"
+            />
+            <figcaption className="flex flex-1 items-center text-sm leading-relaxed text-slate-700">
+              Certified organic chitkabra rajma (24 Mantra)
+            </figcaption>
+          </figure>
+          <figure className="m-0 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/organic/organic-thai-chilli-coated-peanuts.webp"
+              alt="Spicy coated peanuts — read the label, small portions"
+              width={800}
+              height={1765}
+              loading="lazy"
+              decoding="async"
+              className="aspect-square h-auto w-full max-w-[160px] shrink-0 rounded-xl object-cover object-top sm:max-w-[140px]"
+            />
+            <figcaption className="flex flex-1 items-center text-sm leading-relaxed text-slate-700">
+              Spicy coated peanuts — read the label, small portions
+            </figcaption>
+          </figure>
         </div>
       </section>
 

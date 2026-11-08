@@ -87,4 +87,25 @@ export const CELEBRITY_RECOGNITION: CelebrityRecognition[] = [
     caption: "Republic Day programme — teaching children healthy habits early",
     imageFocus: "center",
   },
+  {
+    image: "/images/celebrities/celebrity-dr-bhandari-srinivas-adoni.webp",
+    name: "Dr. Bhandari Srinivas, MD",
+    caption: "Physician, Adoni",
+  },
+  {
+    image: "/images/celebrities/celebrity-mla-sri-gandhi-glycemic-guardians.webp",
+    name: "Sri Gandhi, MLA Serilingampally",
+    caption: "Receiving the Glycemic Guardians Conclave book",
+  },
+  {
+    image: "/images/celebrities/celebrity-mamatha-medical-college-faculty.webp",
+    name: "Mamatha Medical College Faculty",
+    caption: "Teaching session with faculty and residents",
+    imageFocus: "center",
+  },
+  {
+    image: "/images/celebrities/celebrity-dr-bharath-patodia-oncologist.webp",
+    name: "Dr. Bharath Patodia",
+    caption: "Oncologist · T-Hub, Hyderabad",
+  },
 ];
