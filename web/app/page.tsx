@@ -126,9 +126,9 @@ export default function HomePage() {
       {/* HOME HERO START */}
       <HomeHero />
       <FreeHealthTools />
-      <WhyHomaVideos />
       <FreeScreeningCamps />
       <MendTrustAward />
+      <WhyHomaVideos />
       <SubtypeBanner />
       {/* HOME HERO END */}
       <section className="bg-white py-12 px-4">
