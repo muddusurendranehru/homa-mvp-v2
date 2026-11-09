@@ -14,34 +14,54 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Database not configured (DATABASE_URL)' }, { status: 500 });
   }
 
+  const recentParam = request.nextUrl.searchParams.get('recent');
   const mobileRaw =
     request.nextUrl.searchParams.get('mobile') ??
     request.nextUrl.searchParams.get('mobile_number') ??
     '';
-  const digits = normalizeMobileDigits(mobileRaw.trim());
-  if (digits.length < 4) {
-    return NextResponse.json(
-      { error: 'Enter at least 4 digits of the mobile number to search' },
-      { status: 400 },
-    );
-  }
-
-  const likePattern = `%${digits}%`;
 
   try {
-    const rows = await sql`
-      SELECT
-        id,
-        clerk_user_id,
-        mobile_number,
-        email,
-        patient_name,
-        start_date
-      FROM patient_tracker
-      WHERE regexp_replace(COALESCE(mobile_number, ''), '[^0-9]', '', 'g') LIKE ${likePattern}
-      ORDER BY start_date DESC NULLS LAST, patient_name ASC NULLS LAST
-      LIMIT 25
-    `;
+    let rows: unknown;
+
+    if (recentParam !== null && mobileRaw.trim() === '') {
+      const limit = Math.min(50, Math.max(1, Number.parseInt(recentParam, 10) || 15));
+      rows = await sql`
+        SELECT
+          id,
+          clerk_user_id,
+          mobile_number,
+          email,
+          patient_name,
+          start_date
+        FROM patient_tracker
+        ORDER BY start_date DESC NULLS LAST, patient_name ASC NULLS LAST
+        LIMIT ${limit}
+      `;
+    } else {
+      const digits = normalizeMobileDigits(mobileRaw.trim());
+      if (digits.length < 4) {
+        return NextResponse.json(
+          { error: 'Enter at least 4 digits of the mobile number to search' },
+          { status: 400 },
+        );
+      }
+
+      const likePattern = `%${digits}%`;
+
+      rows = await sql`
+        SELECT
+          id,
+          clerk_user_id,
+          mobile_number,
+          email,
+          patient_name,
+          start_date
+        FROM patient_tracker
+        WHERE regexp_replace(COALESCE(mobile_number, ''), '[^0-9]', '', 'g') LIKE ${likePattern}
+        ORDER BY start_date DESC NULLS LAST, patient_name ASC NULLS LAST
+        LIMIT 25
+      `;
+    }
 
     const patients = (Array.isArray(rows) ? rows : []).map((row) =>
       mapPatientTrackerRow(row as Record<string, unknown>),
