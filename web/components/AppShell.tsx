@@ -20,6 +20,7 @@ const shellNav: ShellNavItem[] = [
   { href: '/pharmacy', label: 'Pharmacy' },
   { href: '/organic', label: 'Organic' },
   { href: '/lifestyle', label: 'Lifestyle' },
+  { href: '/diet-plan', label: 'Diet Plan' },
   { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];

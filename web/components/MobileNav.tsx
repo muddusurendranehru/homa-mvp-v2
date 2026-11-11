@@ -29,6 +29,7 @@ const navLinks: {
   { href: '/dashboard', label: 'Dashboard', icon: '📊' },
   { href: '/nutri-bot', label: 'NutriBot AI', icon: '🤖' },
   { href: '/assessment', label: 'Assessment', icon: '📋' },
+  { href: '/diet-plan', label: 'Diet Plan', icon: '🥗' },
   { href: '/remission-program', label: '90-Day Program', icon: '🎯' },
   { href: '/testimonials', label: 'Success Stories', icon: '🏆' },
   { href: '/enroll', label: 'Enroll', icon: '✨' },

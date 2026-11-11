@@ -63,6 +63,10 @@ export default function MainHeaderLinks() {
         {patientCareLinks.map((item) => (
           <NavLink key={item.href} item={item} pathname={pathname} />
         ))}
+        <NavLink
+          item={{ href: '/diet-plan', label: 'Diet Plan' }}
+          pathname={pathname}
+        />
       </div>
       <div className="hidden xl:flex items-center gap-0.5 shrink-0">
         {secondaryLinks.map((item) => (
