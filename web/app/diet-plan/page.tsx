@@ -78,17 +78,26 @@ export default function DietPlanTeaserPage() {
           </div>
         </section>
 
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-3">
+          <a
+            href="/HOMA_Day1_Sample.pdf"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center rounded-xl border-2 border-[#0D9488] bg-white px-6 py-4 text-center text-base font-bold text-[#0D9488] transition hover:bg-teal-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+          >
+            Download Free Day 1 Sample (PDF)
+          </a>
           <a
             href={UNLOCK_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-6 py-4 text-center text-base font-bold text-white shadow-lg shadow-teal-600/25 transition hover:from-teal-700 hover:to-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
           >
-            Unlock Your Full 30-Day Diet Plan
+            Unlock Full 30-Day Plan
           </a>
-          <p className="mt-4 text-center text-xs text-slate-500">
-            Message HOMA Clinic on WhatsApp — we&apos;ll help you get started.
+          <p className="mt-1 text-center text-xs text-slate-500">
+            Download the Day 1 sample for free. If you love it, unlock the full 30-Day Diet Plan.
           </p>
         </div>
       </div>
