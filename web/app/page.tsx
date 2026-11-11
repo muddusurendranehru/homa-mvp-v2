@@ -1221,7 +1221,7 @@ export default function HomePage() {
               marginBottom: "22px",
             }}
           >
-            <a href="/books" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
+            <a href="/books/bp-untold-truth" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
               <img
                 src="/images/bp-book.jpg"
                 alt="BP: The Untold Truth book cover"
