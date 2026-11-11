@@ -777,6 +777,9 @@ export default function RootLayout({
                   <Link href="/books" className="text-gray-300 hover:text-white transition-colors">
                     Books
                   </Link>
+                  <Link href="/collaborate" className="text-gray-300 hover:text-white transition-colors">
+                    Collaborate
+                  </Link>
                                     <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
                     Privacy Policy
                   </Link>

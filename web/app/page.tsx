@@ -12,6 +12,7 @@ import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
 import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
+import { CollaborateSection } from "@/components/CollaborateSection";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -1190,6 +1191,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <CollaborateSection />
 
       {/* BOOKS STRIP */}
       <section
