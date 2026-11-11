@@ -12,6 +12,7 @@ import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
 import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
+import { CollaborateSection } from "@/components/CollaborateSection";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -1191,6 +1192,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <CollaborateSection />
+
       {/* BOOKS STRIP */}
       <section
         style={{
@@ -1221,7 +1224,7 @@ export default function HomePage() {
               marginBottom: "22px",
             }}
           >
-            <a href="/books" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
+            <a href="/books/bp-untold-truth" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
               <img
                 src="/images/bp-book.jpg"
                 alt="BP: The Untold Truth book cover"

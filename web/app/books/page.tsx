@@ -22,6 +22,7 @@ type Book = {
   amazon: string;
   description: string;
   coAuthors?: string[];
+  detailPath?: string;
 };
 
 const books: Book[] = [
@@ -32,6 +33,7 @@ const books: Book[] = [
     amazon: "https://www.amazon.in/dp/B0H23M9VPF",
     description:
       "A clinical guide explaining why blood pressure medicine alone is not enough \u2014 the real cause is insulin resistance.",
+    detailPath: "/books/bp-untold-truth",
   },
   {
     title: "The HOMA GLP-1 Prescribing Guide",
@@ -69,9 +71,23 @@ export default function BooksPage() {
         {books.map((b) => (
           <article key={b.title} style={{ background: "#fff", borderRadius: "14px", border: `2px solid ${GOLD}`, boxShadow: "0 6px 20px rgba(13,59,94,0.12)", padding: "24px", display: "flex", flexDirection: "column" }}>
             <div style={{ background: NAVY, borderRadius: "10px", padding: "16px", display: "flex", justifyContent: "center", marginBottom: "18px" }}>
-              <img src={b.cover} alt={`${b.title} book cover`} style={{ width: "100%", maxWidth: "260px", aspectRatio: "2 / 3", objectFit: "contain", borderRadius: "6px" }} />
+              {b.detailPath ? (
+                <Link href={b.detailPath} style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                  <img src={b.cover} alt={`${b.title} book cover`} style={{ width: "100%", maxWidth: "260px", aspectRatio: "2 / 3", objectFit: "contain", borderRadius: "6px" }} />
+                </Link>
+              ) : (
+                <img src={b.cover} alt={`${b.title} book cover`} style={{ width: "100%", maxWidth: "260px", aspectRatio: "2 / 3", objectFit: "contain", borderRadius: "6px" }} />
+              )}
             </div>
-            <h2 className={montserrat.className} style={{ color: NAVY, fontSize: "24px", fontWeight: 800, margin: "0 0 6px" }}>{b.title}</h2>
+            <h2 className={montserrat.className} style={{ color: NAVY, fontSize: "24px", fontWeight: 800, margin: "0 0 6px" }}>
+              {b.detailPath ? (
+                <Link href={b.detailPath} style={{ color: "inherit", textDecoration: "none" }}>
+                  {b.title}
+                </Link>
+              ) : (
+                b.title
+              )}
+            </h2>
             <p className={montserrat.className} style={{ color: "#8a5a00", fontSize: "15px", fontWeight: 600, margin: "0 0 14px", lineHeight: 1.4 }}>{b.subtitle}</p>
             <p style={{ fontSize: "16px", lineHeight: 1.6, margin: "0 0 14px" }}>{b.description}</p>
             {b.coAuthors && (
@@ -84,9 +100,16 @@ export default function BooksPage() {
                 </ul>
               </div>
             )}
-            <a href={b.amazon} target="_blank" rel="noopener noreferrer" className={montserrat.className} style={{ marginTop: "auto", alignSelf: "flex-start", background: GOLD, color: NAVY, fontWeight: 800, fontSize: "16px", padding: "13px 26px", borderRadius: "8px", textDecoration: "none" }}>
-              Buy on Amazon &rarr;
-            </a>
+            <div style={{ marginTop: "auto", display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              {b.detailPath && (
+                <Link href={b.detailPath} className={montserrat.className} style={{ alignSelf: "flex-start", background: NAVY, color: "#fff", fontWeight: 800, fontSize: "16px", padding: "13px 26px", borderRadius: "8px", textDecoration: "none" }}>
+                  Book details &rarr;
+                </Link>
+              )}
+              <a href={b.amazon} target="_blank" rel="noopener noreferrer" className={montserrat.className} style={{ alignSelf: "flex-start", background: GOLD, color: NAVY, fontWeight: 800, fontSize: "16px", padding: "13px 26px", borderRadius: "8px", textDecoration: "none" }}>
+                Buy on Amazon &rarr;
+              </a>
+            </div>
           </article>
         ))}
       </section>
