@@ -53,7 +53,15 @@ const MULUGU = [
   },
 ];
 
-type LecturePhoto = { src: string; alt: string; caption: string; pos?: string };
+type LecturePhoto = {
+  src: string;
+  alt: string;
+  caption: string;
+  pos?: string;
+  ratio?: string;
+  width?: number;
+  height?: number;
+};
 
 const CELEBRITIES: LecturePhoto[] = [
   {
@@ -84,6 +92,15 @@ const CELEBRITIES: LecturePhoto[] = [
 ];
 
 const LECTURES: LecturePhoto[] = [
+  {
+    src: "/images/lectures/choti-diwali-lions-club.webp",
+    alt: "Dr Muddu Surendra Nehru with Lions Club of Hyderabad Bhagyanagar members, Choti Diwali 2026 talk on central obesity",
+    caption:
+      "Lions Club of Hyderabad Bhagyanagar — Choti Diwali 2026 talk on Central Obesity & Beta Cells",
+    ratio: "9 / 16",
+    width: 720,
+    height: 1280,
+  },
   { src: "/images/homa-thub-agenda-launch.jpg", alt: "HOMA Agenda conference launch with doctors and partners on stage", caption: "HOMA Agenda conference: diabetes care research launch", pos: "center 40%" },
   { src: "/images/homa-thub-junior-doctors.jpg", alt: "Junior doctors from the HOMA research team at T-Hub, Hyderabad", caption: "Junior doctors outreach and T-Hub research collaboration", pos: "center 45%" },
   { src: "/images/homa-lecture-premier-talk.jpg", alt: "Dr. Muddu Surendra Nehru MD giving a metabolic health talk at Premier Hospital", caption: "Metabolic health talk at Premier Hospital", pos: "center 40%" },
@@ -108,12 +125,16 @@ function PhotoFigure({
   caption,
   pos,
   ratio = "4 / 3",
+  width,
+  height,
 }: {
   src: string;
   alt: string;
   caption: string;
   pos?: string;
   ratio?: string;
+  width?: number;
+  height?: number;
 }) {
   return (
     <figure className="conf-card">
@@ -121,6 +142,8 @@ function PhotoFigure({
         <img
           src={src}
           alt={alt}
+          width={width}
+          height={height}
           loading="lazy"
           decoding="async"
           className="conf-img"
@@ -249,7 +272,7 @@ export default function ConferencesPage() {
           </p>
           <div className="conf-grid conf-grid-lectures">
             {LECTURES.map((p) => (
-              <PhotoFigure key={p.src} {...p} />
+              <PhotoFigure key={p.src} {...p} ratio={p.ratio ?? "4 / 3"} />
             ))}
           </div>
         </div>
