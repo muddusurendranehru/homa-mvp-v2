@@ -128,9 +128,10 @@ export default function HomePage() {
       {/* HOME HERO START */}
       <HomeHero />
       <FreeHealthTools />
+      <WhyHomaVideos />
+      <HowItWorks />
       <FreeScreeningCamps />
       <MendTrustAward />
-      <WhyHomaVideos />
       <SubtypeBanner />
       {/* HOME HERO END */}
       <section className="bg-white py-12 px-4">
@@ -246,8 +247,6 @@ export default function HomePage() {
       {/* FreeHealthTools duplicate removed — lives under HomeHero */}
       {/* THE SILENT WARNING (migrated Central Obesity card) */}
       <SilentWarning />
-      {/* HOW IT WORKS (moved up from the bottom, restyled) */}
-      <HowItWorks />
       {/* ABOUT DR. MUDDU (details moved from the old teal header bar) */}
       <AboutDrMuddu />
       <VisitClinic />

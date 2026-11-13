@@ -10,6 +10,7 @@
  * slate #64748b, border #e2e8f0, light bg #f1f5f9, radius 20 cards / 14 buttons.
  */
 import { useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const WA = "https://wa.me/919963721999";
@@ -129,31 +130,114 @@ export function SilentWarning() {
 }
 
 /* ---------- How it works (existing 5 steps, restyled; wording unchanged) ---------- */
-const STEPS = [
-  { num: "1", title: "Understand Your Body", desc: "HOMA-IR test + organ age assessment — detect risk years before symptoms" },
-  { num: "2", title: "Find the Root Cause", desc: "Not just sugar — full metabolic diagnosis by a real MD doctor" },
-  { num: "3", title: "Doctor-Designed Plan", desc: "Personally by Dr. Muddu — not an algorithm, not a chatbot" },
-  { num: "4", title: "Regular Follow-up", desc: "Weekly check-ins with the doctor himself — phone, clinic, or home visit" },
-  { num: "5", title: "Long-Term Remission", desc: "Goal: off medicines, not just managed. Hundreds of patients have done it" },
+type Step = {
+  num: string;
+  title: string;
+  desc: string;
+  img?: string;
+  imgAlt?: string;
+};
+
+const STEPS: Step[] = [
+  {
+    num: "1",
+    title: "Understand Your Body",
+    desc: "HOMA-IR test + organ age assessment — detect risk years before symptoms",
+    img: "/images/how-it-works/homa-doctor-led-companion.webp",
+    imgAlt: "Doctor-led metabolic companion care",
+  },
+  {
+    num: "2",
+    title: "Find the Root Cause",
+    desc: "Not just sugar — full metabolic diagnosis by a real MD doctor",
+    img: "/images/how-it-works/homa-why-we-started-poster.webp",
+    imgAlt: "HOMA why we started — root-cause metabolic care",
+  },
+  {
+    num: "3",
+    title: "Doctor-Designed Plan",
+    desc: "Personally by Dr. Muddu — not an algorithm, not a chatbot",
+    img: "/images/how-it-works/homa-doctor-apps.webp",
+    imgAlt: "HOMA doctor-designed apps and plans",
+  },
+  {
+    num: "4",
+    title: "Regular Follow-up",
+    desc: "Weekly check-ins with the doctor himself — phone, clinic, or home visit",
+    img: "/images/how-it-works/homa-join-network-partners.webp",
+    imgAlt: "Join the HOMA network and partners",
+  },
+  {
+    num: "5",
+    title: "Long-Term Remission",
+    desc: "Goal: off medicines, not just managed. Hundreds of patients have done it",
+    img: "/images/homa-clinic-team-premier.jpg",
+    imgAlt: "HOMA Healthcare Center team with Dr. Muddu Surendra Nehru",
+  },
 ];
+
+const WA_INTERESTED =
+  "https://wa.me/919963721999?text=I%20AM%20INTERESTED%20IN%20HOMA";
+const WA_INDUSTRY =
+  "https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA";
 
 export function HowItWorks() {
   return (
     <section id="how-it-works" className="hs-sec hs-slate" aria-labelledby="how-title">
       <div className="hs-wrap">
         <div className="hs-eyebrow">HOW IT WORKS</div>
-        <h2 id="how-title" className="hs-h2">The HOMA Approach to Diabetes Reversal</h2>
-        <p className="hs-sub">Doctor-led. Science-backed. No app required.</p>
+        <h2 id="how-title" className="hs-h2">
+          Get Hands-On: Learn, Teach and Propagate the HOMA Muddu&apos;s Methods
+        </h2>
+        <p className="hs-sub">
+          Diabetology, cardio-obesity and diabetes medicine — join the path-breaking journey. Doctor-led.
+          Science-backed.
+        </p>
         <ol className="hs-steps">
           {STEPS.map((s) => (
             <li key={s.num} className="hs-step">
+              {s.img ? (
+                <div className="hs-step-img">
+                  <Image
+                    src={s.img}
+                    alt={s.imgAlt ?? ""}
+                    fill
+                    sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 20vw"
+                    className="hs-step-photo"
+                    loading="lazy"
+                  />
+                </div>
+              ) : null}
               <span className="hs-step-n" aria-hidden="true">{s.num}</span>
               <div className="hs-step-t">{s.title}</div>
               <div className="hs-step-d">{s.desc}</div>
             </li>
           ))}
         </ol>
-        <div className="hs-learn"><Link href="/how-it-works">Learn more →</Link></div>
+        <div className="hs-how-cta">
+          <Link href="/how-it-works" className="hs-btn hs-btn-ghost">
+            Learn more →
+          </Link>
+          <Link href="/packages" className="hs-btn hs-btn-ghost">
+            Packages &amp; plans
+          </Link>
+          <a
+            href={WA_INTERESTED}
+            className="hs-btn hs-btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            I&apos;m interested — WhatsApp
+          </a>
+          <a
+            href={WA_INDUSTRY}
+            className="hs-btn hs-btn-ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Industry &amp; investors
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -375,9 +459,12 @@ const CSS = `
 @media (min-width:600px){.hs-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:960px){.hs-steps{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}}
 .hs-step{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:22px 20px;text-align:left}
+.hs-step-img{position:relative;height:140px;border-radius:12px;overflow:hidden;margin-bottom:14px;background:#e2e8f0}
+.hs-step-photo{object-fit:cover;object-position:center top}
 .hs-step-n{width:40px;height:40px;border-radius:999px;background:#0f172a;color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .hs-step-t{font-weight:700;font-size:16px;margin-bottom:6px;color:#0f172a}
 .hs-step-d{color:#64748b;font-size:14px;line-height:1.55}
+.hs-how-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
 
 /* gallery (sub-pages) */
 .hs-h3{font-size:clamp(22px,3vw,30px);font-weight:800;color:#1e3a8a;margin:0 0 18px;letter-spacing:-.01em}
