@@ -46,8 +46,9 @@ const MNR_DIABETES_2026 = [
   },
   {
     src: "/images/conferences/mnr-diabetes-2026/dr-nehru-premier-hospital-kokapet.webp",
-    alt: "Dr. Muddu Surendra Nehru at Premier Hospital, Kokapet",
-    caption: "Dr Muddu Surendra Nehru, M.D., at Premier Hospital, Kokapet",
+    alt: "Dr Muddu Surendra Nehru, M.D., Professor of Medicine and Visiting Consultant, Metabolism & Medicine, Premier Hospital, Kokapet",
+    caption:
+      "Dr Muddu Surendra Nehru, M.D., Professor of Medicine and Visiting Consultant, Metabolism & Medicine, Premier Hospital, Kokapet",
     ratio: "544 / 1200",
   },
 ] as const;
