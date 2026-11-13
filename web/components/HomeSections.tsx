@@ -56,7 +56,7 @@ export function FreeHealthTools() {
       <div className="hs-wrap">
         <div className="hs-eyebrow">FREE ONLINE CHECKS · ABOUT 30 SECONDS EACH</div>
         <h2 id="free-tools-title" className="hs-h2">
-          Free Online Diabetes &amp; Prediabetes Risk Check
+          ZERO Waiting Time for Doctor Visit at Hospital — Health Journey Starts at Home
         </h2>
         <p className="hs-sub">
           Heart attack risk from home too — no hospital wait. Know if you are at high risk for diabetes, prediabetes, or heart disease in about 30 seconds each.
