@@ -12,6 +12,33 @@ export const metadata: Metadata = {
 const NAVY = "#1e3a8a";
 const TEAL = "#0d9488";
 
+const MNR_DIABETES_2026 = [
+  {
+    src: "/images/conferences/mnr-diabetes-2026/mnr-diabetes-2026-dr-nehru-board.webp",
+    alt: "Dr. Muddu Surendra Nehru standing beside the MNR Diabetes 2026 conference board",
+    caption: "Dr Muddu Surendra Nehru, M.D., Organizing Committee, MNR Diabetes 2026",
+    ratio: "675 / 1200",
+  },
+  {
+    src: "/images/conferences/mnr-diabetes-2026/mnr-diabetes-2026-banner.webp",
+    alt: "Delegates in front of the conference board outside MNR Learning centre, MNR Diabetes 2026",
+    caption: "MNR Diabetes 2026, two-day multidisciplinary conference, 12–13 Nov 2026",
+    ratio: "675 / 1200",
+  },
+  {
+    src: "/images/conferences/mnr-diabetes-2026/mnr-diabetes-2026-talk.webp",
+    alt: "Dr. Muddu Surendra Nehru speaking at the podium, MNR Diabetes 2026",
+    caption: "Dr. Muddu Surendra Nehru, M.D., speaking at MNR Diabetes 2026",
+    ratio: "3 / 4",
+  },
+  {
+    src: "/images/conferences/mnr-diabetes-2026/mnr-diabetes-2026-tyg-qr.webp",
+    alt: "Conference hall with a slide showing a QR code for the free TyG calculator and Kivra app",
+    caption: "Sharing the free TyG calculator and Kivra app with delegates",
+    ratio: "4 / 3",
+  },
+] as const;
+
 const MEND_2026 = [
   {
     src: "/images/conferences/mend-2026/mend-2026-award-01.jpg",
@@ -108,12 +135,14 @@ function PhotoFigure({
   caption,
   pos,
   ratio = "4 / 3",
+  fit = "cover",
 }: {
   src: string;
   alt: string;
   caption: string;
   pos?: string;
   ratio?: string;
+  fit?: "cover" | "contain";
 }) {
   return (
     <figure className="conf-card">
@@ -124,7 +153,10 @@ function PhotoFigure({
           loading="lazy"
           decoding="async"
           className="conf-img"
-          style={pos ? { objectPosition: pos } : undefined}
+          style={{
+            objectFit: fit,
+            ...(pos ? { objectPosition: pos } : {}),
+          }}
         />
       </div>
       <figcaption className="conf-caption">{caption}</figcaption>
@@ -145,7 +177,8 @@ const CSS = `
 .conf-h2::after{content:"";display:block;width:56px;height:3px;background:${TEAL};border-radius:2px;margin:10px auto 0}
 .conf-section-sub{color:#475569;font-size:15px;line-height:1.55;text-align:center;margin:12px auto 28px;max-width:720px}
 .conf-grid{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
-.conf-grid-mend{grid-template-columns:1fr}
+.conf-grid-mend{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.conf-grid-mend .conf-card{width:100%;max-width:420px;margin:0 auto}
 .conf-card{margin:0;background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(15,23,42,.08);overflow:hidden}
 .conf-frame{width:100%;background:#f1f5f9;overflow:hidden;position:relative}
 .conf-img{width:100%;height:100%;object-fit:cover;display:block}
@@ -159,13 +192,13 @@ const CSS = `
 .conf-btn-secondary{background:#16a34a}
 @media(min-width:640px){
   .conf-h1{font-size:38px}
-  .conf-grid-mend{grid-template-columns:repeat(2,1fr);gap:20px}
+  .conf-grid-mend{gap:20px}
   .conf-grid{grid-template-columns:repeat(3,1fr);gap:20px}
   .conf-btns{flex-direction:row;justify-content:center}
 }
 @media(min-width:1024px){
   .conf-h1{font-size:44px}
-  .conf-grid-mend{grid-template-columns:repeat(2,1fr);gap:24px}
+  .conf-grid-mend{gap:24px}
   .conf-grid-lectures{grid-template-columns:repeat(4,1fr);gap:20px}
   .conf-h2{font-size:30px}
 }
@@ -191,6 +224,22 @@ export default function ConferencesPage() {
         </div>
       </section>
 
+      <section className="conf-section" aria-labelledby="mnr-diabetes-2026-title">
+        <div className="conf-wrap">
+          <h2 id="mnr-diabetes-2026-title" className="conf-h2">
+            MNR Diabetes 2026 — Beyond Numbers: Understanding Diabetes From Cell to Clinic
+          </h2>
+          <p className="conf-section-sub">
+            MNR Medical College, Hyderabad, 12–13 November 2026.
+          </p>
+          <div className="conf-grid">
+            {MNR_DIABETES_2026.map((p) => (
+              <PhotoFigure key={p.src} {...p} fit="contain" />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="conf-section" aria-labelledby="mend-title">
         <div className="conf-wrap">
           <h2 id="mend-title" className="conf-h2">MEND 2026 — Outstanding Clinical Award</h2>
@@ -202,7 +251,7 @@ export default function ConferencesPage() {
           </p>
           <div className="conf-grid conf-grid-mend">
             {MEND_2026.map((p) => (
-              <PhotoFigure key={p.src} {...p} ratio="16 / 10" />
+              <PhotoFigure key={p.src} {...p} ratio="16 / 10" fit="contain" />
             ))}
           </div>
         </div>
