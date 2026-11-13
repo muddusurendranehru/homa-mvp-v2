@@ -143,6 +143,17 @@ const CARDS: TrustCard[] = [
     fit: 'cover',
     pos: 'center 20%',
   },
+  {
+    title: 'Invited Speaker, Diabetes Scientific Programme (12 Nov 2026)',
+    badge: 'PEER RECOGNITION',
+    kind: 'peer',
+    image: '/images/dr-nehru-lada-mody-talk-2026.webp',
+    alt: 'Dr Muddu Surendra Nehru beside the 12 Nov 2026 programme board showing his LADA and MODY talk.',
+    caption:
+      '"When the Diabetes Label Doesn\'t Fit: Recognising LADA and MODY", Dr Muddu Surendra Nehru, M.D.',
+    fit: 'cover',
+    pos: 'center top',
+  },
 ];
 
 const TRUST_BAR = [
