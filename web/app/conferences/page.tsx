@@ -20,6 +20,12 @@ const MNR_DIABETES_2026 = [
     ratio: "675 / 1200",
   },
   {
+    src: "/images/conferences/mnr-diabetes-2026/mnr-diabetes-2026-memento.webp",
+    alt: "Dr Muddu Surendra Nehru, M.D., receiving a memento at MNR Diabetes 2026",
+    caption: "Dr Muddu Surendra Nehru, M.D., receiving a memento at MNR Diabetes 2026",
+    ratio: "631 / 1200",
+  },
+  {
     src: "/images/conferences/mnr-diabetes-2026/mnr-diabetes-2026-with-dr-naik-dr-dhir.webp",
     alt: "With Dr Basavaraj Naik, Professor of Medicine, and Dr Rakesh Dhir, HOD and Professor of Medicine, MNR Medical College",
     caption:
