@@ -214,10 +214,10 @@ export default function WhyHomaVideos() {
       <div className="wh-wrap">
         <div className="wh-eyebrow">WHY HOMA?</div>
         <h2 id="why-homa-videos-title" className="wh-h2">
-          Real moments. Real care.
+          Wake Up India. Take Health Into Your Hands.
         </h2>
         <p className="wh-intro">
-          Short stories from Hyderabad — tap to play. No signup, loads only when you choose.
+          Empowering the wealth of healthy, ethical medical knowledge. Tap to play — no signup, loads only when you choose.
         </p>
 
         <div className={`wh-carousel ${allSlidesVisible ? "wh-carousel--fit" : ""}`}>
