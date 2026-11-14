@@ -4,17 +4,17 @@ import Image from "next/image";
 import SectionCta from "@/components/SectionCta";
 
 const OLD_BULLETS = [
-  "One-page printed handout",
-  "No lab phenotyping",
-  "No biomarker tracking",
-  "Same diet for everyone",
+  "One-size-fits-all ‘Diabetes Upma’ posters",
+  "No lab phenotyping or sub-typing",
+  "Same advice for every patient, regardless of pancreatitis, sarcopenia or kidney health",
+  "No tracking, no adherence",
 ];
 
 const HOMA_BULLETS = [
-  "3-layer integration: IT + AI + Human",
-  "Lab phenotyping (HOMA-IR, TyG)",
-  "30-day dynamic plan",
-  "24x7 dietitian-in-pocket",
+  "Customised meals based on exact sub-types (e.g. Subtype 15B, Subtype 22B)",
+  "Lab-driven macro targets (e.g. strict fat limits for pancreatitis, higher protein for sarcopenia)",
+  "A dynamic 30-day plan on your phone",
+  "Real-time tracking and HOMA Coins for adherence",
 ];
 
 const REAL_EXAMPLES = [
@@ -36,12 +36,15 @@ export default function OldVsNewModel() {
       <style>{OVN_CSS}</style>
       <div className="ovn-wrap">
         <h2 id="ovn-headline" className="ovn-headline">
-          India doesn&apos;t have a diabetes knowledge problem. It has a delivery problem.
+          Where is the personalization? Nowhere but HOMA.
         </h2>
+        <p className="ovn-deck">
+          India doesn&apos;t have a diabetes knowledge problem. It has a delivery problem.
+        </p>
         <p className="ovn-subtitle">Generic Guidelines vs. HOMA Precision Medicine.</p>
         <div className="ovn-grid">
           <article className="ovn-card ovn-card--old">
-            <h3 className="ovn-card-title">The Old Model</h3>
+            <h3 className="ovn-card-title">The Old Model: Generic Posters</h3>
             <ul className="ovn-list">
               {OLD_BULLETS.map((item) => (
                 <li key={item}>{item}</li>
@@ -52,7 +55,7 @@ export default function OldVsNewModel() {
             </div>
           </article>
           <article className="ovn-card ovn-card--new">
-            <h3 className="ovn-card-title">The HOMA Model</h3>
+            <h3 className="ovn-card-title">The HOMA Model: Precision Sub-Typing</h3>
             <ul className="ovn-list">
               {HOMA_BULLETS.map((item) => (
                 <li key={item}>{item}</li>
@@ -88,7 +91,7 @@ export default function OldVsNewModel() {
             </div>
           </article>
         </div>
-        <p className="ovn-strip">From a paper slip to a 365-degree metabolic system.</p>
+        <p className="ovn-strip">From generic posters to a 365-degree personalized metabolic system.</p>
         <SectionCta knowMoreHref="/diet-plan" />
       </div>
     </section>
@@ -101,7 +104,11 @@ const OVN_CSS = `
 .ovn-wrap{max-width:960px;margin:0 auto}
 .ovn-headline{
   font-size:clamp(26px,4.2vw,38px);line-height:1.2;font-weight:800;
-  letter-spacing:-.02em;text-align:center;color:#0f172a;margin:0 0 12px
+  letter-spacing:-.02em;text-align:center;color:#0f172a;margin:0 0 10px
+}
+.ovn-deck{
+  text-align:center;font-size:clamp(15px,2.2vw,17px);font-weight:600;line-height:1.5;
+  color:#64748b;margin:0 auto 12px;max-width:640px
 }
 .ovn-subtitle{
   text-align:center;font-size:clamp(17px,2.5vw,20px);font-weight:700;color:#1e3a8a;
