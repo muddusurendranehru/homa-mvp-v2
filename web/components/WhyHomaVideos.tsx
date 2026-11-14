@@ -132,9 +132,11 @@ export default function WhyHomaVideos() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [allSlidesVisible, setAllSlidesVisible] = useState(true);
+  /** Avoid pager / aria-hidden markup until after hydration (layout-dependent). */
+  const [carouselReady, setCarouselReady] = useState(false);
 
   const count = WHY_HOMA_SHORTS.length;
-  const showPager = count > 1 && !allSlidesVisible;
+  const showPager = carouselReady && count > 1 && !allSlidesVisible;
 
   const stopPlayback = useCallback(() => setPlayingId(null), []);
 
@@ -161,6 +163,11 @@ export default function WhyHomaVideos() {
   }, []);
 
   useEffect(() => {
+    setCarouselReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!carouselReady) return;
     const track = trackRef.current;
     if (!track) return;
 
@@ -179,7 +186,7 @@ export default function WhyHomaVideos() {
       track.removeEventListener("scroll", onScroll);
       ro.disconnect();
     };
-  }, [updateFitAndIndex, stopPlayback, count]);
+  }, [carouselReady, updateFitAndIndex, stopPlayback, count]);
 
   const scrollToIndex = (index: number) => {
     stopPlayback();
@@ -222,7 +229,7 @@ export default function WhyHomaVideos() {
           Empowering the wealth of healthy, ethical medical knowledge. Tap to play — no signup, loads only when you choose.
         </p>
 
-        <div className={`wh-carousel ${allSlidesVisible ? "wh-carousel--fit" : ""}`}>
+        <div className={`wh-carousel ${!carouselReady || allSlidesVisible ? "wh-carousel--fit" : ""}`}>
           {showPager ? (
             <button
               type="button"

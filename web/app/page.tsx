@@ -501,7 +501,10 @@ export default function HomePage() {
                 padding: "10px 20px",
                 minWidth: "72px",
               }}>
-                <span style={{ color: "#ffffff", fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 700, lineHeight: 1 }}>
+                <span
+                  suppressHydrationWarning
+                  style={{ color: "#ffffff", fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 700, lineHeight: 1 }}
+                >
                   {val}
                 </span>
               </div>
@@ -522,7 +525,9 @@ export default function HomePage() {
           borderRadius: "20px",
           marginBottom: "24px",
         }}>
-          {countdown.started ? "🟢 Webinar is LIVE now!" : "⚡ Limited seats — Register free"}
+          <span suppressHydrationWarning>
+            {countdown.started ? "🟢 Webinar is LIVE now!" : "⚡ Limited seats — Register free"}
+          </span>
         </p>
 
         {/* Buttons */}
