@@ -3,7 +3,7 @@ import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 const TRIBES = [
   {
     name: "Diabetes Gladiators Hyd1",
-    cat: "Type 2 Diabetes Reversal",
+    cat: "Type 2 Diabetes Remission",
     desc: "HbA1c goals, HOMA-IR tracking, weekly wins.",
     img: "/images/tribes/diabetes-gladiators.jpg",
     accent: "#4ade80",

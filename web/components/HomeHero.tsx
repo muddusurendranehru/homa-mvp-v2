@@ -66,10 +66,10 @@ export default function HomeHero() {
       <div className="hh-inner">
         <div className="hh-copy">
           <h1 className="hh-h1">
-            Reverse Diabetes at the Root. Doctor-Led. Data-Driven.
+            Diabetes Remission at the Root. Doctor-Led. Data-Driven.
           </h1>
           <p className="hh-sub">
-            Stop managing symptoms and start reversing metabolic disease with HOMA&apos;s precision sub-typing system.
+            Stop managing symptoms — work towards metabolic remission with HOMA&apos;s precision sub-typing system.
           </p>
           <div className="hh-ctas">
             <a href="/remission-program" className="hh-btn hh-primary">

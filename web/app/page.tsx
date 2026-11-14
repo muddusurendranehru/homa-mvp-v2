@@ -7,10 +7,10 @@ const HOME_FAQ_LD = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What does doctor-led diabetes reversal at the root cause mean?",
+      name: "What does doctor-led diabetes remission at the root cause mean?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "HOMA focuses on reversing metabolic disease at the root with precision sub-typing and doctor-led care, rather than only managing symptoms on the surface.",
+        text: "HOMA focuses on working towards metabolic remission at the root with precision sub-typing and doctor-led care, rather than only managing symptoms on the surface.",
       },
     },
     {
@@ -65,11 +65,11 @@ const HOME_FAQ_LD = {
 } as const;
 
 export const metadata: Metadata = {
-  title: "Diabetes Reversal Program Hyderabad | Dr. Muddu Surendra Nehru MD | HOMA",
+  title: "Diabetes Remission Program Hyderabad | Dr. Muddu Surendra Nehru MD | HOMA",
   description:
-    "HOMA Healthcare Center offers a doctor-led diabetes reversal program in Hyderabad focused on the root cause of diabetes and metabolic health. Free HOMA-IR calculator online, precision sub-typing, and a structured 90-day metabolic reset with personalised Indian diet plans.",
+    "HOMA Healthcare Center offers a doctor-led diabetes remission program in Hyderabad focused on the root cause of diabetes and metabolic health. Free HOMA-IR calculator online, precision sub-typing, and a structured 90-day metabolic reset with personalised Indian diet plans.",
   keywords: [
-    "diabetes reversal program",
+    "diabetes remission program",
     "root cause of diabetes",
     "best diabetologist Hyderabad",
     "metabolic health clinic",
@@ -79,8 +79,9 @@ export const metadata: Metadata = {
     "LADA vs Type 2",
     "MODY diabetes treatment",
     "personalized diet plan for Indians",
-    "90-day diabetes reversal program",
+    "90-day diabetes remission program",
     "diabetes support group India",
+    "diabetes reversal program",
   ],
 };
 

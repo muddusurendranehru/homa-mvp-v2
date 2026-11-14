@@ -51,7 +51,7 @@ export default function HomaProgramSection() {
         }}
       >
         <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", marginBottom: "20px" }}>
-          90-Day Reversal Program
+          90-Day Metabolic Remission Program
         </div>
         <div
           style={{
