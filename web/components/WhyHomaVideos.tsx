@@ -337,7 +337,7 @@ export default function WhyHomaVideos() {
           knowMoreHref="/books"
           book={{
             title: "BP: The Untold Truth",
-            coverSrc: "/images/home-sections/book-bp-untold-truth.webp",
+            coverSrc: "/images/books/book-bp-untold-truth.webp",
           }}
         />
       </div>

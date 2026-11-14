@@ -13,6 +13,38 @@ import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
 import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
+
+function bookWhatsAppHref(title: string) {
+  return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
+}
+
+const BOOKS_STRIP = [
+  {
+    title: "BP: The Untold Truth",
+    cover: "/images/books/book-bp-untold-truth.webp",
+    href: "/books",
+    external: false,
+  },
+  {
+    title: "The HOMA GLP-1 Prescribing Guide",
+    cover: "/images/glp1-book.jpg",
+    href: "/books",
+    external: false,
+  },
+  {
+    title: "Bedside Cardiology Mastered",
+    cover: "/images/books/book-bedside-cardiology.webp",
+    href: bookWhatsAppHref("Bedside Cardiology Mastered"),
+    external: true,
+  },
+  {
+    title: "Your Kidneys Are Not Silent",
+    cover: "/images/books/book-kidneys-not-silent.webp",
+    href: bookWhatsAppHref("Your Kidneys Are Not Silent"),
+    external: true,
+  },
+] as const;
+
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -1210,53 +1242,70 @@ export default function HomePage() {
           <div
             style={{
               display: "flex",
-              gap: "28px",
+              gap: "20px 24px",
               justifyContent: "center",
               alignItems: "flex-start",
               flexWrap: "wrap",
               marginBottom: "22px",
+              maxWidth: "720px",
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
-            <a href="/books" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
-              <img
-                src="/images/bp-book.jpg"
-                alt="BP: The Untold Truth book cover"
-                style={{
-                  width: "100%",
-                  maxWidth: "140px",
-                  aspectRatio: "2 / 3",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                  border: "2px solid #F5A623",
-                  boxShadow: "0 4px 14px rgba(13,59,94,0.18)",
-                  display: "block",
-                  margin: "0 auto 10px",
-                }}
-              />
-              <div style={{ fontSize: "14px", fontWeight: 700, color: "#0D3B5E", lineHeight: 1.35 }}>
-                BP: The Untold Truth
-              </div>
-            </a>
-            <a href="/books" style={{ textDecoration: "none", color: "inherit", maxWidth: "160px", width: "100%" }}>
-              <img
-                src="/images/glp1-book.jpg"
-                alt="The HOMA GLP-1 Prescribing Guide book cover"
-                style={{
-                  width: "100%",
-                  maxWidth: "140px",
-                  aspectRatio: "2 / 3",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                  border: "2px solid #F5A623",
-                  boxShadow: "0 4px 14px rgba(13,59,94,0.18)",
-                  display: "block",
-                  margin: "0 auto 10px",
-                }}
-              />
-              <div style={{ fontSize: "14px", fontWeight: 700, color: "#0D3B5E", lineHeight: 1.35 }}>
-                The HOMA GLP-1 Prescribing Guide
-              </div>
-            </a>
+            {BOOKS_STRIP.map((book) => {
+              const cardStyle = {
+                textDecoration: "none" as const,
+                color: "inherit" as const,
+                flex: "1 1 calc(50% - 12px)",
+                maxWidth: "160px",
+                minWidth: "130px",
+              };
+              const imgStyle = {
+                width: "100%",
+                maxWidth: "140px",
+                aspectRatio: "2 / 3",
+                objectFit: "cover" as const,
+                borderRadius: "8px",
+                border: "2px solid #F5A623",
+                boxShadow: "0 4px 14px rgba(13,59,94,0.18)",
+                display: "block",
+                margin: "0 auto 10px",
+              };
+              const titleStyle = {
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "#0D3B5E",
+                lineHeight: 1.35,
+              };
+              const inner = (
+                <>
+                  <img
+                    src={book.cover}
+                    alt={`${book.title} book cover`}
+                    width={140}
+                    height={210}
+                    loading="lazy"
+                    style={imgStyle}
+                  />
+                  <div style={titleStyle}>{book.title}</div>
+                </>
+              );
+              return book.external ? (
+                <a
+                  key={book.title}
+                  href={book.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={cardStyle}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <Link key={book.title} href={book.href} style={cardStyle}>
+                  {inner}
+                </Link>
+              );
+            })}
           </div>
           <Link
             href="/books"

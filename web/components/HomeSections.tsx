@@ -127,7 +127,7 @@ export function FreeHealthTools() {
           primaryConsult
           book={{
             title: "Your Kidneys Are Not Silent",
-            coverSrc: "/images/home-sections/book-kidneys-are-not-silent.webp",
+            coverSrc: "/images/books/book-kidneys-not-silent.webp",
           }}
         />
       </div>
@@ -257,7 +257,7 @@ export function HowItWorks() {
             knowMoreHref="/how-it-works"
             book={{
               title: "Bedside Cardiology Mastered",
-              coverSrc: "/images/home-sections/book-bedside-cardiology-mastered.webp",
+              coverSrc: "/images/books/book-bedside-cardiology.webp",
             }}
           />
           <div className="hs-how-cta">
