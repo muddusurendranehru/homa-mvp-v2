@@ -12,6 +12,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SectionCta from "@/components/SectionCta";
 
 const WA = "https://wa.me/919963721999";
 
@@ -79,6 +80,17 @@ export function FreeHealthTools() {
             </a>
           ))}
         </div>
+        <figure className="hs-waist-support">
+          <Image
+            src="/images/home-sections/waist-measurement-real.webp"
+            alt="Waist measurement — a simple check for belly-fat risk"
+            width={320}
+            height={240}
+            className="hs-waist-support-img"
+            loading="lazy"
+          />
+          <figcaption>Waist measurement — a simple check for belly-fat risk</figcaption>
+        </figure>
         <div className="hs-tools-cta">
           <a
             className="hs-btn hs-btn-primary"
@@ -90,6 +102,13 @@ export function FreeHealthTools() {
           </a>
           <span className="hs-tools-cta-note">WhatsApp us — we guide the next step</span>
         </div>
+        <SectionCta
+          knowMoreHref="/tools"
+          book={{
+            title: "Your Kidneys Are Not Silent",
+            coverSrc: "/images/home-sections/book-kidneys-are-not-silent.webp",
+          }}
+        />
       </div>
     </section>
   );
@@ -214,29 +233,39 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-        <div className="hs-how-cta">
-          <Link href="/how-it-works" className="hs-btn hs-btn-ghost">
-            Learn more →
-          </Link>
-          <Link href="/packages" className="hs-btn hs-btn-ghost">
-            Packages &amp; plans
-          </Link>
-          <a
-            href={WA_INTERESTED}
-            className="hs-btn hs-btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            I&apos;m interested — WhatsApp
-          </a>
-          <a
-            href={WA_INDUSTRY}
-            className="hs-btn hs-btn-ghost"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Industry &amp; investors
-          </a>
+        <div className="hs-how-cta-wrap">
+          <SectionCta
+            bookOnly
+            knowMoreHref="/how-it-works"
+            book={{
+              title: "Bedside Cardiology Mastered",
+              coverSrc: "/images/home-sections/book-bedside-cardiology-mastered.webp",
+            }}
+          />
+          <div className="hs-how-cta">
+            <Link href="/how-it-works" className="hs-btn hs-btn-ghost">
+              Learn more →
+            </Link>
+            <Link href="/packages" className="hs-btn hs-btn-ghost">
+              Packages &amp; plans
+            </Link>
+            <a
+              href={WA_INTERESTED}
+              className="hs-btn hs-btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              I&apos;m interested — WhatsApp
+            </a>
+            <a
+              href={WA_INDUSTRY}
+              className="hs-btn hs-btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Industry &amp; investors
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -464,6 +493,9 @@ const CSS = `
 .hs-step-n{width:40px;height:40px;border-radius:999px;background:#0f172a;color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .hs-step-t{font-weight:700;font-size:16px;margin-bottom:6px;color:#0f172a}
 .hs-step-d{color:#64748b;font-size:14px;line-height:1.55}
+.hs-waist-support{margin:28px auto 0;max-width:320px;text-align:center}
+.hs-waist-support-img{width:100%;height:auto;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 8px 22px -10px rgba(15,23,42,.15)}
+.hs-waist-support figcaption{margin-top:10px;font-size:13px;line-height:1.45;color:#64748b}
 .hs-how-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
 
 /* gallery (sub-pages) */

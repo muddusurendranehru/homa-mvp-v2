@@ -5,6 +5,7 @@ import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import { FreeHealthTools, SilentWarning, HowItWorks, AboutDrMuddu, HomeFadeIn } from "@/components/HomeSections";
 import WhyHomaVideos from "@/components/WhyHomaVideos";
+import OldVsNewModel from "@/components/OldVsNewModel";
 import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
@@ -129,6 +130,7 @@ export default function HomePage() {
       <HomeHero />
       <FreeHealthTools />
       <WhyHomaVideos />
+      <OldVsNewModel />
       <HowItWorks />
       <FreeScreeningCamps />
       <MendTrustAward />

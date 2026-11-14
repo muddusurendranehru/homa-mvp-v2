@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
+import SectionCta from "@/components/SectionCta";
 import {
   useCallback,
   useEffect,
@@ -291,6 +293,53 @@ export default function WhyHomaVideos() {
             ))}
           </div>
         ) : null}
+
+        <div className="wh-photos">
+          <figure className="wh-photo">
+            <Image
+              src="/images/home-sections/lions-club-talk-panel.webp"
+              alt="Dr Muddu Surendra Nehru, M.D., speaking on diabetes, obesity and heart health at Lions Club, Hyderabad"
+              width={320}
+              height={240}
+              className="wh-photo-img"
+              loading="lazy"
+            />
+          </figure>
+          <figure className="wh-photo">
+            <Image
+              src="/images/home-sections/lions-club-talk-audience.webp"
+              alt="Dr Muddu Surendra Nehru, M.D., speaking on diabetes, obesity and heart health at Lions Club, Hyderabad"
+              width={320}
+              height={240}
+              className="wh-photo-img"
+              loading="lazy"
+            />
+          </figure>
+          <figure className="wh-photo wh-photo--with-cap">
+            <Image
+              src="/images/home-sections/lions-club-felicitation.webp"
+              alt="Dr Muddu Surendra Nehru, M.D., felicitated after his guest lecture on central obesity and HOMA-IR, Lions Club, Hyderabad"
+              width={320}
+              height={240}
+              className="wh-photo-img"
+              loading="lazy"
+            />
+            <figcaption className="wh-photo-figcap">
+              Dr Muddu Surendra Nehru, M.D., felicitated after his guest lecture on central obesity and HOMA-IR, Lions Club, Hyderabad
+            </figcaption>
+          </figure>
+          <p className="wh-photo-cap">
+            Dr Muddu Surendra Nehru, M.D., speaking on diabetes, obesity and heart health at Lions Club, Hyderabad
+          </p>
+        </div>
+
+        <SectionCta
+          knowMoreHref="/books"
+          book={{
+            title: "BP: The Untold Truth",
+            coverSrc: "/images/home-sections/book-bp-untold-truth.webp",
+          }}
+        />
       </div>
     </section>
   );
@@ -357,4 +406,11 @@ const WH_CSS = `
 .wh-dot{width:8px;height:8px;border-radius:999px;border:none;padding:0;background:#cbd5e1;cursor:pointer}
 .wh-dot--on{background:#10b981;transform:scale(1.15)}
 .wh-dot:focus-visible{outline:2px solid #10b981;outline-offset:2px}
+
+.wh-photos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:36px;max-width:980px;margin-left:auto;margin-right:auto}
+.wh-photo{margin:0;flex:1 1 140px;max-width:320px}
+.wh-photo--with-cap{flex:1 1 180px;max-width:320px;display:flex;flex-direction:column}
+.wh-photo-img{width:100%;height:auto;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 8px 20px -10px rgba(15,23,42,.15)}
+.wh-photo-figcap{margin-top:8px;font-size:12px;line-height:1.45;color:#64748b;text-align:center}
+.wh-photo-cap{flex:1 1 100%;margin:8px 0 0;text-align:center;font-size:13px;line-height:1.5;color:#64748b}
 `;
