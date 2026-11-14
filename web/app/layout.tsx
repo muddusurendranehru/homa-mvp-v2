@@ -11,6 +11,11 @@ import HeaderAuth from '@/components/HeaderAuth'
 import MainHeaderLinks from '@/components/MainHeaderLinks'
 import OnboardingDemo from '@/components/OnboardingDemo'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
+import SiteFooterNav from '@/components/SiteFooterNav'
+import {
+  BookConsultationHeaderLink,
+  BookConsultationMobileBar,
+} from '@/components/BookConsultationSticky'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -300,6 +305,7 @@ export default function RootLayout({
                 </span>
               </Link>
               <MainHeaderLinks />
+              <BookConsultationHeaderLink />
               <div className="relative z-[1002] shrink-0">
                 <HeaderAuth variant="pill" />
               </div>
@@ -307,7 +313,7 @@ export default function RootLayout({
           </header>
 
           {/* Main Content */}
-          <main className="min-h-screen">
+          <main className="min-h-screen pb-[76px] md:pb-0">
             {children}
           </main>
 
@@ -706,7 +712,7 @@ export default function RootLayout({
                   className="w-16 h-16 mx-auto mb-4"
                   loading="lazy"
                 />
-                <p className="text-sm mb-4">Help 500K+ patients achieve 85% remission</p>
+                <p className="text-sm mb-4">Help more patients reverse diabetes — the HOMA way.</p>
                 <a
                   href="https://wa.me/919963721999?text=I want to DONATE"
                   target="_blank"
@@ -715,38 +721,6 @@ export default function RootLayout({
                 >
                   Donate Now (UPI)
                 </a>
-              </div>
-
-              {/* Quick Links - Moved DOWN (after GIVE/DONATE section) */}
-              <div className="mt-8 mb-6">
-                <h3 className="text-lg font-bold text-teal-400 mb-4 text-center">Quick Links</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 text-sm">
-                  <Link href="/" className="text-gray-300 hover:text-white transition-colors text-center py-2">🏠 Home</Link>
-                  <Link href="/tools" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">📊 Calculators</Link>
-                  <Link href="/labs" className="text-gray-300 hover:text-teal-400 transition-colors text-center py-2">🧪 Labs</Link>
-                  <Link href="/pharmacy" className="text-gray-300 hover:text-teal-400 transition-colors text-center py-2">💊 Pharmacy</Link>
-                  <Link href="/emergency" className="text-gray-300 hover:text-red-400 transition-colors text-center py-2">🚨 Emergency</Link>
-                  <Link href="/tools/metabolic-analyzer.html" target="_blank" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">Metabolic Analyzer</Link>
-                  <Link href="/conditions" className="text-gray-300 hover:text-purple-400 transition-colors text-center py-2">🩺 Conditions</Link>
-                  <Link href="/auth" className="text-gray-300 hover:text-white transition-colors text-center py-2">🔐 Login</Link>
-                  <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors text-center py-2">📊 Dashboard</Link>
-                  <Link href="/remission-program" className="text-gray-300 hover:text-white transition-colors text-center py-2">🎯 Program</Link>
-                  <Link href="/testimonials" className="text-gray-300 hover:text-yellow-400 transition-colors text-center py-2">🏆 Stories</Link>
-                  <Link href="/upgrade" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">💎 Premium</Link>
-                  <Link href="/enroll" className="text-gray-300 hover:text-yellow-400 transition-colors text-center py-2">🎯 Enroll</Link>
-                  <Link href="/ddd" className="text-gray-300 hover:text-teal-400 transition-colors text-center py-2">🩸 D·D·D</Link>
-                  <Link href="/products" className="text-gray-300 hover:text-cyan-400 transition-colors text-center py-2">📱 Apps</Link>
-                  <Link href="/packages" className="text-gray-300 hover:text-amber-400 transition-colors text-center py-2">💰 Packages</Link>
-                  <Link href="/portfolio" className="text-gray-300 hover:text-indigo-400 transition-colors text-center py-2">👤 Portfolio</Link>
-                  <Link href="/pricing" className="text-gray-300 hover:text-amber-300 transition-colors text-center py-2">💳 Pricing</Link>
-                  <Link href="/zoom" className="text-gray-300 hover:text-purple-400 transition-colors text-center py-2">📹 Zoom</Link>
-                  <Link href="/gallery" className="text-gray-300 hover:text-purple-400 transition-colors text-center py-2">📸 Gallery</Link>
-                  <Link href="/blog" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">📝 Blog</Link>
-                  <Link href="/press" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">Press</Link>
-                  <a href="https://feature-step-1-structure-97dp.onrender.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">Partner Login</a>
-                  <Link href="/disclaimer" className="text-gray-300 hover:text-red-400 transition-colors text-center py-2">⚖️ Legal</Link>
-                  <Link href="/security-policy" className="text-gray-300 hover:text-green-400 transition-colors text-center py-2">🔒 Security</Link>
-                </div>
               </div>
 
               {/* PAYMENTS Section - Commented out for now, can add Swift/Visa later */}
@@ -767,8 +741,10 @@ export default function RootLayout({
               </div>
               */}
 
+              <SiteFooterNav />
+
               {/* Bottom Bar - SEO Internal Links */}
-              <div className="border-t border-gray-700 mt-4 pt-4 text-center">
+              <div className="mt-4 pt-4 text-center">
                 {/* SEO Internal Links */}
                 <div className="flex flex-wrap justify-center gap-4 mb-4 text-sm">
                   <Link href="/assessment" className="text-gray-300 hover:text-white transition-colors">
@@ -909,9 +885,7 @@ export default function RootLayout({
             </p>
           </div>
 
-          {/* Welcome Bot */}
-
-          {/* Floating CHECK FREE badge removed (Oct 2026) — free tools are linked from the navbar and homepage */}
+          <BookConsultationMobileBar />
         </AuthProvider>
         </ClerkProvider>
       </body>

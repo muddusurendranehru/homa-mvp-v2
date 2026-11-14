@@ -12,6 +12,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SectionCta from "@/components/SectionCta";
 
 const WA = "https://wa.me/919963721999";
 
@@ -19,37 +20,61 @@ const WA = "https://wa.me/919963721999";
 const TOOLS = [
   {
     img: "/images/tools/diabetes-home-check.jpg",
-    title: "Free Diabetes Check",
-    sub: "Am I at high risk for diabetes?",
+    title: "Free Diabetes Remission Check",
+    sub: "Calculate your HOMA-IR & fasting insulin to find your diabetes sub-type in 30 seconds.",
     hook: "From your lab report — at home, 30 seconds",
+    btn: "Start Free Check →",
     href: "/tools/homa-ir-calculator",
     fg: "#059669",
   },
   {
+    img: "/images/books/book-bp-untold-truth.webp",
+    title: "Check Hidden BP Risk",
+    sub: "High BP is silent. Find out if your blood pressure is damaging your heart and kidneys — without a hospital visit.",
+    hook: "BP: The Untold Truth — doctor-written guide",
+    btn: "Check BP Risk →",
+    href: "/books",
+    fg: "#1e40af",
+  },
+  {
     img: "/images/tools/prediabetes-waist.jpg",
-    title: "Prediabetes From Home",
-    sub: "Waist check — no hospital visit",
-    hook: "Tired of waiting rooms? Tape measure + 30 seconds",
+    title: "Catch Prediabetes Early From Home",
+    sub: "Catch early warning signs without a blood test. Using just a measuring tape, check if your belly fat puts you at risk.",
+    hook: "Waist check — no hospital visit",
+    btn: "Check Prediabetes →",
     href: "/tools/waist-circumference",
     fg: "#ea580c",
   },
   {
     img: "/images/tools/heart-risk-check.jpg",
-    title: "Diabetes + Heart Risk",
-    sub: "Know your risk before a heart attack",
+    title: "Heart Attack Risk Snapshot",
+    sub: "Enter your last lipid profile to calculate your TyG index and see your heart risk.",
     hook: "Fasting labs you already have — check from home",
+    btn: "Assess Heart Risk →",
     href: "/tools/tyg-index-calculator",
     fg: "#7c3aed",
   },
   {
     img: "/images/tools/heart-attack-risk.jpg",
-    title: "Heart Risk Snapshot",
-    sub: "Afraid to visit the hospital?",
-    hook: "Quick organ & heart risk quiz — private, free",
+    title: "Organ Age & Metabolic Quiz",
+    sub: "Answer a few quick questions about your lifestyle to discover your biological organ age and hidden risks.",
+    hook: "Scrolls to the organ-age check on this page",
+    btn: "Take the Quiz →",
     href: "#organ-age",
     fg: "#dc2626",
   },
 ];
+
+/** Waist-check photo strip — append filenames under home-sections/ */
+const WAIST_CHECK_PHOTOS = [
+  '/images/home-sections/waist-1.webp',
+  '/images/home-sections/waist-2.webp',
+  '/images/home-sections/waist-3.webp',
+  '/images/home-sections/waist-4.webp',
+  '/images/home-sections/waist-5.webp',
+] as const;
+
+const WAIST_PHOTO_ALT = 'Waist circumference measured with a tape (identity blurred)';
 
 export function FreeHealthTools() {
   return (
@@ -57,10 +82,10 @@ export function FreeHealthTools() {
       <div className="hs-wrap">
         <div className="hs-eyebrow">FREE ONLINE CHECKS · ABOUT 30 SECONDS EACH</div>
         <h2 id="free-tools-title" className="hs-h2">
-          ZERO Waiting Time for Doctor Visit at Hospital — Health Journey Starts at Home
+          Check Your Metabolic Risk in 30 Seconds (Free)
         </h2>
         <p className="hs-sub">
-          Heart attack risk from home too — no hospital wait. Know if you are at high risk for diabetes, prediabetes, or heart disease in about 30 seconds each.
+          No hospital wait. Check your risk for diabetes, prediabetes and heart disease using our doctor-designed calculators, including the HOMA-IR calculator.
         </p>
         <div className="hs-tools">
           {TOOLS.map((t) => (
@@ -74,10 +99,30 @@ export function FreeHealthTools() {
               <span className="hs-tool-s">{t.sub}</span>
               <span className="hs-tool-hook">{t.hook}</span>
               <span className="hs-tool-go" style={{ color: t.fg }}>
-                Start {'→'}
+                {t.btn}
               </span>
             </a>
           ))}
+        </div>
+        <div className="hs-waist-strip-wrap">
+          <p className="hs-waist-slogan">Look early. Look where. Look at your waist.</p>
+          <p className="hs-waist-deck">
+            Waist circumference (WC) — the simplest early sign of metabolic risk. 30 seconds with a tape.
+          </p>
+          <div className="hs-waist-strip" role="group" aria-label="Waist check">
+            {WAIST_CHECK_PHOTOS.map((src) => (
+              <div key={src} className="hs-waist-card">
+                <Image
+                  src={src}
+                  alt={WAIST_PHOTO_ALT}
+                  width={160}
+                  height={213}
+                  className="hs-waist-card-img"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
         <div className="hs-tools-cta">
           <a
@@ -90,6 +135,14 @@ export function FreeHealthTools() {
           </a>
           <span className="hs-tools-cta-note">WhatsApp us — we guide the next step</span>
         </div>
+        <SectionCta
+          knowMoreHref="/tools"
+          primaryConsult
+          book={{
+            title: "Your Kidneys Are Not Silent",
+            coverSrc: "/images/books/book-kidneys-not-silent.webp",
+          }}
+        />
       </div>
     </section>
   );
@@ -178,20 +231,19 @@ const STEPS: Step[] = [
 
 const WA_INTERESTED =
   "https://wa.me/919963721999?text=I%20AM%20INTERESTED%20IN%20HOMA";
-const WA_INDUSTRY =
-  "https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA";
-
 export function HowItWorks() {
   return (
     <section id="how-it-works" className="hs-sec hs-slate" aria-labelledby="how-title">
       <div className="hs-wrap">
         <div className="hs-eyebrow">HOW IT WORKS</div>
         <h2 id="how-title" className="hs-h2">
-          Get Hands-On: Learn, Teach and Propagate the HOMA Muddu&apos;s Methods
+          Your Journey: From Lab to Life (Step-by-Step)
         </h2>
         <p className="hs-sub">
-          Diabetology, cardio-obesity and diabetes medicine — join the path-breaking journey. Doctor-led.
-          Science-backed.
+          1. Free risk check → 2. Deep lab phenotyping → 3. Diet plan &amp; tracker access → 4. Daily follow-up.
+        </p>
+        <p className="hs-sub">
+          Get Hands-On: Learn, Teach and Propagate the HOMA Muddu&apos;s Methods
         </p>
         <ol className="hs-steps">
           {STEPS.map((s) => (
@@ -214,29 +266,31 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-        <div className="hs-how-cta">
-          <Link href="/how-it-works" className="hs-btn hs-btn-ghost">
-            Learn more →
-          </Link>
-          <Link href="/packages" className="hs-btn hs-btn-ghost">
-            Packages &amp; plans
-          </Link>
-          <a
-            href={WA_INTERESTED}
-            className="hs-btn hs-btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            I&apos;m interested — WhatsApp
-          </a>
-          <a
-            href={WA_INDUSTRY}
-            className="hs-btn hs-btn-ghost"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Industry &amp; investors
-          </a>
+        <div className="hs-how-cta-wrap">
+          <SectionCta
+            bookOnly
+            knowMoreHref="/how-it-works"
+            book={{
+              title: "Bedside Cardiology Mastered",
+              coverSrc: "/images/books/book-bedside-cardiology.webp",
+            }}
+          />
+          <div className="hs-how-cta">
+            <Link href="/how-it-works" className="hs-btn hs-btn-ghost">
+              Learn more →
+            </Link>
+            <Link href="/packages" className="hs-btn hs-btn-ghost">
+              Packages &amp; plans
+            </Link>
+            <a
+              href={WA_INTERESTED}
+              className="hs-btn hs-btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              I&apos;m interested — WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -426,7 +480,8 @@ const CSS = `
 
 /* tools */
 .hs-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-@media (min-width:900px){.hs-tools{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
+@media (min-width:640px){.hs-tools{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
+@media (min-width:1100px){.hs-tools{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}}
 .hs-tool{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px;min-height:0;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s,border-color .2s}
 .hs-tool:hover{border-color:#cbd5e1;box-shadow:0 12px 28px -14px rgba(15,23,42,.22);transform:translateY(-2px)}
 .hs-tool-thumb{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#f1f5f9}
@@ -464,6 +519,16 @@ const CSS = `
 .hs-step-n{width:40px;height:40px;border-radius:999px;background:#0f172a;color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .hs-step-t{font-weight:700;font-size:16px;margin-bottom:6px;color:#0f172a}
 .hs-step-d{color:#64748b;font-size:14px;line-height:1.55}
+.hs-waist-strip-wrap{margin:28px auto 0;max-width:100%;text-align:center}
+.hs-waist-slogan{margin:0 0 8px;font-size:clamp(16px,2.5vw,18px);font-weight:800;color:#0f172a;line-height:1.35}
+.hs-waist-deck{margin:0 0 16px;font-size:13px;line-height:1.5;color:#64748b;max-width:520px;margin-left:auto;margin-right:auto}
+.hs-waist-strip{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
+.hs-waist-card{
+  flex:0 0 auto;width:140px;aspect-ratio:3/4;border-radius:12px;overflow:hidden;
+  border:1px solid #e2e8f0;background:#f1f5f9;box-shadow:0 6px 16px -8px rgba(15,23,42,.12)
+}
+@media (min-width:768px){.hs-waist-card{width:160px}}
+.hs-waist-card-img{width:100%;height:100%;object-fit:cover;display:block}
 .hs-how-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
 
 /* gallery (sub-pages) */
