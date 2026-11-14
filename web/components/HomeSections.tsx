@@ -54,9 +54,14 @@ const TOOLS = [
 
 /** Waist-check photo strip — append filenames under home-sections/ */
 const WAIST_CHECK_PHOTOS = [
-  '/images/home-sections/waist-measurement-real.webp',
-  '/images/home-sections/waist-measure-2.webp',
+  '/images/home-sections/waist-1.webp',
+  '/images/home-sections/waist-2.webp',
+  '/images/home-sections/waist-3.webp',
+  '/images/home-sections/waist-4.webp',
+  '/images/home-sections/waist-5.webp',
 ] as const;
+
+const WAIST_PHOTO_ALT = 'Waist circumference measured with a tape (identity blurred)';
 
 export function FreeHealthTools() {
   return (
@@ -87,12 +92,16 @@ export function FreeHealthTools() {
           ))}
         </div>
         <div className="hs-waist-strip-wrap">
+          <p className="hs-waist-slogan">Look early. Look where. Look at your waist.</p>
+          <p className="hs-waist-deck">
+            Waist circumference (WC) — the simplest early sign of metabolic risk. 30 seconds with a tape.
+          </p>
           <div className="hs-waist-strip" role="group" aria-label="Waist check">
             {WAIST_CHECK_PHOTOS.map((src) => (
               <div key={src} className="hs-waist-card">
                 <Image
                   src={src}
-                  alt=""
+                  alt={WAIST_PHOTO_ALT}
                   width={160}
                   height={213}
                   className="hs-waist-card-img"
@@ -101,7 +110,6 @@ export function FreeHealthTools() {
               </div>
             ))}
           </div>
-          <p className="hs-waist-strip-cap">Waist measurement — 30 seconds with a tape.</p>
         </div>
         <div className="hs-tools-cta">
           <a
@@ -496,6 +504,8 @@ const CSS = `
 .hs-step-t{font-weight:700;font-size:16px;margin-bottom:6px;color:#0f172a}
 .hs-step-d{color:#64748b;font-size:14px;line-height:1.55}
 .hs-waist-strip-wrap{margin:28px auto 0;max-width:100%;text-align:center}
+.hs-waist-slogan{margin:0 0 8px;font-size:clamp(16px,2.5vw,18px);font-weight:800;color:#0f172a;line-height:1.35}
+.hs-waist-deck{margin:0 0 16px;font-size:13px;line-height:1.5;color:#64748b;max-width:520px;margin-left:auto;margin-right:auto}
 .hs-waist-strip{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
 .hs-waist-card{
   flex:0 0 auto;width:140px;aspect-ratio:3/4;border-radius:12px;overflow:hidden;
@@ -503,7 +513,6 @@ const CSS = `
 }
 @media (min-width:768px){.hs-waist-card{width:160px}}
 .hs-waist-card-img{width:100%;height:100%;object-fit:cover;display:block}
-.hs-waist-strip-cap{margin:12px 0 0;font-size:13px;line-height:1.45;color:#64748b}
 .hs-how-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
 
 /* gallery (sub-pages) */
