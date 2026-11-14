@@ -1,10 +1,45 @@
 /**
  * Homepage photo sections: Free Screening Camps, MEND trust spotlight, Visit the Clinic.
- * Uses plain <img loading="lazy"> like HomepagePhotoGallery (avoids Next Image optimizer issues).
+ * Featured camp entries use next/image; legacy grid uses plain <img loading="lazy">.
  * Patient faces are blurred in the source images. No names, numbers or results in captions.
  */
 
+import Image from "next/image";
+
 type Photo = { src: string; alt: string; caption: string; pos?: string };
+
+type CampPhoto = { src: string; alt: string; caption: string };
+
+type ScreeningCampEntry = {
+  title: string;
+  line: string;
+  photos: CampPhoto[];
+};
+
+/** Newest camp events first */
+const SCREENING_CAMP_ENTRIES: ScreeningCampEntry[] = [
+  {
+    title: "World Diabetes Day Free Screening Camp — 14 Nov 2026",
+    line: "HOMA Healthcare Center and Surendra Nehru Hospital (SNH), Hyderabad, ran a free diabetes screening and awareness camp on World Diabetes Day. 50 people screened, with free sugar testing and diabetes counselling for patients and families.",
+    photos: [
+      {
+        src: "/images/camps/world-diabetes-day-2026/world-diabetes-day-2026-doctor.webp",
+        alt: "Dr Muddu Surendra Nehru, M.D., with a patient at the World Diabetes Day camp, SNH Hyderabad",
+        caption: "Dr Muddu Surendra Nehru, M.D., with a patient at the World Diabetes Day camp, SNH Hyderabad",
+      },
+      {
+        src: "/images/camps/world-diabetes-day-2026/world-diabetes-day-2026-test.webp",
+        alt: "Free blood sugar testing for patients and families",
+        caption: "Free blood sugar testing for patients and families",
+      },
+      {
+        src: "/images/camps/world-diabetes-day-2026/world-diabetes-day-2026-hall.webp",
+        alt: "Patients and families at the SNH waiting hall",
+        caption: "Patients and families at the SNH waiting hall",
+      },
+    ],
+  },
+];
 
 const screening: Photo[] = [
   { src: "/images/homa-lions-ramagundam-camp.jpg", alt: "Dr. Muddu Surendra Nehru MD with Lions Club of Ramagundam members at a diabetes screening camp", caption: "Diabetes screening camp with Lions Club of Ramagundam", pos: "center 40%" },
@@ -17,6 +52,33 @@ const screening: Photo[] = [
 
 const MEND_TRUST_CAPTION =
   "MEND 2026 — Outstanding Clinical Award · Dr. Muddu Surendra Nehru, M.D.";
+
+function CampEntryGallery({ photos }: { photos: CampPhoto[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center max-w-[1008px] mx-auto">
+      {photos.map((p) => (
+        <figure key={p.src} className="m-0 w-full max-w-[320px]">
+          <div
+            className="relative w-full overflow-hidden rounded-lg bg-gray-100"
+            style={{ aspectRatio: "4 / 5" }}
+          >
+            <Image
+              src={p.src}
+              alt={p.alt}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
+          <figcaption className="mt-2 text-xs md:text-sm text-gray-700 text-center leading-snug">
+            {p.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
 
 function PhotoGrid({ photos }: { photos: Photo[] }) {
   return (
@@ -41,6 +103,17 @@ export function FreeScreeningCamps() {
         <p className="mt-3 text-gray-700">
           Dr. Muddu Surendra Nehru MD and the HOMA Healthcare Center team run free sugar and blood pressure screening camps for the community.
         </p>
+      </div>
+      <div className="max-w-3xl mx-auto mb-10 space-y-10 px-2">
+        {SCREENING_CAMP_ENTRIES.map((entry) => (
+          <article key={entry.title} className="text-center">
+            <h3 className="text-lg md:text-xl font-bold text-[#07153a]">{entry.title}</h3>
+            <p className="mt-3 text-sm md:text-base text-gray-700 leading-relaxed">{entry.line}</p>
+            <div className="mt-6">
+              <CampEntryGallery photos={entry.photos} />
+            </div>
+          </article>
+        ))}
       </div>
       <PhotoGrid photos={screening} />
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
