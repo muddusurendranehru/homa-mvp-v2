@@ -28,6 +28,15 @@ const TOOLS = [
     fg: "#059669",
   },
   {
+    img: "/images/books/book-bp-untold-truth.webp",
+    title: "Check Hidden BP Risk",
+    sub: "High BP is silent. Find out if your blood pressure is damaging your heart and kidneys — without a hospital visit.",
+    hook: "BP: The Untold Truth — doctor-written guide",
+    btn: "Check BP Risk →",
+    href: "/books",
+    fg: "#1e40af",
+  },
+  {
     img: "/images/tools/prediabetes-waist.jpg",
     title: "Catch Prediabetes Early From Home",
     sub: "Catch the early warning signs before it becomes Type 2. Takes 30 seconds using standard lab values.",
@@ -471,7 +480,8 @@ const CSS = `
 
 /* tools */
 .hs-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-@media (min-width:900px){.hs-tools{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
+@media (min-width:640px){.hs-tools{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
+@media (min-width:1100px){.hs-tools{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}}
 .hs-tool{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px;min-height:0;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s,border-color .2s}
 .hs-tool:hover{border-color:#cbd5e1;box-shadow:0 12px 28px -14px rgba(15,23,42,.22);transform:translateY(-2px)}
 .hs-tool-thumb{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#f1f5f9}
