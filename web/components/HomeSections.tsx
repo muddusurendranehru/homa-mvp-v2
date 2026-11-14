@@ -39,7 +39,7 @@ const TOOLS = [
   {
     img: "/images/tools/prediabetes-waist.jpg",
     title: "Catch Prediabetes Early From Home",
-    sub: "Catch the early warning signs before it becomes Type 2. Takes 30 seconds using standard lab values.",
+    sub: "Catch early warning signs without a blood test. Using just a measuring tape, check if your belly fat puts you at risk.",
     hook: "Waist check — no hospital visit",
     btn: "Check Prediabetes →",
     href: "/tools/waist-circumference",
@@ -56,10 +56,10 @@ const TOOLS = [
   },
   {
     img: "/images/tools/heart-attack-risk.jpg",
-    title: "Heart Risk Snapshot",
-    sub: "Quick organ and heart risk check — private, free, no hospital visit.",
+    title: "Organ Age & Metabolic Quiz",
+    sub: "Answer a few quick questions about your lifestyle to discover your biological organ age and hidden risks.",
     hook: "Scrolls to the organ-age check on this page",
-    btn: "Assess Heart Risk →",
+    btn: "Take the Quiz →",
     href: "#organ-age",
     fg: "#dc2626",
   },

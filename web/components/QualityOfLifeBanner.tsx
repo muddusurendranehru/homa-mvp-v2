@@ -1,30 +1,29 @@
-import Link from 'next/link';
-import Image from 'next/image';
+const VOLUNTEER_WA =
+  "https://wa.me/919963721999?text=Hi%20Dr%20Muddu%2C%20I%20want%20to%20volunteer%20with%20HOMA";
 
 export default function QualityOfLifeBanner() {
   return (
-    <Link href="/lifestyle" className="group block w-full max-w-sm mx-auto h-full">
+    <a
+      href={VOLUNTEER_WA}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block w-full max-w-sm mx-auto h-full no-underline text-inherit"
+    >
       <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col h-full">
-        
-        {/* Thumbnail Image */}
         <div className="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
-          <Image 
-            src="/images/qol-woman.jpg" 
-            alt="HOMA Lifestyle - Eat, Pray, Sleep, Conquer"
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, 33vw"
+          <img
+            src="/images/qol-woman.jpg"
+            alt="HOMA community volunteers"
+            width={400}
+            height={300}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-green-200 to-teal-100 -z-10 flex items-center justify-center text-gray-500 text-sm text-center p-4">
-            Add qol-woman.jpg to public/images
-          </div>
-          
           <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-green-700 shadow-sm">
             New
           </div>
         </div>
-
-        {/* Text Content */}
         <div className="p-6 flex flex-col flex-grow">
           <h3 className="text-xl font-bold text-gray-900 mb-2 font-serif group-hover:text-green-700 transition-colors">
             HOMA Community Volunteers
@@ -36,8 +35,7 @@ export default function QualityOfLifeBanner() {
             Join as Volunteer <span aria-hidden="true">&rarr;</span>
           </div>
         </div>
-
       </div>
-    </Link>
+    </a>
   );
 }

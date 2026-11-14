@@ -14,6 +14,7 @@ import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
 import HomaProgramSection from "@/components/HomaProgramSection";
 import PatientCommunitiesSection from "@/components/PatientCommunitiesSection";
+import HomeHealthHubSection from "@/components/HomeHealthHubSection";
 
 function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
@@ -1258,6 +1259,7 @@ export default function HomePageClient() {
           </Link>
         </div>
       </section>
+      <HomeHealthHubSection />
     </>
   );
 }
