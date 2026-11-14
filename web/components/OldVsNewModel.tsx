@@ -17,6 +17,19 @@ const HOMA_BULLETS = [
   "24x7 dietitian-in-pocket",
 ];
 
+const REAL_EXAMPLES = [
+  {
+    src: "/images/home-sections/diet-tracker-subtyped-plan.webp",
+    caption:
+      "Each patient is subtyped first, then gets a prescribed plan (patient name hidden)",
+  },
+  {
+    src: "/images/home-sections/diet-day5-meal-plan.webp",
+    caption:
+      "Day 5 of a 30-day personalised meal plan — timed meals with calories",
+  },
+] as const;
+
 export default function OldVsNewModel() {
   return (
     <section id="old-vs-new-model" className="ovn-sec" aria-labelledby="ovn-headline">
@@ -55,6 +68,24 @@ export default function OldVsNewModel() {
                 loading="lazy"
               />
             </figure>
+            <div className="ovn-real">
+              <p className="ovn-real-label">Real example</p>
+              <div className="ovn-real-row">
+                {REAL_EXAMPLES.map((ex) => (
+                  <figure key={ex.src} className="ovn-real-fig">
+                    <Image
+                      src={ex.src}
+                      alt={ex.caption}
+                      width={320}
+                      height={240}
+                      className="ovn-real-img"
+                      loading="lazy"
+                    />
+                    <figcaption className="ovn-real-cap">{ex.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
           </article>
         </div>
         <p className="ovn-strip">From a paper slip to a 365-degree metabolic system.</p>
@@ -119,6 +150,18 @@ const OVN_CSS = `
   width:100%;max-width:320px;height:auto;border-radius:12px;
   border:1px solid #e2e8f0;box-shadow:0 6px 16px rgba(15,23,42,.08)
 }
+.ovn-real{margin-top:4px;padding-top:14px;border-top:1px dashed #cbd5e1}
+.ovn-real-label{
+  margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:#047857
+}
+.ovn-real-row{display:flex;flex-wrap:wrap;gap:12px}
+.ovn-real-fig{margin:0;flex:1 1 140px;max-width:320px}
+.ovn-real-img{
+  width:100%;max-width:320px;height:auto;border-radius:10px;
+  border:1px solid #e2e8f0;box-shadow:0 6px 14px rgba(15,23,42,.08)
+}
+.ovn-real-cap{margin-top:8px;font-size:12px;line-height:1.45;color:#475569}
 .ovn-strip{
   margin:28px 0 0;padding:16px 20px;text-align:center;font-weight:800;font-size:clamp(15px,2.5vw,18px);
   color:#fff;border-radius:14px;
