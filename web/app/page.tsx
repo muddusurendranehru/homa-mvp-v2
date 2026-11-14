@@ -90,6 +90,13 @@ const BOOKS_STRIP: BookStripItem[] = [
     linkLabel: "Buy on Amazon",
     newTab: true,
   },
+  {
+    title: "The COVID 19 Handbook",
+    cover: "/images/books/book-covid-handbook.webp",
+    href: "https://www.amazon.in/dp/1639976108",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
+  },
 ];
 
 export default function HomePage() {
