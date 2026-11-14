@@ -57,6 +57,7 @@ export default function HomaProgramInterestCta() {
   return (
     <a
       href={href}
+      suppressHydrationWarning
       target="_blank"
       rel="noopener noreferrer"
       style={{

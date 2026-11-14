@@ -9,11 +9,11 @@ import OldVsNewModel from "@/components/OldVsNewModel";
 import SubtypeBanner from "@/components/SubtypeBanner";
 import FeatureShowcase from "@/components/FeatureShowcase";
 import GovernmentTrust from "@/components/GovernmentTrust";
-import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
 import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
-import HomaProgramInterestCta from "@/components/HomaProgramInterestCta";
+import HomaProgramSection from "@/components/HomaProgramSection";
+import PatientCommunitiesSection from "@/components/PatientCommunitiesSection";
 
 function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
@@ -254,7 +254,9 @@ export default function HomePage() {
       <FreeHealthTools />
       <WhyHomaVideos />
       <OldVsNewModel />
+      <HomaProgramSection />
       <HowItWorks />
+      <PatientCommunitiesSection />
       <FreeScreeningCamps />
       <MendTrustAward />
       <SubtypeBanner />
@@ -372,9 +374,6 @@ export default function HomePage() {
       {/* FreeHealthTools duplicate removed — lives under HomeHero */}
       {/* THE SILENT WARNING (migrated Central Obesity card) */}
       <SilentWarning />
-      {/* ABOUT DR. MUDDU (details moved from the old teal header bar) */}
-      <AboutDrMuddu />
-      <VisitClinic />
 
       {/* DDDD DIRECTION BLOCK START */}
       <section style={{ background: "linear-gradient(#ffffff, #e8f7ee)", borderTop: "4px solid #16a34a", color: "#1a2e22", padding: "40px 6%", textAlign: "center" }}>
@@ -685,6 +684,9 @@ export default function HomePage() {
       </div>
 
       <CelebrityRecognitionSection />
+      {/* ABOUT DR. MUDDU (details moved from the old teal header bar) */}
+      <AboutDrMuddu />
+      <VisitClinic />
 
       {/* ORGAN AGE SECTION */}
       <section id="organ-age" style={{ background: "#06152b", padding: "60px 6%", textAlign: "center" }}>
@@ -872,48 +874,6 @@ export default function HomePage() {
         </div>
       </section>
       {/* REAL CAMPS END */}
-
-           {/* PATIENT COMMUNITIES */}
-      <section style={{ background: "#07153a", padding: "72px 6%" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "#25D366", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Free WhatsApp Communities</div>
-          <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, color: "#fff", marginBottom: "12px", lineHeight: 1.2 }}>Join Your Tribe.<br /><em style={{ color: "#25D366" }}>You Are Not Alone.</em></h2>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", fontWeight: 300, maxWidth: "500px", margin: "0 auto" }}>1,000+ patients across Telangana & Andhra Pradesh. Free forever.</p>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", maxWidth: "960px", margin: "0 auto 32px" }}>
-          {[
-            { name: "Diabetes Gladiators Hyd1", cat: "Type 2 Diabetes Reversal", desc: "HbA1c goals, HOMA-IR tracking, weekly wins.", img: "/images/tribes/diabetes-gladiators.jpg", accent: "#4ade80", link: "https://chat.whatsapp.com/IfeG6QI8Ia6ArRFlxwqxMp" },
-            { name: "Hypertension Heroes", cat: "Blood Pressure Control", desc: "BP without fear — real lifestyle wins, every evening 6-7 PM.", img: "/images/tribes/hypertension-heroes.jpg", accent: "#c084fc", link: "https://chat.whatsapp.com/Cpk5Wrq6bw25CpbFhMd2Ab" },
-            { name: "Lady Lions", cat: "Women's Metabolic Health", desc: "For women managing diabetes and heart disease together.", img: "/images/tribes/lady-lions.png", accent: "#fbbf24", link: "https://chat.whatsapp.com/Jy7b3h8iMzpAySmJj4pc1z" },
-          ].map((tribe) => (
-            <div key={tribe.name} style={{ position: "relative", borderRadius: "16px", overflow: "hidden", minHeight: "260px", border: `1px solid ${tribe.accent}30` }}>
-              <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${tribe.img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.85) 100%)" }} />
-              <div style={{ position: "relative", zIndex: 1, padding: "16px", display: "flex", flexDirection: "column", minHeight: "260px" }}>
-                <div style={{ display: "flex", gap: "6px" }}>
-                  <span style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: "9px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", padding: "3px 8px", borderRadius: "100px" }}>HOMA</span>
-                  <span style={{ background: "#25D366", color: "#fff", fontSize: "9px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", padding: "3px 8px", borderRadius: "100px" }}>FREE</span>
-                </div>
-                <div style={{ marginTop: "auto" }}>
-                  <div style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: tribe.accent, marginBottom: "4px" }}>{tribe.cat}</div>
-                  <div style={{ fontSize: "18px", fontWeight: 800, color: "#fff", marginBottom: "6px" }}>{tribe.name}</div>
-                  <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", marginBottom: "12px" }}>{tribe.desc}</div>
-                  <a href={tribe.link} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", background: "#25D366", color: "#fff", fontWeight: 700, fontSize: "12px", textTransform: "uppercase", padding: "9px", borderRadius: "8px", textDecoration: "none" }}>Join Free</a>
-                </div>
-              </div>
-            </div>
-                   ))}
-          
-                    {/* HOMA Lifestyle Card */}
-          <div className="flex items-center justify-center h-full">
-            <QualityOfLifeBanner />
-          </div>
-
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <a href="/communities" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontWeight: 600, fontSize: "14px", padding: "12px 28px", borderRadius: "100px", textDecoration: "none" }}>See All 10 Free Tribes</a>
-        </div>
-      </section>
 
       {/* AWARDS SECTION */}
       <section style={{ background: "#f8f5ee", padding: "72px 6%" }}>
@@ -1296,75 +1256,6 @@ export default function HomePage() {
           >
             See books &amp; buy on Amazon
           </Link>
-        </div>
-      </section>
-
-      {/* PACKAGES — late conversion (after trust / books) */}
-      <section style={{ padding: "72px 6%", background: "#f8f7f3" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <p
-            style={{
-              fontSize: "11px",
-              fontWeight: 600,
-              color: "#00A896",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              marginBottom: "10px",
-            }}
-          >
-            Investment in Your Health
-          </p>
-          <h2
-            style={{
-              fontFamily: "'EB Garamond', serif",
-              fontSize: "clamp(30px, 4vw, 48px)",
-              fontWeight: 500,
-              color: "#0D2B4E",
-              marginBottom: "12px",
-            }}
-          >
-            The HOMA Program
-          </h2>
-          <p style={{ fontSize: "15px", color: "#888", fontWeight: 300 }}>
-            Complete 90-day metabolic reversal — everything included
-          </p>
-        </div>
-        <div
-          style={{
-            maxWidth: "520px",
-            margin: "0 auto",
-            background: "#0D2B4E",
-            borderRadius: "20px",
-            padding: "40px",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", marginBottom: "20px" }}>
-            90-Day Reversal Program
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              marginBottom: "28px",
-              textAlign: "left",
-            }}
-          >
-            {[
-              "✅ HOMA-IR Test + TyG Index Assessment",
-              "✅ NutriBot AI — personalised Indian meal plans",
-              "✅ D·D·D — Door to Door home visits",
-              "✅ 90-day monitoring + follow-ups",
-              "✅ Free online HOMA-IR calculator access",
-              "✅ 38 years licensed experience",
-            ].map((item) => (
-              <div key={item} style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)" }}>
-                {item}
-              </div>
-            ))}
-          </div>
-          <HomaProgramInterestCta />
         </div>
       </section>
     </>
