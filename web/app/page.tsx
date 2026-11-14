@@ -13,6 +13,7 @@ import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 import CelebrityRecognitionSection from "@/components/CelebrityRecognitionSection";
 import DoctorPeersSection from "@/components/DoctorPeersSection";
 import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/HomaPhotoSections";
+import HomaProgramInterestCta from "@/components/HomaProgramInterestCta";
 
 function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
@@ -1089,119 +1090,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section style={{ padding: "72px 6%", background: "#f8f7f3" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <p
-            style={{
-              fontSize: "11px",
-              fontWeight: 600,
-              color: "#00A896",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              marginBottom: "10px",
-            }}
-          >
-            Investment in Your Health
-          </p>
-          <h2
-            style={{
-              fontFamily: "'EB Garamond', serif",
-              fontSize: "clamp(30px, 4vw, 48px)",
-              fontWeight: 500,
-              color: "#0D2B4E",
-              marginBottom: "12px",
-            }}
-          >
-            The HOMA Program
-          </h2>
-          <p style={{ fontSize: "15px", color: "#888", fontWeight: 300 }}>
-            Complete 90-day metabolic reversal — everything included
-          </p>
-        </div>
-        <div
-          style={{
-            maxWidth: "520px",
-            margin: "0 auto",
-            background: "#0D2B4E",
-            borderRadius: "20px",
-            padding: "40px",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>
-            90-Day Reversal Program
-          </div>
-          <div
-            style={{
-              fontFamily: "'EB Garamond', serif",
-              fontSize: "60px",
-              fontWeight: 500,
-              color: "#F5A623",
-              lineHeight: 1,
-            }}
-          >
-            ₹13,500
-          </div>
-          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", margin: "8px 0 28px" }}>
-            Others charge ₹20,000–₹25,000
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              marginBottom: "32px",
-              textAlign: "left",
-            }}
-          >
-            {[
-              "✅ HOMA-IR Test + TyG Index Assessment",
-              "✅ NutriBot AI — personalised Indian meal plans",
-              "✅ D·D·D — Door to Door home visits",
-              "✅ 90-day monitoring + follow-ups",
-              "✅ Free online HOMA-IR calculator access",
-              "✅ Peer-reviewed protocol — 32 years experience",
-            ].map((item) => (
-              <div key={item} style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)" }}>
-                {item}
-              </div>
-            ))}
-          </div>
-          <Link
-            href="/assessment"
-            style={{
-              display: "block",
-              background: "#F5A623",
-              color: "#1a1a1a",
-              fontWeight: 700,
-              fontSize: "16px",
-              padding: "16px",
-              borderRadius: "10px",
-              textDecoration: "none",
-              marginBottom: "10px",
-            }}
-          >
-            Book Your Assessment →
-          </Link>
-          <a
-            href="https://wa.me/919963721999"
-            style={{
-              display: "block",
-              background: "#25D366",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "15px",
-              padding: "14px",
-              borderRadius: "10px",
-              textDecoration: "none",
-            }}
-          >
-            💬 WhatsApp for Details
-          </a>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section style={{ padding: "72px 6%", background: "#fff" }}>
         <div style={{ textAlign: "center", marginBottom: "48px" }}>
@@ -1408,6 +1296,75 @@ export default function HomePage() {
           >
             See books &amp; buy on Amazon
           </Link>
+        </div>
+      </section>
+
+      {/* PACKAGES — late conversion (after trust / books) */}
+      <section style={{ padding: "72px 6%", background: "#f8f7f3" }}>
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <p
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              color: "#00A896",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              marginBottom: "10px",
+            }}
+          >
+            Investment in Your Health
+          </p>
+          <h2
+            style={{
+              fontFamily: "'EB Garamond', serif",
+              fontSize: "clamp(30px, 4vw, 48px)",
+              fontWeight: 500,
+              color: "#0D2B4E",
+              marginBottom: "12px",
+            }}
+          >
+            The HOMA Program
+          </h2>
+          <p style={{ fontSize: "15px", color: "#888", fontWeight: 300 }}>
+            Complete 90-day metabolic reversal — everything included
+          </p>
+        </div>
+        <div
+          style={{
+            maxWidth: "520px",
+            margin: "0 auto",
+            background: "#0D2B4E",
+            borderRadius: "20px",
+            padding: "40px",
+            textAlign: "center",
+          }}
+        >
+          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", marginBottom: "20px" }}>
+            90-Day Reversal Program
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              marginBottom: "28px",
+              textAlign: "left",
+            }}
+          >
+            {[
+              "✅ HOMA-IR Test + TyG Index Assessment",
+              "✅ NutriBot AI — personalised Indian meal plans",
+              "✅ D·D·D — Door to Door home visits",
+              "✅ 90-day monitoring + follow-ups",
+              "✅ Free online HOMA-IR calculator access",
+              "✅ 38 years licensed experience",
+            ].map((item) => (
+              <div key={item} style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)" }}>
+                {item}
+              </div>
+            ))}
+          </div>
+          <HomaProgramInterestCta />
         </div>
       </section>
     </>
