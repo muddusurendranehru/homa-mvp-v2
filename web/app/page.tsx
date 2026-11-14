@@ -50,7 +50,7 @@ const HOME_FAQ_LD = {
       name: "Are there free patient communities for diabetes and metabolic health?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Join free WhatsApp tribes for diabetes, hypertension and women's metabolic health across Telangana and Andhra Pradesh.",
+        text: "Yes. Join free WhatsApp tribes such as Diabetes Gladiators Hyd, Hypertension Heroes, and Lady Lions Metabolic Health, plus lifestyle volunteer opportunities across Telangana and Andhra Pradesh.",
       },
     },
     {

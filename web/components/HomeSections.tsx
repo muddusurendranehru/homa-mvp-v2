@@ -20,33 +20,37 @@ const WA = "https://wa.me/919963721999";
 const TOOLS = [
   {
     img: "/images/tools/diabetes-home-check.jpg",
-    title: "Free Diabetes Check",
-    sub: "Am I at high risk for diabetes?",
+    title: "Free Diabetes Remission Check",
+    sub: "Calculate your HOMA-IR & fasting insulin to find your diabetes sub-type in 30 seconds.",
     hook: "From your lab report — at home, 30 seconds",
+    btn: "Start Free Check →",
     href: "/tools/homa-ir-calculator",
     fg: "#059669",
   },
   {
     img: "/images/tools/prediabetes-waist.jpg",
-    title: "Prediabetes From Home",
-    sub: "Waist check — no hospital visit",
-    hook: "Tired of waiting rooms? Tape measure + 30 seconds",
+    title: "Catch Prediabetes Early From Home",
+    sub: "Catch the early warning signs before it becomes Type 2. Takes 30 seconds using standard lab values.",
+    hook: "Waist check — no hospital visit",
+    btn: "Check Prediabetes →",
     href: "/tools/waist-circumference",
     fg: "#ea580c",
   },
   {
     img: "/images/tools/heart-risk-check.jpg",
-    title: "Diabetes + Heart Risk",
-    sub: "Know your risk before a heart attack",
+    title: "Heart Attack Risk Snapshot",
+    sub: "Enter your last lipid profile to calculate your TyG index and see your heart risk.",
     hook: "Fasting labs you already have — check from home",
+    btn: "Assess Heart Risk →",
     href: "/tools/tyg-index-calculator",
     fg: "#7c3aed",
   },
   {
     img: "/images/tools/heart-attack-risk.jpg",
     title: "Heart Risk Snapshot",
-    sub: "Afraid to visit the hospital?",
-    hook: "Quick organ & heart risk quiz — private, free",
+    sub: "Quick organ and heart risk check — private, free, no hospital visit.",
+    hook: "Scrolls to the organ-age check on this page",
+    btn: "Assess Heart Risk →",
     href: "#organ-age",
     fg: "#dc2626",
   },
@@ -86,7 +90,7 @@ export function FreeHealthTools() {
               <span className="hs-tool-s">{t.sub}</span>
               <span className="hs-tool-hook">{t.hook}</span>
               <span className="hs-tool-go" style={{ color: t.fg }}>
-                Start {'→'}
+                {t.btn}
               </span>
             </a>
           ))}

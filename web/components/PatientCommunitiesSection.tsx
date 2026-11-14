@@ -2,9 +2,10 @@ import QualityOfLifeBanner from "@/components/QualityOfLifeBanner";
 
 const TRIBES = [
   {
-    name: "Diabetes Gladiators Hyd1",
+    name: "Diabetes Gladiators Hyd",
     cat: "Type 2 Diabetes Remission",
-    desc: "HbA1c goals, HOMA-IR tracking, weekly wins.",
+    desc: "Join patients on a doctor-guided path to Type 2 diabetes remission. Track your HbA1c weekly and win.",
+    btn: "Join Free →",
     img: "/images/tribes/diabetes-gladiators.jpg",
     accent: "#4ade80",
     link: "https://chat.whatsapp.com/IfeG6QI8Ia6ArRFlxwqxMp",
@@ -12,15 +13,17 @@ const TRIBES = [
   {
     name: "Hypertension Heroes",
     cat: "Blood Pressure Control",
-    desc: "BP without fear — real lifestyle wins, every evening 6-7 PM.",
+    desc: "Master BP control without fear. Share lifestyle wins, track your daily readings, and learn precision protocols.",
+    btn: "Join Free →",
     img: "/images/tribes/hypertension-heroes.jpg",
     accent: "#c084fc",
     link: "https://chat.whatsapp.com/Cpk5Wrq6bw25CpbFhMd2Ab",
   },
   {
-    name: "Lady Lions",
+    name: "Lady Lions Metabolic Health",
     cat: "Women's Metabolic Health",
-    desc: "For women managing diabetes and heart disease together.",
+    desc: "Specialised support for women balancing thyroid, PCOS, insulin resistance and heart health.",
+    btn: "Join Free →",
     img: "/images/tribes/lady-lions.png",
     accent: "#fbbf24",
     link: "https://chat.whatsapp.com/Jy7b3h8iMzpAySmJj4pc1z",
@@ -185,7 +188,7 @@ export default function PatientCommunitiesSection() {
                     textDecoration: "none",
                   }}
                 >
-                  Join Free
+                  {tribe.btn}
                 </a>
               </div>
             </div>

@@ -27,13 +27,13 @@ export default function QualityOfLifeBanner() {
         {/* Text Content */}
         <div className="p-6 flex flex-col flex-grow">
           <h3 className="text-xl font-bold text-gray-900 mb-2 font-serif group-hover:text-green-700 transition-colors">
-            The HOMA Lifestyle
+            HOMA Community Volunteers
           </h3>
           <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">
-            Eat. Pray. Sleep. Conquer & Enjoy the Journey. Be the master, not the slave. Join our community to live vibrantly.
+            Help your neighbours walk, eat right and stay healthy. Lead morning walks and earn HOMA Coins.
           </p>
           <div className="text-green-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-            Join the Community <span aria-hidden="true">&rarr;</span>
+            Join as Volunteer <span aria-hidden="true">&rarr;</span>
           </div>
         </div>
 
