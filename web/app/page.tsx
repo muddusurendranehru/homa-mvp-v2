@@ -18,32 +18,79 @@ function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
 }
 
-const BOOKS_STRIP = [
+type BookStripItem = {
+  title: string;
+  cover: string;
+  href: string;
+  linkLabel: "Buy on Amazon" | "Get the book";
+  newTab: boolean;
+};
+
+const BOOKS_STRIP: BookStripItem[] = [
   {
     title: "BP: The Untold Truth",
     cover: "/images/books/book-bp-untold-truth.webp",
     href: "/books",
-    external: false,
+    linkLabel: "Get the book",
+    newTab: false,
   },
   {
     title: "The HOMA GLP-1 Prescribing Guide",
     cover: "/images/glp1-book.jpg",
-    href: "/books",
-    external: false,
+    href: "https://www.amazon.in/dp/B0GXYQMJD6",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
   },
   {
     title: "Bedside Cardiology Mastered",
     cover: "/images/books/book-bedside-cardiology.webp",
     href: bookWhatsAppHref("Bedside Cardiology Mastered"),
-    external: true,
+    linkLabel: "Get the book",
+    newTab: true,
   },
   {
     title: "Your Kidneys Are Not Silent",
     cover: "/images/books/book-kidneys-not-silent.webp",
     href: bookWhatsAppHref("Your Kidneys Are Not Silent"),
-    external: true,
+    linkLabel: "Get the book",
+    newTab: true,
   },
-] as const;
+  {
+    title: "PCOS and the Insulin-Ovarian Axis",
+    cover: "/images/books/book-pcos.webp",
+    href: "https://www.amazon.in/dp/B0GYFK9GQS",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
+  },
+  {
+    title: "The Rice-Insulin-Belly Axis",
+    cover: "/images/books/book-rice-insulin-belly.webp",
+    href: "https://www.amazon.in/dp/B0GX2WNHYT",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
+  },
+  {
+    title: "TELMA TRAP",
+    cover: "/images/books/book-telma-trap.webp",
+    href: "https://www.amazon.in/dp/B0GXQGWCFB",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
+  },
+  {
+    title: "Doctors Said Normal",
+    cover: "/images/books/book-doctors-said-normal.webp",
+    href: "https://www.amazon.in/dp/B0GX34T976",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
+  },
+  {
+    title: "SARS COVID 19 (with Dr M.V. Ramana Rao)",
+    cover: "/images/books/book-sars-covid.webp",
+    href: "https://www.amazon.in/dp/B0979RG1YR",
+    linkLabel: "Buy on Amazon",
+    newTab: true,
+  },
+];
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -1247,18 +1294,17 @@ export default function HomePage() {
               alignItems: "flex-start",
               flexWrap: "wrap",
               marginBottom: "22px",
-              maxWidth: "720px",
+              maxWidth: "1000px",
               marginLeft: "auto",
               marginRight: "auto",
             }}
           >
             {BOOKS_STRIP.map((book) => {
-              const cardStyle = {
-                textDecoration: "none" as const,
-                color: "inherit" as const,
+              const cardWrapStyle = {
                 flex: "1 1 calc(50% - 12px)",
                 maxWidth: "160px",
                 minWidth: "130px",
+                textAlign: "center" as const,
               };
               const imgStyle = {
                 width: "100%",
@@ -1276,34 +1322,61 @@ export default function HomePage() {
                 fontWeight: 700,
                 color: "#0D3B5E",
                 lineHeight: 1.35,
+                marginBottom: "6px",
               };
-              const inner = (
-                <>
-                  <img
-                    src={book.cover}
-                    alt={`${book.title} book cover`}
-                    width={140}
-                    height={210}
-                    loading="lazy"
-                    style={imgStyle}
-                  />
-                  <div style={titleStyle}>{book.title}</div>
-                </>
+              const actionStyle = {
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#0D9488",
+                textDecoration: "underline",
+                textUnderlineOffset: "2px",
+              };
+              const cover = (
+                <img
+                  src={book.cover}
+                  alt={`${book.title} book cover`}
+                  width={140}
+                  height={210}
+                  loading="lazy"
+                  style={imgStyle}
+                />
               );
-              return book.external ? (
+              const actionLink = book.newTab ? (
                 <a
-                  key={book.title}
                   href={book.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={cardStyle}
+                  style={actionStyle}
                 >
-                  {inner}
+                  {book.linkLabel}
                 </a>
               ) : (
-                <Link key={book.title} href={book.href} style={cardStyle}>
-                  {inner}
+                <Link href={book.href} style={actionStyle}>
+                  {book.linkLabel}
                 </Link>
+              );
+              return (
+                <div key={book.title} style={cardWrapStyle}>
+                  {book.newTab ? (
+                    <a
+                      href={book.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                    >
+                      {cover}
+                    </a>
+                  ) : (
+                    <Link
+                      href={book.href}
+                      style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                    >
+                      {cover}
+                    </Link>
+                  )}
+                  <div style={titleStyle}>{book.title}</div>
+                  {actionLink}
+                </div>
               );
             })}
           </div>
