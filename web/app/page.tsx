@@ -1293,6 +1293,30 @@ export default function HomePage() {
           >
             Books by Dr Muddu Surendra Nehru MD
           </h2>
+          <style>{`
+            .book-strip-btn {
+              display: block;
+              width: 100%;
+              margin-top: 8px;
+              padding: 8px 16px;
+              font-size: 14px;
+              font-weight: 600;
+              color: #fff;
+              background: #0b3d66;
+              border-radius: 6px;
+              text-decoration: none;
+              text-align: center;
+              box-sizing: border-box;
+              transition: background 0.15s ease;
+            }
+            .book-strip-btn:hover {
+              background: #1d4ed8;
+            }
+            .book-strip-btn:focus-visible {
+              outline: 2px solid #f5a623;
+              outline-offset: 2px;
+            }
+          `}</style>
           <div
             style={{
               display: "flex",
@@ -1331,13 +1355,8 @@ export default function HomePage() {
                 lineHeight: 1.35,
                 marginBottom: "6px",
               };
-              const actionStyle = {
-                fontSize: "12px",
-                fontWeight: 600,
-                color: "#0D9488",
-                textDecoration: "underline",
-                textUnderlineOffset: "2px",
-              };
+              const btnLabel =
+                book.linkLabel === "Buy on Amazon" ? "Buy on Amazon →" : "Get the Book →";
               const cover = (
                 <img
                   src={book.cover}
@@ -1353,13 +1372,13 @@ export default function HomePage() {
                   href={book.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={actionStyle}
+                  className="book-strip-btn"
                 >
-                  {book.linkLabel}
+                  {btnLabel}
                 </a>
               ) : (
-                <Link href={book.href} style={actionStyle}>
-                  {book.linkLabel}
+                <Link href={book.href} className="book-strip-btn">
+                  {btnLabel}
                 </Link>
               );
               return (
