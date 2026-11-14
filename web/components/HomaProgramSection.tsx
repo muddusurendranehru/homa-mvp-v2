@@ -34,10 +34,10 @@ export default function HomaProgramSection() {
             marginBottom: "12px",
           }}
         >
-          The HOMA Program
+          The 90-Day Metabolic Reset Program
         </h2>
         <p style={{ fontSize: "15px", color: "#888", fontWeight: 300 }}>
-          Complete 90-day metabolic reversal — everything included
+          Everything you need for your 90-day reset: HOMA-IR testing, 30-day personalised diet plans, door-to-door follow-up, and direct WhatsApp access to your doctor.
         </p>
       </div>
       <div

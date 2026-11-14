@@ -66,7 +66,7 @@ export default function PatientCommunitiesSection() {
             margin: "0 auto",
           }}
         >
-          1,000+ patients across Telangana & Andhra Pradesh. Free forever.
+          Join our free communities for diabetes, hypertension and women&apos;s metabolic health across Telangana &amp; Andhra Pradesh.
         </p>
       </div>
       <div

@@ -36,12 +36,11 @@ export default function OldVsNewModel() {
       <style>{OVN_CSS}</style>
       <div className="ovn-wrap">
         <h2 id="ovn-headline" className="ovn-headline">
-          Where is the personalization? Nowhere but HOMA.
+          Generic Diets Fail. Precision Medicine Works.
         </h2>
         <p className="ovn-deck">
-          India doesn&apos;t have a diabetes knowledge problem. It has a delivery problem.
+          One-size-fits-all paper diet charts ignore who you are. We identify your metabolic sub-type (such as LADA or MODY) to build a personalised plan for Indians.
         </p>
-        <p className="ovn-subtitle">Generic Guidelines vs. HOMA Precision Medicine.</p>
         <div className="ovn-grid">
           <article className="ovn-card ovn-card--old">
             <h3 className="ovn-card-title">The Old Model: Generic Posters</h3>

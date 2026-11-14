@@ -223,10 +223,10 @@ export default function WhyHomaVideos() {
       <div className="wh-wrap">
         <div className="wh-eyebrow">WHY HOMA?</div>
         <h2 id="why-homa-videos-title" className="wh-h2">
-          Wake Up India. Take Health Into Your Hands.
+          Meet Your Doctor: 38 Years of Clinical Precision
         </h2>
         <p className="wh-intro">
-          Empowering the wealth of healthy, ethical medical knowledge. Tap to play — no signup, loads only when you choose.
+          Led by Dr. Muddu Surendra Nehru, MD, Professor of Medicine, metabolic medicine specialist in Hyderabad, backed by 13 published medical books.
         </p>
 
         <div className={`wh-carousel ${!carouselReady || allSlidesVisible ? "wh-carousel--fit" : ""}`}>

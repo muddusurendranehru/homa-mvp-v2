@@ -69,10 +69,10 @@ export function FreeHealthTools() {
       <div className="hs-wrap">
         <div className="hs-eyebrow">FREE ONLINE CHECKS · ABOUT 30 SECONDS EACH</div>
         <h2 id="free-tools-title" className="hs-h2">
-          ZERO Waiting Time for Doctor Visit at Hospital — Health Journey Starts at Home
+          Check Your Metabolic Risk in 30 Seconds (Free)
         </h2>
         <p className="hs-sub">
-          Heart attack risk from home too — no hospital wait. Know if you are at high risk for diabetes, prediabetes, or heart disease in about 30 seconds each.
+          No hospital wait. Check your risk for diabetes, prediabetes and heart disease using our doctor-designed calculators, including the HOMA-IR calculator.
         </p>
         <div className="hs-tools">
           {TOOLS.map((t) => (
@@ -224,11 +224,13 @@ export function HowItWorks() {
       <div className="hs-wrap">
         <div className="hs-eyebrow">HOW IT WORKS</div>
         <h2 id="how-title" className="hs-h2">
-          Get Hands-On: Learn, Teach and Propagate the HOMA Muddu&apos;s Methods
+          Your Journey: From Lab to Life (Step-by-Step)
         </h2>
         <p className="hs-sub">
-          Diabetology, cardio-obesity and diabetes medicine — join the path-breaking journey. Doctor-led.
-          Science-backed.
+          1. Free risk check → 2. Deep lab phenotyping → 3. Diet plan &amp; tracker access → 4. Daily follow-up.
+        </p>
+        <p className="hs-sub">
+          Get Hands-On: Learn, Teach and Propagate the HOMA Muddu&apos;s Methods
         </p>
         <ol className="hs-steps">
           {STEPS.map((s) => (
