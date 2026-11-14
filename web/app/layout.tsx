@@ -320,7 +320,6 @@ export default function RootLayout({
           {/* Global Footer */}
           <footer className="bg-gray-900 text-white py-8 px-4">
             <div className="max-w-7xl mx-auto">
-              <SiteFooterNav />
               {/* Conditions Internal Linking - SEO - Tiles Version */}
               <div className="mb-8">
                 <h3 className="text-xl font-bold text-center text-teal-400 mb-6">Conditions We Treat</h3>
@@ -713,7 +712,7 @@ export default function RootLayout({
                   className="w-16 h-16 mx-auto mb-4"
                   loading="lazy"
                 />
-                <p className="text-sm mb-4">Help 500K+ patients achieve 85% remission</p>
+                <p className="text-sm mb-4">Help more patients reverse diabetes — the HOMA way.</p>
                 <a
                   href="https://wa.me/919963721999?text=I want to DONATE"
                   target="_blank"
@@ -741,6 +740,8 @@ export default function RootLayout({
                 </div>
               </div>
               */}
+
+              <SiteFooterNav />
 
               {/* Bottom Bar - SEO Internal Links */}
               <div className="border-t border-gray-700 mt-4 pt-4 text-center">

@@ -105,7 +105,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
 
 export default function SiteFooterNav() {
   return (
-    <nav className="sf-nav mb-8 border-b border-gray-800 pb-6" aria-label="Site footer">
+    <nav className="sf-nav mb-6 mt-2 border-t border-b border-gray-700 py-6" aria-label="Site footer">
       <style>{`
         @media (max-width: 767px) {
           .sf-col:not([open]) > div { display: none; }
