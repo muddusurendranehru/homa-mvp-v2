@@ -14,6 +14,9 @@ const patientCareLinks: NavItem[] = [
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];
 
+const WA_INVESTORS =
+  'https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA';
+
 const secondaryLinks: NavItem[] = [
   { href: '/how-it-works', label: 'How it works' },
   { href: '/tools', label: 'Free Tools' },
@@ -72,6 +75,14 @@ export default function MainHeaderLinks() {
         {secondaryLinks.map((item) => (
           <NavLink key={item.href} item={item} pathname={pathname} />
         ))}
+        <a
+          href={WA_INVESTORS}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative z-[1002] shrink-0 rounded-lg px-2.5 py-2 text-slate-600 no-underline hover:bg-slate-100 hover:text-slate-900"
+        >
+          Investors
+        </a>
       </div>
       <div className="hidden xl:flex items-center gap-0.5 shrink-0">
         <a

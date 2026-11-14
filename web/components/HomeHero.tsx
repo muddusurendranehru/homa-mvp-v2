@@ -66,7 +66,7 @@ export default function HomeHero() {
       <div className="hh-inner">
         <div className="hh-copy">
           <h1 className="hh-h1">
-            Your doctor-guided <span className="hh-grad">90-day</span> reset — tracked daily.
+            Your Doctor-Guided 90-Day Metabolic Reset.
           </h1>
           <p className="hh-sub">
             Diet, exercise and sleep on your phone — with follow-up until your numbers improve. Led by Dr. Muddu

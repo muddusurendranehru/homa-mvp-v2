@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-const WA_INDUSTRY =
-  "https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA";
+const WA_BOOK_CONSULT =
+  "https://wa.me/919963721999?text=I%20WANT%20TO%20BOOK%20A%20CONSULTATION";
 
 function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
@@ -22,9 +22,16 @@ export type SectionCtaProps = {
   book?: SectionCtaBook;
   /** Show only the book block — for sections that already have their own button row */
   bookOnly?: boolean;
+  /** Large orange primary consult CTA (FreeHealthTools) */
+  primaryConsult?: boolean;
 };
 
-export default function SectionCta({ knowMoreHref, book, bookOnly = false }: SectionCtaProps) {
+export default function SectionCta({
+  knowMoreHref,
+  book,
+  bookOnly = false,
+  primaryConsult = false,
+}: SectionCtaProps) {
   return (
     <>
       <style>{SC_CSS}</style>
@@ -52,21 +59,23 @@ export default function SectionCta({ knowMoreHref, book, bookOnly = false }: Sec
           </div>
         ) : null}
         {!bookOnly ? (
-          <div className="sc-actions">
+          <div className={`sc-actions${primaryConsult ? " sc-actions--stack" : ""}`}>
+            {primaryConsult ? (
+              <a
+                href={WA_BOOK_CONSULT}
+                className="sc-btn sc-btn-primary sc-btn-primary-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book Your Consultation →
+              </a>
+            ) : null}
             <Link href={knowMoreHref} className="sc-btn sc-btn-ghost">
               Know more
             </Link>
             <Link href="/packages" className="sc-btn sc-btn-ghost">
               Packages &amp; plans
             </Link>
-            <a
-              href={WA_INDUSTRY}
-              className="sc-btn sc-btn-ghost"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Industry &amp; investors
-            </a>
           </div>
         ) : null}
       </Row>
@@ -122,5 +131,14 @@ const SC_CSS = `
 }
 .sc-btn-ghost{background:#fff;color:#1e3a8a;border:1px solid #e2e8f0}
 .sc-btn-ghost:hover{background:#f1f5f9;border-color:#cbd5e1}
+.sc-btn-primary{background:#f97316;color:#fff;border:1px solid #ea580c;box-shadow:0 8px 20px -8px rgba(249,115,22,.65)}
+.sc-btn-primary:hover{background:#ea580c}
+.sc-btn-primary-lg{min-height:52px;padding:0 22px;font-size:16px;width:100%;max-width:320px}
+.sc-actions--stack{flex-direction:column;align-items:stretch;width:100%;max-width:360px}
+.sc-actions--stack .sc-btn-ghost{width:100%}
+@media (min-width:480px){
+  .sc-actions--stack{align-items:center}
+  .sc-actions--stack .sc-btn-ghost{width:auto}
+}
 ${SECTION_CTA_EXTRA_CSS}
 `;

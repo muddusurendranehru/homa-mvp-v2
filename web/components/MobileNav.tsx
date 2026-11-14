@@ -7,6 +7,9 @@ import { usePathname } from 'next/navigation';
 import { useUser, SignOutButton } from '@clerk/nextjs';
 import { usesPatientCareAppShell } from '@/lib/patient-care-routes';
 
+const WA_INVESTORS =
+  'https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA';
+
 const navLinks: {
   href: string;
   label: string;
@@ -161,6 +164,19 @@ export default function MobileNav() {
               </Link>
             </li>
           ))}
+
+          <li>
+            <a
+              href={WA_INVESTORS}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+              className="group relative flex transform items-center gap-4 rounded-xl border border-slate-600 bg-slate-800 px-5 py-4 text-gray-100 shadow-lg transition-all duration-200 hover:scale-[1.02] hover:bg-slate-700"
+            >
+              <span className="text-2xl transition-transform group-hover:scale-110">📈</span>
+              <span className="flex-1 text-base font-semibold">Investors</span>
+            </a>
+          </li>
 
           <li>
             <button

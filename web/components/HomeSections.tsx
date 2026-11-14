@@ -104,6 +104,7 @@ export function FreeHealthTools() {
         </div>
         <SectionCta
           knowMoreHref="/tools"
+          primaryConsult
           book={{
             title: "Your Kidneys Are Not Silent",
             coverSrc: "/images/home-sections/book-kidneys-are-not-silent.webp",
@@ -197,9 +198,6 @@ const STEPS: Step[] = [
 
 const WA_INTERESTED =
   "https://wa.me/919963721999?text=I%20AM%20INTERESTED%20IN%20HOMA";
-const WA_INDUSTRY =
-  "https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA";
-
 export function HowItWorks() {
   return (
     <section id="how-it-works" className="hs-sec hs-slate" aria-labelledby="how-title">
@@ -256,14 +254,6 @@ export function HowItWorks() {
               rel="noopener noreferrer"
             >
               I&apos;m interested — WhatsApp
-            </a>
-            <a
-              href={WA_INDUSTRY}
-              className="hs-btn hs-btn-ghost"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Industry &amp; investors
             </a>
           </div>
         </div>
