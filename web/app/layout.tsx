@@ -744,7 +744,7 @@ export default function RootLayout({
               <SiteFooterNav />
 
               {/* Bottom Bar - SEO Internal Links */}
-              <div className="border-t border-gray-700 mt-4 pt-4 text-center">
+              <div className="mt-4 pt-4 text-center">
                 {/* SEO Internal Links */}
                 <div className="flex flex-wrap justify-center gap-4 mb-4 text-sm">
                   <Link href="/assessment" className="text-gray-300 hover:text-white transition-colors">

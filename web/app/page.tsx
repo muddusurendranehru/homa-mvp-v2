@@ -26,6 +26,73 @@ type BookStripItem = {
   newTab: boolean;
 };
 
+type ScienceSlide = { img: string; title: string; sub: string };
+
+const SCIENCE_SLIDES: ScienceSlide[] = [
+  {
+    img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848746/gllucodeberg1_wlwkq0.jpg",
+    title: "Glucose is just the tip of the iceberg",
+    sub: "The real danger is hidden — insulin resistance, organ fat, metabolic dysfunction",
+  },
+  {
+    img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848745/Malabsorption_complete2_u03x0a.jpg",
+    title: "The HOMA Journey to Reversal",
+    sub: "Step-by-step metabolic recovery — from diagnosis to remission",
+  },
+  {
+    img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787849215/pancreas_and_dm1_9_egt9qi.jpg",
+    title: "Early vs Late Biomarkers",
+    sub: "Catch diabetes risk years before fasting glucose turns abnormal",
+  },
+  {
+    img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787849213/pancreas_and_dm1_6_tvlmce.jpg",
+    title: "Right Way vs Wrong Way",
+    sub: "Why treating sugar alone fails — the metabolic approach that actually works",
+  },
+];
+
+function ScienceSlidesSection({
+  slideIdx,
+  onSelectSlide,
+}: {
+  slideIdx: number;
+  onSelectSlide: (index: number) => void;
+}) {
+  const slide = SCIENCE_SLIDES[slideIdx];
+  return (
+    <section style={{ background: "#07153a", padding: "60px 6%", textAlign: "center" }}>
+      <div style={{ fontSize: "13px", color: "#d4af37", fontWeight: 700, letterSpacing: "2px", marginBottom: "8px" }}>THE SCIENCE</div>
+      <h2 style={{ fontSize: "clamp(22px,3.5vw,36px)", fontWeight: 800, color: "#fff", marginBottom: "32px" }}>
+        Why Sugar Alone Is Not the Problem
+      </h2>
+      <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}>
+        <img
+          src={slide.img}
+          alt={slide.title}
+          width={800}
+          height={450}
+          style={{ width: "100%", height: "auto", borderRadius: "16px", border: "2px solid rgba(212,175,55,0.4)", display: "block" }}
+        />
+        <div style={{ background: "rgba(6,21,43,0.85)", borderRadius: "0 0 16px 16px", padding: "20px 24px", textAlign: "left" }}>
+          <div style={{ fontWeight: 800, fontSize: "18px", color: "#d4af37", marginBottom: "4px" }}>{slide.title}</div>
+          <div style={{ fontSize: "14px", color: "rgba(255,255,255,0.65)" }}>{slide.sub}</div>
+        </div>
+        <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "16px" }}>
+          {SCIENCE_SLIDES.map((_, i) => (
+            <button
+              key={SCIENCE_SLIDES[i].title}
+              type="button"
+              onClick={() => onSelectSlide(i)}
+              aria-label={`Show slide ${i + 1}: ${SCIENCE_SLIDES[i].title}`}
+              style={{ width: "10px", height: "10px", borderRadius: "50%", border: "none", cursor: "pointer", background: i === slideIdx ? "#d4af37" : "rgba(255,255,255,0.25)" }}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const BOOKS_STRIP: BookStripItem[] = [
   {
     title: "BP: The Untold Truth",
@@ -160,42 +227,11 @@ export default function HomePage() {
     },
   ];
 
-  const scienceSlides = [
-    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848746/gllucodeberg1_wlwkq0.jpg", title: "Glucose is just the tip of the iceberg", sub: "The real danger is hidden — insulin resistance, organ fat, metabolic dysfunction" },
-    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848745/Malabsorption_complete2_u03x0a.jpg", title: "The HOMA Journey to Reversal", sub: "Step-by-step metabolic recovery — from diagnosis to remission" },
-    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787849215/pancreas_and_dm1_9_egt9qi.jpg", title: "Early vs Late Biomarkers", sub: "Catch diabetes risk years before fasting glucose turns abnormal" },
-    { img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787849213/pancreas_and_dm1_6_tvlmce.jpg", title: "Right Way vs Wrong Way", sub: "Why treating sugar alone fails — the metabolic approach that actually works" },
-  ];
   const [slideIdx, setSlideIdx] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setSlideIdx(i => (i + 1) % 4), 4000);
+    const t = setInterval(() => setSlideIdx((i) => (i + 1) % SCIENCE_SLIDES.length), 4000);
     return () => clearInterval(t);
   }, []);
-  const ScienceSlides = () => (
-    <section style={{ background: "#07153a", padding: "60px 6%", textAlign: "center" }}>
-      <div style={{ fontSize: "13px", color: "#d4af37", fontWeight: 700, letterSpacing: "2px", marginBottom: "8px" }}>THE SCIENCE</div>
-      <h2 style={{ fontSize: "clamp(22px,3.5vw,36px)", fontWeight: 800, color: "#fff", marginBottom: "32px" }}>
-        Why Sugar Alone Is Not the Problem
-      </h2>
-      <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}>
-        <img
-          src={scienceSlides[slideIdx].img}
-          alt={scienceSlides[slideIdx].title}
-          style={{ width: "100%", borderRadius: "16px", border: "2px solid rgba(212,175,55,0.4)", display: "block" }}
-        />
-        <div style={{ background: "rgba(6,21,43,0.85)", borderRadius: "0 0 16px 16px", padding: "20px 24px", textAlign: "left" }}>
-          <div style={{ fontWeight: 800, fontSize: "18px", color: "#d4af37", marginBottom: "4px" }}>{scienceSlides[slideIdx].title}</div>
-          <div style={{ fontSize: "14px", color: "rgba(255,255,255,0.65)" }}>{scienceSlides[slideIdx].sub}</div>
-        </div>
-        {/* Dots */}
-        <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "16px" }}>
-          {scienceSlides.map((_, i) => (
-            <button key={i} onClick={() => setSlideIdx(i)} style={{ width: "10px", height: "10px", borderRadius: "50%", border: "none", cursor: "pointer", background: i === slideIdx ? "#d4af37" : "rgba(255,255,255,0.25)" }} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
 
   const [quizAge, setQuizAge] = useState("");
   const [quizWaist, setQuizWaist] = useState("");
@@ -596,7 +632,7 @@ export default function HomePage() {
       </div>
 
       {/* SCIENCE SLIDES CAROUSEL */}
-      <ScienceSlides />
+      <ScienceSlidesSection slideIdx={slideIdx} onSelectSlide={setSlideIdx} />
 
       {/* TRUST STRIP */}
       <div
@@ -954,40 +990,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9 BOOKS — Authority Section */}
-      <section style={{ background: "#0D2B4E", padding: "72px 6%" }}>
-        <div style={{ display: "flex", gap: "48px", alignItems: "center", flexWrap: "wrap", maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ flex: "1 1 380px" }}>
-            <div style={{ fontSize: "11px", fontWeight: 600, color: "#d4af37", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
-              Published Authority
-            </div>
-            <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 500, color: "#fff", lineHeight: 1.2, marginBottom: "20px" }}>
-              9 Books.<br />32 Years.<br /><em style={{ color: "#d4af37" }}>One Mission.</em>
-            </h2>
-            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, marginBottom: "28px" }}>
-              Dr. Muddu has written the science most doctors never learned in college — BP, PCOS, diabetes, kidneys, GLP-1, spices, insulin. Each book is peer-reviewed clinical knowledge made readable for patients.
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
-              {["BP: The Untold Truth", "The Telma Trap", "Rice Belly Insulin Axis", "PCOS: The Metabolism Angle", "Your Kidneys Are Not Silent Anymore", "+ 4 more published titles"].map((b) => (
-                <div key={b} style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", display: "flex", gap: "8px", alignItems: "flex-start" }}>
-                  <span style={{ color: "#d4af37", flexShrink: 0 }}>📖</span> {b}
-                </div>
-              ))}
-            </div>
-            <a href="https://wa.me/919963721999" style={{ display: "inline-block", background: "#d4af37", color: "#07153a", fontWeight: 700, fontSize: "14px", padding: "13px 28px", borderRadius: "8px", textDecoration: "none" }}>
-              💬 Ask Dr. Muddu Directly
-            </a>
-          </div>
-          <div style={{ flex: "1 1 340px" }}>
-            <img
-              src="https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_800/v1786809072/bboksslide1_gkdzpb.jpg"
-              alt="All 9 books published by Dr. Muddu Surendra Nehru MD"
-              style={{ width: "100%", borderRadius: "16px", display: "block", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
-            />
-          </div>
-        </div>
-      </section>
-
       {/* FINAL CTA — Start Your Reversal */}
       <section style={{ background: "#0D2B4E", padding: "72px 6%", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 500, color: "#fff", marginBottom: "16px" }}>
@@ -1281,7 +1283,7 @@ export default function HomePage() {
           borderTop: "3px solid #F5A623",
         }}
       >
-        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+        <div className="mx-auto max-w-[1100px] text-center overflow-x-hidden">
           <h2
             style={{
               fontSize: "clamp(20px, 3.5vw, 28px)",
@@ -1317,26 +1319,8 @@ export default function HomePage() {
               outline-offset: 2px;
             }
           `}</style>
-          <div
-            style={{
-              display: "flex",
-              gap: "20px 24px",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              flexWrap: "wrap",
-              marginBottom: "22px",
-              maxWidth: "1000px",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
+          <div className="mx-auto mb-[22px] box-border grid w-full max-w-[1100px] grid-cols-2 gap-6 justify-items-center px-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {BOOKS_STRIP.map((book) => {
-              const cardWrapStyle = {
-                flex: "1 1 calc(50% - 12px)",
-                maxWidth: "160px",
-                minWidth: "130px",
-                textAlign: "center" as const,
-              };
               const imgStyle = {
                 width: "100%",
                 maxWidth: "140px",
@@ -1382,7 +1366,7 @@ export default function HomePage() {
                 </Link>
               );
               return (
-                <div key={book.title} style={cardWrapStyle}>
+                <div key={book.title} className="w-full max-w-[200px] min-w-0 text-center">
                   {book.newTab ? (
                     <a
                       href={book.href}

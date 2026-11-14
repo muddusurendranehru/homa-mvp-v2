@@ -60,26 +60,48 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
   },
 ];
 
+const linkClassName = 'text-gray-300 hover:text-white transition-colors text-sm';
+
 function FooterLinkItem({ link }: { link: FooterLink }) {
-  const className = 'text-gray-300 hover:text-teal-300 transition-colors text-sm';
   if (link.external) {
     return (
-      <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+      <a href={link.href} target="_blank" rel="noopener noreferrer" className={linkClassName}>
         {link.label}
       </a>
     );
   }
   return (
-    <Link href={link.href} className={className}>
+    <Link href={link.href} className={linkClassName}>
       {link.label}
     </Link>
   );
 }
 
-function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+function FooterLinkList({ links }: { links: FooterLink[] }) {
   return (
-    <details className="sf-col group border-b border-gray-800 md:border-none">
-      <summary className="sf-summary cursor-pointer list-none py-3 font-bold text-teal-400 md:hidden [&::-webkit-details-marker]:hidden">
+    <ul className="flex flex-col gap-2">
+      {links.map((link) => (
+        <li key={link.label}>
+          <FooterLinkItem link={link} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function DesktopFooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+  return (
+    <div>
+      <h3 className="text-sm font-bold text-teal-400 mb-3 uppercase tracking-wide">{title}</h3>
+      <FooterLinkList links={links} />
+    </div>
+  );
+}
+
+function MobileFooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+  return (
+    <details className="group border-b border-gray-800">
+      <summary className="cursor-pointer list-none py-3 font-bold text-[#d4af37] [&::-webkit-details-marker]:hidden">
         <span className="flex items-center justify-between gap-2">
           {title}
           <span className="text-gray-500 group-open:rotate-180 transition-transform" aria-hidden="true">
@@ -87,17 +109,8 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
           </span>
         </span>
       </summary>
-      <div className="pb-4 md:pb-0">
-        <h3 className="hidden md:block text-sm font-bold text-teal-400 mb-3 uppercase tracking-wide">
-          {title}
-        </h3>
-        <ul className="flex flex-col gap-2 pl-0 md:pl-0">
-          {links.map((link) => (
-            <li key={link.label}>
-              <FooterLinkItem link={link} />
-            </li>
-          ))}
-        </ul>
+      <div className="pb-4">
+        <FooterLinkList links={links} />
       </div>
     </details>
   );
@@ -105,19 +118,15 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
 
 export default function SiteFooterNav() {
   return (
-    <nav className="sf-nav mb-6 mt-2 border-t border-b border-gray-700 py-6" aria-label="Site footer">
-      <style>{`
-        @media (max-width: 767px) {
-          .sf-col:not([open]) > div { display: none; }
-        }
-        @media (min-width: 768px) {
-          .sf-col > .sf-summary { display: none; }
-          .sf-col > div { display: block !important; }
-        }
-      `}</style>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8">
+    <nav className="mb-6 mt-2 border-t border-gray-700 py-6" aria-label="Site footer">
+      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         {COLUMNS.map((col) => (
-          <FooterColumn key={col.title} title={col.title} links={col.links} />
+          <DesktopFooterColumn key={col.title} title={col.title} links={col.links} />
+        ))}
+      </div>
+      <div className="md:hidden">
+        {COLUMNS.map((col) => (
+          <MobileFooterColumn key={col.title} title={col.title} links={col.links} />
         ))}
       </div>
     </nav>
