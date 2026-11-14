@@ -52,6 +52,12 @@ const TOOLS = [
   },
 ];
 
+/** Waist-check photo strip — append filenames under home-sections/ */
+const WAIST_CHECK_PHOTOS = [
+  '/images/home-sections/waist-measurement-real.webp',
+  '/images/home-sections/waist-measure-2.webp',
+] as const;
+
 export function FreeHealthTools() {
   return (
     <section id="free-tools" className="hs-sec hs-white" aria-labelledby="free-tools-title">
@@ -80,17 +86,23 @@ export function FreeHealthTools() {
             </a>
           ))}
         </div>
-        <figure className="hs-waist-support">
-          <Image
-            src="/images/home-sections/waist-measurement-real.webp"
-            alt="Waist measurement — a simple check for belly-fat risk"
-            width={320}
-            height={240}
-            className="hs-waist-support-img"
-            loading="lazy"
-          />
-          <figcaption>Waist measurement — a simple check for belly-fat risk</figcaption>
-        </figure>
+        <div className="hs-waist-strip-wrap">
+          <div className="hs-waist-strip" role="group" aria-label="Waist check">
+            {WAIST_CHECK_PHOTOS.map((src) => (
+              <div key={src} className="hs-waist-card">
+                <Image
+                  src={src}
+                  alt=""
+                  width={160}
+                  height={213}
+                  className="hs-waist-card-img"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          <p className="hs-waist-strip-cap">Waist measurement — 30 seconds with a tape.</p>
+        </div>
         <div className="hs-tools-cta">
           <a
             className="hs-btn hs-btn-primary"
@@ -483,9 +495,15 @@ const CSS = `
 .hs-step-n{width:40px;height:40px;border-radius:999px;background:#0f172a;color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .hs-step-t{font-weight:700;font-size:16px;margin-bottom:6px;color:#0f172a}
 .hs-step-d{color:#64748b;font-size:14px;line-height:1.55}
-.hs-waist-support{margin:28px auto 0;max-width:320px;text-align:center}
-.hs-waist-support-img{width:100%;height:auto;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 8px 22px -10px rgba(15,23,42,.15)}
-.hs-waist-support figcaption{margin-top:10px;font-size:13px;line-height:1.45;color:#64748b}
+.hs-waist-strip-wrap{margin:28px auto 0;max-width:100%;text-align:center}
+.hs-waist-strip{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
+.hs-waist-card{
+  flex:0 0 auto;width:140px;aspect-ratio:3/4;border-radius:12px;overflow:hidden;
+  border:1px solid #e2e8f0;background:#f1f5f9;box-shadow:0 6px 16px -8px rgba(15,23,42,.12)
+}
+@media (min-width:768px){.hs-waist-card{width:160px}}
+.hs-waist-card-img{width:100%;height:100%;object-fit:cover;display:block}
+.hs-waist-strip-cap{margin:12px 0 0;font-size:13px;line-height:1.45;color:#64748b}
 .hs-how-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
 
 /* gallery (sub-pages) */
