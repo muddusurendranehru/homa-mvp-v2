@@ -296,12 +296,12 @@ export default function RootLayout({
           
           {/* Global Header — slim navbar (doctor details moved to "About Dr. Muddu" on the homepage) */}
           <header className="sticky top-0 z-[1000] bg-white/95 backdrop-blur border-b border-slate-200" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
-            <nav className="relative z-[1001] mx-auto flex h-16 min-w-0 max-w-[1080px] items-center gap-1.5 pl-3 pr-[4.75rem] sm:gap-2 sm:pl-4 sm:pr-[5.25rem] md:pr-[5.75rem] lg:gap-2 lg:pr-[13.5rem] xl:pr-[4.5rem] 2xl:pr-4" aria-label="Main">
-              <Link href="/" className="relative z-[1002] flex min-w-0 max-w-[11.5rem] shrink-0 items-center gap-2 sm:max-w-[12rem] sm:gap-2.5 md:max-w-[12.5rem] lg:max-w-[13rem] xl:max-w-[14rem] 2xl:max-w-none text-slate-900 no-underline">
+            <nav className="relative z-[1001] mx-auto flex h-16 min-w-0 max-w-[1080px] items-center gap-1 pl-3 pr-[4.75rem] sm:gap-2 sm:pl-4 sm:pr-[5.25rem] md:pr-[5.75rem] lg:gap-2 lg:pr-[13.5rem] xl:gap-1 xl:pr-[5rem] 2xl:gap-2 2xl:pr-4" aria-label="Main">
+              <Link href="/" className="relative z-[1002] flex min-w-0 max-w-[11.5rem] shrink-0 items-center gap-2 sm:max-w-[12rem] sm:gap-2.5 md:max-w-[12.5rem] lg:max-w-[13rem] xl:max-w-[12.75rem] 2xl:max-w-none text-slate-900 no-underline">
                 <img src="/images/homa-logo.png" alt="HOMA Healthcare Center logo" width={32} height={32} className="h-8 w-8 shrink-0 rounded-full" />
                 <span className="min-w-0 leading-tight">
                   <span className="block truncate text-[12.5px] sm:text-[14px] font-extrabold tracking-tight text-[#1e3a8a]">HOMA Healthcare Center</span>
-                  <span className="block truncate text-[10.5px] font-medium text-slate-500 sm:text-xs">Dr. Muddu Surendra Nehru MD</span>
+                  <span className="block max-w-[10.5rem] truncate text-[10.5px] font-medium text-slate-500 sm:text-xs xl:max-w-[9.25rem] 2xl:max-w-none">Dr. Muddu Surendra Nehru MD</span>
                 </span>
               </Link>
               <MainHeaderLinks />

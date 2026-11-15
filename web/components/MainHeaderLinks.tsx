@@ -8,6 +8,7 @@ type NavItem = { href: string; label: string; alertDot?: boolean };
 const patientCareLinks: NavItem[] = [
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
+  { href: '/diet', label: 'Diet Plan' },
   { href: '/organic', label: 'Organic' },
   { href: '/lifestyle', label: 'Lifestyle' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
@@ -16,6 +17,7 @@ const patientCareLinks: NavItem[] = [
 const patientCareCompact: NavItem[] = [
   { href: '/labs', label: 'Labs' },
   { href: '/pharmacy', label: 'Pharmacy' },
+  { href: '/diet', label: 'Diet Plan' },
 ];
 
 const WA_INVESTORS =
@@ -92,8 +94,8 @@ export default function MainHeaderLinks() {
       role="navigation"
       aria-label="Patient resources and site sections"
     >
-      {/* xl–2xl: Labs + Pharmacy only; full patient row at 2xl+ */}
-      <div className="hidden shrink-0 items-center gap-0.5 overflow-hidden xl:flex 2xl:hidden">
+      {/* xl–2xl: Labs, Pharmacy, Diet Plan; full patient row at 2xl+ */}
+      <div className="hidden shrink-0 items-center gap-px overflow-hidden xl:flex 2xl:hidden">
         {patientCareCompact.map((item) => (
           <NavLink key={item.href} item={item} pathname={pathname} />
         ))}
@@ -102,7 +104,6 @@ export default function MainHeaderLinks() {
         {patientCareLinks.map((item) => (
           <NavLink key={item.href} item={item} pathname={pathname} />
         ))}
-        <NavLink item={{ href: '/diet-plan', label: 'Diet Plan' }} pathname={pathname} />
       </div>
 
       {/* Secondary + Investors / Partners / Join: room at 2xl+ only */}
