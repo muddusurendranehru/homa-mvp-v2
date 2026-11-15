@@ -30,26 +30,7 @@ export function TrackerNavPill({ compact = false }: { compact?: boolean }) {
   );
 }
 
-function DietPlanHeaderLink() {
-  const pathname = usePathname();
-  const active = pathname === '/diet' || pathname.startsWith('/diet/');
-  return (
-    <Link
-      href="/diet"
-      prefetch={true}
-      className={[
-        'hidden lg:inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full border px-3 py-1.5 text-[13px] font-semibold no-underline transition-colors',
-        active
-          ? 'border-teal-600 bg-teal-50 text-teal-900'
-          : 'border-teal-300/90 bg-white text-teal-800 hover:border-teal-500 hover:bg-teal-50/80',
-      ].join(' ')}
-    >
-      🥗 Diet Plan
-    </Link>
-  );
-}
-
-/** Main bar actions: Diet Plan (lg+) + tracker pill only — no other inline links. */
+/** Main bar actions: tracker pill only — no other inline links. */
 export default function MainHeaderLinks() {
   return (
     <div
@@ -57,7 +38,6 @@ export default function MainHeaderLinks() {
       role="navigation"
       aria-label="Primary header actions"
     >
-      <DietPlanHeaderLink />
       <TrackerNavPill compact={false} />
     </div>
   );
