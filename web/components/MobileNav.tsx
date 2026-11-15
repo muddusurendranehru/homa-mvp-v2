@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUser, SignOutButton } from '@clerk/nextjs';
 import { usesPatientCareAppShell } from '@/lib/patient-care-routes';
+import { TrackerNavPill } from '@/components/MainHeaderLinks';
 
 const WA_INVESTORS =
   'https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA';
@@ -277,6 +278,17 @@ export default function MobileNav() {
 
   return (
     <>
+      {/* Compact tracker pill — visible below md in the top bar (md+ uses MainHeaderLinks) */}
+      <div
+        className="fixed z-[100055] md:hidden"
+        style={{
+          top: 'calc(10px + env(safe-area-inset-top, 0px))',
+          right: 'calc(max(1rem, env(safe-area-inset-right, 1rem)) + 3.25rem)',
+        }}
+      >
+        <TrackerNavPill compact />
+      </div>
+
       {/* Hamburger Button - orange so it doesn't mix with green; safe-area for Android/notched screens */}
       <button
         onClick={toggleMenu}

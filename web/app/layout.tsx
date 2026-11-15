@@ -296,8 +296,8 @@ export default function RootLayout({
           
           {/* Global Header — slim navbar (doctor details moved to "About Dr. Muddu" on the homepage) */}
           <header className="sticky top-0 z-[1000] bg-white/95 backdrop-blur border-b border-slate-200" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
-            <nav className="relative z-[1001] mx-auto flex h-16 max-w-[1080px] items-center gap-2 pl-3 pr-[70px] sm:gap-3 sm:pl-4 sm:pr-[76px] lg:pr-[84px]" aria-label="Main">
-              <Link href="/" className="relative z-[1002] flex min-w-0 shrink-0 items-center gap-2 sm:gap-2.5 text-slate-900 no-underline max-w-[52%] sm:max-w-none">
+            <nav className="relative z-[1001] mx-auto flex h-16 min-w-0 max-w-[1080px] items-center gap-1.5 pl-3 pr-[4.75rem] sm:gap-2 sm:pl-4 sm:pr-[5.25rem] md:pr-[5.75rem] lg:gap-2 lg:pr-[13.5rem] xl:pr-[4.5rem] 2xl:pr-4" aria-label="Main">
+              <Link href="/" className="relative z-[1002] flex min-w-0 max-w-[11.5rem] shrink-0 items-center gap-2 sm:max-w-[12rem] sm:gap-2.5 md:max-w-[12.5rem] lg:max-w-[13rem] xl:max-w-[14rem] 2xl:max-w-none text-slate-900 no-underline">
                 <img src="/images/homa-logo.png" alt="HOMA Healthcare Center logo" width={32} height={32} className="h-8 w-8 shrink-0 rounded-full" />
                 <span className="min-w-0 leading-tight">
                   <span className="block truncate text-[12.5px] sm:text-[14px] font-extrabold tracking-tight text-[#1e3a8a]">HOMA Healthcare Center</span>
