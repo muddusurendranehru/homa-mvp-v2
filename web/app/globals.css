@@ -4,6 +4,11 @@
 
 /* HOMA Clinic Global Styles - Tailwind Fixed */
 @layer base {
+  :root {
+    --site-header-main-h: 4rem;
+    --site-header-utility-h: 2.5rem;
+    --site-header-stack-h: calc(var(--site-header-main-h) + var(--site-header-utility-h));
+  }
   html {
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   }

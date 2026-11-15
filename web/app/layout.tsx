@@ -9,6 +9,7 @@ import Image from 'next/image'
 import MobileNav from '@/components/MobileNav'
 import HeaderAuth from '@/components/HeaderAuth'
 import MainHeaderLinks from '@/components/MainHeaderLinks'
+import HeaderUtilityBar from '@/components/HeaderUtilityBar'
 import OnboardingDemo from '@/components/OnboardingDemo'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import SiteFooterNav from '@/components/SiteFooterNav'
@@ -294,14 +295,33 @@ export default function RootLayout({
           {/* Mobile Navigation */}
           <MobileNav />
           
-          {/* Global Header — slim navbar (doctor details moved to "About Dr. Muddu" on the homepage) */}
-          <header className="sticky top-0 z-[1000] bg-white/95 backdrop-blur border-b border-slate-200" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
-            <nav className="relative z-[1001] mx-auto flex h-16 min-w-0 max-w-[1080px] items-center gap-1 pl-3 pr-[4.75rem] sm:gap-2 sm:pl-4 sm:pr-[5.25rem] md:pr-[5.75rem] lg:gap-2 lg:pr-[13.5rem] xl:gap-1 xl:pr-[5rem] 2xl:gap-2 2xl:pr-4" aria-label="Main">
-              <Link href="/" className="relative z-[1002] flex min-w-0 max-w-[11.5rem] shrink-0 items-center gap-2 sm:max-w-[12rem] sm:gap-2.5 md:max-w-[12.5rem] lg:max-w-[13rem] xl:max-w-[12.75rem] 2xl:max-w-none text-slate-900 no-underline">
-                <img src="/images/homa-logo.png" alt="HOMA Healthcare Center logo" width={32} height={32} className="h-8 w-8 shrink-0 rounded-full" />
-                <span className="min-w-0 leading-tight">
-                  <span className="block truncate text-[12.5px] sm:text-[14px] font-extrabold tracking-tight text-[#1e3a8a]">HOMA Healthcare Center</span>
-                  <span className="block max-w-[10.5rem] truncate text-[10.5px] font-medium text-slate-500 sm:text-xs xl:max-w-[9.25rem] 2xl:max-w-none">Dr. Muddu Surendra Nehru MD</span>
+          {/* Global header + utility bar (sticky stack) */}
+          <header
+            className="sticky top-0 z-[1000] bg-white/95 backdrop-blur"
+            style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+          >
+            <nav
+              className="relative z-[1001] mx-auto flex h-16 max-w-[1080px] items-center gap-2 border-b border-slate-200 pl-3 pr-[4.75rem] sm:pl-4 sm:pr-20 md:pr-[5.25rem]"
+              aria-label="Main"
+            >
+              <Link
+                href="/"
+                className="relative z-[1002] flex min-w-0 flex-1 items-center gap-2 text-slate-900 no-underline sm:gap-2.5 md:flex-initial md:flex-shrink-0"
+              >
+                <img
+                  src="/images/homa-logo.png"
+                  alt="HOMA Healthcare Center logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 shrink-0 rounded-full"
+                />
+                <span className="min-w-0 leading-tight md:min-w-fit">
+                  <span className="block truncate text-[12.5px] font-extrabold tracking-tight text-[#1e3a8a] sm:text-[14px] md:overflow-visible md:whitespace-normal">
+                    HOMA Healthcare Center
+                  </span>
+                  <span className="block truncate text-[10.5px] font-medium text-slate-500 sm:text-xs md:overflow-visible md:whitespace-normal">
+                    Dr. Muddu Surendra Nehru MD
+                  </span>
                 </span>
               </Link>
               <MainHeaderLinks />
@@ -310,6 +330,7 @@ export default function RootLayout({
                 <HeaderAuth variant="pill" />
               </div>
             </nav>
+            <HeaderUtilityBar />
           </header>
 
           {/* Main Content */}

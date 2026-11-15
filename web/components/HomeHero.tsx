@@ -125,7 +125,7 @@ export default function HomeHero() {
 }
 
 const CSS = `
-.hh-hero{position:relative;min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;
+.hh-hero{position:relative;min-height:calc(100svh - var(--site-header-stack-h, 6.5rem));display:flex;flex-direction:column;justify-content:center;
   padding:calc(32px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
   background:linear-gradient(180deg,rgba(15,23,42,.35) 0%,rgba(15,23,42,.55) 55%,rgba(15,23,42,.90) 100%),url('/images/hero-yoga.jpg') 74% 100%/cover no-repeat,#0f172a;
   color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;overflow:hidden;box-sizing:border-box}
