@@ -63,6 +63,16 @@ const TOOLS = [
     href: "#organ-age",
     fg: "#dc2626",
   },
+  {
+    img: "/images/home-sections/diet-tracker-subtyped-plan.webp",
+    title: "Join the 90-Day Bingo Tracker",
+    sub: "Earn HOMA Coins, protect your target organs, and work toward metabolic remission.",
+    hook: "Daily habits · HOMA Coins · organ targets",
+    btn: "Start Tracking Now →",
+    href: "/tracker",
+    fg: "#059669",
+    bingo: true,
+  },
 ];
 
 /** Waist-check photo strip — append filenames under home-sections/ */
@@ -89,11 +99,21 @@ export function FreeHealthTools() {
         </p>
         <div className="hs-tools">
           {TOOLS.map((t) => (
-            <a key={t.title} href={t.href} className="hs-tool">
+            <a
+              key={t.title}
+              href={t.href}
+              className={`hs-tool${'bingo' in t && t.bingo ? ' hs-tool-bingo' : ''}`}
+            >
               <span className="hs-tool-thumb" aria-hidden="true">
                 <img src={t.img} alt="" width={120} height={90} loading="lazy" decoding="async" />
-                <span className="hs-tool-badge">FREE</span>
-                <span className="hs-tool-time">~30 sec</span>
+                {'bingo' in t && t.bingo ? (
+                  <span className="hs-tool-badge hs-tool-badge-bingo">BINGO</span>
+                ) : (
+                  <>
+                    <span className="hs-tool-badge">FREE</span>
+                    <span className="hs-tool-time">~30 sec</span>
+                  </>
+                )}
               </span>
               <span className="hs-tool-t">{t.title}</span>
               <span className="hs-tool-s">{t.sub}</span>
@@ -481,7 +501,10 @@ const CSS = `
 /* tools */
 .hs-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (min-width:640px){.hs-tools{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
-@media (min-width:1100px){.hs-tools{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}}
+@media (min-width:1100px){.hs-tools{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
+@media (min-width:1280px){.hs-tools{grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}}
+.hs-tool-bingo{border:2px solid #10b981;background:linear-gradient(165deg,#ecfdf5 0%,#fff 45%,#f0fdf4 100%);box-shadow:0 10px 28px rgba(16,185,129,.18)}
+.hs-tool-bingo .hs-tool-badge-bingo{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 6px 14px rgba(5,150,105,.4)}
 .hs-tool{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px;min-height:0;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s,border-color .2s}
 .hs-tool:hover{border-color:#cbd5e1;box-shadow:0 12px 28px -14px rgba(15,23,42,.22);transform:translateY(-2px)}
 .hs-tool-thumb{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#f1f5f9}

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { auth } from '@clerk/nextjs/server';
 import AppShell from '@/components/AppShell';
 import PatientTracker from '@/components/PatientTracker';
+import TrackerOnboarding from '@/components/TrackerOnboarding';
 import {
   fetchLatestPatientAssessmentByClerkUserId,
   fetchPatientTrackerByClerkUserId,
@@ -35,6 +36,7 @@ export default async function TrackerPage() {
 
   return (
     <AppShell>
+      <TrackerOnboarding />
       <PatientTracker initialPatientMe={initialPatientMe} />
     </AppShell>
   );

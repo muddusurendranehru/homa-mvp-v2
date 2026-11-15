@@ -137,6 +137,23 @@ export default function MobileNav() {
               )}
             </li>
           )}
+          <li>
+            <Link
+              href="/tracker"
+              prefetch={true}
+              onClick={closeMenu}
+              className={`group relative flex transform items-center gap-4 rounded-xl px-5 py-4 shadow-lg transition-all duration-200 hover:scale-[1.02] ${
+                pathname === '/tracker'
+                  ? 'border border-emerald-300 bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-emerald-900/40'
+                  : 'border border-emerald-500/60 bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-700 hover:to-emerald-700'
+              }`}
+            >
+              <span className="text-2xl" aria-hidden="true">
+                📊
+              </span>
+              <span className="flex-1 text-base font-bold">My 90-Day Tracker</span>
+            </Link>
+          </li>
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link

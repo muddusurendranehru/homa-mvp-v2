@@ -654,7 +654,7 @@ export default function HomePageClient() {
           ["5,000+", "Patients Treated"],
           ["90", "Day Reversal Program"],
           ["34", "Years Clinical Experience"],
-          ["11", "Books Published"],
+          ["13", "Books Published"],
         ].map(([num, lbl], i) => (
           <div
             key={i}
@@ -945,7 +945,7 @@ export default function HomePageClient() {
             { emoji: "🔬", p: "Penetrative", line1: "6 Metabolic Pathways", line2: "We go 6 levels deep — ENaC, RAAS, leptin, glycocalyx, visceral fat, beta cell reserve. Tablets touch only the surface.", color: "#1a5276" },
             { emoji: "🛡️", p: "Preventive", line1: "Stop It Before It Starts", line2: "Pre-diabetes reversed before it becomes diabetes. Heart risk identified before it becomes an event. Prevention is our first move.", color: "#1B6B45" },
             { emoji: "👤", p: "Personalized", line1: "Your Food. Your Body. Your Plan.", line2: "Indian meal plans built for Telugu, Hindi, and regional diets. No foreign keto. No generic advice. Your culture, your reversal.", color: "#7d3c98" },
-            { emoji: "✅", p: "Proven", line1: "32 Years · 5,000+ Patients", line2: "9 published books. Peer-reviewed protocols. Taught at ISB, IIIT, IKEA. Results that repeat — not testimonials from one lucky patient.", color: "#c0392b" },
+            { emoji: "✅", p: "Proven", line1: "32 Years · 5,000+ Patients", line2: "13 published books. Peer-reviewed protocols. Taught at ISB, IIIT, IKEA. Results that repeat — not testimonials from one lucky patient.", color: "#c0392b" },
           ].map((item) => (
             <div key={item.p} style={{ background: "#fff", borderRadius: "16px", padding: "28px 22px", border: "1px solid #ece9e1", borderTop: `4px solid ${item.color}` }}>
               <div style={{ fontSize: "32px", marginBottom: "12px" }}>{item.emoji}</div>

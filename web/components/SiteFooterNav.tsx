@@ -12,6 +12,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: 'For Patients',
     links: [
+      { href: '/tracker', label: '📊 My Tracker' },
       { href: '/', label: 'Home' },
       { href: '/tools', label: 'Free Calculators' },
       { href: '/auth', label: 'Login' },

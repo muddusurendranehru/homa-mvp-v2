@@ -10,20 +10,21 @@ const patientCareLinks: NavItem[] = [
   { href: '/pharmacy', label: 'Pharmacy' },
   { href: '/organic', label: 'Organic' },
   { href: '/lifestyle', label: 'Lifestyle' },
-  { href: '/tracker', label: 'Tracker' },
   { href: '/emergency', label: 'Emergency', alertDot: true },
 ];
 
 const WA_INVESTORS =
   'https://wa.me/919963721999?text=INDUSTRY%20%2F%20INVESTOR%20ENQUIRY%20FOR%20HOMA';
 
-const secondaryLinks: NavItem[] = [
+type SecondaryNavItem = NavItem & { wideOnly?: boolean };
+
+const secondaryLinks: SecondaryNavItem[] = [
   { href: '/how-it-works', label: 'How it works' },
   { href: '/tools', label: 'Free Tools' },
   { href: '/about', label: 'About' },
   { href: '/blog', label: 'Blog' },
   { href: '/press', label: 'Press' },
-  { href: '/conferences', label: 'Conferences' },
+  { href: '/conferences', label: 'Conferences', wideOnly: true },
 ];
 
 function linkClass(active: boolean) {
@@ -58,11 +59,11 @@ export default function MainHeaderLinks() {
 
   return (
     <div
-      className="ml-auto flex min-w-0 max-w-[calc(100%-11rem)] items-center justify-end gap-0.5 overflow-x-auto text-sm font-medium [scrollbar-width:none] sm:max-w-none"
+      className="ml-auto flex min-w-0 max-w-[calc(100%-12rem)] flex-1 items-center justify-end gap-0.5 overflow-x-auto overflow-y-hidden text-sm font-medium [scrollbar-width:none] sm:max-w-none lg:max-w-[calc(100%-14rem)]"
       role="navigation"
       aria-label="Patient resources and site sections"
     >
-      <div className="flex shrink-0 items-center gap-0.5">
+      <div className="flex min-w-0 shrink items-center gap-0.5">
         {patientCareLinks.map((item) => (
           <NavLink key={item.href} item={item} pathname={pathname} />
         ))}
@@ -71,10 +72,23 @@ export default function MainHeaderLinks() {
           pathname={pathname}
         />
       </div>
-      <div className="hidden xl:flex items-center gap-0.5 shrink-0">
+      <div className="hidden xl:flex min-w-0 items-center gap-0.5 shrink">
         {secondaryLinks.map((item) => (
-          <NavLink key={item.href} item={item} pathname={pathname} />
+          <span key={item.href} className={item.wideOnly ? 'hidden 2xl:contents' : 'contents'}>
+            <NavLink item={item} pathname={pathname} />
+          </span>
         ))}
+        <Link
+          href="/tracker"
+          className={[
+            'relative z-[1002] shrink-0 rounded-full px-3 py-2 text-[13px] font-bold text-white no-underline shadow-sm transition-colors',
+            pathname === '/tracker'
+              ? 'bg-emerald-800 ring-2 ring-emerald-300/80'
+              : 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700',
+          ].join(' ')}
+        >
+          📊 My 90-Day Tracker
+        </Link>
         <a
           href={WA_INVESTORS}
           target="_blank"
