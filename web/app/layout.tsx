@@ -733,7 +733,7 @@ export default function RootLayout({
                   className="w-16 h-16 mx-auto mb-4"
                   loading="lazy"
                 />
-                <p className="text-sm mb-4">Help more patients reverse diabetes — the HOMA way.</p>
+                <p className="text-sm mb-4">Help more patients achieve diabetes remission — the HOMA way.</p>
                 <a
                   href="https://wa.me/919963721999?text=I want to DONATE"
                   target="_blank"

@@ -15,6 +15,7 @@ import { FreeScreeningCamps, MendTrustAward, VisitClinic } from "@/components/Ho
 import HomaProgramSection from "@/components/HomaProgramSection";
 import PatientCommunitiesSection from "@/components/PatientCommunitiesSection";
 import HomeHealthHubSection from "@/components/HomeHealthHubSection";
+import PourYourDataPrescriptionSection from "@/components/PourYourDataPrescriptionSection";
 
 function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
@@ -38,7 +39,7 @@ const SCIENCE_SLIDES: ScienceSlide[] = [
   },
   {
     img: "https://res.cloudinary.com/drhsco04l/image/upload/q_auto,f_auto,w_900/v1787848745/Malabsorption_complete2_u03x0a.jpg",
-    title: "The HOMA Journey to Reversal",
+    title: "The HOMA Journey to Remission",
     sub: "Step-by-step metabolic recovery — from diagnosis to remission",
   },
   {
@@ -258,6 +259,7 @@ export default function HomePageClient() {
       <HomaProgramSection />
       <HowItWorks />
       <PatientCommunitiesSection />
+      <PourYourDataPrescriptionSection />
       <FreeScreeningCamps />
       <MendTrustAward />
       <SubtypeBanner />
@@ -410,81 +412,6 @@ export default function HomePageClient() {
         </div>
       </section>
       {/* DDDD DIRECTION BLOCK END */}
-      {/* 30-DAY DIET HERO START */}
-      <section style={{ background: "#FDF3DC", padding: "40px 6%", textAlign: "center" }}>
-        <div style={{ maxWidth: "920px", margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "Montserrat, Arial, sans-serif", fontSize: "clamp(26px, 4.5vw, 40px)", fontWeight: 800, color: "#0D3B5E", margin: "0 0 12px", lineHeight: 1.2 }}>
-            Pour Your Data. Get Your Custom Medical &amp; Lifestyle Prescription.
-          </h2>
-          <p lang="te" style={{ fontSize: "18px", color: "#0D3B5E", margin: "0 0 12px", lineHeight: 1.6 }}>
-            మీ రిపోర్ట్స్ మరియు బాడీ మెజర్మెంట్స్ ఇవ్వండి — డాక్టర్ మరియు మా AI విశ్లేషణతో మీ పూర్తి చికిత్సా ప్రణాళిక.
-          </p>
-          <p style={{ fontSize: "17px", color: "#333", margin: "0 auto 28px", lineHeight: 1.6, maxWidth: "720px" }}>
-            Submit your lab reports and anthropometric data. Our Professor of Medicine, assisted by our proprietary AI Analyzer, builds your precision 2-Pillar remission plan.
-          </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: "16px",
-              marginBottom: "28px",
-              textAlign: "left",
-            }}
-          >
-            <div
-              style={{
-                background: "linear-gradient(165deg, #ecfdf5 0%, #d1fae5 100%)",
-                border: "2px solid #10b981",
-                borderRadius: "16px",
-                padding: "22px 20px",
-                boxShadow: "0 8px 20px rgba(16, 185, 129, 0.12)",
-              }}
-            >
-              <div style={{ fontSize: "40px", lineHeight: 1, marginBottom: "10px" }} aria-hidden="true">
-                🏃
-              </div>
-              <h3 style={{ fontFamily: "Montserrat, Arial, sans-serif", fontSize: "18px", fontWeight: 800, color: "#065f46", margin: "0 0 8px" }}>
-                Pillar 1: Lifestyle Engineering
-              </h3>
-              <p style={{ fontSize: "15px", color: "#134e4a", margin: 0, lineHeight: 1.55 }}>
-                Habit tracker, precision AI diet, exercise protocols, and sleep optimization.
-              </p>
-            </div>
-            <div
-              style={{
-                background: "linear-gradient(165deg, #eef2ff 0%, #e0e7ff 100%)",
-                border: "2px solid #4f46e5",
-                borderRadius: "16px",
-                padding: "22px 20px",
-                boxShadow: "0 8px 20px rgba(79, 70, 229, 0.12)",
-              }}
-            >
-              <div style={{ fontSize: "40px", lineHeight: 1, marginBottom: "10px" }} aria-hidden="true">
-                🩺
-              </div>
-              <h3 style={{ fontFamily: "Montserrat, Arial, sans-serif", fontSize: "18px", fontWeight: 800, color: "#312e81", margin: "0 0 8px" }}>
-                Pillar 2: Clinical Medicine
-              </h3>
-              <p style={{ fontSize: "15px", color: "#3730a3", margin: 0, lineHeight: 1.55 }}>
-                Doctor-guided medication protocols (tablets, injections) and referral for surgical care if required.
-              </p>
-            </div>
-          </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center", marginBottom: "20px" }}>
-            <a href="/tools" style={{ display: "inline-block", background: "#F5A623", color: "#0D3B5E", fontWeight: 800, fontSize: "16px", padding: "14px 26px", borderRadius: "10px", textDecoration: "none" }}>
-              Check Your Health Free
-            </a>
-            <a href="https://wa.me/919963721999" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#25D366", color: "#fff", fontWeight: 800, fontSize: "16px", padding: "14px 26px", borderRadius: "10px", textDecoration: "none" }}>
-              WhatsApp Dr. Surendra
-            </a>
-          </div>
-          <p style={{ fontSize: "14px", fontWeight: 700, color: "#0D3B5E", margin: 0 }}>
-            23+ Metabolic Sub-types Analyzed · AI + Doctor Guided · Complete Clinical Care
-          </p>
-        </div>
-      </section>
-      {/* 30-DAY DIET HERO END */}
-
       {/* DPIIT CERTIFICATE */}
       <section style={{ background: "#ffffff", padding: "28px 6%", textAlign: "center" }}>
         <img
@@ -620,7 +547,7 @@ export default function HomePageClient() {
         {[
           {
             emoji: "🇬🇧",
-            text: "Reverse Type 2 Diabetes in 90 Days — Science-Based, No Gimmicks",
+            text: "Achieve Type 2 Diabetes Remission in 90 Days — Science-Based, No Gimmicks",
             href: "/assessment",
             lang: "EN",
           },
@@ -700,7 +627,7 @@ export default function HomePageClient() {
       >
         {[
           ["5,000+", "Patients Treated"],
-          ["90", "Day Reversal Program"],
+          ["90", "Day Remission Program"],
           ["34", "Years Clinical Experience"],
           ["13", "Books Published"],
         ].map(([num, lbl], i) => (
@@ -862,14 +789,14 @@ export default function HomePageClient() {
           }}
         >
           {[
-            { img: "/images/patients/pt-01.jpg", role: "✅ Diabetes Reversed · Hyderabad" },
-            { img: "/images/patients/pt-02.jpg", role: "✅ Central Obesity Reversed · Gachibowli" },
+            { img: "/images/patients/pt-01.jpg", role: "✅ Diabetes Remission · Hyderabad" },
+            { img: "/images/patients/pt-02.jpg", role: "✅ Central Obesity Remission · Gachibowli" },
             { img: "/images/patients/pt-03.jpg", role: "✅ −12 kg · No Medication · Ameerpet" },
-            { img: "/images/patients/pt-04.jpg", role: "✅ Pre-Diabetes Reversed · Bachupally" },
-            { img: "/images/patients/pt-05.jpg", role: "✅ Diabetes Reversed · Kondapur" },
+            { img: "/images/patients/pt-04.jpg", role: "✅ Pre-Diabetes Remission · Bachupally" },
+            { img: "/images/patients/pt-05.jpg", role: "✅ Diabetes Remission · Kondapur" },
             { img: "/images/patients/pt-06.jpg", role: "✅ −18 kg · Off Insulin · Madhapur" },
             { img: "/images/patients/pt-07.jpg", role: "✅ HbA1c Normal · No Surgery · Patancheru" },
-            { img: "/images/patients/pt-08.jpg", role: "✅ Obesity Reversed · Telangana" },
+            { img: "/images/patients/pt-08.jpg", role: "✅ Obesity Remission · Telangana" },
           ].map((p) => (
             <div
               key={p.role}
@@ -991,8 +918,8 @@ export default function HomePageClient() {
           {[
             { emoji: "🎯", p: "Precision", line1: "HOMA-IR + TyG Index", line2: "We measure insulin resistance directly. Not just sugar. Not just HbA1c. The root cause, measured precisely.", color: "#0D2B4E" },
             { emoji: "🔬", p: "Penetrative", line1: "6 Metabolic Pathways", line2: "We go 6 levels deep — ENaC, RAAS, leptin, glycocalyx, visceral fat, beta cell reserve. Tablets touch only the surface.", color: "#1a5276" },
-            { emoji: "🛡️", p: "Preventive", line1: "Stop It Before It Starts", line2: "Pre-diabetes reversed before it becomes diabetes. Heart risk identified before it becomes an event. Prevention is our first move.", color: "#1B6B45" },
-            { emoji: "👤", p: "Personalized", line1: "Your Food. Your Body. Your Plan.", line2: "Indian meal plans built for Telugu, Hindi, and regional diets. No foreign keto. No generic advice. Your culture, your reversal.", color: "#7d3c98" },
+            { emoji: "🛡️", p: "Preventive", line1: "Stop It Before It Starts", line2: "Pre-diabetes addressed before it becomes diabetes. Heart risk identified before it becomes an event. Prevention is our first move.", color: "#1B6B45" },
+            { emoji: "👤", p: "Personalized", line1: "Your Food. Your Body. Your Plan.", line2: "Indian meal plans built for Telugu, Hindi, and regional diets. No foreign keto. No generic advice. Your culture, your remission plan.", color: "#7d3c98" },
             { emoji: "✅", p: "Proven", line1: "32 Years · 5,000+ Patients", line2: "13 published books. Peer-reviewed protocols. Taught at ISB, IIIT, IKEA. Results that repeat — not testimonials from one lucky patient.", color: "#c0392b" },
           ].map((item) => (
             <div key={item.p} style={{ background: "#fff", borderRadius: "16px", padding: "28px 22px", border: "1px solid #ece9e1", borderTop: `4px solid ${item.color}` }}>
@@ -1005,10 +932,10 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* FINAL CTA — Start Your Reversal */}
+      {/* FINAL CTA — Start Your Remission Journey */}
       <section style={{ background: "#0D2B4E", padding: "72px 6%", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 500, color: "#fff", marginBottom: "16px" }}>
-          Start Your Reversal Today
+          Start Your Remission Journey Today
         </h2>
         <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.55)", fontWeight: 300, maxWidth: "480px", margin: "0 auto 36px" }}>
           Free 15-minute metabolic assessment. No cost, no signup. Serving Gachibowli, Ameerpet, Bachupally &amp; Patancheru.
@@ -1049,7 +976,7 @@ export default function HomePageClient() {
             marginBottom: "12px",
           }}
         >
-          Science-Based Reversal
+          Science-Based Remission
         </h2>
         <p style={{ fontSize: "15px", color: "#888", fontWeight: 300, marginBottom: "40px" }}>
           From PCOS to senior care — personalised metabolic protocols for every life stage
@@ -1064,9 +991,9 @@ export default function HomePageClient() {
           }}
         >
           {[
-            ["🔴", "Type 2 Diabetes", "Reversal in 90 days"],
+            ["🔴", "Type 2 Diabetes", "Remission in 90 days"],
             ["💗", "PCOS", "Hormonal balance"],
-            ["⚖️", "Obesity", "Visceral fat reversal"],
+            ["⚖️", "Obesity", "Visceral fat remission"],
             ["❤️", "Heart Risk", "Cardio-metabolic care"],
             ["🫘", "Diabetes + Kidney", "Nephropathy care", "/conditions/diabetes-kidney"],
             ["🛡️", "Pre-Diabetes", "Prevention first"],

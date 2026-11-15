@@ -408,7 +408,7 @@ export function HowItWorksPageBody() {
       <section className="hs-sec hs-slate">
         <div className="hs-wrap">
           <div className="hs-eyebrow hs-eyebrow-teal">HOW IT WORKS</div>
-          <h1 className="hs-h2 hs-navy-txt">The HOMA Approach to Diabetes Reversal</h1>
+          <h2 className="hs-h2 hs-navy-txt">The HOMA Approach to Diabetes Remission</h2>
           <p className="hs-sub">Doctor-led. Science-backed. No app required.</p>
           <ol className="hs-steps">
             {STEPS.map((s) => (
