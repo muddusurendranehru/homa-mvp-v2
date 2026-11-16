@@ -777,6 +777,15 @@ export default function RootLayout({
                                     <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
                     Privacy Policy
                   </Link>
+                  <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
+                    Terms & Conditions
+                  </Link>
+                  <Link href="/refund" className="text-gray-300 hover:text-white transition-colors">
+                    Refund Policy
+                  </Link>
+                  <Link href="/shipping" className="text-gray-300 hover:text-white transition-colors">
+                    Shipping & Delivery
+                  </Link>
                   <Link href="/editorial-policy" className="text-gray-300 hover:text-white transition-colors">
   Editorial Policy
 </Link>
