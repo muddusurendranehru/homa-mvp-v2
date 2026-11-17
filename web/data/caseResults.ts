@@ -15,6 +15,13 @@ export type CaseResult = {
   consent: boolean;
 };
 
+// Real counts from Neon as of 17 Nov 2026 — update monthly by hand
+export const programStats = {
+  subtypes: 26,
+  patientsOnPlans: 21,
+  doctorFollowUps: 90,
+};
+
 export const caseResults: CaseResult[] = [
   // PLACEHOLDER — verify against real report + signed consent before setting consent: true
   {
