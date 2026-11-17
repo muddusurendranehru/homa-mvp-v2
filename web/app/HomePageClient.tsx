@@ -255,10 +255,10 @@ export default function HomePageClient() {
       {/* HOME HERO START */}
       <HomeHero />
       <FreeHealthTools />
-      <CaseResultsSection />
       <WhyHomaVideos />
       <OldVsNewModel />
       <HomaProgramSection />
+      <CaseResultsSection />
       <HowItWorks />
       <PatientCommunitiesSection />
       <PourYourDataPrescriptionSection />
