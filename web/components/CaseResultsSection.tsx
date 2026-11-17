@@ -224,14 +224,14 @@ export default function CaseResultsSection() {
                 <div className="relative flex h-24 w-full items-end justify-center gap-2 px-2">
                   <div className="absolute inset-x-0 bottom-0 h-9 border-t-2 border-dashed border-emerald-400 bg-emerald-50/50" />
                   <div className="relative flex flex-col items-center">
-                    <div className="mb-1 h-18 w-6 rounded-t bg-red-500" />
+                    <div className="mb-1 h-20 w-6 rounded-t bg-red-500" />
                     <span className="text-[8px] text-slate-600">Day 0</span>
                   </div>
                   <svg className="relative mb-3 h-4 w-4 text-emerald-600" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 12l-4-4h8z" />
                   </svg>
                   <div className="relative flex flex-col items-center">
-                    <div className="mb-1 h-11 w-6 rounded-t bg-emerald-600" />
+                    <div className="mb-1 h-12 w-6 rounded-t bg-emerald-600" />
                     <span className="text-[8px] text-slate-600">Day 90</span>
                   </div>
                 </div>
