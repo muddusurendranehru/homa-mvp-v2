@@ -16,6 +16,7 @@ import HomaProgramSection from "@/components/HomaProgramSection";
 import PatientCommunitiesSection from "@/components/PatientCommunitiesSection";
 import HomeHealthHubSection from "@/components/HomeHealthHubSection";
 import PourYourDataPrescriptionSection from "@/components/PourYourDataPrescriptionSection";
+import CaseResultsSection from "@/components/CaseResultsSection";
 
 function bookWhatsAppHref(title: string) {
   return `https://wa.me/919963721999?text=${encodeURIComponent(`I WANT THE BOOK: ${title}`)}`;
@@ -254,6 +255,7 @@ export default function HomePageClient() {
       {/* HOME HERO START */}
       <HomeHero />
       <FreeHealthTools />
+      <CaseResultsSection />
       <WhyHomaVideos />
       <OldVsNewModel />
       <HomaProgramSection />

@@ -12,7 +12,7 @@ export default function HeaderAuth({ variant = 'default' }: { variant?: 'default
 
   const pill = variant === 'pill';
   const pillCls =
-    'inline-flex min-h-[48px] items-center justify-center rounded-[14px] border border-slate-200 bg-white px-3 sm:px-4 text-sm font-semibold text-slate-900 no-underline transition-colors hover:border-slate-300 hover:bg-slate-50';
+    'inline-flex min-h-[48px] items-center justify-center rounded-[14px] bg-[#1e3a8a] px-3 sm:px-4 text-sm font-semibold text-white no-underline transition-colors hover:bg-blue-950 shadow-sm';
 
   // Pill variant shows "Sign In" straight away (also if Clerk is slow / blocked) so the navbar never has a gap.
   if (!isLoaded && !pill) return null;
