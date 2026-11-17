@@ -133,7 +133,18 @@ export default function CaseResultsSection() {
   return (
     <section className="bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4 sm:py-12">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-center text-2xl font-extrabold text-slate-900 sm:text-3xl">
+        <img
+          src="/images/results-hero.webp"
+          alt="Illustration: HbA1c coming down over 3 months"
+          width={480}
+          height={853}
+          loading="lazy"
+          decoding="async"
+          className="w-full max-w-sm mx-auto rounded-2xl"
+        />
+        <p className="text-xs text-gray-400 text-center mt-2">Example of how we track progress</p>
+
+        <h2 className="mt-6 text-center text-2xl font-extrabold text-slate-900 sm:text-3xl">
           {hasCases
             ? "Real Patients. Real Lab Reports. Numbers Coming Down."
             : "Precision Care, Tracked by Your Doctor"}
