@@ -120,7 +120,7 @@ export default function MetabolicServicesHero() {
             <strong>Dr. Muddu Surendra Nehru, MD</strong> | Professor of Medicine | 32+ Years Experience
           </p>
           <p className="mt-1">
-            Best diabetologist in Gachibowli | Metabolic reversal Hyderabad
+            Best diabetologist in Gachibowli | Metabolic remission Hyderabad
           </p>
         </div>
       </div>

@@ -799,7 +799,7 @@ export default function RootLayout({
                 
                 <div className="text-center text-gray-400 space-y-1">
                   <p className="text-xs">© 2026 HOMA Clinic | Dr. Muddu Surendra Nehru M.D.</p>
-                  <p className="text-xs">Best diabetologist in Gachibowli | Metabolic reversal Hyderabad</p>
+                  <p className="text-xs">Best diabetologist in Gachibowli | Metabolic remission Hyderabad</p>
                   <p className="text-xs">Serving Gachibowli, Ameerpet, Bachupally & Patancheru with at-home metabolic assessments.</p>
                 </div>
                 
