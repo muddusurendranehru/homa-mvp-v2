@@ -28,6 +28,7 @@ function isActive(pathname: string, href: string) {
 }
 
 function pillClass(item: UtilityLink, active: boolean) {
+  if (item.href === '/pay') return 'border-amber-500 bg-amber-400 text-slate-900 hover:bg-amber-500';
   if (item.urgent) {
     return active
       ? 'border-red-500 bg-red-100 text-red-900'
