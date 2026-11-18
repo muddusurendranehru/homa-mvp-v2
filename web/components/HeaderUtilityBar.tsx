@@ -9,6 +9,7 @@ type UtilityLink = { href: string; label: string; icon: string; urgent?: boolean
 const COMMUNITIES_HREF = '/communities';
 
 const UTILITY_LINKS: UtilityLink[] = [
+  { href: '/pay', label: 'Pay', icon: '💳' },
   { href: '/labs', label: 'Labs', icon: '🧪' },
   { href: '/pharmacy', label: 'Pharmacy', icon: '💊' },
   { href: '/diet', label: 'Diet Plan', icon: '🥗' },
