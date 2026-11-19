@@ -192,6 +192,7 @@ export default function PayPage() {
           <div className="mt-1 text-white/70">Dr. Muddu Surendra Nehru, MD · Professor of Medicine · DPIIT recognised (DIPP275722)</div>
           <div className="mt-3 flex flex-wrap gap-4 text-white/80">
             <Link href="/" className="hover:text-white">Home</Link>
+            <Link href="/network" className="hover:text-white">Care Network</Link>
             <Link href="/tools" className="hover:text-white">Free tools</Link>
             <Link href="/terms" className="hover:text-white">Terms</Link>
           </div>
