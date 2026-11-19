@@ -9,6 +9,7 @@ type UtilityLink = { href: string; label: string; icon: string; urgent?: boolean
 const COMMUNITIES_HREF = '/communities';
 
 const UTILITY_LINKS: UtilityLink[] = [
+  { href: '/pay', label: 'Pay', icon: '💳' },
   { href: '/labs', label: 'Labs', icon: '🧪' },
   { href: '/pharmacy', label: 'Pharmacy', icon: '💊' },
   { href: '/diet', label: 'Diet Plan', icon: '🥗' },
@@ -27,6 +28,7 @@ function isActive(pathname: string, href: string) {
 }
 
 function pillClass(item: UtilityLink, active: boolean) {
+  if (item.href === '/pay') return 'border-amber-500 bg-amber-400 text-slate-900 hover:bg-amber-500';
   if (item.urgent) {
     return active
       ? 'border-red-500 bg-red-100 text-red-900'

@@ -18,6 +18,7 @@ const navLinks: {
   alertDot?: boolean;
 }[] = [
   { href: '/', label: 'Home', icon: '🏠' },
+    { href: '/pay', label: 'Pay', icon: '💳' },
   { href: '/ddd', label: 'D·D·D Campaign', icon: '🩸' },
   { href: '/labs', label: 'Labs', icon: '🧪' },
   { href: '/pharmacy', label: 'Pharmacy', icon: '💊' },
