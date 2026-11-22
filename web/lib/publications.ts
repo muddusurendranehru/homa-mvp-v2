@@ -13,6 +13,38 @@ export const TITLED_PUBLICATIONS: Publication[] = [
     citation: "2026;18(2):826-833",
     url: "https://doi.org/10.25258/ijcpr.18.2.136",
   },
+  {
+    id: "p2",
+    type: "international",
+    title: "Triglyceride-Glucose Index and Metabolic Risk: A Novel Perspective on NAFLD and Lipid Dysregulation",
+    venue: "Journal of Contemporary Clinical Practice",
+    year: 2025,
+    citation: "Nehru MS, Satheesh Kumar K, Sathyanarayana EV. 2025;11:349-357",
+  },
+  {
+    id: "p3",
+    type: "international",
+    title: "Analysis of Triglycerides to Glucose Index as a Marker of Insulin Resistance in Adult Population at a Tertiary Care Hospital",
+    venue: "Int J Acad Med Pharm",
+    year: 2024,
+    citation: "Nehru MS, Prathyusha M, Kumar SB, Tufheem A. 2024;6(4):258-261",
+  },
+  {
+    id: "p4",
+    type: "international",
+    title: "Evaluation of Biochemical and Anthropometric Parameters Associated with Insulin Resistance Using TyG Index",
+    venue: "International Journal of Medicine",
+    year: 2026,
+    citation: "Sathyanarayana EV, Reddy BL, Ram YS, Nehru MS. 2026;8(5):977-983",
+  },
+  {
+    id: "p5",
+    type: "article",
+    title: "A Study on Electrolyte Abnormalities Among Stroke Patients",
+    venue: "MedPulse International Journal of Medicine",
+    year: 2020,
+    citation: "Kumar MR, Nehru MS. 2020;14(1):18-21",
+  },
 ];
 
 export const PUB_CATEGORIES: { type: PublicationType | "patients" | "years"; label: string; count: string; detail: string }[] = [
