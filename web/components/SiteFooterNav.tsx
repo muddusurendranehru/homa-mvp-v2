@@ -57,6 +57,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { href: WA_INDUSTRY, label: 'Industry & Investors', external: true },
       { href: PARTNER_LOGIN, label: 'Partner Login', external: true },
       { href: COLLABORATE, label: 'Collaborate', external: true },
+      { href: '/evidence', label: 'Evidence & Publications' },
     ],
   },
 ];

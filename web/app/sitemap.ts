@@ -20,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/diet`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/nutri-bot`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/tools`, lastModified: now, priority: 0.8 },
+    { url: `${baseUrl}/investors`, lastModified: now, priority: 0.7 },
+    { url: `${baseUrl}/evidence`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/testimonials`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/gallery`, lastModified: now, priority: 0.7 },
     { url: `${baseUrl}/conferences`, lastModified: now, priority: 0.7 },
