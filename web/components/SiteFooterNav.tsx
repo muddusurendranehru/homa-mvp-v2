@@ -58,6 +58,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { href: PARTNER_LOGIN, label: 'Partner Login', external: true },
       { href: COLLABORATE, label: 'Collaborate', external: true },
       { href: '/evidence', label: 'Evidence & Publications' },
+      { href: '/join', label: 'Join HOMA Network' },
     ],
   },
 ];
