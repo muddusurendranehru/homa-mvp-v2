@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { PhotoGallery } from '@/components/HomeSections';
+import MentorTiles from '@/components/MentorTiles';
 
 export const metadata: Metadata = {
   title: "About Dr. Muddu Surendra Nehru, MD – HOMA Health Clinics",
@@ -78,6 +79,8 @@ export default function AboutPage() {
             <li><strong>Phase 2 (Days 31–60):</strong> Personalized nutrition plans, daily step goals, and WhatsApp-based health coaching.</li>
             <li><strong>Phase 3 (Days 61–90):</strong> Repeat lab testing, protocol refinement, and long-term sustainability planning.</li>
           </ul>
+
+          <MentorTiles />
 
           {/* CTA */}
           <div className="bg-blue-50 p-6 rounded-lg text-center border border-blue-100">
