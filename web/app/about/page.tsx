@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { PhotoGallery } from '@/components/HomeSections';
+import MentorTiles from '@/components/MentorTiles';
 
 export const metadata: Metadata = {
   title: "About Dr. Muddu Surendra Nehru, MD – HOMA Health Clinics",
@@ -64,6 +65,8 @@ export default function AboutPage() {
           <p className="text-gray-700 mb-6">
             As the founder of HOMA Health Clinics, he pioneered the use of HOMA-IR and TyG Index as early detection tools for metabolic syndrome — long before they became mainstream in Indian healthcare.
           </p>
+
+          <MentorTiles />
 
           {/* Mission */}
           <h2 className="text-2xl font-bold text-gray-800 mb-3">Our Mission</h2>
