@@ -22,6 +22,7 @@ const isProtectedRoute = createRouteMatcher([
   '/dashboard(.*)',
   '/profile(.*)',
   '/staff(.*)', // staff dashboard: must be signed in (allowlist checked in /api/staff)
+  '/lab-redeem(.*)', // lab coin redeem: signed-in Clerk user only
 ]);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
