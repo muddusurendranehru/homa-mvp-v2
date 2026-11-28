@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { PhotoGallery } from '@/components/HomeSections';
 import MentorTiles from '@/components/MentorTiles';
+import WellWishersTiles from '@/components/WellWishersTiles';
+import StudentsTiles from '@/components/StudentsTiles';
 
 export const metadata: Metadata = {
   title: "About Dr. Muddu Surendra Nehru, MD – HOMA Health Clinics",
@@ -81,6 +83,8 @@ export default function AboutPage() {
           </ul>
 
           <MentorTiles />
+          <WellWishersTiles />
+          <StudentsTiles />
 
           {/* CTA */}
           <div className="bg-blue-50 p-6 rounded-lg text-center border border-blue-100">
